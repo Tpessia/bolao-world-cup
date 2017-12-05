@@ -151,7 +151,7 @@ main.container {
   border-radius: 10px;
   right: 3px;
   transition: all .8s ease-in-out;
-  border: 3px solid black;
+  border: 1px solid black;
   -webkit-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
   -moz-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
   box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66); }
