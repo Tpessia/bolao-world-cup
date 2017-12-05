@@ -78,7 +78,7 @@ main.container {
                         }
                     }
 
-                    &.btn-large {
+                    &.btn-large, &.btn {
                         top: 50%;
                         transform: translateY(-50%);
                     }
@@ -184,6 +184,14 @@ main.container {
             height: $content-height - ($content-padding * 2);
         }
         @include content-font($content-height - ($content-padding * 2), 30px, 300);
+
+        @media screen and (max-width: 992px) {
+            &.card-action {
+                height: $content-height - ($content-padding * 2) - 15px;
+            }
+
+            @include content-font($content-height - ($content-padding * 2) - 15px, 30px, 300);
+        }
     }
 
     #first {

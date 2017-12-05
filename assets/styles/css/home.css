@@ -124,7 +124,7 @@ main.container {
         @media screen and (max-width: 992px) {
           .rank .card .card-content .card-action a.large-only {
             display: none !important; } }
-        .rank .card .card-content .card-action a.btn-large {
+        .rank .card .card-content .card-action a.btn-large, .rank .card .card-content .card-action a.btn {
           top: 50%;
           transform: translateY(-50%); }
   .rank .card .rankElem {
@@ -192,6 +192,13 @@ main.container {
   font-weight: 300; }
   .rank .col:first-of-type .card-content > *.card-action {
     height: 70px; }
+  @media screen and (max-width: 992px) {
+    .rank .col:first-of-type .card-content > * {
+      line-height: 55px;
+      font-size: 30px;
+      font-weight: 300; }
+      .rank .col:first-of-type .card-content > *.card-action {
+        height: 55px; } }
 .rank #first {
   position: sticky;
   top: 5px; }
