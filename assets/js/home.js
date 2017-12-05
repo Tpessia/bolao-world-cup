@@ -75,6 +75,7 @@ function rankCreate() { //create ranking element
     }
     
     $("#rankContent").html("");
+    $("#moreRank").removeClass("hide");
 
     for (i in ranking) { //só mostra na div (remover no projeto oficial)
         if(i==0){
