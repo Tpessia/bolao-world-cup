@@ -89,8 +89,9 @@ body {
 main.container {
   min-width: 85%; }
 
-.rank h2 {
-  padding: 0 .75rem; }
+.rank h1 {
+  padding: 2% .75rem;
+  text-align: center; }
 .rank .card {
   margin: .3rem 0 !important;
   background-color: #25365d; }
@@ -108,12 +109,16 @@ main.container {
       .rank .card .card-content > * .card-title {
         overflow: hidden; }
       .rank .card .card-content > * .pontuacao {
-        overflow: visible; }
+        overflow: hidden; }
     .rank .card .card-content .card-title {
-      margin: 0; }
+      margin: 0;
+      overflow: hidden; }
+    .rank .card .card-content .pontuacao {
+      overflow: hidden; }
     .rank .card .card-content .card-action {
       padding: 0 !important;
-      border: 0 !important; }
+      border: 0 !important;
+      overflow: hidden; }
       .rank .card .card-content .card-action a {
         float: right; }
         @media screen and (max-width: 992px) {
@@ -146,6 +151,7 @@ main.container {
   border-radius: 10px;
   right: 3px;
   transition: all .8s ease-in-out;
+  border: 3px solid black;
   -webkit-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
   -moz-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
   box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66); }
@@ -155,7 +161,8 @@ main.container {
     background-color: #25365d; }
   .rank#sideRank h2 {
     font-size: 2.5vw;
-    color: #f5f5f5; }
+    color: #f5f5f5;
+    padding: 0 .75rem; }
   .rank#sideRank > .row > .col:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(6)) {
     display: none; }
   .rank#sideRank.hideSide {
@@ -185,6 +192,13 @@ main.container {
   font-weight: 300; }
   .rank .col:first-of-type .card-content > *.card-action {
     height: 70px; }
+.rank #first {
+  position: sticky;
+  top: 5px; }
+  .rank #first > h2 {
+    margin-top: 0; }
+  .rank #first #firstContent h4 {
+    margin-bottom: 0; }
 
 #modal1 {
   min-height: 350px; }

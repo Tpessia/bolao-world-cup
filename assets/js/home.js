@@ -12,7 +12,7 @@ $(function() {
 })
 
 function bindClick() { //está rodando quando o rankfy roda, que por sua vez roda quando o new data roda
-    $(".card-content .rankElem, .card-content .btn-floating").on("click", function () {
+    $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () {
         nome = $(this).closest(".card").find(".card-title").html(); //modal
         nome = nome.split(" ")
         nome.shift()
@@ -20,11 +20,11 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
         search(nome);
     })
 
-    $("#moreRank").on("click", function () {
+    $("#moreRank").off("click").on("click", function () {
         showMoreRank();
     })
 
-    $("#refresh").on("click", function () {
+    $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     })
 }
@@ -52,6 +52,7 @@ function newData(pages, ID) { //request spreadsheet page data
 
                 rankCreate();
                 playersArray();
+                winnerDiv();
             },
             error: function (xhr, status, error) {
                 alert('Erro, sem conexão com a internet!');
@@ -64,7 +65,7 @@ function newData(pages, ID) { //request spreadsheet page data
 function rankCreate() { //create ranking element
     k = 4; //numero de itens do rank mostrados por vez
 
-    ranking = [];
+    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
     j = 0;
     for (i in table.page1) { //cria array do ranking
@@ -89,7 +90,7 @@ function rankCreate() { //create ranking element
 
         sideRank = rankBlock;
 
-        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 offset-m1 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s5 m2 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
+        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s9 m3 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
 
         $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
 
@@ -135,6 +136,10 @@ function playersArray() {
 
 }
 
+function winnerDiv() {
+    $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
+}
+
 function search(key) {
 
     pesquisa = lower(key); //catch and format name
@@ -148,6 +153,8 @@ function search(key) {
                 success: function (json) {
                     data = JSON.parse(json).feed.entry //recebe a data como json
 
+                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
+
                     arrayfy(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
                     //Prepare Modal
@@ -156,9 +163,7 @@ function search(key) {
                     $("#playerStats").html('');
                     $("#sideGames").html('');
 
-                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
-
-                    createPageDados(searching);
+                    pageDadosModal(searching);
 
                     function pageDadosModal(page) {
                         table[page].dados = {}; //player data broken down

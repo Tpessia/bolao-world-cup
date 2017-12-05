@@ -19,8 +19,9 @@ main.container {
     $content-height: 100px;
     $content-padding: 15px;
 
-    h2 {
-        padding: 0 .75rem;
+    h1 {
+        padding: 2% .75rem;
+        text-align: center;
     }
 
     .card {
@@ -50,17 +51,23 @@ main.container {
                 }
 
                 .pontuacao {
-                    overflow: visible;
+                    overflow: hidden;
                 }
             }
 
             .card-title {
                 margin: 0;
+                overflow: hidden;
+            }
+
+            .pontuacao {
+                overflow: hidden;
             }
 
             .card-action {
                 padding: 0 !important;
                 border: 0 !important;
+                overflow: hidden;
 
                 a {
                     float: right;
@@ -116,6 +123,7 @@ main.container {
         border-radius: 10px;
         right: 3px;
         transition: all .8s ease-in-out;
+        border: 3px solid $colorBd;
 
         -webkit-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
         -moz-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
@@ -132,6 +140,7 @@ main.container {
         h2 {
             font-size: 2.5vw;
             color: $page-bg;
+            padding: 0 .75rem;
         }
 
         >.row>.col:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(6)) {
@@ -175,6 +184,19 @@ main.container {
             height: $content-height - ($content-padding * 2);
         }
         @include content-font($content-height - ($content-padding * 2), 30px, 300);
+    }
+
+    #first {
+        position: sticky;
+        top: 5px;
+
+        &>h2 {
+            margin-top: 0;
+        }
+
+        #firstContent h4 {
+            margin-bottom: 0;
+        }
     }
 }
 
