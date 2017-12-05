@@ -146,42 +146,47 @@ function search(key) {
                 success: function (json) {
                     data = JSON.parse(json).feed.entry //recebe a data como json
 
-                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
-
                     arrayfy(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
+                    //Prepare Modal
                     $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
 
                     $("#playerStats").html('');
                     $("#sideGames").html('');
 
-                    table[searching].dados = {}; //player data broken down
+                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
 
-                    j=0;
-                    for (i in table[searching]) { //itera sobre a página, e i é row1, row2, row3...
-                        if(j%2!=0 && j<Object.keys(table[searching]).length-2 && j>0){ //fileira impar (jogo1, jogo2...)
-                            table[searching].dados[table[searching][i]] = []; //cria jogo1, jogo2...
-                            lastJogo = table[searching][i];
+                    createPageDados(searching);
 
-                            jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
+                    function pageDadosModal(page) {
+                        table[page].dados = {}; //player data broken down
+
+                        j = 0;
+                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3...
+                            if (j % 2 != 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
+                                table[page].dados[table[page][i]] = []; //cria jogo1, jogo2...
+                                lastJogo = table[page][i];
+
+                                jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
+                            }
+                            if (j % 2 == 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
+                                table[page].dados[lastJogo].times = [table[page][i][0], table[page][i][1], table[page][i][3], table[page][i][4], table[page][i].pop()];
+                                times = table[page].dados[lastJogo].times;
+
+                                $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
+
+                                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
+                            }
+                            if (j == Object.keys(table[page]).length - 2) { //ultima fileira (pontuação final)
+                                table[page].dados.pontuacao = table[page][i][0];
+                                pontuacao = table[page].dados.pontuacao;
+
+                                $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
+                                $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
+                            }
+
+                            j++;
                         }
-                        if(j%2==0 && j<Object.keys(table[searching]).length-2 && j>0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
-                            table[searching].dados[lastJogo].times = [table[searching][i][0],table[searching][i][1],table[searching][i][3],table[searching][i][4],table[searching][i].pop()];
-                            times = table[searching].dados[lastJogo].times;
-
-                            $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
-
-                            $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
-                        }
-                        if (j == Object.keys(table[searching]).length - 2){ //ultima fileira (pontuação final)
-                            table[searching].dados.pontuacao = table[searching][i][0];
-                            pontuacao = table[searching].dados.pontuacao;
-
-                            $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
-                            $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
-                        }
-
-                        j++;
                     }
 
                     $('#modal1').modal('open');
