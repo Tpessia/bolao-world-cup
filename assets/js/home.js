@@ -74,6 +74,7 @@ function rankCreate() { //create ranking element
         j++;
     }
     
+    $("#rankContent").html("");
 
     for (i in ranking) { //só mostra na div (remover no projeto oficial)
         if(i==0){
