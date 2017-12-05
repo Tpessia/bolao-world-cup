@@ -89,7 +89,7 @@ function rankCreate() { //create ranking element
 
         rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 offset-m1 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s5 m2 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
 
-        $("#rankContent").html(rankBlock); //append main rank block
+        $("#rankContent").html(($"#rankContent").html() + rankBlock); //append main rank block
 
         if(i>k){$($("#rankContent>.col")[i]).addClass("hide");} //hide players that are not at the top "k+1"
 
