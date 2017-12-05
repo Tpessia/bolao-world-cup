@@ -2,24 +2,21 @@
 <html>
 <head>
     <title>Bolão Copa 2018</title>
-
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#db5945">
-    <meta name="description" content="Caso tenho alguma dúvida relacionada com o website ou com o sistema de pontuação/ranking, entre em contato conosco através dessa página! Faça um orçamento para criação de seu próprio sistema/site em: www.pessia.xyz/contato.html">
 
-    <link rel="icon" type="image/png" href="assets/img/icon.png">
+    <link rel="icon" type="image/png" href="/assets/img/icon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="" href="assets/styles/css/min/contato.min.css">
+    <link rel="stylesheet" href="/assets/styles/css/min/error.min.css">
 
 </head>
-
 <body>
-
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
@@ -30,7 +27,7 @@
                 </a>
 
                 <ul class="right hide-on-med-and-down">
-                    <li class="active">
+                    <li>
                         <a href="/index.html">Ranking</a>
                     </li>
                     <li>
@@ -70,35 +67,12 @@
         </ul>
     </header>
 
-    <main id="conteudo" class="container">
-        <form id="form" style="margin-bottom: 30px; margin-top: 45px;" action="assets/php/contact.php" method="post">
-            <div class="input-field">
-                <input name="email" id="email" type="email" placeholder="seuemail@exemplo.com.br" required>
-                <label for="email">Email</label>
-            </div>
-            <div class="input-field">
-                <input name="assunto" id="assunto" type="text" placeholder="Meu Assunto" required>
-                <label for="email">Assunto</label>
-            </div>
-            <div class="input-field">
-                <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' style="height: 40vh; min-height: 170px;" required></textarea>
-                <label for="mensagem">Mensagem</label>
-            </div>
-            <div class="input-field">
-                <input type="submit" class="btn colorBl" value="Enviar">
-            </div>
-        </form>
-    </main>
+    <main>
 
-    <div id="myModal" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <h4>Mensagem Enviada!</h4>
-            <p>Sua mensagem foi enviada com sucesso! Obrigado pro entrar em contato!</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div>
+        <h1>Erro 404</h1>
+        <div class="container1">Você não tem acesso à essas página ou diretório!</div>
+
+    </main>
 
     <footer class="page-footer">
         <div class="container">
@@ -124,53 +98,46 @@
             <div class="container">
                 <div>
                     Aplicação Web
-                    <br> Bolão Copa do Mundo 2018
+                    <br>
+                    Bolão Copa do Mundo 2018
                 </div>
                 <div>
-                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por
-                        <strong>Thiago Pessia</strong>
-                    </a>
+                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por <strong>Thiago Pessia</strong></a></div>
                 </div>
-            </div>
         </div>
     </footer>
 
-    <script>
-        $("#form").on("submit", function (event) {
-            event.preventDefault();
+    <style>
+        body {
+            height: 100vh;
+        }
 
-            var myData = { email: $("#email").val(), assunto: $("#assunto").val(), mensagem: $("#mensagem").val().replace(/(?:\r\n|\r|\n)/g, '<br />') }
+        main {
+            background-image: url(/assets/img/error.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-top: 50px;
+            height: calc(100% - 85px);
+        }
 
-            $.ajax({
-                method: "POST",
-                url: "assets/php/contact.php",
-                data: myData,
-                success: function () {
-                    $("#email, #mensagem").val("");
-                    $('#myModal').modal('open');
-                },
-                error: function (err, status) {
-                    window.alert("Erro ao enviar a mensagem!");
-                }
-            });
-        });
-    </script>
+        main h1 {
+            text-align: center;
+            font-size: 45px;
+            margin-top: 27vh;
+        }
+
+        .container1 {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 5%;
+        }
+    </style>
 
     <script type="text/javascript">
         /*Mobile Nav (3/3) / Necessário para a sidebar funcionar*/
         $('.collapsible').collapsible();/*não sei se é necessário*/
         $(".button-collapse").sideNav();
-        $(document).ready(function () {
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-            $('.modal').modal();
-        });
-
-        $(document).ready(function () {
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-            $('.modal').modal();
-        });
     </script>
 
 </body>
-
 </html>

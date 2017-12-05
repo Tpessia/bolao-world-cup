@@ -30,8 +30,8 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 }
 
 
-function newData(pages, ID) {
-    id = ID;
+function newData(pages, ID) { //request spreadsheet page data
+    id = ID; //cria id global
     pages = pages.split(',');
 
     pages.forEach(function (page, index) {
@@ -50,13 +50,8 @@ function newData(pages, ID) {
 
                 arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
-                // for (i in table[page]) { //só mostra na div (remover no projeto oficial)
-                //     $("#div").html($("#div").html() + table[page][i]);
-                //     $("#div").html($("#div").html() + "<br>");
-                // }
-
-                rankingGet();
-                playersGet();
+                rankCreate();
+                playersArray();
             },
             error: function (xhr, status, error) {
                 alert('Erro, sem conexão com a internet!');
@@ -66,7 +61,7 @@ function newData(pages, ID) {
 }
 
 
-function rankingGet() {
+function rankCreate() { //create ranking element
     k = 4; //numero de itens do rank mostrados por vez
 
     ranking = [];
@@ -78,33 +73,30 @@ function rankingGet() {
         }
         j++;
     }
-
-    $("#rank").html('<h2>RANKING</h2><a id="moreRank" class="rankBtn waves-effect waves-light btn col s5"><i class="material-icons right">playlist_add</i>Ver Mais</a><a id="refresh" class="rankBtn waves-effect waves-light btn col s4"><i class="material-icons">autorenew</i><span class="hide-on-small-only">Atualizar</span></a>');
-    $("#sideRank>.row").html('<h2>Top 5</h2>');
     
 
     for (i in ranking) { //só mostra na div (remover no projeto oficial)
         if(i==0){
-            element = '<div class="col s12">';
+            rankBlock = '<div class="col s12">'; //maior se for o primeiro
             btn = 'btn-large';
         }
         else {
-            element = '<div class="col s10">';
+            rankBlock = '<div class="col s10">'; //2nd,3rd,4th...
             btn = 'btn';
         }
 
-        element2 = element;
+        sideRank = rankBlock;
 
-        element += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 offset-m1 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s5 m2 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>';
+        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 offset-m1 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s5 m2 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
 
-        $("#moreRank").before(element);
+        $("#moreRank").before(rankBlock); //append main rank block
 
-        if(i>k){$($("#rank>.col")[i]).addClass("hide");}
+        if(i>k){$($("#rankList>.col")[i]).addClass("hide");} //hide players that are not at the top "k+1"
 
-        if(i<5) {
-            element2 += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
+        if(i<5) { //create side rank
+            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
 
-            $("#sideRank>.row").append(element2);
+            $("#sideRank>.row").append(sideRank);
         }
     }
 
@@ -112,27 +104,27 @@ function rankingGet() {
 }
 
 function showMoreRank() {
-    k+=5;
+    k+=6; //number of players shown on click (= k-1)
     
     for (i in ranking) {
         if (i < k) {
-            $($("#rank>.col")[i]).removeClass("hide");
+            $($("#rankList>.col")[i]).removeClass("hide"); //show player
         }
         if (k > ranking.length - 1) {
-            $("#moreRank").addClass('hide');
+            $("#moreRank").addClass('hide'); //hide button if there are no more players
         }
     }
 }
 
 
-function playersGet() {
+function playersArray() {
     players = [];
 
     j = 0;
     for (i in table.page1) {
         if (j > 1) {
             pageVar = table.page1[i][3];
-            nameVar = table.page1[i][4]; //nomes são salvados minificados
+            nameVar = table.page1[i][4];
             players.push({ page: pageVar, name: nameVar });
         }
         j++;
@@ -143,53 +135,51 @@ function playersGet() {
 
 function search(key) {
 
-    pesquisa = lower(key);
+    pesquisa = lower(key); //catch and format name
 
-    for (i in players) {
+    for (i in players) { //players[i].name and players[i].page
         if (/*pesquisa.match(lower(players[i].name))*/pesquisa == lower(players[i].name)) {
 
-            $.ajax({ //verifica se a url existe
+            $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
                 dataType: 'html',
                 success: function (json) {
                     data = JSON.parse(json).feed.entry //recebe a data como json
 
-                    pageSearch = "search"; //cria a pageN
+                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
 
-                    arrayfy(pageSearch, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                    arrayfy(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
                     $("#modal1 .modal-content>h4").html("Dados de " + players[i].name);
 
                     $("#playerStats").html('');
                     $("#sideGames").html('');
 
-                    table[pageSearch].dados = {};
+                    table[searching].dados = {}; //player data broken down
 
                     j=0;
-                    for (i in table[pageSearch]) { //só mostra na div (remover no projeto oficial)
-                        if(j%2!=0 && j<Object.keys(table[pageSearch]).length-2 && j>0){
-                            table[pageSearch].dados[table[pageSearch][i]] = []; //cria jogo1 jogo2
-                            lastJogo = table[pageSearch][i];
+                    for (i in table[searching]) { //itera sobre a página, e i é row1, row2, row3...
+                        if(j%2!=0 && j<Object.keys(table[searching]).length-2 && j>0){ //fileira impar (jogo1, jogo2...)
+                            table[searching].dados[table[searching][i]] = []; //cria jogo1, jogo2...
+                            lastJogo = table[searching][i];
 
                             jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>';
                         }
-                        if(j%2==0 && j<Object.keys(table[pageSearch]).length-2 && j>0) {
-                            table[pageSearch].dados[lastJogo].times = [table[pageSearch][i][0],table[pageSearch][i][1],table[pageSearch][i][3],table[pageSearch][i][4],table[pageSearch][i].pop()];
-                            times = table[pageSearch].dados[lastJogo].times;
+                        if(j%2==0 && j<Object.keys(table[searching]).length-2 && j>0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
+                            table[searching].dados[lastJogo].times = [table[searching][i][0],table[searching][i][1],table[searching][i][3],table[searching][i][4],table[searching][i].pop()];
+                            times = table[searching].dados[lastJogo].times;
 
                             $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>");
 
                             $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>");
                         }
-                        if (j == Object.keys(table[pageSearch]).length - 2){
-                            table[pageSearch].dados.pontuacao = table[pageSearch][i][0];
-                            pontuacao = table[pageSearch].dados.pontuacao;
+                        if (j == Object.keys(table[searching]).length - 2){ //ultima fileira (pontuação final)
+                            table[searching].dados.pontuacao = table[searching][i][0];
+                            pontuacao = table[searching].dados.pontuacao;
 
                             $(".sideTotal").remove();
                             $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>");
                         }
-
-                        //acessar: table.search.dados['Jogo 1'].times [0:timeA,1:pontA,2:pontB,3:timeB,4:pontPlayerJogo]; table.search.dados.pontuacao;
 
                         j++;
                     }
@@ -213,7 +203,7 @@ function lower(string1) {
     return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g,"");
 }
 
-function arrayfy(sheetPage, nullify = false) {
+function arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
     if (typeof table == "undefined") { table = {}; }
 
     table[sheetPage] = {};
@@ -266,4 +256,4 @@ function scrollFire(selector, foo, cont) {
     });
 }
 
-scrollFire('#rank',function(){$('#sideRank').toggleClass('hideSide');},cont=1)
+scrollFire('#rankList',function(){$('#sideRank').toggleClass('hideSide');},cont=1)

@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/css/min/home.min.css">
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/home.js"></script>
 
 </head>
 <body>
@@ -23,7 +23,7 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="assets/img/icon_white.png"></i>Bolão 2018</a>
+                <a href="#" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon_white.png"></i>Bolão 2018</a>
 
                 <a href="#" data-activates="mobileNav" class="button-collapse">
                     <i class="material-icons">menu</i>
@@ -31,13 +31,13 @@
 
                 <ul class="right hide-on-med-and-down">
                     <li class="active">
-                        <a href="#">Ranking</a>
+                        <a href="/index.html">Ranking</a>
                     </li>
                     <li>
                         <a href="">Instruções</a>
                     </li>
                     <li>
-                        <a href="contato.html">Contato</a>
+                        <a href="/contato.html">Contato</a>
                     </li>
                 </ul>
 
@@ -57,7 +57,7 @@
         <ul class="side-nav" id="mobileNav">
             <!--Mobile Nav(2/3)-->
             <li>
-                <a href="#">Ranking</a>
+                <a href="/home.html">Ranking</a>
             </li>
         
             <li>
@@ -65,7 +65,7 @@
             </li>
         
             <li>
-                <a href="contato.html">Contato</a>
+                <a href="/contato.html">Contato</a>
             </li>
         </ul>
     </header>
@@ -73,6 +73,21 @@
     <main class="container">
         <div id="rank" class="row rank">
             
+            <div id="rankList" class="col l8 s12">
+
+                <h2>RANKING</h2>
+                
+                <a id="moreRank" class="rankBtn waves-effect waves-light btn col s5"><i class="material-icons right">playlist_add</i>Ver Mais</a>
+                
+                <a id="refresh" class="rankBtn waves-effect waves-light btn col s4"><i class="material-icons">autorenew</i><span class="hide-on-small-only">Atualizar</span></a>
+
+            </div>
+            
+            <div id="first" class="col l4 hide-on-med-and-down">
+
+                
+
+            </div>
             
         </div>
     
@@ -96,7 +111,7 @@
     <aside>
         <div id="sideRank" class="rank hideSide hide-on-med-and-down">
             <div class="row">
-                    
+                    <h2>Top 5</h2>
             </div>
         </div>
     <aside>
