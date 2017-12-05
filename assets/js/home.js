@@ -150,7 +150,7 @@ function search(key) {
 
                     arrayfy(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
-                    $("#modal1 .modal-content>h4").html("Dados de " + players[i].name);
+                    $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
 
                     $("#playerStats").html('');
                     $("#sideGames").html('');
@@ -163,22 +163,22 @@ function search(key) {
                             table[searching].dados[table[searching][i]] = []; //cria jogo1, jogo2...
                             lastJogo = table[searching][i];
 
-                            jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>';
+                            jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
                         }
                         if(j%2==0 && j<Object.keys(table[searching]).length-2 && j>0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
                             table[searching].dados[lastJogo].times = [table[searching][i][0],table[searching][i][1],table[searching][i][3],table[searching][i][4],table[searching][i].pop()];
                             times = table[searching].dados[lastJogo].times;
 
-                            $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>");
+                            $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
 
-                            $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>");
+                            $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
                         }
                         if (j == Object.keys(table[searching]).length - 2){ //ultima fileira (pontuação final)
                             table[searching].dados.pontuacao = table[searching][i][0];
                             pontuacao = table[searching].dados.pontuacao;
 
-                            $(".sideTotal").remove();
-                            $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>");
+                            $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
+                            $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
                         }
 
                         j++;
