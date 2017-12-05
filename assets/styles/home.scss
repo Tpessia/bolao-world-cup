@@ -1,0 +1,258 @@
+@import '_main.scss';
+
+body {
+    background-color: $page-bg;
+}
+
+main.container {
+    min-width: 85%;
+}
+
+.rank {
+
+    @mixin content-font($line, $fSize, $weight) {
+        line-height: $line;
+        font-size: $fSize;
+        font-weight: $weight;
+    }
+
+    $content-height: 100px;
+    $content-padding: 15px;
+
+    h2 {
+        padding: 0 .75rem;
+    }
+
+    .card {
+
+        margin: .3rem 0 !important;
+
+        background-color: $colorBl;
+
+        .btn-floating {
+            background-color: $colorCd;
+        }
+
+        .row {
+            margin-bottom: 0 !important;
+        }
+        
+        .card-content {
+            padding: $content-padding;
+
+            >* {
+                @include content-font(40px, 18px, 300);
+
+                white-space: nowrap;
+
+                .card-title {
+                    overflow: hidden;
+                }
+
+                .pontuacao {
+                    overflow: visible;
+                }
+            }
+
+            .card-title {
+                margin: 0;
+            }
+
+            .card-action {
+                padding: 0 !important;
+                border: 0 !important;
+
+                a {
+                    float: right;
+
+                    &.large-only {
+                        @media screen and (max-width: 992px) {
+                            display: none !important;
+                        }
+                    }
+
+                    &.btn-large {
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+        }
+
+        .rankElem {
+            cursor: pointer;
+            color: $colorC !important;
+        }
+    }
+
+    &#rank {
+        .card-action {
+            @media screen and (max-width: 600px) {
+                transform: translateY(50%);
+            }
+        }
+
+        .rankBtn {
+            background-color: $colorAl;
+            font-size: 0.75em;
+            margin-left: .75rem;
+            line-height: 50px;
+            height: 50px;
+            margin-top: 15px;
+        }
+
+        #refresh i {
+            @media screen and (min-width: 600px) {
+                float: right;
+            }
+        }
+    }
+
+    &#sideRank {
+        position: fixed;
+        width: 15%;
+        top: 5%;
+        background-color: rgba($colorAl, 0.87);
+        border-radius: 10px;
+        right: 3px;
+        transition: all .8s ease-in-out;
+
+        -webkit-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
+        -moz-box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
+        box-shadow: 7px 7px 25px 1px rgba(0, 0, 0, 0.66);
+
+        .card {
+            background-color: $colorBd;
+        }
+
+        .btn-floating {
+            background-color: $colorBl;
+        }
+
+        h2 {
+            font-size: 2.5vw;
+            color: $page-bg;
+        }
+
+        >.row>.col:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(6)) {
+            display: none;
+        }
+
+        &.hideSide {
+            opacity: 0;
+            margin-right: 34%;
+        }
+
+        .card-content {
+            $heightCard: 30px;
+            padding: 0px;
+            height: $heightCard;
+            .card-title {
+                font-size: 1.2vw;
+                line-height: $heightCard;
+            }
+            .card-action {
+                height: $heightCard;
+            }
+            .btn {
+                $sizeBtn: 1.8vw;
+                width: $sizeBtn;
+                height: $sizeBtn;
+                top: 50%;
+                transform: translateY(-50%);
+                i {
+                    line-height: $sizeBtn;
+                    font-size: 1.1vw;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+
+    .col:first-of-type .card-content > * {
+        &.card-action {
+            height: $content-height - ($content-padding * 2);
+        }
+        @include content-font($content-height - ($content-padding * 2), 30px, 300);
+    }
+}
+
+#modal1 {
+    min-height: 350px;
+
+    .modal-content {
+        padding: 0;
+
+        &>h4 {
+            text-align: center;
+            //text-transform: capitalize;
+            position: sticky;
+            top: 0;
+            background-color: #fafafa;
+            padding: 22px;
+            margin: 0;
+        }
+
+        #wrapper {
+
+            :not(h5) {
+                color: #504a4a;
+            }
+
+            .jogo {
+                display: inline-block;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            #sidePont {
+                position: fixed;
+                height: 36vh;
+                right: 20px;
+                background-color: #f3f3f3;
+
+                -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
+                -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.25);
+
+                @media screen and (max-width: 600px) {
+                    margin-bottom: 20px;
+                    position: initial;
+
+                    .sideTotal {
+                        position: initial !important;
+                        bottom: auto !important;
+                        width: auto !important;
+                    }
+                }
+
+                .sideJogo {}
+
+                .sideNum {
+                    float: right;
+                    margin-right: 7px;
+                }
+
+                #sideGames {
+                    max-height: calc(100% - 69px);
+                    overflow-y: auto;
+                }
+
+                .sideTotal {
+                    position: absolute;
+                    bottom: 0;
+                    width: calc(100% - 1.5rem);
+                    background-color: #f3f3f3;
+                    padding-top: 2px;
+                    border-top: 1px solid rgba(100, 100, 100, 0.3);
+
+                    span:nth-child(2) {
+                        float: right;
+                        margin-right: 5px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}
