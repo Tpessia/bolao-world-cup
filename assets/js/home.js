@@ -89,9 +89,9 @@ function rankCreate() { //create ranking element
 
         rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 offset-m1 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s5 m2 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
 
-        $("#moreRank").before(rankBlock); //append main rank block
+        $("#rankContent").html(rankBlock); //append main rank block
 
-        if(i>k){$($("#rankList>.col")[i]).addClass("hide");} //hide players that are not at the top "k+1"
+        if(i>k){$($("#rankContent>.col")[i]).addClass("hide");} //hide players that are not at the top "k+1"
 
         if(i<5) { //create side rank
             sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
@@ -108,7 +108,7 @@ function showMoreRank() {
     
     for (i in ranking) {
         if (i < k) {
-            $($("#rankList>.col")[i]).removeClass("hide"); //show player
+            $($("#rankContent>.col")[i]).removeClass("hide"); //show player
         }
         if (k > ranking.length - 1) {
             $("#moreRank").addClass('hide'); //hide button if there are no more players
