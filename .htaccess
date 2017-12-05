@@ -49,8 +49,8 @@ Header unset X-UA-Compatible
 </IfModule>
 
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^www.pessia.xyz$ [NC]
-RewriteRule ^(.*)$ http://www.pessia.xyz/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} !^www.bolaodomauricio.xyz$ [NC]
+RewriteRule ^(.*)$ http://www.bolaodomauricio.xyz/$1 [L,R=301]
 
 ErrorDocument 404 /assets/errors/404.html
 
