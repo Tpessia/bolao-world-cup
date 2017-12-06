@@ -67,7 +67,10 @@ main.container {
             .card-action {
                 padding: 0 !important;
                 border: 0 !important;
-                overflow: hidden;
+
+                @media screen and (min-width: 992px) {
+                    overflow: hidden;
+                }
 
                 a {
                     float: right;
