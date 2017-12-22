@@ -38,26 +38,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
-<body>
+<body class="login">
 
-    <div id="login" style="
-        position:  fixed;
-        width:  100%;
-        height:  100vh;
-        background-color: black;
-        z-index:  999;
-                           ">
-        <div id="formDiv" style="
-        position:  absolute;
-        top: 50%;
-        left:  50%;
-        transform: translate(-50%,-50%);
-    ">
+    <div id="login">
+        <div id="formDiv">
             <form>
                 <div class="input-field">
                     <input type="text" id="name">
-                    <label for="name" class="active" style="
-    ">Nome</label>
+                    <label for="name" class="active">Nome <small>(como na planilha)</small></label>
                 </div>
                 <div class="input-field">
                     <input type="button" id="sendLogin" class="btn colorBl" value="Login">
@@ -80,7 +68,7 @@
                         <a href="/index.html">Ranking</a>
                     </li>
                     <li>
-                        <a href="">Instruções</a>
+                        <a class="login">Login</a>
                     </li>
                     <li>
                         <a href="/contato.html">Contato</a>
@@ -92,7 +80,7 @@
             <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
                 <form onsubmit="return false">
                     <div class="input-field">
-                        <input type="search" id="searchVal" autocomplete="off" placeholder="Pesquise seu nome" onsearch="search($('#searchVal').val())" required style="margin: 0; padding-left: 3.5em;">
+                        <input type="search" id="searchVal" autocomplete="off" placeholder="Pesquisar Nome" onsearch="search($('#searchVal').val())" required style="margin: 0; padding-left: 3.5em;">
                         <i class="material-icons">search</i>
                         <i class="material-icons" style="top: -15%;">close</i>
                     </div>
@@ -107,7 +95,7 @@
             </li>
         
             <li>
-                <a href="#">Instruções</a>
+                <a class="login">Login</a>
             </li>
         
             <li>
@@ -160,7 +148,7 @@
         </div>
 
         <div class="row" id="chart">
-            <h2>Pontuaçao</h2>
+            <h2>Minha Pontuaçao</h2>
             <div class="col s12 l10"><canvas id="myChart"></canvas></div>
 
             <!-- <div style="
@@ -260,7 +248,7 @@
     <script type="text/javascript">
         /*Mobile Nav (3/3) / Necessário para a sidebar funcionar*/
         $('.collapsible').collapsible();/*não sei se é necessário*/
-        $(".button-collapse").sideNav();
+        $(".button-collapse").sideNav({ closeOnClick: true });
         $(document).ready(function () {
                 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
                 $('.modal').modal();

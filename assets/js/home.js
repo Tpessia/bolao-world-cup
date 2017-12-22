@@ -1,4 +1,6 @@
 $(function() {
+    login();
+
     newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     //setInterval((function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); bindClick();}),180000);
 
@@ -13,7 +15,42 @@ $(function() {
     chart();
 
     scrolls();
-})
+});
+
+function login() {
+    if (localStorage.getItem("user") !== null) {
+        $("div#login").css("display", "none");
+        $("body").removeClass("login");
+    }
+
+    $('#name').on('keydown', function (e) {
+        if (e.which == 13) {
+            cadastrar();
+            e.preventDefault();
+        }
+    });
+
+    $("#sendLogin").on("click", function () {
+        cadastrar();
+    });
+
+    function cadastrar() {
+        user = { name: "" };
+
+        user.name = $("#name").val();
+
+        localStorage.setItem('user', user.name);
+
+        $("div#login").css("display", "none");
+        $("#name").val("");
+        $("body").removeClass("login");
+    }
+
+    $("a.login").on("click", function() {
+        $("div#login").css("display","initial");
+        $("body").addClass("login");
+    });
+}
 
 function bindClick() { //está rodando quando o rankfy roda, que por sua vez roda quando o new data roda
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () {
@@ -68,7 +105,8 @@ function newData(pages, ID) { //request spreadsheet page data
 
 
 function rankCreate() { //create ranking element
-    k = 4; //numero de itens do rank mostrados por vez
+    var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
 
     ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
