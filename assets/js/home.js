@@ -9,6 +9,10 @@ $(function() {
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
         $('#searchVal').val(''); //clean search on close
     })
+
+    chart();
+
+    scrolls();
 })
 
 function bindClick() { //está rodando quando o rankfy roda, que por sua vez roda quando o new data roda
@@ -26,6 +30,7 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 
     $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        chart();
     })
 }
 
@@ -268,6 +273,53 @@ function scrollFire(selector, foo, id) {
     });
 }
 
-scrollFire('#rankList',function(){$('#sideRank').toggleClass('hideSide');}, 1);
+function scrolls() {
+    scrollFire('#rankList', function () {
+        $('#sideRank').toggleClass('hideSide');
+    }, 1);
 
-scrollFire('#rankContent>div:first-child',function(){$('#first').toggleClass('transform');}, 2);
+    scrollFire('#rankContent>div:first-child', function () {
+        $('#first').toggleClass('transform');
+    }, 2);
+}
+
+function chart() {
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    var date = new Date();
+    var month = date.getMonth();
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: [
+                 "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+            ],
+            datasets: [
+            {
+                label: "Pontuaçao Média",
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgb(0,0,0)',
+                data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+            },
+
+            {
+                label: "Minha Pontuação",
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230],
+            }
+            ]
+        },
+
+        // Configuration options go here
+        options: {
+            
+        }
+    });
+}

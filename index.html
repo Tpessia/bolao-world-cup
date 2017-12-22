@@ -25,22 +25,46 @@
     <meta name="description" content="9º Bolão Copa do Mundo (do Maurício). Participe do Bolão da Copa do Mundo de 2018!">
 
     <link rel="icon" type="image/png" href="assets/img/icon.png">
-
-    <script src="lib/pace_1.0.0.js"></script> <!-- pace -->
-    <link rel="stylesheet" href="lib/pace-theme-minimal.tmpl_1.css">
     
-    <link rel="stylesheet" href="lib/addtohomescreen.css"> <!-- AHM -->
-    <script src="lib/addtohomescreen.js"></script>
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="lib/addtohomescreen.css">
+    <link rel="stylesheet" href="assets/styles/css/min/home.min.css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/css/min/home.min.css">
     <script src="assets/js/home.js"></script>
+    <script src="lib/addtohomescreen.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
 <body>
+
+    <div id="login" style="
+        position:  fixed;
+        width:  100%;
+        height:  100vh;
+        background-color: black;
+        z-index:  999;
+                           ">
+        <div id="formDiv" style="
+        position:  absolute;
+        top: 50%;
+        left:  50%;
+        transform: translate(-50%,-50%);
+    ">
+            <form>
+                <div class="input-field">
+                    <input type="text" id="name">
+                    <label for="name" class="active" style="
+    ">Nome</label>
+                </div>
+                <div class="input-field">
+                    <input type="button" id="sendLogin" class="btn colorBl" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
 
     <header>
         <nav class="nav-extended navbar-fixed">
@@ -92,6 +116,22 @@
         </ul>
     </header>
 
+    <div id="imgHead" style="
+        height: calc(100vh - 112px);
+        width: 100%;
+        background-image: url(assets/img/imgHead.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position:  relative;
+                             ">
+        <div id="overlay" style="
+        width:  100%;
+        height:  100%;
+        background-color: rgba(0,0,0,0.1);
+    "></div>
+    </div>
+
     <main class="container">
         <div id="rank" class="row rank">
             
@@ -117,6 +157,26 @@
 
             </div>
             
+        </div>
+
+        <div class="row" id="chart">
+            <h2>Pontuaçao</h2>
+            <div class="col s12 l10"><canvas id="myChart"></canvas></div>
+
+            <!-- <div style="
+                position: absolute;
+                bottom: -25px;
+                width: 84.833%;
+                margin-left: .4%;
+                text-align: center;
+            " id="label">
+                <span class="col s2">Janeiro</span>
+                <span class="col s2">Fevereiro</span>
+                <span class="col s2">Março</span>
+                <span class="col s2">Abril</span>
+                <span class="col s2">Maio</span>
+                <span class="col s2">Junho</span>
+            </div> -->
         </div>
     
         <div class="row">
