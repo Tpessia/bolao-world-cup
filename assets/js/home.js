@@ -84,7 +84,7 @@ function rankCreate() { //create ranking element
             btn = 'btn-large';
         }
         else {
-            rankBlock = '<div class="col s10">'; //2nd,3rd,4th...
+            rankBlock = '<div class="col s11">'; //2nd,3rd,4th...
             btn = 'btn';
         }
 
@@ -245,27 +245,29 @@ function arrayfy(sheetPage, nullify = false) { //create an array based on the sp
 }
 
 
-function scrollFire(selector, foo, cont) {
+function scrollFire(selector, foo, id) {
+    scroll[id] = 0;
     $(window).scroll(function () {
-        //só funciona para elementos que sempre serão os primeiros na página
         var sT = $(selector).offset().top,
             sH = $(selector).outerHeight(),
             wH = $(window).height(),
             wS = $(window).scrollTop();
 
-        if(cont>0) { //só roda uma vez
+        if (scroll[id] == 0) { //só roda uma vez
             if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
                 foo();
-                cont--;
+                scroll[id] ^= 1;
             }
         }
         else {
             if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
                 foo();
-                cont++;
+                scroll[id] ^= 1;
             }
         }
     });
 }
 
-scrollFire('#rankList',function(){$('#sideRank').toggleClass('hideSide');},cont=1)
+scrollFire('#rankList',function(){$('#sideRank').toggleClass('hideSide');}, 1);
+
+scrollFire('#rankContent>div:first-child',function(){$('#first').toggleClass('transform');}, 2);
