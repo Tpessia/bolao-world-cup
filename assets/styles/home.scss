@@ -154,7 +154,7 @@ main.container {
         font-weight: $weight;
     }
 
-    $content-height: 100px;
+    $content-height: 85px;
     $content-padding: 15px;
 
     h1 {
@@ -234,6 +234,13 @@ main.container {
     }
 
     &#rank {
+        #rankList {
+            #rankContent {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+        
         .card-action {
             @media screen and (max-width: 600px) {
                 transform: translateY(50%);

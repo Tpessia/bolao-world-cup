@@ -236,6 +236,9 @@ main.container {
   .rank .card .rankElem {
     cursor: pointer;
     color: #ffab40 !important; }
+.rank#rank #rankList #rankContent {
+  margin-left: 0;
+  margin-right: 0; }
 @media screen and (max-width: 600px) {
   .rank#rank .card-action {
     transform: translateY(50%); } }
@@ -291,18 +294,18 @@ main.container {
         font-size: 1.1vw;
         vertical-align: top; }
 .rank .col:first-of-type .card-content > * {
-  line-height: 70px;
+  line-height: 55px;
   font-size: 30px;
   font-weight: 300; }
   .rank .col:first-of-type .card-content > *.card-action {
-    height: 70px; }
+    height: 55px; }
   @media screen and (max-width: 992px) {
     .rank .col:first-of-type .card-content > * {
-      line-height: 55px;
+      line-height: 40px;
       font-size: 30px;
       font-weight: 300; }
       .rank .col:first-of-type .card-content > *.card-action {
-        height: 55px; } }
+        height: 40px; } }
 .rank #first {
   position: sticky;
   top: 5px;
