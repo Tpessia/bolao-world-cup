@@ -1,6 +1,8 @@
 window.onload = function() {
-    $("body").removeClass("loading");
-    $("#loading").css("display", "none");
+    setTimeout(function(){
+        $("body").removeClass("loading");
+        $("#loading").css("display", "none");
+    },1000);
 };
 
 $(function() {
@@ -17,18 +19,19 @@ $(function() {
         $('#searchVal').val(''); //clean search on close
     })
 
-    chartObj.create();
+    charts1.create();
+    charts2.create();
 
     scrolls();
 });
 
 function login() {
     if (localStorage.getItem("user") !== null) {
+        $("div#login").css("display", "none");
+        $("body").removeClass("login");
         user = { name: "" };
         user.name = localStorage.getItem("user");
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
-        $("div#login").css("display", "none");
-        $("body").removeClass("login");
     }
 
     $('#name').on('keydown', function (e) {
@@ -92,7 +95,7 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 
     $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        chartObj.create();
+        charts1.create();
     })
 }
 
@@ -346,16 +349,10 @@ function scrolls() {
     }, 2);
 }
 
-chartObj = {
+charts1 = {
     create: function() {
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-        var date = new Date();
-        var month = date.getMonth();
-
-        ctx = document.getElementById('myChart').getContext('2d');
-        chart = new Chart(ctx, {
+        ctx1 = document.getElementById('myChart').getContext('2d');
+        chart1 = new Chart(ctx1, {
             // The type of chart we want to create
             type: 'line',
 
@@ -366,7 +363,7 @@ chartObj = {
                 ],
                 datasets: [
                     {
-                        label: "Pontuaçao Média",
+                        label: "Pontuação Média",
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderColor: 'rgb(0,0,0)',
                         data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
@@ -376,7 +373,7 @@ chartObj = {
                         label: "Minha Pontuação",
                         backgroundColor: 'rgba(255, 171, 64, 0.7)',
                         borderColor: 'rgb(255, 171, 64)',
-                        data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230],
+                        data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
                     }
                 ]
             },
@@ -389,6 +386,43 @@ chartObj = {
     },
 
     update: function(datasetIndex, dataArr) {
+        chart.data.datasets[datasetIndex].data = dataArr;
+        chart.update();
+    }
+}
+
+charts2 = {
+    create: function () {
+        ctx2 = document.getElementById('myChart2').getContext('2d');
+        var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#25365d33');
+        gradient.addColorStop(1, '#25365dff');
+        chart2 = new Chart(ctx2, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: [
+                    "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                ],
+                datasets: [{
+                        label: "Minha Colocação",
+                        backgroundColor: gradient,
+                        hoverBackgroundColor: "#102149",
+                        data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3, 0, 12]
+                    }
+                ]
+            },
+
+            // Configuration options go here
+            options: {
+                
+            }
+        });
+    },
+
+    update: function (datasetIndex, dataArr) {
         chart.data.datasets[datasetIndex].data = dataArr;
         chart.update();
     }

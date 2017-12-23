@@ -308,34 +308,31 @@ main.container {
     margin-bottom: 0; }
 
 #chart {
-  margin-top: 100px;
   position: relative; }
   #chart h2 {
     margin-left: 20px; }
   #chart > div {
+    margin-top: 80px;
     position: relative; }
-    #chart > div #blockMobile {
+    #chart > div .blockMobile {
       display: none; }
       @media screen and (max-width: 400px) {
-        #chart > div #blockMobile {
+        #chart > div .blockMobile {
           display: initial;
           position: absolute;
           z-index: 10;
           width: calc(100% - .75rem);
-          height: 100%;
+          height: 50%;
           background: #f5f5f5; }
-          #chart > div #blockMobile div {
+          #chart > div .blockMobile div {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             display: inline-table; }
-            #chart > div #blockMobile div i {
+            #chart > div .blockMobile div i {
               font-size: 15vh; } }
-  @media screen and (max-width: 350px) {
-    #chart {
-      display: none; } }
 
 #modal1 {
   min-height: 350px; }
