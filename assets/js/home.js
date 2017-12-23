@@ -400,30 +400,54 @@ charts1 = {
 charts2 = {
     create: function () {
         ctx2 = document.getElementById('myChart2').getContext('2d');
-        var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, '#25365d33');
-        gradient.addColorStop(1, '#25365dff');
+        // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
+        // gradient.addColorStop(0, '#25365d33');
+        // gradient.addColorStop(1, '#25365dff');
         chart2 = new Chart(ctx2, {
             // The type of chart we want to create
-            type: 'bar',
+            type: 'line',
 
             // The data for our dataset
             data: {
                 labels: [
                     "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
                 ],
-                datasets: [{
+                datasets: [
+                    // {
+                    //     label: "Minha Colocação",
+                    //     backgroundColor: gradient,
+                    //     hoverBackgroundColor: "#102149",
+                    //     data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                    // },
+
+                    {
                         label: "Minha Colocação",
-                        backgroundColor: gradient,
-                        hoverBackgroundColor: "#102149",
-                        data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3, 0, 12]
+                        // backgroundColor: '#25365d66',
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: '#25365d',
+                        data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
                 ]
             },
 
             // Configuration options go here
             options: {
-                legend: false
+                legend: false,
+                
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                            suggestedMax: 12,
+                            reverse: true,
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Colocação'
+                        }
+                    }]
+                }
             }
         });
     },
