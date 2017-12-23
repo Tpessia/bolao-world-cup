@@ -74,9 +74,15 @@ function login() {
     }
 
     $("a.login").on("click", function () {
+        $("#login .close").css("display","inline-block");
         $("#name").removeClass("invalid");
         $("div#login").css("display","initial");
         $("body").addClass("login");
+    });
+
+    $("#login .close").on("click", function() {
+        $("div#login").css("display", "none");
+        $("body").removeClass("login");
     });
 }
 

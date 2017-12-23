@@ -103,6 +103,13 @@ body.loading {
 
 body.login {
   overflow-y: hidden; }
+  body.login #login {
+    text-align: right; }
+    body.login #login .close {
+      display: none;
+      color: white;
+      padding: 15px 15px 0 0;
+      cursor: pointer; }
   body.login div#login {
     position: fixed;
     width: 100%;
