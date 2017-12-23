@@ -38,7 +38,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
-<body class="login">
+<body class="login loading">
+    <div id="loading">
+        <span id="ball">
+            <img src="assets/img/loading-ball.gif">
+        </span>
+    </div>
 
     <div id="login">
         <div id="formLogin">
@@ -106,7 +111,7 @@
 
     <div id="imgHead">
         <div id="overlay"></div>
-        <div id="welcome">Bem Vindo, %nome%!</div>
+        <h2 id="welcome">Bem Vindo, %nome%!</h2>
         <div class="arrow-pulse-down" onclick="window.scrollTo(0, window.innerHeight)"></div>
     </div>
 
@@ -139,7 +144,15 @@
 
         <div class="row" id="chart">
             <h2>Minha Pontuaçao</h2>
-            <div class="col s12 l10"><canvas id="myChart"></canvas></div>
+            <div class="col s12 l10">
+                <div id="blockMobile">
+                    <div>
+                        <i class="material-icons">screen_rotation</i>
+                        <p>Vire a tela para ver o gráfico!</p>
+                    </div>
+                </div>
+                <canvas id="myChart"></canvas>
+            </div>
 
             <!-- <div style="
                 position: absolute;
@@ -164,7 +177,7 @@
                 <h2>Aqui estarão algumas informações ou regras para o usuário</h2>
                 <br>
                 <br>
-                <h3>Por exemplo, podemos explicar para ele (de maneira resumida) como é o sistema utilizado para os pontos, e referênciar a página de intruções.</h3>
+                <h3>Por exemplo, podemos explicar para ele como é o sistema utilizado para os pontos.</h3>
                 <br>
                 <h3>Também podemos mostrar algumas notícias, retiradas de sites de granda porte, como G1, para atualiazar os jogadores quanto ao placar dos últimos jogos ou sobre as datas dos próximos jogos.</h3>
                 <br>

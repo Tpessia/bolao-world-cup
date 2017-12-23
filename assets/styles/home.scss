@@ -4,6 +4,26 @@ body {
     background-color: $page-bg;
 }
 
+body.loading {
+    overflow-y: hidden;
+
+    #loading {
+        position : fixed;
+        width : 100vw;
+        height : 100vh;
+        background-color: #fff;
+        z-index : 1000;
+
+        #ball {
+            display : inline-block;
+            position : absolute;
+            top: 50%;
+            left : 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
 body.login {
     overflow-y: hidden;
 
@@ -53,6 +73,7 @@ body.login {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-position: top;
     position : relative;
 
     #overlay {
@@ -71,7 +92,7 @@ body.login {
         font-size: 5vw;
 
         @media screen and (max-width: 600px) {
-            font-size: 9vw;
+            font-size: 9.8vw;
         }
     }
 
@@ -329,6 +350,35 @@ main.container {
 
     h2 {
         margin-left: 20px;
+    }
+
+    >div {
+        position: relative;
+
+        #blockMobile {
+            display: none;
+
+            @media screen and (max-width: 400px) {
+                display: initial;
+                position: absolute;
+                z-index: 10;
+                width: calc(100% - .75rem);
+                height: 100%;
+                background: #f5f5f5;
+
+                div {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                    display: inline-table;
+                    i {
+                        font-size: 15vh;
+                    }
+                }
+            }
+        }
     }
 
     @media screen and (max-width: 350px) {

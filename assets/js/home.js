@@ -1,3 +1,8 @@
+window.onload = function() {
+    $("body").removeClass("loading");
+    $("#loading").css("display", "none");
+};
+
 $(function() {
     login();
 
