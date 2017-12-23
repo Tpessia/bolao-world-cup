@@ -417,7 +417,7 @@ charts2 = {
 
             // Configuration options go here
             options: {
-                
+                legend: false
             }
         });
     },
