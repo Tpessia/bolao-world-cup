@@ -12,41 +12,61 @@ $(function() {
         $('#searchVal').val(''); //clean search on close
     })
 
-    chart();
+    chartObj.create();
 
     scrolls();
 });
 
 function login() {
     if (localStorage.getItem("user") !== null) {
+        user = { name: "" };
+        user.name = localStorage.getItem("user");
+        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
         $("div#login").css("display", "none");
         $("body").removeClass("login");
     }
 
     $('#name').on('keydown', function (e) {
         if (e.which == 13) {
-            cadastrar();
-            e.preventDefault();
+            $("#formLogin").submit();
         }
     });
 
-    $("#sendLogin").on("click", function () {
+    $("#formLogin").on("submit", function (e) {
+        e.preventDefault();
         cadastrar();
     });
 
     function cadastrar() {
         user = { name: "" };
 
-        user.name = $("#name").val();
+        //validação
+        user.name = lower($("#name").val());
+
+        var playerCount = 1;
+        for (i in players) { //players[i].name and players[i].page
+            if (user.name == lower(players[i].name)) {
+                user.name = players[i].name;
+                break;
+            }
+            if (playerCount == players.length) {
+                $("#name").addClass("invalid");
+                return; //cancela cadastro
+            }
+            playerCount++;
+        }
 
         localStorage.setItem('user', user.name);
+
+        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
 
         $("div#login").css("display", "none");
         $("#name").val("");
         $("body").removeClass("login");
     }
 
-    $("a.login").on("click", function() {
+    $("a.login").on("click", function () {
+        $("#name").removeClass("invalid");
         $("div#login").css("display","initial");
         $("body").addClass("login");
     });
@@ -67,7 +87,7 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 
     $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        chart();
+        chartObj.create();
     })
 }
 
@@ -321,43 +341,50 @@ function scrolls() {
     }, 2);
 }
 
-function chart() {
-    var monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    var date = new Date();
-    var month = date.getMonth();
+chartObj = {
+    create: function() {
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        var date = new Date();
+        var month = date.getMonth();
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
+        ctx = document.getElementById('myChart').getContext('2d');
+        chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
 
-        // The data for our dataset
-        data: {
-            labels: [
-                 "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-            ],
-            datasets: [
-            {
-                label: "Pontuaçao Média",
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgb(0,0,0)',
-                data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+            // The data for our dataset
+            data: {
+                labels: [
+                    "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                ],
+                datasets: [
+                    {
+                        label: "Pontuaçao Média",
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: 'rgb(0,0,0)',
+                        data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+                    },
+
+                    {
+                        label: "Minha Pontuação",
+                        backgroundColor: 'rgba(255, 171, 64, 0.7)',
+                        borderColor: 'rgb(255, 171, 64)',
+                        data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230],
+                    }
+                ]
             },
 
-            {
-                label: "Minha Pontuação",
-                backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230],
-            }
-            ]
-        },
+            // Configuration options go here
+            options: {
 
-        // Configuration options go here
-        options: {
-            
-        }
-    });
+            }
+        });
+    },
+
+    update: function(datasetIndex, dataArr) {
+        chart.data.datasets[datasetIndex].data = dataArr;
+        chart.update();
+    }
 }
