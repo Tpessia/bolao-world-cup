@@ -135,6 +135,7 @@ body.login {
     content: "\01F863";
     /* Here you can change the style of the arrow */
     position: absolute;
+    color: white;
     width: 50px;
     height: 50px;
     margin: 0 auto;
