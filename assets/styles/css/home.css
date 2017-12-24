@@ -176,7 +176,7 @@ body.login {
     transform: translate(-50%, 30%) scale(0.5);
     animation: arrow-pulse-down .7s linear infinite;
     cursor: pointer; }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 900px) {
       #imgHead .arrow-pulse-down:after {
         transform: translate(-50%, 40%) scale(0.25); } }
 @keyframes arrow-pulse-down {

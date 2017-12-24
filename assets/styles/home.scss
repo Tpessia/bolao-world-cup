@@ -132,7 +132,7 @@ body.login {
         animation: arrow-pulse-down .7s linear infinite;
         cursor: pointer;
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 900px) {
             transform: translate(-50%, 40%) scale(0.25);
         }
     }
