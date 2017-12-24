@@ -10,8 +10,7 @@ $(function() {
     // window.addEventListener('online', function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); });
 
     // window.addEventListener('offline', function () { offline(); });
-    Offline.check();
-    console.log(Offline.state);
+    
     if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
         Offline.on("down", function () {
