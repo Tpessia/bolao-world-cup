@@ -36,7 +36,8 @@ self.addEventListener("install", function (event) {
                     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
                     'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js',
                     'https://www.bolaodomauricio.xyz/assets/img/loading-ball.gif',
-                    'https://fonts.googleapis.com/icon?family=Material+Icons'
+                    'https://fonts.googleapis.com/icon?family=Material+Icons',
+                    'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Regular.woff2'
                 ]);
             })
             .then(function () {
