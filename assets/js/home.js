@@ -10,15 +10,9 @@ $(function() {
     // window.addEventListener('online', function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); });
 
     // window.addEventListener('offline', function () { offline(); });
-    
+    Offline.check();
     if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        Offline.on("down", function () {
-            $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none"});
-        });
-        Offline.on("up", function () {
-            $("a.login, #refresh").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" });
-        });
     }
     else {
         $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" });
@@ -26,6 +20,13 @@ $(function() {
         rankCreate();
         winnerDiv();
     }
+
+    Offline.on("down", function () {
+        $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" });
+    });
+    Offline.on("up", function () {
+        $("a.login, #refresh").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" });
+    });
 
     login();
 
@@ -77,6 +78,8 @@ function login() {
 
     $("#formLogin").on("submit", function (e) {
         e.preventDefault();
+        $("body").addClass("loading");
+        $("#loading").css("display", "initial");
         cadastrar();
     });
 
@@ -114,6 +117,9 @@ function login() {
         highlight();
 
         prepareOffline();
+
+        $("body").removeClass("loading");
+        $("#loading").css("display", "none");
     }
 
     $("a.login").on("click", function () {
