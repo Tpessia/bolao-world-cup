@@ -278,7 +278,11 @@ function rankCreate() { //create ranking element
             $("#sideRank>.row").append(sideRank);
         }
 
-        if(ranking[i].name == user.name) {$('.rank div.col:nth-of-type(' + (i + 1) + ')>.card').addClass("colorB");} //current user highlight
+        
+        if(ranking[i].name == user.name) {
+            var userId = parseInt(i) + 1;
+            $('.rank div.col:nth-of-type(' + userId + ')>.card').addClass("colorB");
+        } //current user highlight
     }
 
     bindClick();
