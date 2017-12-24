@@ -37,7 +37,10 @@ self.addEventListener("install", function (event) {
                     'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js',
                     'https://www.bolaodomauricio.xyz/assets/img/loading-ball.gif',
                     'https://fonts.googleapis.com/icon?family=Material+Icons',
-                    'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Regular.woff2'
+                    'https://fonts.gstatic.com/s/materialicons/v32/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2',
+                    'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Regular.woff2',
+                    'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Medium.woff2',
+                    'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Light.woff2'
                 ]);
             })
             .then(function () {
