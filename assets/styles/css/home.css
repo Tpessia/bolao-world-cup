@@ -167,7 +167,7 @@ body.login {
     font-size: 4.9vw; }
     @media screen and (max-width: 600px) {
       #imgHead #welcome {
-        font-size: 7.9vw; } }
+        font-size: 7.7vw; } }
   #imgHead .arrow-pulse-down:after {
     /* Here you can change the style of the arrow */
     content: url(https://www.bolaodomauricio.xyz/assets/img/down-arrow.png);
