@@ -105,6 +105,10 @@ function getChartData() {
         success: function (data) {
             var chartData = eval(data);
 
+            user.date = [];
+            user.pontuacao = [];
+            user.colocacao = [];
+
             for (i in chartData) {
                 user.date.push(chunk(chartData[i].date, 2).join("/"));
                 user.pontuacao.push(chartData[i].pontuacao);
@@ -165,6 +169,8 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 
     $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        getChartData();
+        getMedias();
     })
 }
 

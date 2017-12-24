@@ -322,7 +322,7 @@ main.container {
   #chart h2 {
     margin-left: 20px; }
   #chart > div {
-    margin-top: 80px;
+    margin-top: 70px;
     position: relative; }
     #chart > div .blockMobile {
       display: none; }
@@ -394,5 +394,8 @@ main.container {
           float: right;
           margin-right: 5px;
           font-weight: 500; }
+
+footer {
+  margin-top: 60px; }
 
 /*# sourceMappingURL=home.css.map */
