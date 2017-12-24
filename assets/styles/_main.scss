@@ -2,33 +2,33 @@ $page-bg: #f5f5f5;
 $colorA: #151515; //nav/footer color
 $colorAd: darken($colorA, 15%);
 $colorAl: lighten($colorA, 15%);
-.colorA {background-color: $colorA;}
-.colorAl {background-color: $colorAl;}
-.colorAd {background-color: $colorAd;}
+.colorA {background-color: $colorA !important;}
+.colorAl {background-color: $colorAl !important;}
+.colorAd {background-color: $colorAd !important;}
 $colorB: #0F1626; //main color
 $colorBd: darken($colorB, 15%);
 $colorBl: lighten($colorB, 15%);
-.colorB {background-color: $colorB;}
-.colorBl {background-color: $colorBl;}
-.colorBd {background-color: $colorBd;}
+.colorB {background-color: $colorB !important;}
+.colorBl {background-color: $colorBl !important;}
+.colorBd {background-color: $colorBd !important;}
 $colorC: #ffab40; //secondary color
 $colorCd: darken($colorC, 15%);
 $colorCl: lighten($colorC, 15%);
-.colorC {background-color: $colorC;}
-.colorCl {background-color: $colorCl;}
-.colorCd {background-color: $colorCd;}
+.colorC {background-color: $colorC !important;}
+.colorCl {background-color: $colorCl !important;}
+.colorCd {background-color: $colorCd !important;}
 $colorD: #1A2930; //ternary color
 $colorDd: darken($colorD, 15%);
 $colorDl: lighten($colorD, 15%);
-.colorD {background-color: $colorD;}
-.colorDl {background-color: $colorDl;}
-.colorDd {background-color: $colorDd;}
+.colorD {background-color: $colorD !important;}
+.colorDl {background-color: $colorDl !important;}
+.colorDd {background-color: $colorDd !important;}
 $colorE: #A9B7C0; //extra color (e.g. buttons)
 $colorEd: darken($colorE, 15%);
 $colorEl: lighten($colorE, 15%);
-.colorE {background-color: $colorE;}
-.colorEl {background-color: $colorEl;}
-.colorEd {background-color: $colorEd;}
+.colorE {background-color: $colorE !important;}
+.colorEl {background-color: $colorEl !important;}
+.colorEd {background-color: $colorEd !important;}
 
 nav {
     background-color: $colorA;

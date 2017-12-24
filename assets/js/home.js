@@ -8,8 +8,19 @@ window.onload = function() {
 $(function() {
     login();
 
-    newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-    //setInterval((function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); bindClick();}),180000);
+    // window.addEventListener('online', function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); });
+
+    // window.addEventListener('offline', function () { offline(); });
+
+    if (navigator.onLine) {
+        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+    }
+    else {
+        $("a.login").off().css({"opacity":"0.5","cursor":"default"});
+        offline();
+        rankCreate();
+        winnerDiv();
+    }
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         search($('#searchVal').val()); //search on click Magnifying glass
@@ -22,15 +33,25 @@ $(function() {
     charts1.create();
     charts2.create();
 
-    try {
-        getChartData();
-    } catch (error) {
+    if (navigator.onLine) {
+        try {
+            getChartData();
+        } catch (error) {
+
+        }
         
+        getMedias();
+    }
+    else {
+        charts1.change(1, user.pontuacao, user.date);
+
+        charts2.change(0, user.colocacao, user.date);
     }
 
-    getMedias();
-
     scrolls();
+
+    prepareOffline();
+    
 });
 
 function login() {
@@ -38,15 +59,9 @@ function login() {
         $("div#login").css("display", "none");
         $("body").removeClass("login");
         user = { name: "", pontuacao: [], colocacao: [], date: [] };
-        user.name = localStorage.getItem("user");
+        user.name = JSON.parse(localStorage.getItem("user")).name;
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
     }
-
-    // $('#name').on('keydown', function (e) {
-    //     if (e.which == 13) {
-    //         $("#formLogin").submit();
-    //     }
-    // });
 
     $("#formLogin").on("submit", function (e) {
         e.preventDefault();
@@ -74,7 +89,7 @@ function login() {
 
         //cadastro
 
-        localStorage.setItem('user', user.name);
+        localStorage.setItem('user', JSON.stringify(user));
 
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
 
@@ -83,6 +98,8 @@ function login() {
         $("body").removeClass("login");
 
         getChartData();
+
+        prepareOffline();
     }
 
     $("a.login").on("click", function () {
@@ -102,6 +119,7 @@ function getChartData() {
     $.ajax({
         url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
+        async: false,
         success: function (data) {
             var chartData = eval(data);
 
@@ -129,6 +147,7 @@ function getMedias() {
     $.ajax({
         url: "assets/php/dbMedia.php",
         type: "GET",
+        async: false,
         success: function (data) {
             var medias = eval(data);
 
@@ -217,14 +236,19 @@ function rankCreate() { //create ranking element
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
 
-    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+    if (navigator.onLine) {
+        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
-    j = 0;
-    for (i in table.page1) { //cria array do ranking
-        if (j > 1) {
-            ranking.push({ name: table.page1[i][1], pontuacao: table.page1[i][2] });
+        j = 0;
+        for (i in table.page1) { //cria array do ranking
+            if (j > 1) {
+                ranking.push({
+                    name: table.page1[i][1],
+                    pontuacao: table.page1[i][2]
+                });
+            }
+            j++;
         }
-        j++;
     }
     
     $("#rankContent").html("");
@@ -253,6 +277,8 @@ function rankCreate() { //create ranking element
 
             $("#sideRank>.row").append(sideRank);
         }
+
+        if(ranking[i].name == user.name) {$('.rank div.col:nth-of-type(' + (i + 1) + ')>.card').addClass("colorB");} //current user highlight
     }
 
     bindClick();
@@ -544,4 +570,16 @@ charts2 = {
         chart2.data.labels = labelsArr;
         chart2.update();
     }
+}
+
+function prepareOffline() {
+    if (navigator.onLine) {
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("ranking", JSON.stringify(ranking));
+    }
+}
+
+function offline() {
+    user = JSON.parse(localStorage.getItem("user"));
+    ranking = JSON.parse(localStorage.getItem("ranking"));
 }
