@@ -92,7 +92,7 @@ body {
 body.loading {
   overflow-y: hidden; }
   body.loading #loading {
-    display: block;
+    display: block !important;
     position: fixed;
     width: 100vw;
     height: 100vh;

@@ -1,7 +1,6 @@
 window.onload = function() {
     setTimeout(function(){
         $("body").removeClass("loading");
-        $("#loading").css("display", "none");
     },1000);
 };
 
@@ -83,7 +82,6 @@ function login() {
 
     function cadastrar() {
         $("body").addClass("loading");
-
         user = { name: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
@@ -110,6 +108,7 @@ function login() {
 
         $("div#login").css("display", "none");
         $("#name").val("");
+        $("body").removeClass("login");
 
         getChartData();
 
