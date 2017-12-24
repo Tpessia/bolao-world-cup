@@ -4,10 +4,15 @@ body {
     background-color: $page-bg;
 }
 
+#loading {
+    display: none;
+}
+
 body.loading {
     overflow-y: hidden;
 
     #loading {
+        display: block;
         position : fixed;
         width : 100vw;
         height : 100vh;

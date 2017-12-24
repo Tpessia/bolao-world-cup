@@ -78,12 +78,12 @@ function login() {
 
     $("#formLogin").on("submit", function (e) {
         e.preventDefault();
-        $("body").addClass("loading");
-        $("#loading").css("display", "initial");
         cadastrar();
     });
 
     function cadastrar() {
+        $("body").addClass("loading");
+
         user = { name: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
@@ -110,7 +110,6 @@ function login() {
 
         $("div#login").css("display", "none");
         $("#name").val("");
-        $("body").removeClass("login");
 
         getChartData();
 
@@ -119,7 +118,6 @@ function login() {
         prepareOffline();
 
         $("body").removeClass("loading");
-        $("#loading").css("display", "none");
     }
 
     $("a.login").on("click", function () {

@@ -86,9 +86,13 @@ footer {
 body {
   background-color: #f5f5f5; }
 
+#loading {
+  display: none; }
+
 body.loading {
   overflow-y: hidden; }
   body.loading #loading {
+    display: block;
     position: fixed;
     width: 100vw;
     height: 100vh;
