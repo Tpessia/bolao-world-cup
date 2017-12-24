@@ -22,6 +22,14 @@ $(function() {
     charts1.create();
     charts2.create();
 
+    try {
+        getChartData();
+    } catch (error) {
+        
+    }
+
+    getMedias();
+
     scrolls();
 });
 
@@ -29,7 +37,7 @@ function login() {
     if (localStorage.getItem("user") !== null) {
         $("div#login").css("display", "none");
         $("body").removeClass("login");
-        user = { name: "" };
+        user = { name: "", pontuacao: [], colocacao: [], date: [] };
         user.name = localStorage.getItem("user");
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
     }
@@ -46,7 +54,7 @@ function login() {
     });
 
     function cadastrar() {
-        user = { name: "" };
+        user = { name: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
         user.name = lower($("#name").val());
@@ -64,6 +72,8 @@ function login() {
             playerCount++;
         }
 
+        //cadastro
+
         localStorage.setItem('user', user.name);
 
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
@@ -71,6 +81,8 @@ function login() {
         $("div#login").css("display", "none");
         $("#name").val("");
         $("body").removeClass("login");
+
+        getChartData();
     }
 
     $("a.login").on("click", function () {
@@ -85,6 +97,58 @@ function login() {
         $("body").removeClass("login");
     });
 }
+
+function getChartData() {
+    $.ajax({
+        url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
+        type: "GET",
+        success: function (data) {
+            var chartData = eval(data);
+
+            for (i in chartData) {
+                user.date.push(chunk(chartData[i].date, 2).join("/"));
+                user.pontuacao.push(chartData[i].pontuacao);
+                user.colocacao.push(chartData[i].colocacao);
+            }
+
+            charts1.change(1, user.pontuacao, user.date);
+
+            charts2.change(0, user.colocacao, user.date);
+        }
+    });
+}
+
+function getMedias() {
+    $.ajax({
+        url: "assets/php/dbMedia.php",
+        type: "GET",
+        success: function (data) {
+            var medias = eval(data);
+
+            mediaArr = [];
+            dateArr = [];
+
+            for (i in medias) {
+                mediaArr.push(medias[i].media);
+                dateArr.push(chunk(medias[i].date, 2).join("/"));
+            }
+
+            charts1.change(0, mediaArr, dateArr);
+        }
+    });
+}
+
+function chunk(str, n) { //insert char every n chars
+    var ret = [];
+    var i;
+    var len;
+
+    for (i = 0, len = str.length; i < len; i += n) {
+        ret.push(str.substr(i, n))
+    }
+
+    return ret
+};
 
 function bindClick() { //está rodando quando o rankfy roda, que por sua vez roda quando o new data roda
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () {
@@ -101,7 +165,6 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
 
     $("#refresh").off("click").on("click", function () {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        charts1.create();
     })
 }
 
@@ -365,35 +428,47 @@ charts1 = {
             // The data for our dataset
             data: {
                 labels: [
-                    "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
                 ],
                 datasets: [
                     {
                         label: "Pontuação Média",
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderColor: 'rgb(0,0,0)',
-                        data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+                        // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
                     },
 
                     {
                         label: "Minha Pontuação",
                         backgroundColor: 'rgba(255, 171, 64, 0.7)',
                         borderColor: 'rgb(255, 171, 64)',
-                        data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
+                        // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
                     }
                 ]
             },
 
             // Configuration options go here
             options: {
-
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0    // minimum will be 0, unless there is a lower value.
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Pontuação'
+                        }
+                    }]
+                }
             }
         });
     },
 
-    update: function(datasetIndex, dataArr) {
-        chart.data.datasets[datasetIndex].data = dataArr;
-        chart.update();
+    change: function(datasetIndex, dataArr, labelsArr) {
+        chart1.data.datasets[datasetIndex].data = dataArr;
+        chart1.data.labels = labelsArr;
+        chart1.update();
     }
 }
 
@@ -410,7 +485,7 @@ charts2 = {
             // The data for our dataset
             data: {
                 labels: [
-                    "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
                 ],
                 datasets: [
                     // {
@@ -425,7 +500,7 @@ charts2 = {
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(0,0,0,0)',
                         borderColor: '#25365d',
-                        data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
                 ]
             },
@@ -439,7 +514,7 @@ charts2 = {
                         display: true,
                         ticks: {
                             suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                            suggestedMax: 12,
+                            suggestedMax: ranking.length,
                             reverse: true,
                         },
                         scaleLabel: {
@@ -452,8 +527,9 @@ charts2 = {
         });
     },
 
-    update: function (datasetIndex, dataArr) {
-        chart.data.datasets[datasetIndex].data = dataArr;
-        chart.update();
+    change: function (datasetIndex, dataArr, labelsArr) {
+        chart2.data.datasets[datasetIndex].data = dataArr;
+        chart2.data.labels = labelsArr;
+        chart2.update();
     }
 }
