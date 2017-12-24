@@ -44,7 +44,7 @@ function login() {
 
     $('#name').on('keydown', function (e) {
         if (e.which == 13) {
-            $("#formLogin").submit();
+            cadastrar();
         }
     });
 
