@@ -104,10 +104,10 @@ body.login {
         transform: translate(-50%, -50%);
         text-align : center;
         color: #f5f5f5e6;
-        font-size: 4.4vw;
+        font-size: 4.9vw;
 
         @media screen and (max-width: 600px) {
-            font-size: 7.4vw;
+            font-size: 7.9vw;
         }
     }
 
@@ -131,6 +131,10 @@ body.login {
         transform: translate(-50%, 30%) scale(0.5);
         animation: arrow-pulse-down .7s linear infinite;
         cursor: pointer;
+
+        @media screen and (max-width: 600px) {
+            transform: translate(-50%, 40%) scale(0.25);
+        }
     }
 
     @keyframes arrow-pulse-down {
