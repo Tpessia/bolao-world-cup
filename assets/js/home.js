@@ -12,7 +12,7 @@ $(function() {
     // window.addEventListener('offline', function () { offline(); });
     Offline.check();
     console.log(Offline.state);
-    if (/*typeof Offline !== "undefined" &&*/ Offline.state == "up") {
+    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
         Offline.on("down", function () {
             $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none"});
@@ -41,7 +41,7 @@ $(function() {
     charts1.create();
     charts2.create();
 
-    if (/*typeof Offline !== "undefined" &&*/ Offline.state == "up") {
+    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         try {
             getChartData();
         } catch (error) {
@@ -251,7 +251,7 @@ function rankCreate() { //create ranking element
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
 
-    if (/*typeof Offline !== "undefined" &&*/ Offline.state == "up") {
+    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
         j = 0;
@@ -599,7 +599,7 @@ charts2 = {
 }
 
 function prepareOffline() {
-    if (/*typeof Offline !== "undefined" &&*/ Offline.state == "up") {
+    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
