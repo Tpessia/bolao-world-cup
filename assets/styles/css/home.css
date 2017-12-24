@@ -400,4 +400,8 @@ main.container {
 footer {
   margin-top: 60px; }
 
+.offline-ui {
+  top: auto;
+  bottom: 0; }
+
 /*# sourceMappingURL=home.css.map */
