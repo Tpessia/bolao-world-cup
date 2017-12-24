@@ -110,13 +110,15 @@ function login() {
         $("#name").val("");
         $("body").removeClass("login");
 
-        getChartData();
+        setTimeout(function() { //garante que a loading screen apareça
+            getChartData();
 
-        highlight();
+            highlight();
 
-        prepareOffline();
+            prepareOffline();
 
-        $("body").removeClass("loading");
+            $("body").removeClass("loading");
+        },500);
     }
 
     $("a.login").on("click", function () {

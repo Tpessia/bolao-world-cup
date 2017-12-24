@@ -169,17 +169,12 @@ body.login {
       #imgHead #welcome {
         font-size: 7.4vw; } }
   #imgHead .arrow-pulse-down:after {
-    content: "\01F863";
     /* Here you can change the style of the arrow */
+    content: url(assets/img/down-arrow.png);
     position: absolute;
-    color: white;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    font-size: 50px;
-    animation: arrow-pulse-down 700ms linear infinite;
+    left: 50%;
+    transform: translate(-50%, 30%) scale(0.5);
+    animation: arrow-pulse-down .7s linear infinite;
     cursor: pointer; }
 @keyframes arrow-pulse-down {
   0% {
