@@ -323,6 +323,8 @@ main.container {
   position: relative; }
   #chart h2 {
     margin-left: 20px; }
+  #chart p {
+    margin-left: 35px; }
   #chart > div {
     margin-top: 70px;
     position: relative; }

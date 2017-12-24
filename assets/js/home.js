@@ -581,7 +581,7 @@ charts2 = {
                     yAxes: [{
                         display: true,
                         ticks: {
-                            suggestedMin: 1,    // minimum will be 0, unless there is a lower value.
+                            min: 1,    // minimum will be 0, unless there is a lower value.
                             suggestedMax: ranking.length,
                             reverse: true,
                         },
