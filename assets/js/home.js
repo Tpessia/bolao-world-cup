@@ -12,7 +12,7 @@ $(function() {
 
     // window.addEventListener('offline', function () { offline(); });
 
-    if (navigator.onLine) {
+    if (Offline.state == "up") {
         newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     }
     else {
@@ -33,7 +33,7 @@ $(function() {
     charts1.create();
     charts2.create();
 
-    if (navigator.onLine) {
+    if (Offline.state == "up") {
         try {
             getChartData();
         } catch (error) {
@@ -236,7 +236,7 @@ function rankCreate() { //create ranking element
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
 
-    if (navigator.onLine) {
+    if (Offline.state == "up") {
         ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
         j = 0;
@@ -577,7 +577,7 @@ charts2 = {
 }
 
 function prepareOffline() {
-    if (navigator.onLine) {
+    if (Offline.state == "up") {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
