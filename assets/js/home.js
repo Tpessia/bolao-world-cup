@@ -42,11 +42,11 @@ function login() {
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
     }
 
-    $('#name').on('keydown', function (e) {
-        if (e.which == 13) {
-            cadastrar();
-        }
-    });
+    // $('#name').on('keydown', function (e) {
+    //     if (e.which == 13) {
+    //         $("#formLogin").submit();
+    //     }
+    // });
 
     $("#formLogin").on("submit", function (e) {
         e.preventDefault();
@@ -118,6 +118,9 @@ function getChartData() {
             charts1.change(1, user.pontuacao, user.date);
 
             charts2.change(0, user.colocacao, user.date);
+        },
+        error: function() {
+            getChartData();
         }
     });
 }
@@ -138,6 +141,9 @@ function getMedias() {
             }
 
             charts1.change(0, mediaArr, dateArr);
+        },
+        error: function() {
+            getMedias();
         }
     });
 }
