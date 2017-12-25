@@ -323,8 +323,15 @@ main.container {
   position: relative; }
   #chart h2 {
     margin-left: 20px; }
-  #chart p {
-    margin-left: 25px; }
+    #chart h2 + p {
+      margin-left: 25px; }
+    @media screen and (max-width: 400px) {
+      #chart h2 {
+        text-align: center;
+        margin-left: 0; }
+        #chart h2 + p {
+          text-align: center;
+          margin-left: 0; } }
   #chart > div {
     margin-top: 70px;
     position: relative; }
@@ -339,7 +346,7 @@ main.container {
           position: absolute;
           z-index: 10;
           width: calc(100% - .75rem);
-          height: 65%;
+          height: 50%;
           background: #f5f5f5; }
           #chart > div .blockMobile div {
             position: absolute;
