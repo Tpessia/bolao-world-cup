@@ -70,8 +70,12 @@ nav {
     nav .input-field input[type=search]:focus + i:first-of-type {
       color: #444 !important; }
 
+.side-nav {
+  padding-top: 10px; }
+
 footer {
-  background-color: #151515 !important; }
+  background-color: #151515 !important;
+  margin-top: 60px; }
   footer a[href="http://pessia.site90.com/"] {
     transform: translateY(-50%); }
   footer .footer-copyright .container div {
@@ -408,9 +412,6 @@ main.container {
           float: right;
           margin-right: 5px;
           font-weight: 500; }
-
-footer {
-  margin-top: 60px; }
 
 @media screen and (max-width: 992px) {
   .offline-ui {

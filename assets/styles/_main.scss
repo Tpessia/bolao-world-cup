@@ -68,8 +68,14 @@ nav {
     }
 }
 
+.side-nav {
+    padding-top: 10px;
+}
+
 footer {
     background-color: $colorA !important;
+    margin-top: 60px;
+    
     a[href="http://pessia.site90.com/"] {
         transform: translateY(-50%);
     }
