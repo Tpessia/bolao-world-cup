@@ -296,6 +296,10 @@ main.container {
 
         .card {
             background-color: $colorBd;
+
+            &.highlight {
+                border: 3px solid rgb(130, 130, 255);
+            }
         }
 
         .btn-floating {

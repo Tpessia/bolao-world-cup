@@ -305,11 +305,14 @@ function highlight() {
     for (var n in ranking) {
         var userId = parseInt(n) + 1;
         var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
+        var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
         if (ranking[n].name == user.name) {
             card.addClass("colorB");
+            sideCard.addClass("highlight");
         } //current user highlight
         else if (card.hasClass("colorB")) {
             card.removeClass("colorB");
+            sideCard.removeClass("highlight");
         }
     }
 }

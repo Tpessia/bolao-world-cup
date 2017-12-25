@@ -272,6 +272,8 @@ main.container {
   box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px; }
   .rank#sideRank .card {
     background-color: black; }
+    .rank#sideRank .card.highlight {
+      border: 3px solid #8282ff; }
   .rank#sideRank .btn-floating {
     background-color: #25365d; }
   .rank#sideRank h2 {
