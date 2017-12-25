@@ -392,6 +392,12 @@ main.container {
         margin-top: 70px;
         position: relative;
 
+        canvas {
+            @media screen and (max-width: 400px) {
+                opacity: 0;
+            }
+        }
+
         .blockMobile {
             display: none;
 
@@ -400,7 +406,7 @@ main.container {
                 position: absolute;
                 z-index: 10;
                 width: calc(100% - .75rem);
-                height: 50%;
+                height: 65%;
                 background: #f5f5f5;
 
                 div {
