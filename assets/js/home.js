@@ -81,7 +81,6 @@ function login() {
     });
 
     function cadastrar() {
-        $("body").addClass("loading");
         user = { name: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
@@ -91,6 +90,7 @@ function login() {
         for (i in players) { //players[i].name and players[i].page
             if (user.name == lower(players[i].name)) {
                 user.name = players[i].name;
+                $("body").addClass("loading");
                 break;
             }
             if (playerCount == players.length) {
