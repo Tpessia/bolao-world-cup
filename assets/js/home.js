@@ -127,7 +127,7 @@ function login() {
     }
 
     $("a.login").on("click", function () {
-        $("#login .close").css("display","inline-block");
+        $("#login .close").addClass("active");
         $("#name").removeClass("invalid");
         $("body").addClass("login");
     });
