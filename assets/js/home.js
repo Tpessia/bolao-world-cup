@@ -15,14 +15,15 @@ $(function() {
     //Inicia como Offline ou Online
 
     if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
-        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
+        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
         $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
         $("#searchVal").prop('disabled', true);
-        offline(); //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
-        rankCreate(); //cria o ranking na DOM
+        offlineGet();
     }
+
+    //offline/online events
 
     Offline.on("down", function () {
         $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //event: when offline, blocks all online content
@@ -31,34 +32,10 @@ $(function() {
     Offline.on("up", function () {
         $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
         $("#searchVal").prop('disabled', false);
-        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        bindClick(); //é necessário pois o new data cria os novos elementos do zero, entao os botões sao resetados
+        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 
-    login(); //manages the login "page" or automatically logs in
-
-    charts1.create(); //create charts
-    charts2.create();
-
-    if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
-        //se online, verifica os dados no DB
-        try {
-            getChartData(); //verificar por que dá erro; recebe os dados do usuário para os gráficos (DB)
-        } catch (error) {
-
-        }
-        
-        getMedias(); //recebe a média de pontuação (DB)
-    }
-    else {
-        //se offline, utiliza os dados do localStorage
-        charts1.change(1, user.pontuacao, user.date);
-
-        charts2.change(0, user.colocacao, user.date);
-    }
-
     scrolls();
-    bindClick();
 });
 
 
@@ -66,13 +43,18 @@ $(function() {
 
 
 function login() {
+    //auto log in
+
     if (localStorage.getItem("user") !== null) { //usuário já salvo no local storage
         $("body").removeClass("login");
-        user = JSON.parse(localStorage.getItem("user"));
-        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
+        user = JSON.parse(localStorage.getItem("user")); //receive user data from local storage
+        
+        welcome();
         highlight();
         prepareOffline();
     }
+
+    //submit cadastro
 
     $('#name').keypress(function (e) {
         if (e.which == 13) {
@@ -94,12 +76,13 @@ function login() {
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
-            if (user.name == lower(players[i].name)) {
+            if (user.name == lower(players[i].name)) { //verifica se usuário é válido
                 user.name = players[i].name;
-                $("body").addClass("loading");
+                // $("body").addClass("loading");
+                $(".chartLoading").addClass("active");
                 break;
             }
-            if (playerCount == players.length) {
+            if (playerCount == players.length) { //se nenhum for válido, cancela o cadastro
                 $("#name").addClass("invalid");
                 return; //cancela cadastro
             }
@@ -110,29 +93,25 @@ function login() {
 
         localStorage.setItem('user', JSON.stringify(user));
 
-        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
+        welcome();
 
         $("#name").val("");
         $("body").removeClass("login");
 
-        setTimeout(function() { //garante que a loading screen apareça
-            getChartData();
-
-            highlight();
-
-            prepareOffline();
-
-            $("body").removeClass("loading");
-        },500);
+        getChartData();
     }
 
-    $("a.login").on("click", function () {
+    function welcome() { //welcome name update
+        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
+    }
+
+    $("a.login").on("click", function () { //nav login open
         $("#login .close").addClass("active");
         $("#name").removeClass("invalid");
         $("body").addClass("login");
     });
 
-    $("#login .close").on("click", function() {
+    $("#login .close").on("click", function() { //close login page
         $("body").removeClass("login");
     });
 }
@@ -141,24 +120,9 @@ function login() {
 //MAIN FUNCTIONS
 
 
-function rankCreate() { //create ranking element
+function rankCreate() { //create ranking element and object
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
-
-    if ( /*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
-        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
-
-        j = 0;
-        for (i in table.page1) { //cria array do ranking
-            if (j > 1) {
-                ranking.push({
-                    name: table.page1[i][1],
-                    pontuacao: table.page1[i][2]
-                });
-            }
-            j++;
-        }
-    }
 
     $("#rankContent").html("");
     $("#moreRank").removeClass("hide");
@@ -331,21 +295,22 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
     })
 
     $("#refresh").off("click").on("click", function () {
-        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
         getChartData(); //async false
         getMedias(); //async false
     })
 }
 
-function highlight() {
+function highlight() { //current user highlight on ranking
     for (var n in ranking) {
         var userId = parseInt(n) + 1;
         var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
         var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
+
         if (ranking[n].name == user.name) {
             card.addClass("colorB");
             sideCard.addClass("highlight");
-        } //current user highlight
+        }
         else if (card.hasClass("colorB")) {
             card.removeClass("colorB");
             sideCard.removeClass("highlight");
@@ -403,7 +368,7 @@ function scrolls() {
 //ONLINE FUNCTIONS
 
 
-function newData(pages, ID) { //request spreadsheet page data
+function onlineGet(pages, ID) { //request spreadsheet page data
     id = ID; //cria id global
     pages = pages.split(',');
 
@@ -421,10 +386,25 @@ function newData(pages, ID) { //request spreadsheet page data
 
                 page = "page" + page; //cria a pageN
 
-                arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-
+                tableCreate(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                rankingArray();
                 rankCreate();
                 playersArray();
+                bindClick();
+                charts1.create(); //create charts
+                charts2.create();
+
+                login(); //manages the login "page" or automatically logs in
+
+                //se online, verifica os dados no DB
+                try {
+                    getChartData(); //dá problema na primeira vez, quando o usuário nunca logou
+                } catch (error) {
+
+                }
+
+                getMedias(); //recebe a média de pontuação (DB)
+                
             },
             error: function (xhr, status, error) {
                 alert('Erro, sem conexão com a internet!');
@@ -433,11 +413,79 @@ function newData(pages, ID) { //request spreadsheet page data
     })
 }
 
+function tableCreate(sheetPage, nullify = false) { //create an array based on the spreadsheet page
+    if (typeof table == "undefined") {
+        table = {};
+    }
+
+    table[sheetPage] = {};
+
+    var lastRow = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        var dataTemp = data[i];
+
+        if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
+            table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
+        } //create table.rowN
+
+        if (lastRow != dataTemp.gs$cell.row) {
+            lastCol = 0;
+        } //new row
+
+        if (dataTemp.gs$cell.col > lastCol && nullify) { //add null para células vazias
+            var holes = dataTemp.gs$cell.col - lastCol - 1; //number of emptys
+
+            for (var j = 0; j < holes; j++) {
+                table[sheetPage]["row" + dataTemp.gs$cell.row].push(null);
+            }
+        }
+
+        table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+
+        lastCol = dataTemp.gs$cell.col;
+        lastRow = dataTemp.gs$cell.row;
+    }
+}
+
+function rankingArray() {
+    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+
+    j = 0;
+    for (i in table.page1) { //cria array do ranking
+        if (j > 1) {
+            ranking.push({
+                name: table.page1[i][1],
+                pontuacao: table.page1[i][2]
+            });
+        }
+        j++;
+    }
+}
+
+function playersArray() {
+    players = [];
+
+    j = 0;
+    for (i in table.page1) {
+        if (j > 1) {
+            pageVar = table.page1[i][3];
+            nameVar = table.page1[i][4];
+            players.push({
+                page: pageVar,
+                name: nameVar
+            });
+        }
+        j++;
+    }
+
+
+}
+
 function getChartData() {
     $.ajax({
         url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
-        async: false,
         success: function (data) {
             var chartData = eval(data);
 
@@ -454,6 +502,13 @@ function getChartData() {
             charts1.change(1, user.pontuacao, user.date);
 
             charts2.change(0, user.colocacao, user.date);
+
+            highlight();
+
+            prepareOffline();
+
+            // $("body").removeClass("loading");
+            $(".chartLoading").removeClass("active");
         },
         error: function () {
             getChartData();
@@ -465,19 +520,19 @@ function getMedias() {
     $.ajax({
         url: "assets/php/dbMedia.php",
         type: "GET",
-        async: false,
         success: function (data) {
             var medias = eval(data);
 
-            mediaArr = [];
-            dateArr = [];
+            media = { mediaArr: [], dateArr: [] };
 
             for (i in medias) {
-                mediaArr.push(medias[i].media);
-                dateArr.push(chunk(medias[i].date, 2).join("/"));
+                media.mediaArr.push(medias[i].media);
+                media.dateArr.push(chunk(medias[i].date, 2).join("/"));
             }
 
-            charts1.change(0, mediaArr, dateArr);
+            charts1.change(0, media.mediaArr, media.dateArr);
+
+            localStorage.setItem("media", JSON.stringify(media));
         },
         error: function () {
             getMedias();
@@ -485,40 +540,12 @@ function getMedias() {
     });
 }
 
-function chunk(str, n) { //insert char every n chars
-    var ret = [];
-    var i;
-    var len;
-
-    for (i = 0, len = str.length; i < len; i += n) {
-        ret.push(str.substr(i, n))
-    }
-
-    return ret
-};
-
-function playersArray() {
-    players = [];
-
-    j = 0;
-    for (i in table.page1) {
-        if (j > 1) {
-            pageVar = table.page1[i][3];
-            nameVar = table.page1[i][4];
-            players.push({ page: pageVar, name: nameVar });
-        }
-        j++;
-    }
-
-
-}
-
 function search(key) {
 
     pesquisa = lower(key); //catch and format name
 
     for (i in players) { //players[i].name and players[i].page
-        if (/*pesquisa.match(lower(players[i].name))*/pesquisa == lower(players[i].name)) {
+        if ( /*pesquisa.match(lower(players[i].name))*/ pesquisa == lower(players[i].name)) {
 
             $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
@@ -528,7 +555,7 @@ function search(key) {
 
                     var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
 
-                    arrayfy(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                    tableCreate(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
                     //Prepare Modal
                     $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
@@ -577,58 +604,56 @@ function search(key) {
             });
 
             break;
-        }
-        else if (i == players.length - 1) {
+        } else if (i == players.length - 1) {
             alert("Nome não encontrado!")
         }
     }
+}
+
+function chunk(str, n) { //insert char every n chars
+    var ret = [];
+    var i;
+    var len;
+
+    for (i = 0, len = str.length; i < len; i += n) {
+        ret.push(str.substr(i, n))
+    }
+
+    return ret
 }
 
 function lower(string1) {
     return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "");
 }
 
-function arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
-    if (typeof table == "undefined") { table = {}; }
-
-    table[sheetPage] = {};
-
-    var lastRow = 0;
-
-    for (var i = 0; i < data.length; i++) {
-        var dataTemp = data[i];
-
-        if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) { table[sheetPage]["row" + dataTemp.gs$cell.row] = []; } //create table.rowN
-
-        if (lastRow != dataTemp.gs$cell.row) { lastCol = 0; } //new row
-
-        if (dataTemp.gs$cell.col > lastCol && nullify) { //add null para células vazias
-            var holes = dataTemp.gs$cell.col - lastCol - 1; //number of emptys
-
-            for (var j = 0; j < holes; j++) {
-                table[sheetPage]["row" + dataTemp.gs$cell.row].push(null);
-            }
-        }
-
-        table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
-
-        lastCol = dataTemp.gs$cell.col;
-        lastRow = dataTemp.gs$cell.row;
-    }
-}
-
 
 //OFFLINE FUNCTIONS
 
 
+function offlineGet() {
+    offlineParse(); //receive user and ranking
+    rankCreate(); //create DOM based on ranking
+
+    login(); //manages the login "page" or automatically logs in
+
+    charts1.create(); //create charts
+    charts2.create();
+    
+    charts1.change(0, media.mediaArr, media.dateArr);
+    charts1.change(1, user.pontuacao, user.date);
+    charts2.change(0, user.colocacao, user.date);
+}
+
+
 function prepareOffline() {
-    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
+    if (navigator.onLine) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
 }
 
-function offline() {
+function offlineParse() { //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
     user = JSON.parse(localStorage.getItem("user"));
     ranking = JSON.parse(localStorage.getItem("ranking"));
+    media = JSON.parse(localStorage.getItem("media"));
 }
