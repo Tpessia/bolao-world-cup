@@ -1,66 +1,72 @@
+//STOP LOADING ANIM
+
 window.onload = function() {
     setTimeout(function(){
         $("body").removeClass("loading");
     },1000);
 };
 
+//CONTROLLER
+
 $(function() {
-
-    // window.addEventListener('online', function () { newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); });
-
-    // window.addEventListener('offline', function () { offline(); });
+    
     Offline.check();
-    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
-        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+
+    //Inicia como Offline ou Online
+
+    if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
+        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
-        $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" });
-        offline();
-        rankCreate();
-        winnerDiv();
+        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
+        $("#searchVal").prop('disabled', true);
+        offline(); //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
+        rankCreate(); //cria o ranking na DOM
     }
 
     Offline.on("down", function () {
-        $("a.login, #refresh").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" });
+        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //event: when offline, blocks all online content
+        $("#searchVal").prop('disabled', true);
     });
     Offline.on("up", function () {
-        $("a.login, #refresh").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" });
+        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
+        $("#searchVal").prop('disabled', false);
+        newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        bindClick(); //é necessário pois o new data cria os novos elementos do zero, entao os botões sao resetados
     });
 
-    login();
+    login(); //manages the login "page" or automatically logs in
 
-    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
-        search($('#searchVal').val()); //search on click Magnifying glass
-    })
-
-    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
-        $('#searchVal').val(''); //clean search on close
-    })
-
-    charts1.create();
+    charts1.create(); //create charts
     charts2.create();
 
-    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
+    if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
+        //se online, verifica os dados no DB
         try {
-            getChartData();
+            getChartData(); //verificar por que dá erro; recebe os dados do usuário para os gráficos (DB)
         } catch (error) {
 
         }
         
-        getMedias();
+        getMedias(); //recebe a média de pontuação (DB)
     }
     else {
+        //se offline, utiliza os dados do localStorage
         charts1.change(1, user.pontuacao, user.date);
 
         charts2.change(0, user.colocacao, user.date);
     }
 
-    scrolls();    
+    scrolls();
+    bindClick();
 });
 
+
+//LOGIN
+
+
 function login() {
-    if (localStorage.getItem("user") !== null) {
-        $("div#login").css("display", "none");
+    if (localStorage.getItem("user") !== null) { //usuário já salvo no local storage
         $("body").removeClass("login");
         user = JSON.parse(localStorage.getItem("user"));
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
@@ -71,7 +77,7 @@ function login() {
     $('#name').keypress(function (e) {
         if (e.which == 13) {
             $('#formLogin').submit();
-            return false;    //<---- Add this line
+            return false;
         }
     });
 
@@ -106,7 +112,6 @@ function login() {
 
         $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
 
-        $("div#login").css("display", "none");
         $("#name").val("");
         $("body").removeClass("login");
 
@@ -124,82 +129,196 @@ function login() {
     $("a.login").on("click", function () {
         $("#login .close").css("display","inline-block");
         $("#name").removeClass("invalid");
-        $("div#login").css("display","initial");
         $("body").addClass("login");
     });
 
     $("#login .close").on("click", function() {
-        $("div#login").css("display", "none");
         $("body").removeClass("login");
     });
 }
 
-function getChartData() {
-    $.ajax({
-        url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
-        type: "GET",
-        async: false,
-        success: function (data) {
-            var chartData = eval(data);
 
-            user.date = [];
-            user.pontuacao = [];
-            user.colocacao = [];
+//MAIN FUNCTIONS
 
-            for (i in chartData) {
-                user.date.push(chunk(chartData[i].date, 2).join("/"));
-                user.pontuacao.push(chartData[i].pontuacao);
-                user.colocacao.push(chartData[i].colocacao);
+
+function rankCreate() { //create ranking element
+    var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
+
+    if ( /*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
+        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+
+        j = 0;
+        for (i in table.page1) { //cria array do ranking
+            if (j > 1) {
+                ranking.push({
+                    name: table.page1[i][1],
+                    pontuacao: table.page1[i][2]
+                });
             }
-
-            charts1.change(1, user.pontuacao, user.date);
-
-            charts2.change(0, user.colocacao, user.date);
-        },
-        error: function() {
-            getChartData();
+            j++;
         }
-    });
-}
-
-function getMedias() {
-    $.ajax({
-        url: "assets/php/dbMedia.php",
-        type: "GET",
-        async: false,
-        success: function (data) {
-            var medias = eval(data);
-
-            mediaArr = [];
-            dateArr = [];
-
-            for (i in medias) {
-                mediaArr.push(medias[i].media);
-                dateArr.push(chunk(medias[i].date, 2).join("/"));
-            }
-
-            charts1.change(0, mediaArr, dateArr);
-        },
-        error: function() {
-            getMedias();
-        }
-    });
-}
-
-function chunk(str, n) { //insert char every n chars
-    var ret = [];
-    var i;
-    var len;
-
-    for (i = 0, len = str.length; i < len; i += n) {
-        ret.push(str.substr(i, n))
     }
 
-    return ret
-};
+    $("#rankContent").html("");
+    $("#moreRank").removeClass("hide");
 
-function bindClick() { //está rodando quando o rankfy roda, que por sua vez roda quando o new data roda
-    $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () {
+    for (i in ranking) { //só mostra na div (remover no projeto oficial)
+        if (i == 0) {
+            rankBlock = '<div class="col s12">'; //maior se for o primeiro
+            btn = 'btn-large';
+        } else {
+            rankBlock = '<div class="col s11">'; //2nd,3rd,4th...
+            btn = 'btn';
+        }
+
+        sideRank = rankBlock;
+
+        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s9 m3 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
+
+        $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
+
+        if (i > k) {
+            $($("#rankContent>.col")[i]).addClass("hide");
+        } //hide players that are not at the top "k+1"
+
+        if (i < 5) { //create side rank
+            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
+
+            $("#sideRank>.row").append(sideRank);
+        }
+    }
+
+    //winner div
+    $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
+}
+
+charts1 = {
+    create: function () {
+        ctx1 = document.getElementById('myChart').getContext('2d');
+        chart1 = new Chart(ctx1, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: [
+                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                ],
+                datasets: [{
+                        label: "Pontuação Média",
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: 'rgb(0,0,0)',
+                        // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+                    },
+
+                    {
+                        label: "Minha Pontuação",
+                        backgroundColor: 'rgba(255, 171, 64, 0.7)',
+                        borderColor: 'rgb(255, 171, 64)',
+                        // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
+                    }
+                ]
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0 // minimum will be 0, unless there is a lower value.
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Pontuação'
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+    change: function (datasetIndex, dataArr, labelsArr) {
+        chart1.data.datasets[datasetIndex].data = dataArr;
+        chart1.data.labels = labelsArr;
+        chart1.update();
+    }
+}
+
+charts2 = {
+    create: function () {
+        ctx2 = document.getElementById('myChart2').getContext('2d');
+        // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
+        // gradient.addColorStop(0, '#25365d33');
+        // gradient.addColorStop(1, '#25365dff');
+        chart2 = new Chart(ctx2, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: [
+                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                ],
+                datasets: [
+                    // {
+                    //     label: "Minha Colocação",
+                    //     backgroundColor: gradient,
+                    //     hoverBackgroundColor: "#102149",
+                    //     data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                    // },
+
+                    {
+                        label: "Minha Colocação",
+                        // backgroundColor: '#25365d66',
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: '#25365d',
+                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                    }
+                ]
+            },
+
+            // Configuration options go here
+            options: {
+                legend: false,
+
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            min: 1, // minimum will be 0, unless there is a lower value.
+                            suggestedMax: ranking.length,
+                            reverse: true,
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Colocação'
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+    change: function (datasetIndex, dataArr, labelsArr) {
+        chart2.data.datasets[datasetIndex].data = dataArr;
+        chart2.data.labels = labelsArr;
+        chart2.update();
+    }
+}
+
+function bindClick() { //search, close search, ver dados, side ver dados, atualizar
+
+    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
+        search($('#searchVal').val()); //search on click Magnifying glass
+    })
+
+    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
+        $('#searchVal').val(''); //clean search on close
+    })
+
+    $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
         nome = $(this).closest(".card").find(".card-title").html(); //modal
         nome = nome.split(" ")
         nome.shift()
@@ -217,6 +336,71 @@ function bindClick() { //está rodando quando o rankfy roda, que por sua vez rod
         getMedias(); //async false
     })
 }
+
+function highlight() {
+    for (var n in ranking) {
+        var userId = parseInt(n) + 1;
+        var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
+        var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
+        if (ranking[n].name == user.name) {
+            card.addClass("colorB");
+            sideCard.addClass("highlight");
+        } //current user highlight
+        else if (card.hasClass("colorB")) {
+            card.removeClass("colorB");
+            sideCard.removeClass("highlight");
+        }
+    }
+}
+
+function showMoreRank() {
+    k += 6; //number of players shown on click (= k-1)
+
+    for (i in ranking) {
+        if (i < k) {
+            $($("#rankContent>.col")[i]).removeClass("hide"); //show player
+        }
+        if (k > ranking.length - 1) {
+            $("#moreRank").addClass('hide'); //hide button if there are no more players
+        }
+    }
+}
+
+function scrollFire(selector, foo, id) {
+    scroll[id] = 0;
+    $(window).scroll(function () {
+        var sT = $(selector).offset().top,
+            sH = $(selector).outerHeight(),
+            wH = $(window).height(),
+            wS = $(window).scrollTop();
+
+        if (scroll[id] == 0) { //só roda uma vez
+            if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
+                foo();
+                scroll[id] ^= 1;
+            }
+        }
+        else {
+            if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
+                foo();
+                scroll[id] ^= 1;
+            }
+        }
+    });
+}
+
+function scrolls() {
+    scrollFire('#rankList', function () {
+        $('#sideRank').toggleClass('hideSide');
+    }, 1);
+
+    scrollFire('#rankContent>div:first-child', function () {
+        $('#first').toggleClass('transform');
+    }, 2);
+}
+
+
+//ONLINE FUNCTIONS
 
 
 function newData(pages, ID) { //request spreadsheet page data
@@ -241,7 +425,6 @@ function newData(pages, ID) { //request spreadsheet page data
 
                 rankCreate();
                 playersArray();
-                winnerDiv();
             },
             error: function (xhr, status, error) {
                 alert('Erro, sem conexão com a internet!');
@@ -250,86 +433,69 @@ function newData(pages, ID) { //request spreadsheet page data
     })
 }
 
+function getChartData() {
+    $.ajax({
+        url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
+        type: "GET",
+        async: false,
+        success: function (data) {
+            var chartData = eval(data);
 
-function rankCreate() { //create ranking element
-    var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
+            user.date = [];
+            user.pontuacao = [];
+            user.colocacao = [];
 
-    if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {
-        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
-
-        j = 0;
-        for (i in table.page1) { //cria array do ranking
-            if (j > 1) {
-                ranking.push({
-                    name: table.page1[i][1],
-                    pontuacao: table.page1[i][2]
-                });
+            for (i in chartData) {
+                user.date.push(chunk(chartData[i].date, 2).join("/"));
+                user.pontuacao.push(chartData[i].pontuacao);
+                user.colocacao.push(chartData[i].colocacao);
             }
-            j++;
+
+            charts1.change(1, user.pontuacao, user.date);
+
+            charts2.change(0, user.colocacao, user.date);
+        },
+        error: function () {
+            getChartData();
         }
-    }
-    
-    $("#rankContent").html("");
-    $("#moreRank").removeClass("hide");
-
-    for (i in ranking) { //só mostra na div (remover no projeto oficial)
-        if(i==0){
-            rankBlock = '<div class="col s12">'; //maior se for o primeiro
-            btn = 'btn-large';
-        }
-        else {
-            rankBlock = '<div class="col s11">'; //2nd,3rd,4th...
-            btn = 'btn';
-        }
-
-        sideRank = rankBlock;
-
-        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s9 m3 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
-
-        $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
-
-        if(i>k){$($("#rankContent>.col")[i]).addClass("hide");} //hide players that are not at the top "k+1"
-
-        if(i<5) { //create side rank
-            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
-
-            $("#sideRank>.row").append(sideRank);
-        }
-    }
-
-    bindClick();
+    });
 }
 
-function highlight() {
-    for (var n in ranking) {
-        var userId = parseInt(n) + 1;
-        var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
-        var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
-        if (ranking[n].name == user.name) {
-            card.addClass("colorB");
-            sideCard.addClass("highlight");
-        } //current user highlight
-        else if (card.hasClass("colorB")) {
-            card.removeClass("colorB");
-            sideCard.removeClass("highlight");
+function getMedias() {
+    $.ajax({
+        url: "assets/php/dbMedia.php",
+        type: "GET",
+        async: false,
+        success: function (data) {
+            var medias = eval(data);
+
+            mediaArr = [];
+            dateArr = [];
+
+            for (i in medias) {
+                mediaArr.push(medias[i].media);
+                dateArr.push(chunk(medias[i].date, 2).join("/"));
+            }
+
+            charts1.change(0, mediaArr, dateArr);
+        },
+        error: function () {
+            getMedias();
         }
-    }
+    });
 }
 
-function showMoreRank() {
-    k+=6; //number of players shown on click (= k-1)
-    
-    for (i in ranking) {
-        if (i < k) {
-            $($("#rankContent>.col")[i]).removeClass("hide"); //show player
-        }
-        if (k > ranking.length - 1) {
-            $("#moreRank").addClass('hide'); //hide button if there are no more players
-        }
-    }
-}
+function chunk(str, n) { //insert char every n chars
+    var ret = [];
+    var i;
+    var len;
 
+    for (i = 0, len = str.length; i < len; i += n) {
+        ret.push(str.substr(i, n))
+    }
+
+    return ret
+};
 
 function playersArray() {
     players = [];
@@ -345,10 +511,6 @@ function playersArray() {
     }
 
 
-}
-
-function winnerDiv() {
-    $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
 }
 
 function search(key) {
@@ -416,14 +578,14 @@ function search(key) {
 
             break;
         }
-        else if (i==players.length-1) {
+        else if (i == players.length - 1) {
             alert("Nome não encontrado!")
         }
     }
 }
 
 function lower(string1) {
-    return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g,"");
+    return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "");
 }
 
 function arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
@@ -456,154 +618,8 @@ function arrayfy(sheetPage, nullify = false) { //create an array based on the sp
 }
 
 
-function scrollFire(selector, foo, id) {
-    scroll[id] = 0;
-    $(window).scroll(function () {
-        var sT = $(selector).offset().top,
-            sH = $(selector).outerHeight(),
-            wH = $(window).height(),
-            wS = $(window).scrollTop();
+//OFFLINE FUNCTIONS
 
-        if (scroll[id] == 0) { //só roda uma vez
-            if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
-                foo();
-                scroll[id] ^= 1;
-            }
-        }
-        else {
-            if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
-                foo();
-                scroll[id] ^= 1;
-            }
-        }
-    });
-}
-
-function scrolls() {
-    scrollFire('#rankList', function () {
-        $('#sideRank').toggleClass('hideSide');
-    }, 1);
-
-    scrollFire('#rankContent>div:first-child', function () {
-        $('#first').toggleClass('transform');
-    }, 2);
-}
-
-charts1 = {
-    create: function() {
-        ctx1 = document.getElementById('myChart').getContext('2d');
-        chart1 = new Chart(ctx1, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: [
-                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-                ],
-                datasets: [
-                    {
-                        label: "Pontuação Média",
-                        backgroundColor: 'rgba(0, 0, 0, 0)',
-                        borderColor: 'rgb(0,0,0)',
-                        // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
-                    },
-
-                    {
-                        label: "Minha Pontuação",
-                        backgroundColor: 'rgba(255, 171, 64, 0.7)',
-                        borderColor: 'rgb(255, 171, 64)',
-                        // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
-                    }
-                ]
-            },
-
-            // Configuration options go here
-            options: {
-                scales: {
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            suggestedMin: 0    // minimum will be 0, unless there is a lower value.
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Pontuação'
-                        }
-                    }]
-                }
-            }
-        });
-    },
-
-    change: function(datasetIndex, dataArr, labelsArr) {
-        chart1.data.datasets[datasetIndex].data = dataArr;
-        chart1.data.labels = labelsArr;
-        chart1.update();
-    }
-}
-
-charts2 = {
-    create: function () {
-        ctx2 = document.getElementById('myChart2').getContext('2d');
-        // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
-        // gradient.addColorStop(0, '#25365d33');
-        // gradient.addColorStop(1, '#25365dff');
-        chart2 = new Chart(ctx2, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: [
-                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-                ],
-                datasets: [
-                    // {
-                    //     label: "Minha Colocação",
-                    //     backgroundColor: gradient,
-                    //     hoverBackgroundColor: "#102149",
-                    //     data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
-                    // },
-
-                    {
-                        label: "Minha Colocação",
-                        // backgroundColor: '#25365d66',
-                        backgroundColor: 'rgba(0,0,0,0)',
-                        borderColor: '#25365d',
-                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
-                    }
-                ]
-            },
-
-            // Configuration options go here
-            options: {
-                legend: false,
-                
-                scales: {
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            min: 1,    // minimum will be 0, unless there is a lower value.
-                            suggestedMax: ranking.length,
-                            reverse: true,
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Colocação'
-                        }
-                    }]
-                }
-            }
-        });
-    },
-
-    change: function (datasetIndex, dataArr, labelsArr) {
-        chart2.data.datasets[datasetIndex].data = dataArr;
-        chart2.data.labels = labelsArr;
-        chart2.update();
-    }
-}
 
 function prepareOffline() {
     if (/*typeof Offline !== "undefined" && Offline.state == "up"*/ navigator.onLine) {

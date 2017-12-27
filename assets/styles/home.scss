@@ -2,72 +2,78 @@
 
 body {
     background-color: $page-bg;
-}
 
-#loading {
-    display: none;
-}
-
-body.loading {
-    overflow-y: hidden;
+    //loading
 
     #loading {
-        display: block !important;
-        position : fixed;
-        width : 100vw;
-        height : 100vh;
-        background-color: #fff;
-        z-index : 1000;
+        display: none;
+    }
 
-        #ball {
-            display : inline-block;
-            position : absolute;
-            top: 50%;
-            left : 50%;
-            transform: translate(-50%, -50%);
+    &.loading {
+        overflow-y: hidden;
+        #loading {
+            display: block !important;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            z-index: 1000;
+            #ball {
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
     }
-}
 
-body.login {
-    overflow-y: hidden;
+    //login
 
     #login {
-        text-align: right;
-        .close {
-            display: none;
-            color: white;
-            padding: 15px 15px 0 0;
-            cursor: pointer;
-        }
+        display: none;
     }
 
-    div#login {
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background-color: black;
-        z-index: 999;
+    &.login {
+        overflow-y: hidden;
+        
+        #login {
+            display: block;
+            text-align: right;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            z-index: 999;
 
-        #formLogin {
-            position: absolute;
-            min-width: 25%;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            #formLogin {
+                position: absolute;
+                min-width: 25%;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
 
-            #name {
-                color: white;
-                -webkit-box-shadow: 0px 0px 0px;
-                box-shadow: 0px 0px 0px;
+                #name {
+                    color: white;
+                    -webkit-box-shadow: 0px 0px 0px;
+                    box-shadow: 0px 0px 0px;
+                }
+
+                #sendLogin {
+                    width: 100%;
+                }
             }
 
-            #sendLogin {
-                width: 100%;
+            .close {
+                display: none;
+                color: white;
+                padding: 15px 15px 0 0;
+                cursor: pointer;
             }
         }
     }
 }
+
 
 #imgHead {
     @media screen and (min-width: 1200px) {

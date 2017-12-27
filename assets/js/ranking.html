@@ -86,7 +86,7 @@
 
                 total += parseInt(ranking[i].pontuacao); 
             }
-            media = total / ranking.length;
+            media = (total / ranking.length).toFixed(2);
 
             // var params = { "ranking": ranking };
             paramsJSON = JSON.stringify(ranking);

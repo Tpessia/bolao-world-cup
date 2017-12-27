@@ -89,53 +89,52 @@ footer {
 
 body {
   background-color: #f5f5f5; }
-
-#loading {
-  display: none; }
-
-body.loading {
-  overflow-y: hidden; }
-  body.loading #loading {
-    display: block !important;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fff;
-    z-index: 1000; }
-    body.loading #loading #ball {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); }
-
-body.login {
-  overflow-y: hidden; }
-  body.login #login {
-    text-align: right; }
-    body.login #login .close {
-      display: none;
-      color: white;
-      padding: 15px 15px 0 0;
-      cursor: pointer; }
-  body.login div#login {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    z-index: 999; }
-    body.login div#login #formLogin {
-      position: absolute;
-      min-width: 25%;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%); }
-      body.login div#login #formLogin #name {
+  body #loading {
+    display: none; }
+  body.loading {
+    overflow-y: hidden; }
+    body.loading #loading {
+      display: block !important;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: #fff;
+      z-index: 1000; }
+      body.loading #loading #ball {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+  body #login {
+    display: none; }
+  body.login {
+    overflow-y: hidden; }
+    body.login #login {
+      display: block;
+      text-align: right;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background-color: black;
+      z-index: 999; }
+      body.login #login #formLogin {
+        position: absolute;
+        min-width: 25%;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+        body.login #login #formLogin #name {
+          color: white;
+          -webkit-box-shadow: 0px 0px 0px;
+          box-shadow: 0px 0px 0px; }
+        body.login #login #formLogin #sendLogin {
+          width: 100%; }
+      body.login #login .close {
+        display: none;
         color: white;
-        -webkit-box-shadow: 0px 0px 0px;
-        box-shadow: 0px 0px 0px; }
-      body.login div#login #formLogin #sendLogin {
-        width: 100%; }
+        padding: 15px 15px 0 0;
+        cursor: pointer; }
 
 #imgHead {
   width: 100%;
