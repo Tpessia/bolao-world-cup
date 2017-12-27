@@ -98,6 +98,8 @@ function login() {
         $("#name").val("");
         $("body").removeClass("login");
 
+        highlight();
+
         getChartData();
     }
 
@@ -502,8 +504,6 @@ function getChartData() {
             charts1.change(1, user.pontuacao, user.date);
 
             charts2.change(0, user.colocacao, user.date);
-
-            highlight();
 
             prepareOffline();
 

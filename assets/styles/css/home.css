@@ -352,7 +352,8 @@ main.container {
         position: absolute;
         z-index: 10;
         width: calc(100% - .75rem);
-        height: 50%; }
+        height: 50%;
+        background-color: #f5f5f5; }
         #chart > div .chartLoading.active div {
           position: absolute;
           top: 50%;
@@ -368,7 +369,8 @@ main.container {
           position: absolute;
           z-index: 10;
           width: calc(100% - .75rem);
-          height: 50%; }
+          height: 50%;
+          background-color: #f5f5f5; }
           #chart > div .blockMobile div {
             position: absolute;
             top: 50%;
