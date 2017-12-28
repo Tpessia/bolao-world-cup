@@ -290,7 +290,7 @@ charts3 = {
                     {
                         label: "Primeiros Colocados",
                         // backgroundColor: '#25365d66',
-                        backgroundColor: 'rgba(0,0,0,0)',
+                        backgroundColor: '#25365dcc',
                         borderColor: '#25365d',
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
