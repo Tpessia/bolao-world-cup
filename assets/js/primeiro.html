@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function() {
+            newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        });
+        function newData(pages, ID) { //request spreadsheet page data
+                        id = ID; //cria id global
+                    pages = pages.split(',');
+            pages.forEach(function (page, index) {
+                var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+                $.ajax({ //verifica se a url existe
+                        url: urlJSON,
+                    dataType: 'html',
+                    async: false,
+                    timeout: 5000,
+                    success: function (json) {
+                        data = JSON.parse(json).feed.entry //recebe a data como json
+                        page = "page" + page; //cria a pageN
+                        arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                        rankCreate();
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Erro, sem conexão com a internet!');
+                    }
+                });
+            })
+        }
+        function arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
+            if (typeof table == "undefined") {table = {}; }
+            table[sheetPage] = {};
+            var lastRow = 0;
+            for (var i = 0; i < data.length; i++) {
+                var dataTemp = data[i];
+                if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {table[sheetPage]["row" + dataTemp.gs$cell.row] = []; } //create table.rowN
+                if (lastRow != dataTemp.gs$cell.row) {lastCol = 0; } //new row
+                if (dataTemp.gs$cell.col > lastCol && nullify) { //add null para células vazias
+                    var holes = dataTemp.gs$cell.col - lastCol - 1; //number of emptys
+                    for (var j = 0; j < holes; j++) {
+                        table[sheetPage]["row" + dataTemp.gs$cell.row].push(null);
+                    }
+                }
+                table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+                lastCol = dataTemp.gs$cell.col;
+                lastRow = dataTemp.gs$cell.row;
+            }
+        }
+        function rankCreate() { //create ranking element
+                        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+                    j = 0;
+            for (i in table.page1) { //cria array do ranking
+                if (j > 1) {
+                        ranking.push({ name: table.page1[i][1], pontuacao: table.page1[i][2] });
+                    }
+                j++;
+            }
+            for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
+            total = 0;
+            for (i in ranking) {
+                ranking[i].name = lower(lower(ranking[i].name));
+                total += parseInt(ranking[i].pontuacao); 
+            }
+            media = (total / ranking.length).toFixed(2);
+            // var params = { "ranking": ranking };
+            paramsJSON = JSON.stringify(ranking);
+            console.log("https://www.bolaodomauricio.xyz/assets/php/db.php?ranking=" + paramsJSON + "&media=" + media);
+            $.ajax({
+                url: "https://www.bolaodomauricio.xyz/assets/php/db.php?ranking=" + paramsJSON + "&media=" + media,
+                method: "GET",
+                // data: paramsJSON,
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+        function lower(string1) {
+        return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g,"").replace(/ /g,"");
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
