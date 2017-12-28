@@ -397,14 +397,11 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 login(); //manages the login "page" or automatically logs in
 
                 //se online, verifica os dados no DB
-                // try {
-                    getChartData(); //dá problema na primeira vez, quando o usuário nunca logou
-                // } catch (error) {
-
-                // }
+                if (typeof user !== "undefined") {
+                    getChartData();
+                }
 
                 getMedias(); //recebe a média de pontuação (DB)
-                
             },
             error: function (xhr, status, error) {
                 alert('Erro, sem conexão com a internet!');
