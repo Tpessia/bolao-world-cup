@@ -626,7 +626,8 @@ function search(key) {
                 },
                 error: function (xhr, status, error) {
                     if (status != "abort") {
-                        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."');
+                        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+                        $('#modal2').modal('open');
                     }
                 }
             });
@@ -634,7 +635,8 @@ function search(key) {
             break;
         }
         else if (i == players.length - 1) {
-            $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."');
+            $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+            $('#modal2').modal('open');
         }
     }
 }
