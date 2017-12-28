@@ -626,8 +626,7 @@ function search(key) {
                 },
                 error: function (xhr, status, error) {
                     if (status != "abort") {
-                        alert('Pesquisa Inválida!');
-                        $("#modal2 .modal-content>p").html('Usuário não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."'); //MAIN TITLE
+                        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."');
                     }
                 }
             });
@@ -635,7 +634,7 @@ function search(key) {
             break;
         }
         else if (i == players.length - 1) {
-            alert("Nome não encontrado!")
+            $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."');
         }
     }
 }
