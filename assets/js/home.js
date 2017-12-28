@@ -274,6 +274,58 @@ charts2 = {
     }
 }
 
+charts3 = {
+    create: function () {
+        ctx3 = document.getElementById('myChart3').getContext('2d');
+        chart3 = new Chart(ctx3, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: [
+                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                ],
+                datasets: [
+                    {
+                        label: "Primeiros Colocados",
+                        // backgroundColor: '#25365d66',
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: '#25365d',
+                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                    }
+                ]
+            },
+
+            // Configuration options go here
+            options: {
+                //legend: false,
+
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            suggestedMin: 0, // minimum will be 0, unless there is a lower value.
+                            //suggestedMax: ranking.length,
+                            //reverse: true,
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Vezes como Primeiro'
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+    change: function (datasetIndex, dataArr, labelsArr) {
+        chart3.data.datasets[datasetIndex].data = dataArr;
+        chart3.data.labels = labelsArr;
+        chart3.update();
+    }
+}
+
 function bindClick() { //search, close search, ver dados, side ver dados, atualizar
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
@@ -400,6 +452,7 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 scrolls();
                 charts1.create(); //create charts
                 charts2.create();
+                charts3.create();
 
                 login(); //manages the login "page" or automatically logs in
 
@@ -409,6 +462,8 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 }
 
                 getMedias(); //recebe a média de pontuação (DB)
+
+                getPrimeiros();
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
@@ -557,6 +612,36 @@ function getMedias() {
     });
 }
 
+
+function getPrimeiros() {
+    if (typeof getPrimeirosAjax !== "undefined" && getPrimeirosAjax.readyState !== 4 && getPrimeirosAjax.readyState !== 0) {
+        getPrimeirosAjax.abort();
+    }
+
+    getPrimeirosAjax = $.ajax({
+        url: "assets/php/primeiro-select.php",
+        type: "GET",
+        success: function (data) {
+            var primeirosData = eval(data);
+
+            primeiros = { nome: [], ocorrencias: [] };
+
+            for (var p in primeirosData) {
+                primeiros.nome.push(primeirosData[p].nome);
+                primeiros.ocorrencias.push(primeirosData[p].ocorrencia);
+            }
+
+            charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+
+            localStorage.setItem("primeiros", JSON.stringify(primeiros));
+        },
+        error: function () {
+            getPrimeiros();
+        }
+    });
+}
+
+
 function search(key) {
 
     pesquisa = lower(key); //catch and format name
@@ -664,10 +749,12 @@ function offlineGet() {
 
     charts1.create(); //create charts
     charts2.create();
+    charts3.create();
     
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
+    charts3.change(0, primeiros.ocorrencias, primeiros.nome);
 }
 
 
@@ -682,4 +769,5 @@ function offlineParse() { //recebe as informações de 'user' e 'ranking' do loc
     user = JSON.parse(localStorage.getItem("user"));
     ranking = JSON.parse(localStorage.getItem("ranking"));
     media = JSON.parse(localStorage.getItem("media"));
+    primeiros = JSON.parse(localStorage.getItem("primeiros"));
 }
