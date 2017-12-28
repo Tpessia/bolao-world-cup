@@ -24,9 +24,9 @@ $username = $_GET["username"];
 
 $sql = '
 
-SELECT u.Name, count(*) as "Ocorrencia"
+SELECT u.Nome, count(*) as "Ocorrencia"
 FROM `primeiros` as u
-GROUP BY u.Name
+GROUP BY u.Nome
 ORDER BY count(*) desc
 
 ';
