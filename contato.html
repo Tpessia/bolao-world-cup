@@ -170,7 +170,7 @@
                 url: "assets/php/contact.php",
                 data: myData,
                 success: function () {
-                    $("#email, #mensagem").val("");
+                    $("#email, #mensagem, #assunto").val("");
                     $('#myModal').modal('open');
                 },
                 error: function (err, status) {
