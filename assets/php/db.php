@@ -20,6 +20,9 @@
     $cleanData = json_decode($tempData);
 
 
+    date_default_timezone_set('America/Sao_Paulo');
+
+
     //create
 
     $date = date("dmy");
