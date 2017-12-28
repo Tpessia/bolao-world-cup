@@ -298,8 +298,6 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
 
     $("#refresh").off("click").on("click", function () {
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-        getChartData(); //async false
-        getMedias(); //async false
     })
 }
 
@@ -399,11 +397,11 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 login(); //manages the login "page" or automatically logs in
 
                 //se online, verifica os dados no DB
-                try {
+                // try {
                     getChartData(); //dá problema na primeira vez, quando o usuário nunca logou
-                } catch (error) {
+                // } catch (error) {
 
-                }
+                // }
 
                 getMedias(); //recebe a média de pontuação (DB)
                 
