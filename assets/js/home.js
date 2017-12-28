@@ -34,8 +34,6 @@ $(function() {
         $("#searchVal").prop('disabled', false);
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
-
-    scrolls();
 });
 
 
@@ -56,14 +54,14 @@ function login() {
 
     //submit cadastro
 
-    $('#name').keypress(function (e) {
+    $('#name').off().keypress(function (e) {
         if (e.which == 13) {
             $('#formLogin').submit();
             return false;
         }
     });
 
-    $("#formLogin").on("submit", function (e) {
+    $("#formLogin").off().on("submit", function (e) {
         e.preventDefault();
         cadastrar();
     });
@@ -72,6 +70,7 @@ function login() {
         user = { name: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
+        
         user.name = lower($("#name").val());
 
         var playerCount = 1;
@@ -80,6 +79,7 @@ function login() {
                 user.name = players[i].name;
                 // $("body").addClass("loading");
                 $(".chartLoading").addClass("active");
+                $("a.login").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //prevent new logins while ajax is running
                 break;
             }
             if (playerCount == players.length) { //se nenhum for válido, cancela o cadastro
@@ -277,8 +277,14 @@ charts2 = {
 function bindClick() { //search, close search, ver dados, side ver dados, atualizar
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
+        $("#searchVal").blur();
         search($('#searchVal').val()); //search on click Magnifying glass
     })
+
+    $("#searchVal").on("search", function() {
+        $("#searchVal").blur();
+        search($('#searchVal').val()); //search on click Magnifying glass
+    });
 
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
         $('#searchVal').val(''); //clean search on close
@@ -297,6 +303,7 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
     })
 
     $("#refresh").off("click").on("click", function () {
+        $(".chartLoading").addClass("active");
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     })
 }
@@ -375,12 +382,16 @@ function onlineGet(pages, ID) { //request spreadsheet page data
     pages.forEach(function (page, index) {
 
         var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+        
+        if (typeof onlineGetAjax !== "undefined" && onlineGetAjax.readyState !== 4 && onlineGetAjax.readyState !== 0) {
+            onlineGetAjax.abort();
+        }
 
-        $.ajax({ //verifica se a url existe
+        onlineGetAjax = $.ajax({ //verifica se a url existe
             url: urlJSON,
             dataType: 'html',
-            async: false,
-            timeout: 5000,
+            // async: false,
+            // timeout: 5000,
             success: function (json) {
                 data = JSON.parse(json).feed.entry //recebe a data como json
 
@@ -391,6 +402,7 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 rankCreate();
                 playersArray();
                 bindClick();
+                scrolls();
                 charts1.create(); //create charts
                 charts2.create();
 
@@ -404,7 +416,9 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 getMedias(); //recebe a média de pontuação (DB)
             },
             error: function (xhr, status, error) {
-                alert('Erro, sem conexão com a internet!');
+                if (status != "abort") {
+                    onlineGet(pages.join(","), id);
+                }
             }
         });
     })
@@ -480,11 +494,15 @@ function playersArray() {
 }
 
 function getChartData() {
-    $.ajax({
+    if (typeof getChartAjax !== "undefined" && getChartAjax.readyState !== 4 && getChartAjax.readyState !== 0) {
+        getChartAjax.abort();
+    }
+
+    getChartAjax = $.ajax({
         url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
-        success: function (data) {
-            var chartData = eval(data);
+        success: function (dataDB) {
+            var chartData = eval(dataDB);
 
             user.date = [];
             user.pontuacao = [];
@@ -504,6 +522,11 @@ function getChartData() {
 
             // $("body").removeClass("loading");
             $(".chartLoading").removeClass("active");
+            $("a.login").css({
+                "opacity": "1",
+                "cursor": "pointer",
+                "pointer-events": "auto"
+            }); //prevent new logins while ajax is running
         },
         error: function () {
             getChartData();
@@ -512,7 +535,11 @@ function getChartData() {
 }
 
 function getMedias() {
-    $.ajax({
+    if (typeof getMediaAjax !== "undefined" && getMediaAjax.readyState !== 4 && getMediaAjax.readyState !== 0) {
+        getMediaAjax.abort();
+    }
+
+    getMediaAjax = $.ajax({
         url: "assets/php/dbMedia.php",
         type: "GET",
         success: function (data) {
@@ -542,7 +569,11 @@ function search(key) {
     for (i in players) { //players[i].name and players[i].page
         if ( /*pesquisa.match(lower(players[i].name))*/ pesquisa == lower(players[i].name)) {
 
-            $.ajax({
+            if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
+                searchAjax.abort();
+            }
+
+            searchAjax = $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
                 dataType: 'html',
                 success: function (json) {
@@ -594,12 +625,16 @@ function search(key) {
                     $('#modal1').modal('open');
                 },
                 error: function (xhr, status, error) {
-                    alert('Pesquisa Inválida!');
+                    if (status != "abort") {
+                        alert('Pesquisa Inválida!');
+                        $("#modal2 .modal-content>p").html('Usuário não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html target="_blank">página de contato</a>."'); //MAIN TITLE
+                    }
                 }
             });
 
             break;
-        } else if (i == players.length - 1) {
+        }
+        else if (i == players.length - 1) {
             alert("Nome não encontrado!")
         }
     }
