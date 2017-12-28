@@ -281,11 +281,6 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
         search($('#searchVal').val()); //search on click Magnifying glass
     })
 
-    $("#searchVal").on("search", function() {
-        $("#searchVal").blur();
-        search($('#searchVal').val()); //search on click Magnifying glass
-    });
-
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
         $('#searchVal').val(''); //clean search on close
     })
