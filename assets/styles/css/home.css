@@ -439,8 +439,4 @@ main.container {
     top: auto;
     bottom: 0; } }
 
-input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-  background-color: #fff !important;
-  -webkit-box-shadow: 0 0 0px 300px white inset !important; }
-
 /*# sourceMappingURL=home.css.map */
