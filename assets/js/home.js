@@ -34,6 +34,8 @@ $(function() {
         $("#searchVal").prop('disabled', false);
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
+
+    bindMain();
 });
 
 
@@ -326,7 +328,7 @@ charts3 = {
     }
 }
 
-function bindClick() { //search, close search, ver dados, side ver dados, atualizar
+function bindNetwork() { //search, close search, ver dados, side ver dados, atualizar
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         $("#searchVal").blur();
@@ -353,8 +355,10 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
         $(".chartLoading").addClass("active");
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
+}
 
-    $(".blockMobile .btn").off().on("click", function() {
+function bindMain() {
+    $(".blockMobile .btn").on("click", function () {
         $(".blockMobile").removeClass("show");
     });
 }
@@ -452,7 +456,7 @@ function onlineGet(pages, ID) { //request spreadsheet page data
                 rankingArray();
                 rankCreate();
                 playersArray();
-                bindClick();
+                bindNetwork();
                 scrolls();
                 charts1.create(); //create charts
                 charts2.create();
