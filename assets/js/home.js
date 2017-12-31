@@ -354,8 +354,9 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 
-    $(".offline-ui .close").on("click", function() {
-        $(".offline-ui").css("display", "none");
+    $(".blockMobile .btn").off().on("click", function() {
+        $(".blockMobile").css("display","none !important");
+        $("#chart>div canvas").css("opacity", "1 !important");
     });
 }
 

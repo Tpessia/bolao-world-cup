@@ -447,6 +447,10 @@ main.container {
         .blockMobile {
             display: none;
 
+            .btn {
+                font-size: 0.8rem;
+            }
+
             @media screen and (max-width: 400px) {
                 display: initial;
                 position: absolute;

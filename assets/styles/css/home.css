@@ -363,6 +363,8 @@ main.container {
           font-size: 1.5rem; }
     #chart > div .blockMobile {
       display: none; }
+      #chart > div .blockMobile .btn {
+        font-size: 0.8rem; }
       @media screen and (max-width: 400px) {
         #chart > div .blockMobile {
           display: initial;
