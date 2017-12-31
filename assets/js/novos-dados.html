@@ -79,8 +79,6 @@
                 j++;
             }
 
-            for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
-
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php?primeiro=" + ranking[0].name,
                 method: "GET",
@@ -88,6 +86,10 @@
                     console.log(data);
                 }
             });
+
+            $("body").html($("body").html() + "Primeiro: " + ranking[i].name + "<br><br>")
+
+            for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
 
             total = 0;
             for (i in ranking) {
