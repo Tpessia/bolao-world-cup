@@ -342,9 +342,6 @@ main.container {
   #chart > div {
     margin-top: 70px;
     position: relative; }
-    @media screen and (max-width: 400px) {
-      #chart > div canvas {
-        opacity: 0; } }
     #chart > div .chartLoading {
       display: none; }
       #chart > div .chartLoading.active {
@@ -366,22 +363,24 @@ main.container {
       #chart > div .blockMobile .btn {
         font-size: 0.8rem; }
       @media screen and (max-width: 400px) {
-        #chart > div .blockMobile {
+        #chart > div .blockMobile.show {
           display: initial;
           position: absolute;
           z-index: 10;
           width: calc(100% - .75rem);
           height: 50%;
           background-color: #f5f5f5; }
-          #chart > div .blockMobile div {
+          #chart > div .blockMobile.show div {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             display: inline-table; }
-            #chart > div .blockMobile div i {
-              font-size: 15vh; } }
+            #chart > div .blockMobile.show div i {
+              font-size: 15vh; }
+          #chart > div .blockMobile.show + canvas {
+            opacity: 0; } }
 
 #modal1 {
   min-height: 350px; }

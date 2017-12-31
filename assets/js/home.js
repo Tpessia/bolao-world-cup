@@ -355,8 +355,7 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
     });
 
     $(".blockMobile .btn").off().on("click", function() {
-        $(".blockMobile").css("display","none !important");
-        $("#chart>div canvas").css("opacity", "1 !important");
+        $(".blockMobile").removeClass("show");
     });
 }
 

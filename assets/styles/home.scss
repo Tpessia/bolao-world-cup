@@ -416,12 +416,6 @@ main.container {
         margin-top: 70px;
         position: relative;
 
-        canvas {
-            @media screen and (max-width: 400px) {
-                opacity: 0;
-            }
-        }
-
         .chartLoading {
             display: none;
 
@@ -451,23 +445,27 @@ main.container {
                 font-size: 0.8rem;
             }
 
-            @media screen and (max-width: 400px) {
-                display: initial;
-                position: absolute;
-                z-index: 10;
-                width: calc(100% - .75rem);
-                height: 50%;
-                background-color: $page-bg;
-
-                div {
+            &.show {
+                @media screen and (max-width: 400px) {
+                    display: initial;
                     position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    display: inline-table;
-                    i {
-                        font-size: 15vh;
+                    z-index: 10;
+                    width: calc(100% - .75rem);
+                    height: 50%;
+                    background-color: $page-bg;
+                    div {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        display: inline-table;
+                        i {
+                            font-size: 15vh;
+                        }
+                    }
+                    &+canvas {
+                        opacity: 0;
                     }
                 }
             }
