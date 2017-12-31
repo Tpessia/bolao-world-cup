@@ -68,9 +68,10 @@
 
         function rankCreate() { //create ranking element
 
-                        ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+            ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
-                    j = 0;
+            j = 0;
+            
             for (i in table.page1) { //cria array do ranking
                 if (j > 1) {
                         ranking.push({ name: table.page1[i][1], pontuacao: table.page1[i][2] });
@@ -79,6 +80,14 @@
             }
 
             for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
+
+            $.ajax({
+                url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-select.php?primeiro=" + ranking[0].name,
+                method: "GET",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
 
             total = 0;
             for (i in ranking) {
@@ -90,16 +99,16 @@
 
             // var params = { "ranking": ranking };
             paramsJSON = JSON.stringify(ranking);
-            console.log("https://www.bolaodomauricio.xyz/assets/php/dbRanking.php?ranking=" + paramsJSON + "&media=" + media);
+            console.log("https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media);
 
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/dbRanking.php?ranking=" + paramsJSON + "&media=" + media,
+                url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media,
                 method: "GET",
                 // data: paramsJSON,
                 success: function(data) {
                     console.log(data);
                 }
-            })
+            });
         }
 
         function lower(string1) {

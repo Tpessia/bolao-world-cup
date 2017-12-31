@@ -594,7 +594,7 @@ function getMedias() {
     }
 
     getMediaAjax = $.ajax({
-        url: "assets/php/dbMedia.php",
+        url: "assets/php/media-select.php",
         type: "GET",
         success: function (data) {
             var medias = eval(data);
