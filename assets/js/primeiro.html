@@ -57,9 +57,9 @@
                     }
                 j++;
             }
-            console.log("https://www.bolaodomauricio.xyz/assets/php/primeiro-db.php?primeiro=" + ranking[0].name);
+            console.log("https://www.bolaodomauricio.xyz/assets/php/dbPrimeiros.php?primeiro=" + ranking[0].name);
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/primeiro-db.php?primeiro=" + ranking[0].name,
+                url: "https://www.bolaodomauricio.xyz/assets/php/dbPrimeiros.php?primeiro=" + ranking[0].name,
                 method: "GET",
                 success: function(data) {
                     console.log(data);

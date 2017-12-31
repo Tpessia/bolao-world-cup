@@ -290,8 +290,8 @@ charts3 = {
                     {
                         label: "Primeiros Colocados",
                         // backgroundColor: '#25365d66',
-                        backgroundColor: '#25365dcc',
-                        borderColor: '#25365d',
+                        backgroundColor: 'rgba(11,21,43,0.9)',
+                        // borderColor: '#25365d',
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
                 ]
@@ -299,7 +299,7 @@ charts3 = {
 
             // Configuration options go here
             options: {
-                //legend: false,
+                legend: false,
 
                 scales: {
                     yAxes: [{
@@ -331,11 +331,11 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         $("#searchVal").blur();
         search($('#searchVal').val()); //search on click Magnifying glass
-    })
+    });
 
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
         $('#searchVal').val(''); //clean search on close
-    })
+    });
 
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
         nome = $(this).closest(".card").find(".card-title").html(); //modal
@@ -343,16 +343,20 @@ function bindClick() { //search, close search, ver dados, side ver dados, atuali
         nome.shift()
         nome = nome.join(" ");
         search(nome);
-    })
+    });
 
     $("#moreRank").off("click").on("click", function () {
         showMoreRank();
-    })
+    });
 
     $("#refresh").off("click").on("click", function () {
         $(".chartLoading").addClass("active");
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-    })
+    });
+
+    $(".offline-ui .close").on("click", function() {
+        $(".offline-ui").css("display", "none");
+    });
 }
 
 function highlight() { //current user highlight on ranking
@@ -549,7 +553,7 @@ function getChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/dbSelect.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
+        url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
         success: function (dataDB) {
             var chartData = eval(dataDB);
@@ -619,7 +623,7 @@ function getPrimeiros() {
     }
 
     getPrimeirosAjax = $.ajax({
-        url: "assets/php/primeiro-select.php",
+        url: "assets/php/primeiros-select.php",
         type: "GET",
         success: function (data) {
             var primeirosData = eval(data);
@@ -632,6 +636,8 @@ function getPrimeiros() {
             }
 
             charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+
+            chart3.options.scales.yAxes[0].ticks.suggestedMax = primeiros.ocorrencias[0] + 1;
 
             localStorage.setItem("primeiros", JSON.stringify(primeiros));
         },

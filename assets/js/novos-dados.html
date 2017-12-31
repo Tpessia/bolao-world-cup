@@ -90,10 +90,10 @@
 
             // var params = { "ranking": ranking };
             paramsJSON = JSON.stringify(ranking);
-            console.log("https://www.bolaodomauricio.xyz/assets/php/db.php?ranking=" + paramsJSON + "&media=" + media);
+            console.log("https://www.bolaodomauricio.xyz/assets/php/dbRanking.php?ranking=" + paramsJSON + "&media=" + media);
 
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/db.php?ranking=" + paramsJSON + "&media=" + media,
+                url: "https://www.bolaodomauricio.xyz/assets/php/dbRanking.php?ranking=" + paramsJSON + "&media=" + media,
                 method: "GET",
                 // data: paramsJSON,
                 success: function(data) {
