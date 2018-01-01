@@ -81,7 +81,7 @@
 
         $sql = "
         INSERT INTO $value->name (Data, Colocacao, Pontuacao)
-        VALUES (".$date.", '".$index."', ".$value->pontuacao.")
+        VALUES ('".$date."', '".$index."', ".$value->pontuacao.")
         ";
             
         if (!mysqli_query($conn, $sql)) {
@@ -108,7 +108,7 @@
 
     $sql = "
     INSERT INTO medias (Data, Media)
-    VALUES (".$date.", ".$media.")
+    VALUES ('".$date."', ".$media.")
     ";
         
     if (!mysqli_query($conn, $sql)) {
