@@ -573,8 +573,8 @@ function getChartData() {
             user.colocacao = [];
 
             for (i in chartData) {
-                var date = new Date(chartData[i].date + 'T00:00-02:00'); //weakest link
-                user.date.push(formatarData(date));
+                // user.date.push(chunk(chartData[i].date, 2).join("/"));
+                user.date.push(chartData[i].date);
                 user.pontuacao.push(chartData[i].pontuacao);
                 user.colocacao.push(chartData[i].colocacao);
             }
@@ -614,8 +614,8 @@ function getMedias() {
 
             for (i in medias) {
                 media.mediaArr.push(medias[i].media);
-                var date = new Date(medias[i].date + 'T00:00-02:00'); //weakest link
-                media.dateArr.push(formatarData(date));
+                // media.dateArr.push(chunk(medias[i].date, 2).join("/"));
+                media.dateArr.push(medias[i].date);
             }
 
             charts1.change(0, media.mediaArr, media.dateArr);
@@ -657,16 +657,6 @@ function getPrimeiros() {
             getPrimeiros();
         }
     });
-}
-
-function formatarData(data) {
-    var dia = data.getDate();
-    if (dia.toString().length == 1)
-        dia = "0" + dia;
-    var mes = data.getMonth() + 1;
-    if (mes.toString().length == 1)
-        mes = "0" + mes;
-    return dia + "/" + mes;
 }
 
 
@@ -748,6 +738,18 @@ function search(key) {
         }
     }
 }
+
+// function chunk(str, n) { //insert char every n chars
+//     var ret = [];
+//     var i;
+//     var len;
+
+//     for (i = 0, len = str.length; i < len; i += n) {
+//         ret.push(str.substr(i, n))
+//     }
+
+//     return ret
+// }
 
 function lower(string1) {
     return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "");
