@@ -32,7 +32,7 @@ $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Date DATE,
+Date VARCHAR(255),
 
 Nome VARCHAR(255)
 
@@ -52,7 +52,7 @@ $sql = "
 
 INSERT INTO primeiros (Date, Nome)
 
-VALUES (TO_DATE('".$date."', 'DDMMYY'), '".$primeiro."')
+VALUES (".$date.", '".$primeiro."')
 
 ";
 

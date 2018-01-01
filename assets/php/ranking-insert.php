@@ -81,7 +81,7 @@
 
         $sql = "
         INSERT INTO $value->name (Date, Colocacao, Pontuacao)
-        VALUES (TO_DATE('".$date."', 'DDMMYY'), '".$index."', ".$value->pontuacao.")
+        VALUES (".$date.", '".$index."', ".$value->pontuacao.")
         ";
             
         if (!mysqli_query($conn, $sql)) {
@@ -97,7 +97,7 @@
 
     $sql = "
     CREATE TABLE IF NOT EXISTS medias (
-        Date DATE,
+        Date VARCHAR(255),
         Media DOUBLE NOT NULL
     );
     ";
