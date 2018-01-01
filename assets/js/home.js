@@ -330,14 +330,6 @@ charts3 = {
 
 function bindNetwork() { //search, close search, ver dados, side ver dados, atualizar
 
-    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
-        $("#searchVal").blur();
-        search($('#searchVal').val()); //search on click Magnifying glass
-    });
-
-    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
-        $('#searchVal').val(''); //clean search on close
-    });
 
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
         nome = $(this).closest(".card").find(".card-title").html(); //modal
@@ -358,8 +350,22 @@ function bindNetwork() { //search, close search, ver dados, side ver dados, atua
 }
 
 function bindMain() {
+    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
+        $("#searchVal").blur();
+        search($('#searchVal').val()); //search on click Magnifying glass
+    });
+
+    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
+        $('#searchVal').val(''); //clean search on close
+    });
+
     $(".blockMobile .btn").on("click", function () {
         $(".blockMobile").removeClass("show");
+    });
+
+    $("#searchVal").on("search", function() {
+        $('#searchVal').blur();
+        search($('#searchVal').val());
     });
 }
 
