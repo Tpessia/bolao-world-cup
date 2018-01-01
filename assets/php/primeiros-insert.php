@@ -26,13 +26,13 @@ date_default_timezone_set('America/Sao_Paulo');
 
 //create
 
-$date = date("Y-m-d");
+$date = date("dmy");
 
 $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Data DATE,
+Date INT NOT NULL,
 
 Nome VARCHAR(255)
 
@@ -50,7 +50,7 @@ die("Error: " . $sql . "<br>" . mysqli_error($conn));
 
 $sql = "
 
-INSERT INTO primeiros (Data, Nome)
+INSERT INTO primeiros (Date, Nome)
 
 VALUES (".$date.", '".$primeiro."')
 
