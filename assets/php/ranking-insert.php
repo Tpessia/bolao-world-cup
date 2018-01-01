@@ -25,7 +25,7 @@
 
     //create
 
-    $date = date("yyyy-mm-dd");
+    $date = date("Y-m-d");
 
     // $sql = "
     // CREATE TABLE players_$date (

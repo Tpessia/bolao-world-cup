@@ -26,7 +26,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 //create
 
-$date = date("yyyy-mm-dd");
+$date = date("Y-m-d");
 
 $sql = "
 
