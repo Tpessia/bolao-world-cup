@@ -25,7 +25,7 @@
 
     //create
 
-    $date = date("Y-m-d");
+    $date = date("dmy");
 
     // $sql = "
     // CREATE TABLE players_$date (
@@ -81,7 +81,7 @@
 
         $sql = "
         INSERT INTO $value->name (Date, Colocacao, Pontuacao)
-        VALUES (".$date.", '".$index."', ".$value->pontuacao.")
+        VALUES (TO_DATE('".$date."', 'DDMMYY'), '".$index."', ".$value->pontuacao.")
         ";
             
         if (!mysqli_query($conn, $sql)) {

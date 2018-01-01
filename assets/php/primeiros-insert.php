@@ -26,7 +26,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 //create
 
-$date = date("Y-m-d");
+$date = date("dmy");
 
 $sql = "
 
@@ -52,7 +52,7 @@ $sql = "
 
 INSERT INTO primeiros (Date, Nome)
 
-VALUES (".$date.", '".$primeiro."')
+VALUES (TO_DATE('".$date."', 'DDMMYY'), '".$primeiro."')
 
 ";
 
