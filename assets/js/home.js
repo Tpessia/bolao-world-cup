@@ -1,6 +1,6 @@
 //STOP LOADING ANIM
 
-window.onload = function() {
+window.onload = function() { //window load
     setTimeout(function(){
         $("body").removeClass("loading");
     },1000);
@@ -8,7 +8,7 @@ window.onload = function() {
 
 //CONTROLLER
 
-$(function() {
+$(function() { //document ready
     
     Offline.check();
 
