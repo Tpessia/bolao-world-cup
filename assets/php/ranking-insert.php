@@ -25,7 +25,7 @@
 
     //create
 
-    $date = date("dmy");
+    $date = date("yyyy-mm-dd");
 
     // $sql = "
     // CREATE TABLE players_$date (
@@ -97,7 +97,7 @@
 
     $sql = "
     CREATE TABLE IF NOT EXISTS medias (
-        Date VARCHAR(255),
+        Date DATE,
         Media DOUBLE NOT NULL
     );
     ";
