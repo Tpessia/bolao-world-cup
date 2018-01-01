@@ -26,13 +26,13 @@ date_default_timezone_set('America/Sao_Paulo');
 
 //create
 
-$date = date("dmy");
+$date = date("Y-m-d");
 
 $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Data INT NOT NULL,
+Data DATE,
 
 Nome VARCHAR(255)
 
