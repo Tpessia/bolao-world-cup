@@ -32,7 +32,7 @@ $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Date VARCHAR(255),
+Date DATE,
 
 Nome VARCHAR(255)
 

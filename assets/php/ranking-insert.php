@@ -63,7 +63,7 @@
 
         $sql = "
         CREATE TABLE IF NOT EXISTS $value->name (
-            Date VARCHAR(255),
+            Date DATE,
             Colocacao INT NOT NULL,
             Pontuacao INT NOT NULL
         );
@@ -97,7 +97,7 @@
 
     $sql = "
     CREATE TABLE IF NOT EXISTS medias (
-        Date VARCHAR(255),
+        Date DATE,
         Media DOUBLE NOT NULL
     );
     ";
