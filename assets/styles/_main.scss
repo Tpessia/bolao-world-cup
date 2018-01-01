@@ -76,7 +76,7 @@ footer {
     background-color: $colorA !important;
     margin-top: 60px;
     
-        a[href="http://www.pessia.xyz/"] {
+    a[href="http://www.pessia.xyz/"] {
         transform: translateY(-50%);
     }
     .footer-copyright .container div {
@@ -86,6 +86,10 @@ footer {
             &:last-of-type {
                 text-align: right;
                 vertical-align: super;
+
+                a {
+                    vertical-align: super;
+                }
             }
         }
     }
