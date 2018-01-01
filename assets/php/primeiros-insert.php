@@ -52,7 +52,7 @@ $sql = "
 
 INSERT INTO primeiros (Data, Nome)
 
-VALUES (".$date.", '".$primeiro."')
+VALUES ('".$date."', '".$primeiro."')
 
 ";
 
