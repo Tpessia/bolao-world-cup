@@ -63,7 +63,7 @@
 
         $sql = "
         CREATE TABLE IF NOT EXISTS $value->name (
-            Date DATE,
+            Data DATE,
             Colocacao INT NOT NULL,
             Pontuacao INT NOT NULL
         );
@@ -80,7 +80,7 @@
         // ";
 
         $sql = "
-        INSERT INTO $value->name (Date, Colocacao, Pontuacao)
+        INSERT INTO $value->name (Data, Colocacao, Pontuacao)
         VALUES (".$date.", '".$index."', ".$value->pontuacao.")
         ";
             
@@ -97,7 +97,7 @@
 
     $sql = "
     CREATE TABLE IF NOT EXISTS medias (
-        Date DATE,
+        Data DATE,
         Media DOUBLE NOT NULL
     );
     ";
@@ -107,7 +107,7 @@
     }
 
     $sql = "
-    INSERT INTO medias (Date, Media)
+    INSERT INTO medias (Data, Media)
     VALUES (".$date.", ".$media.")
     ";
         

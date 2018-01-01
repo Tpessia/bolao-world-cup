@@ -15,7 +15,7 @@
     $username = $_GET["username"];
     
     $sql = "
-    SELECT Date, Colocacao, Pontuacao
+    SELECT Data, Colocacao, Pontuacao
     FROM $username
     ";
     $result = mysqli_query($conn, $sql);
@@ -24,7 +24,7 @@
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
-            echo '{date: "' . $row['Date']. '", colocacao: ' . $row['Colocacao']. ', pontuacao: ' . $row['Pontuacao']. '},';
+            echo '{date: "' . $row['Data']. '", colocacao: ' . $row['Colocacao']. ', pontuacao: ' . $row['Pontuacao']. '},';
         }
     } else {
         echo "0 results";

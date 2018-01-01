@@ -32,7 +32,7 @@ $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Date DATE,
+Data DATE,
 
 Nome VARCHAR(255)
 
@@ -50,7 +50,7 @@ die("Error: " . $sql . "<br>" . mysqli_error($conn));
 
 $sql = "
 
-INSERT INTO primeiros (Date, Nome)
+INSERT INTO primeiros (Data, Nome)
 
 VALUES (".$date.", '".$primeiro."')
 
