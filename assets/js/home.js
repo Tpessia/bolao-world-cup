@@ -458,7 +458,7 @@ function onlineGet(pages, ID) { //request spreadsheet page data
 
                 page = "page" + page; //cria a pageN
 
-                tableCreate(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                tableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
                 rankingArray();
                 rankCreate();
                 playersArray();
@@ -530,8 +530,8 @@ function rankingArray() {
     for (i in table.page1) { //cria array do ranking
         if (j > 1) {
             ranking.push({
-                name: table.page1[i][1],
-                pontuacao: table.page1[i][2]
+                name: table.page1[i][1], //sheet format (Participante)
+                pontuacao: table.page1[i][2] //sheet format (Pontuação)
             });
         }
         j++;
@@ -544,8 +544,8 @@ function playersArray() {
     j = 0;
     for (i in table.page1) {
         if (j > 1) {
-            pageVar = table.page1[i][3];
-            nameVar = table.page1[i][4];
+            pageVar = table.page1[i][3]; //sheet format (Página)
+            nameVar = table.page1[i][4]; //sheet format (Nome)
             players.push({
                 page: pageVar,
                 name: nameVar
@@ -704,6 +704,10 @@ function search(key) {
 
                         j = 0;
                         for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3...
+                            //j1 é o header, por isso j > 0
+                            //jImpar é o header de cada jogo
+                            //jPar é o resultado de cada jogo
+                            //jLast é a pontuação final
                             if (j % 2 != 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
                                 table[page].dados[table[page][i]] = []; //cria jogo1, jogo2...
                                 lastJogo = table[page][i];
