@@ -703,7 +703,7 @@ function search(key) {
                         table[page].dados = {}; //player data broken down
 
                         j = 0;
-                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3...
+                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
                             //j1 é o header, por isso j > 0
                             //jImpar é o header de cada jogo
                             //jPar é o resultado de cada jogo
