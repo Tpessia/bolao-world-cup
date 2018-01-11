@@ -331,7 +331,8 @@ main.container {
 #chart {
   position: relative; }
   #chart h1 {
-    padding-top: 5%; }
+    padding-top: 5%;
+    text-align: center; }
   #chart > div {
     margin-top: 40px;
     position: relative; }
