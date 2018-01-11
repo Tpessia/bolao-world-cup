@@ -572,6 +572,13 @@ function getChartData() {
                 $("#modal2 .modal-content>p").html('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
                 $('#modal2').modal('open');
 
+                $(".chartLoading").removeClass("active");
+                $("a.login").css({
+                    "opacity": "1",
+                    "cursor": "pointer",
+                    "pointer-events": "auto"
+                });
+
                 throw "UnableToFindUser";
             }
 
