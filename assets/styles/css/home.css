@@ -333,6 +333,9 @@ main.container {
   #chart h1 {
     padding-top: 5%;
     text-align: center; }
+    @media screen and (max-width: 400px) {
+      #chart h1 {
+        padding-top: 10%; } }
   #chart > div {
     position: relative; }
     #chart > div:not(:first-of-type) {
