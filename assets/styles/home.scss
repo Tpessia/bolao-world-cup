@@ -184,7 +184,7 @@ main.container {
     $content-padding: 15px;
 
     h1 {
-        padding: 2% .75rem;
+        padding: 4% .75rem;
         text-align: center;
     }
 
@@ -394,27 +394,28 @@ main.container {
 #chart {
     position: relative;
 
-    h2 {
-        margin-left: 20px;
-
-        &+p {
-            margin-left: 25px;
-        }
-
-        @media screen and (max-width: 400px) {
-            text-align: center;
-            margin-left: 0;
-
-            &+p {
-                text-align: center;
-                margin-left: 0;
-            }
-        }
+    h1 {
+        padding-top: 5%;
     }
 
     >div {
-        margin-top: 70px;
+        margin-top: 40px;
         position: relative;
+
+        h2 {
+            margin-left: 20px;
+            &+p {
+                margin-left: 25px;
+            }
+            @media screen and (max-width: 400px) {
+                text-align: center;
+                margin-left: 0;
+                &+p {
+                    text-align: center;
+                    margin-left: 0;
+                }
+            }
+        }
 
         .chartLoading {
             display: none;

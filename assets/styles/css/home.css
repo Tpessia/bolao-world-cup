@@ -203,7 +203,7 @@ main.container {
   min-width: 85%; }
 
 .rank h1 {
-  padding: 2% .75rem;
+  padding: 4% .75rem;
   text-align: center; }
 .rank .card {
   margin: .3rem 0 !important;
@@ -330,20 +330,22 @@ main.container {
 
 #chart {
   position: relative; }
-  #chart h2 {
-    margin-left: 20px; }
-    #chart h2 + p {
-      margin-left: 25px; }
-    @media screen and (max-width: 400px) {
-      #chart h2 {
-        text-align: center;
-        margin-left: 0; }
-        #chart h2 + p {
-          text-align: center;
-          margin-left: 0; } }
+  #chart h1 {
+    padding-top: 5%; }
   #chart > div {
-    margin-top: 70px;
+    margin-top: 40px;
     position: relative; }
+    #chart > div h2 {
+      margin-left: 20px; }
+      #chart > div h2 + p {
+        margin-left: 25px; }
+      @media screen and (max-width: 400px) {
+        #chart > div h2 {
+          text-align: center;
+          margin-left: 0; }
+          #chart > div h2 + p {
+            text-align: center;
+            margin-left: 0; } }
     #chart > div .chartLoading {
       display: none; }
       #chart > div .chartLoading.active {
