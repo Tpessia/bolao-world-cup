@@ -566,7 +566,14 @@ function getChartData() {
         url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
         success: function (dataDB) {
-            var chartData = eval(dataDB);
+            try {
+                var chartData = eval(dataDB);
+            } catch (error) {
+                $("#modal2 .modal-content>p").html('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
+                $('#modal2').modal('open');
+
+                throw new UserException("UnableToFindUser");
+            }
 
             user.date = [];
             user.pontuacao = [];
