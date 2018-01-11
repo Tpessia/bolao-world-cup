@@ -334,8 +334,9 @@ main.container {
     padding-top: 5%;
     text-align: center; }
   #chart > div {
-    margin-top: 40px;
     position: relative; }
+    #chart > div:not(:first-of-type) {
+      margin-top: 40px; }
     #chart > div h2 {
       margin-left: 20px; }
       #chart > div h2 + p {
