@@ -566,7 +566,21 @@ function getChartData() {
         url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "")).replace(/ /g, ""),
         type: "GET",
         success: function (dataDB) {
-            var chartData = eval(dataDB);
+            try {
+                var chartData = eval(dataDB);
+            } catch (error) {
+                $("#modal2 .modal-content>p").html('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
+                $('#modal2').modal('open');
+
+                $(".chartLoading").removeClass("active");
+                $("a.login").css({
+                    "opacity": "1",
+                    "cursor": "pointer",
+                    "pointer-events": "auto"
+                });
+
+                throw "UnableToFindUser";
+            }
 
             user.date = [];
             user.pontuacao = [];
@@ -703,7 +717,7 @@ function search(key) {
                         table[page].dados = {}; //player data broken down
 
                         j = 0;
-                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3...
+                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
                             //j1 é o header, por isso j > 0
                             //jImpar é o header de cada jogo
                             //jPar é o resultado de cada jogo
