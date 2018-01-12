@@ -308,7 +308,7 @@ charts3 = {
                         display: true,
                         ticks: {
                             suggestedMin: 0, // minimum will be 0, unless there is a lower value.
-                            suggestedMax: typeof primeiros.ocorrencias[0] !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
+                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
                             //reverse: true,
                         },
                         scaleLabel: {
