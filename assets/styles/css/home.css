@@ -176,6 +176,11 @@ body {
       @media screen and (max-width: 600px) {
         #imgHead #welcome h2 {
           font-size: 7.4vw; } }
+    #imgHead #welcome div {
+      font-size: 2.5vh; }
+      @media screen and (max-width: 600px) {
+        #imgHead #welcome div {
+          font-size: 2vh; } }
   #imgHead .arrow-pulse-down:after {
     /* Here you can change the style of the arrow */
     content: url(https://www.bolaodomauricio.xyz/assets/img/down-arrow.png);
