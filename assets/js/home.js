@@ -48,6 +48,7 @@ function login() {
     if (localStorage.getItem("user") !== null) { //usuário já salvo no local storage
         $("body").removeClass("login");
         user = JSON.parse(localStorage.getItem("user")); //receive user data from local storage
+        userPosition();
         
         welcome();
         highlight();
@@ -90,6 +91,8 @@ function login() {
             }
             playerCount++;
         }
+
+        userPosition();
 
         //cadastro
 
@@ -789,6 +792,7 @@ function lower(string1) {
 function offlineGet() {
     offlineParse(); //receive user and ranking
     rankCreate(); //create DOM based on ranking
+    userPosition();
 
     login(); //manages the login "page" or automatically logs in
 
