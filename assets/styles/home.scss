@@ -108,6 +108,7 @@ body {
     }
 
     #welcome {
+        width: 90vw;
         position : absolute;
         top: 41%;
         left : 50%;
@@ -118,15 +119,12 @@ body {
         h2 {
             font-size: 4.9vw;
             @media screen and (max-width: 600px) {
-                font-size: 7.4vw;
+                font-size: 11vw;
             }
         }
 
         div {
             font-size: 2.5vh;
-            @media screen and (max-width: 600px) {
-                font-size: 2vh;
-            }
         }
     }
 
