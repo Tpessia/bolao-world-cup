@@ -49,7 +49,7 @@ function login() {
         $("body").removeClass("login");
         user = JSON.parse(localStorage.getItem("user")); //receive user data from local storage
         userPosition();
-        
+
         welcome();
         highlight();
         prepareOffline();
@@ -109,7 +109,7 @@ function login() {
     }
 
     function welcome() { //welcome name update
-        $("#welcome").html($("#welcome").html().replace(/,.*/, ", " + user.name + "!"));
+        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name + "!"));
     }
 
     $("a.login").on("click", function () { //nav login open
