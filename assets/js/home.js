@@ -161,6 +161,15 @@ function rankCreate() { //create ranking element and object
     $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
 }
 
+function userPosition() { //current user position
+    for (var i in ranking) {
+        if (ranking[i].name.match(user.name)) {
+            user.currentPosition = parseInt(i) + 1;
+            break;
+        }
+    }
+}
+
 charts1 = {
     create: function () {
         ctx1 = document.getElementById('myChart').getContext('2d');
@@ -327,6 +336,8 @@ charts3 = {
         chart3.update();
     }
 }
+
+//events
 
 function bindNetwork() { //search, close search, ver dados, side ver dados, atualizar
 
