@@ -110,6 +110,8 @@ function login() {
 
     function welcome() { //welcome name update
         $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name + "!"));
+
+        $("#welcome h2").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
     }
 
     $("a.login").on("click", function () { //nav login open
@@ -792,7 +794,6 @@ function lower(string1) {
 function offlineGet() {
     offlineParse(); //receive user and ranking
     rankCreate(); //create DOM based on ranking
-    userPosition();
 
     login(); //manages the login "page" or automatically logs in
 
