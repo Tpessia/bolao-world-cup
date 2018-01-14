@@ -355,10 +355,6 @@ function bindNetwork() { //search, close search, ver dados, side ver dados, atua
         search(nome);
     });
 
-    $("#moreRank").off("click").on("click", function () {
-        showMoreRank();
-    });
-
     $("#refresh").off("click").on("click", function () {
         $(".chartLoading").addClass("active");
         onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
@@ -366,6 +362,10 @@ function bindNetwork() { //search, close search, ver dados, side ver dados, atua
 }
 
 function bindMain() {
+    $("#moreRank").on("click", function () {
+        showMoreRank();
+    });
+
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         $("#searchVal").blur();
         search($('#searchVal').val()); //search on click Magnifying glass
