@@ -24,10 +24,11 @@ $username = $_GET["username"];
 
 $sql = '
 
-SELECT TOP 1 u.Nome, count(*) as "Ocorrencia"
+SELECT u.Nome, count(*) as "Ocorrencia"
 FROM `primeiros` as u
 GROUP BY u.Nome
-ORDER BY count(*) desc
+ORDER BY count(*) DESC
+LIMIT 1;
 
 ';
 
