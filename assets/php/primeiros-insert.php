@@ -1,5 +1,19 @@
 <?php
 
+//validate
+
+$primeiro = $_GET["primeiro"];
+
+if(preg_match('/--/', $primeiro)){
+    die("Invalid Name (primeiro): " . $primeiro);
+}
+
+// if(!preg_match('/(?=^.{0,40}$)^[a-zA-Z]+\s[a-zA-Z]+$/', $primeiro)){
+//     die("Invalid Name (primeiro): " . $primeiro);
+// }
+
+//dbinfo
+
 $servername = "mysql.hostinger.com.br";
 
 $username = "u662107342_user";
@@ -20,8 +34,6 @@ die("Connection failed: " . mysqli_connect_error());
 
 }
 
-$primeiro = $_GET["primeiro"];
-
 date_default_timezone_set('America/Sao_Paulo');
 
 //create
@@ -32,9 +44,11 @@ $sql = "
 
 CREATE TABLE IF NOT EXISTS primeiros (
 
-Data DATE,
+ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-Nome VARCHAR(255)
+Data DATE NOT NULL,
+
+Nome VARCHAR(255) NOT NULL
 
 );
 

@@ -22,16 +22,16 @@
                     async: false,
                     timeout: 5000,
                     success: function (json) {
+                        console.log(json);
+
                         data = JSON.parse(json).feed.entry //recebe a data como json
 
                         page = "page" + page; //cria a pageN
 
                         arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-
-                        rankCreate();
                     },
-                    error: function (xhr, status, error) {
-                        alert('Erro, sem conexão com a internet!');
+                    error: function () {
+                        alert("A conecção com o servidor foi interrompida, tente novamente!")
                     }
                 });
             })
@@ -84,10 +84,13 @@
                 method: "GET",
                 success: function (data) {
                     console.log(data);
+                },
+                error: function () {
+                    alert("A conecção com o servidor foi interrompida, tente novamente!")
                 }
             });
 
-            $("body").html($("body").html() + "Primeiro: " + ranking[0].name + "<br><br>")
+            $("body").html("Primeiro: " + ranking[0].name + "<br><br>")
 
             for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
 
@@ -109,16 +112,41 @@
                 // data: paramsJSON,
                 success: function(data) {
                     console.log(data);
+                },
+                error: function () {
+                    alert("A conecção com o servidor foi interrompida, tente novamente!")
                 }
             });
         }
 
         function lower(string1) {
-        return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g,"").replace(/ /g,"");
+        return string1.toLowerCase().replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/ñ/g, "n").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g,"").replace(/ /g,"_");
         }
     </script>
 </head>
 <body>
+    <button id="genData">Gerar novos dados!</button>
 
+    <!-- <button id="clearLast">Limpar último conjunto de dados!</button> -->
+    <script>
+        $("#genData").on("click", function () {
+            rankCreate();
+        });
+
+        $("#clearLast").on("click", function () {
+            if(window.confirm("Você realmente deseja remover todos os dados do último conjunto?")) {
+                $.ajax({
+                    url: "https://www.bolaodomauricio.xyz/assets/php/clear-last.php",
+                    method: "GET",
+                    success: function (data) {
+                        $("body").html(data);
+                    },
+                    error: function () {
+                        alert("A conecção com o servidor foi interrompida, tente novamente!")
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -61,23 +61,35 @@
 
         // $name = $value->name;
 
+        if(preg_match('/--/', $value->name)){
+            die('Invalid Name (ranking): ' . $value->name);
+        }
+
+        // if(!preg_match('/(?=\^.{0,40}\$)\^[a-zA-Z]\+\s[a-zA-Z]\+\$/', $value->name)){
+        //     die('Invalid Name (ranking): ' . $value->name);
+        // }
+
         $sql = "
+
         CREATE TABLE IF NOT EXISTS $value->name (
-            Data INT NOT NULL,
-            Colocacao INT NOT NULL,
-            Pontuacao INT NOT NULL
+
+        ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+        Data DATE NOT NULL,
+            
+        Colocacao SMALLINT NOT NULL,
+            
+        Pontuacao SMALLINT NOT NULL
+        
         );
+        
         ";
-                
+                    
         if (!mysqli_query($conn, $sql)) {
             die("Error: " . $sql . "<br>" . mysqli_error($conn));
         }
 
-        //insert
-        // $sql = "
-        // INSERT INTO players_$date (Colocacao, Name, Pontuacao)
-        // VALUES (".$index.", '".$value->name."', ".$value->pontuacao.")
-        // ";
+
 
         $sql = "
         INSERT INTO $value->name (Data, Colocacao, Pontuacao)
@@ -96,10 +108,17 @@
     $media = $_GET["media"];
 
     $sql = "
+
     CREATE TABLE IF NOT EXISTS medias (
-        Data INT NOT NULL,
-        Media DOUBLE NOT NULL
+
+    ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+    Data DATE NOT NULL,
+
+    Media DECIMAL NOT NULL
+
     );
+
     ";
             
     if (!mysqli_query($conn, $sql)) {
