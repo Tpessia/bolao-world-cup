@@ -28,7 +28,7 @@ SELECT u.Nome, count(*) as "Ocorrencia"
 FROM `primeiros` as u
 GROUP BY u.Nome
 ORDER BY count(*) DESC
-LIMIT 1;
+LIMIT 3;
 
 ';
 
