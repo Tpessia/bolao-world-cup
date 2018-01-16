@@ -578,7 +578,7 @@ function getChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "_")).replace(/ /g, "_") + user.page,
+        url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "_")).replace(/ /g, "_") + "_" + user.page,
         type: "GET",
         success: function (dataDB) {
             try {
