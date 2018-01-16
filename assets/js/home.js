@@ -225,24 +225,7 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        /**/
-        // scroll[3] = 0;
-
-        // $(window).scroll(function () {
-        //     if (scroll[3] == 0) {
-        //         var sT = $("#myChart2").offset().top,
-        //             sH = $("#myChart2").outerHeight(),
-        //             wH = $(window).height(),
-        //             wS = $(window).scrollTop();
-
-        //         if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
-        //             chart1.update();
-        //             scroll[3] = 1;
-        //         }
-        //     }   
-        // });
-        /**/
-        //chart1.update();
+        chart1.update();
     }
 }
 
