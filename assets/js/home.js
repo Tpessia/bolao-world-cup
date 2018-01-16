@@ -225,7 +225,13 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        chart1.update();
+
+        scrollFire('#rankList', function () {
+            chart1.update();
+            scroll[id] ^= 1;
+        }, 1);
+
+        
     }
 }
 
