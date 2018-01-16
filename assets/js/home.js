@@ -225,7 +225,7 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        scrollFireCharts("#myChart", function() {chart1.update();}, 1);
+        // scrollFireCharts("#myChart", function() {chart1.update();}, 1);
         // chart1.update();
     }
 }
@@ -288,7 +288,7 @@ charts2 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart2.data.datasets[datasetIndex].data = dataArr;
         chart2.data.labels = labelsArr;
-        scrollFireCharts("#myChart2", function() {chart2.update();}, 2);
+        // scrollFireCharts("#myChart2", function() {chart2.update();}, 2);
         // chart2.update();
     }
 }
@@ -341,7 +341,7 @@ charts3 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart3.data.datasets[datasetIndex].data = dataArr;
         chart3.data.labels = labelsArr;
-        scrollFireCharts("#myChart3", function() {chart3.update();}, 3);
+        // scrollFireCharts("#myChart3", function() {chart3.update();}, 3);
         // chart3.update();
     }
 }
