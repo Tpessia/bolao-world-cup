@@ -452,6 +452,7 @@ function scrolls() {
     }, 2);
 }
 
+scrollChart = [];
 function scrollFireCharts(selector, foo, id) {
     scrollChart[id] = 0;
 
