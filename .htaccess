@@ -5,7 +5,7 @@ Header unset ETag
  FileETag None
 <IfModule mod_expires.c>
 ExpiresActive on
-ExpiresDefault "access plus 1 month"
+ExpiresDefault "access plus 15 days"
 ExpiresByType text/cache-manifest "access plus 0 seconds"
 # Html
 ExpiresByType text/html "access plus 0 seconds"
@@ -19,14 +19,14 @@ ExpiresByType application/atom+xml "access plus 1 hour"
 # Favicon
 ExpiresByType image/x-icon "access plus 1 week"
 # Media: images, video, audio
-ExpiresByType image/gif "access plus 1 month"
-ExpiresByType image/png "access plus 1 month"
-ExpiresByType image/jpg "access plus 1 month"
-ExpiresByType image/jpeg "access plus 1 month"
-ExpiresByType video/ogg "access plus 1 month"
-ExpiresByType audio/ogg "access plus 1 month"
-ExpiresByType video/mp4 "access plus 1 month"
-ExpiresByType video/webm "access plus 1 month"
+ExpiresByType image/gif "access plus 15 days"
+ExpiresByType image/png "access plus 15 days"
+ExpiresByType image/jpg "access plus 15 days"
+ExpiresByType image/jpeg "access plus 15 days"
+ExpiresByType video/ogg "access plus 15 days"
+ExpiresByType audio/ogg "access plus 15 days"
+ExpiresByType video/mp4 "access plus 15 days"
+ExpiresByType video/webm "access plus 15 days"
 # HTC files
 ExpiresByType text/x-component "access plus 1 month"
 # Webfonts
@@ -36,9 +36,9 @@ ExpiresByType application/x-font-woff "access plus 1 month"
 ExpiresByType image/svg+xml "access plus 1 month"
 ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
 # CSS / JS
-ExpiresByType text/css "access plus 1 year"
-ExpiresByType application/javascript "access plus 1 year"
-ExpiresByType application/x-javascript "access plus 1 year"
+ExpiresByType text/css "access plus 1 day"
+ExpiresByType application/javascript "access plus 1 day"
+ExpiresByType application/x-javascript "access plus 1 day"
 </IfModule>
 #Força o IE a sempre carregar utilizando a última versão disponível
 <IfModule mod_headers.c>
