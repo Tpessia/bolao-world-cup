@@ -447,6 +447,9 @@ main.container {
           margin-right: 5px;
           font-weight: 500; }
 
+#modal2 {
+  height: 30%; }
+
 @media screen and (max-width: 992px) {
   .offline-ui {
     top: auto;
