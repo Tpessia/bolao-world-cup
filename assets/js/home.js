@@ -234,7 +234,7 @@ charts1 = {
                 wS = $(window).scrollTop();
 
             if (scroll[id] == 0) { //só roda uma vez
-                if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
+                if (wS < sT + sH) { //trigger quando o ranking não está acima da visão
                     chart1.update();
                     scroll[3] = 1;
                 }
