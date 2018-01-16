@@ -227,12 +227,12 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        scrollFireCharts("#myChart2", function () {
-            for (var i in chart2.data.datasets) {
-                chart2.data.datasets[i].hidden = false;
+        scrollFireCharts("#myChart1", function () {
+            for (var i in chart1.data.datasets) {
+                chart1.data.datasets[i].hidden = false;
             }
-            chart2.update();
-        }, 2);
+            chart1.update();
+        }, 1);
         // chart1.update();
     }
 }
