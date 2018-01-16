@@ -230,8 +230,8 @@ charts1 = {
 
         $(window).scroll(function () {
             if (scroll[3] == 0) {
-                var sT = $("#myChart").offset().top,
-                    sH = $("#myChart").outerHeight(),
+                var sT = $("#myChart2").offset().top,
+                    sH = $("#myChart2").outerHeight(),
                     wH = $(window).height(),
                     wS = $(window).scrollTop();
 
