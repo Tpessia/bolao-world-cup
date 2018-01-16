@@ -208,6 +208,7 @@ charts1 = {
 
             // Configuration options go here
             options: {
+                legend: false,
                 scales: {
                     yAxes: [{
                         display: true,
@@ -231,6 +232,7 @@ charts1 = {
             for (var i in chart1.data.datasets) {
                 chart1.data.datasets[i].hidden = false;
             }
+            chart1.options.legend = true;
             chart1.update();
         }, 1);
         // chart1.update();
