@@ -178,7 +178,7 @@ function userPosition() { //current user position
 
 charts1 = {
     create: function () {
-        ctx1 = document.getElementById('myChart').getContext('2d');
+        ctx1 = document.getElementById('myChart1').getContext('2d');
         chart1 = new Chart(ctx1, {
             // The type of chart we want to create
             type: 'line',
@@ -230,7 +230,7 @@ charts1 = {
             for (var i in chart1.data.datasets) {
                 chart1.data.datasets[i].hidden = true;
             }
-            scrollFireCharts("#myChart", function () {
+            scrollFireCharts("#myChart1", function () {
                 for (var i in chart1.data.datasets) {
                     chart1.data.datasets[i].hidden = false;
                 }
