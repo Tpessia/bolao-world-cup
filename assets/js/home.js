@@ -192,6 +192,7 @@ charts1 = {
                         label: "Pontuação Média",
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderColor: 'rgb(0,0,0)',
+                        hidden: true,
                         // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
                     },
 
@@ -199,6 +200,7 @@ charts1 = {
                         label: "Minha Pontuação",
                         backgroundColor: 'rgba(255, 171, 64, 0.7)',
                         borderColor: 'rgb(255, 171, 64)',
+                        hidden: true,
                         // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
                     }
                 ]
@@ -225,7 +227,13 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        chart1.update();
+        scrollFireCharts("#myChart", function () {
+            for (var i in chart1.data.datasets) {
+                chart1.data.datasets[i].hidden = false;
+            }
+            chart1.update();
+        }, 1);
+        // chart1.update();
     }
 }
 
@@ -257,6 +265,7 @@ charts2 = {
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(0,0,0,0)',
                         borderColor: '#25365d',
+                        hidden: true,
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
                 ]
@@ -287,7 +296,13 @@ charts2 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart2.data.datasets[datasetIndex].data = dataArr;
         chart2.data.labels = labelsArr;
-        chart2.update();
+        scrollFireCharts("#myChart2", function () {
+            for (var i in chart2.data.datasets) {
+                chart2.data.datasets[i].hidden = false;
+            }
+            chart2.update();
+        }, 2);
+        // chart2.update();
     }
 }
 
@@ -308,6 +323,7 @@ charts3 = {
                         label: "Primeiros Colocados",
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(11,21,43,0.9)',
+                        hidden: true,
                         // borderColor: '#25365d',
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
@@ -339,7 +355,13 @@ charts3 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart3.data.datasets[datasetIndex].data = dataArr;
         chart3.data.labels = labelsArr;
-        chart3.update();
+        scrollFireCharts("#myChart3", function () {
+            for (var i in chart3.data.datasets) {
+                chart3.data.datasets[i].hidden = false;
+            }            
+            chart3.update();
+        }, 3);
+        // chart3.update();
     }
 }
 
@@ -447,6 +469,25 @@ function scrolls() {
     scrollFire('#rankContent>div:first-child', function () {
         $('#first').toggleClass('transform');
     }, 2);
+}
+
+scrollChart = [];
+function scrollFireCharts(selector, foo, id) {
+    scrollChart[id] = 0;
+
+    $(window).scroll(function () {
+        if (scrollChart[id] == 0) {
+            var sT = $(selector).offset().top,
+                sH = $(selector).outerHeight(),
+                wH = $(window).height(),
+                wS = $(window).scrollTop();
+
+            if (wS + wH > sT + sH) { //trigger quando o ranking volta a estar visível
+                foo();
+                scrollChart[id] = 1;
+            }
+        }
+    });
 }
 
 
