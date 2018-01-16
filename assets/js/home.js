@@ -482,7 +482,7 @@ function scrollFireCharts(selector, foo, id) {
                 wH = $(window).height(),
                 wS = $(window).scrollTop();
 
-            if (wS + wH > sT + sH) { //trigger quando o ranking volta a estar visível
+            if (wS + wH + window.innerHeight * 0.3 > sT + sH) {
                 foo();
                 scrollChart[id] = 1;
             }
