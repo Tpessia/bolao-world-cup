@@ -225,21 +225,7 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-
-        scroll[3] = 0;
-        $(window).scroll(function () {
-            var sT = $('#rankList').offset().top,
-                sH = $('#rankList').outerHeight(),
-                wH = $(window).height(),
-                wS = $(window).scrollTop();
-
-            if (scroll[id] == 0) { //só roda uma vez
-                if (wS < sT + sH) { //trigger quando o ranking não está acima da visão
-                    chart1.update();
-                    scroll[3] = 1;
-                }
-            }
-        });
+        chart1.update();
     }
 }
 
