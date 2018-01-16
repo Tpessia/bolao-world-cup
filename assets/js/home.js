@@ -74,11 +74,11 @@ function login() {
 
         //validação
         
-        user.name = lower($("#name").val());
+        user.name = $("#name").val();
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
-            if (user.name == lower(players[i].name)) { //verifica se usuário é válido
+            if (user.name == players[i].name) { //verifica se usuário é válido
                 user.name = players[i].name;
                 user.page = players[i].page;
 
