@@ -228,7 +228,7 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        scrollFireCharts("#myChart1", function () {
+        scrollFireCharts("#myChart", function () {
             for (var i in chart1.data.datasets) {
                 chart1.data.datasets[i].hidden = false;
             }
