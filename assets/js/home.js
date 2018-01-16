@@ -70,7 +70,7 @@ function login() {
     });
 
     function cadastrar() {
-        user = { name: "", pontuacao: [], colocacao: [], date: [] };
+        user = { name: "", page: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
         
@@ -80,7 +80,8 @@ function login() {
         for (i in players) { //players[i].name and players[i].page
             if (user.name == lower(players[i].name)) { //verifica se usuário é válido
                 user.name = players[i].name;
-                // $("body").addClass("loading");
+                user.page = players[i].page;
+
                 $(".chartLoading").addClass("active");
                 $("a.login").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //prevent new logins while ajax is running
                 break;
@@ -569,8 +570,6 @@ function playersArray() {
         }
         j++;
     }
-
-
 }
 
 function getChartData() {
@@ -579,7 +578,7 @@ function getChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "_")).replace(/ /g, "_"),
+        url: "assets/php/ranking-select.php?username=" + lower(lower(user.name).replace(/ /g, "_")).replace(/ /g, "_") + user.page,
         type: "GET",
         success: function (dataDB) {
             try {

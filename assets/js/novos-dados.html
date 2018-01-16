@@ -66,6 +66,23 @@
             }
         }
 
+        function playersArray() {
+            players = [];
+
+            j = 0;
+            for (i in table.page1) {
+                if (j > 1) {
+                    pageVar = table.page1[i][3]; //sheet format (Página)
+                    nameVar = table.page1[i][4]; //sheet format (Nome)
+                    players.push({
+                        page: pageVar,
+                        name: nameVar
+                    });
+                }
+                j++;
+            }
+        }
+
         function rankCreate() { //create ranking element
 
             ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
@@ -75,6 +92,12 @@
             for (i in table.page1) { //cria array do ranking
                 if (j > 1) {
                         ranking.push({ name: table.page1[i][1], pontuacao: table.page1[i][2] });
+
+                        for (k in players) { //player page passed to ranking array
+                            if (ranking[j - 2].name == players[k].name) {
+                                ranking[j - 2].page = players[k].page;
+                            }
+                        }
                     }
                 j++;
             }
@@ -96,7 +119,7 @@
 
             total = 0;
             for (i in ranking) {
-                ranking[i].name = lower(lower(ranking[i].name));
+                ranking[i].name = lower(lower(ranking[i].name)) + ranking[i].page;
 
                 total += parseInt(ranking[i].pontuacao); 
             }
