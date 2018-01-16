@@ -229,7 +229,7 @@ charts1 = {
         scrollFire('#rankList', function () {
             chart1.update();
             scroll[id] ^= 1;
-        }, 1);
+        }, 3);
 
         
     }
