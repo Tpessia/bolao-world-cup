@@ -482,7 +482,7 @@ function scrollFireCharts(selector, foo, id) {
                 wH = $(window).height(),
                 wS = $(window).scrollTop();
 
-            if (wS + wH + window.innerHeight * ((window.innerWidth > 900) ? 0.15 : 0.3) > sT + sH) {
+            if (wS + wH + window.innerHeight * ((window.innerWidth > 900) ? 0.15 : 0.4) > sT + sH) {
                 foo();
                 scrollChart[id] = 1;
             }
