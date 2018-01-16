@@ -330,7 +330,7 @@ charts3 = {
                 ],
                 datasets: [
                     {
-                        label: "Primeiros Colocados",
+                        label: "Primeiro Colocado",
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(11,21,43,0.9)',
                         //chart animation
