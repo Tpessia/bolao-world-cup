@@ -449,6 +449,9 @@ main.container {
 
 #modal2 {
   height: 30%; }
+  #modal2 p {
+    text-align: justify;
+    overflow-wrap: break-word; }
 
 @media screen and (max-width: 992px) {
   .offline-ui {

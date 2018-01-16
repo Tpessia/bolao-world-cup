@@ -571,6 +571,11 @@ main.container {
 
 #modal2 {
     height: 30%;
+
+    p {
+        text-align: justify;
+        overflow-wrap: break-word;
+    }
 }
 
 .offline-ui {
