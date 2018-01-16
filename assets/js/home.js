@@ -192,9 +192,6 @@ charts1 = {
                         label: "Pontuação Média",
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderColor: 'rgb(0,0,0)',
-                        //chart animation
-                        hidden: true,
-                        //*chart animation
                         // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
                     },
 
@@ -202,9 +199,6 @@ charts1 = {
                         label: "Minha Pontuação",
                         backgroundColor: 'rgba(255, 171, 64, 0.7)',
                         borderColor: 'rgb(255, 171, 64)',
-                        //chart animation
-                        hidden: true,
-                        //*chart animation
                         // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
                     }
                 ]
@@ -233,6 +227,9 @@ charts1 = {
         chart1.data.labels = labelsArr;
         //chart animation
         if (typeof scrollChart[1] === "undefined") {
+            for (var i in chart1.data.datasets) {
+                chart1.data.datasets[i].hidden = true;
+            }
             scrollFireCharts("#myChart", function () {
                 for (var i in chart1.data.datasets) {
                     chart1.data.datasets[i].hidden = false;
@@ -276,9 +273,6 @@ charts2 = {
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(0,0,0,0)',
                         borderColor: '#25365d',
-                        //chart animation
-                        hidden: true,
-                        //*chart animation
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
                 ]
@@ -312,6 +306,9 @@ charts2 = {
         //chart animation
         
         if (typeof scrollChart[2] === "undefined") {
+            for (var i in chart2.data.datasets) {
+                chart2.data.datasets[i].hidden = true;
+            }
             scrollFireCharts("#myChart2", function () {
                 for (var i in chart2.data.datasets) {
                     chart2.data.datasets[i].hidden = false;
@@ -343,9 +340,6 @@ charts3 = {
                         label: "Primeiro Colocado",
                         // backgroundColor: '#25365d66',
                         backgroundColor: 'rgba(11,21,43,0.9)',
-                        //chart animation
-                        hidden: true,
-                        //*chart animation
                         // borderColor: '#25365d',
                         // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
                     }
@@ -379,6 +373,9 @@ charts3 = {
         chart3.data.labels = labelsArr;
         //chart animation
         if (typeof scrollChart[3] === "undefined") {
+            for (var i in chart3.data.datasets) {
+                chart3.data.datasets[i].hidden = true;
+            }
             scrollFireCharts("#myChart3", function () {
                 for (var i in chart3.data.datasets) {
                     chart3.data.datasets[i].hidden = false;
