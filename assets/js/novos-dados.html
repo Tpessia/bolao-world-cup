@@ -83,6 +83,8 @@
             }
         }
 
+        playersArray();
+
         function rankCreate() { //create ranking element
 
             ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
@@ -119,7 +121,7 @@
 
             total = 0;
             for (i in ranking) {
-                ranking[i].name = lower(lower(ranking[i].name)) + ranking[i].page;
+                ranking[i].name = lower(lower(ranking[i].name)) + "_" + ranking[i].page;
 
                 total += parseInt(ranking[i].pontuacao); 
             }
