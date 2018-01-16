@@ -225,7 +225,8 @@ charts1 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
-        chart1.update();
+        scrollFireCharts("#myChart", chart1.update(), 1);
+        // chart1.update();
     }
 }
 
@@ -287,7 +288,8 @@ charts2 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart2.data.datasets[datasetIndex].data = dataArr;
         chart2.data.labels = labelsArr;
-        chart2.update();
+        scrollFireCharts("#myChart2", chart2.update(), 2);
+        // chart2.update();
     }
 }
 
@@ -339,7 +341,8 @@ charts3 = {
     change: function (datasetIndex, dataArr, labelsArr) {
         chart3.data.datasets[datasetIndex].data = dataArr;
         chart3.data.labels = labelsArr;
-        chart3.update();
+        scrollFireCharts("#myChart3", chart3.update(), 3);
+        // chart3.update();
     }
 }
 
@@ -447,6 +450,24 @@ function scrolls() {
     scrollFire('#rankContent>div:first-child', function () {
         $('#first').toggleClass('transform');
     }, 2);
+}
+
+function scrollFireCharts(selector, foo, id) {
+    scrollChart[id] = 0;
+
+    $(window).scroll(function () {
+        if (scrollChart[id] == 0) {
+            var sT = $(selector).offset().top,
+                sH = $(selector).outerHeight(),
+                wH = $(window).height(),
+                wS = $(window).scrollTop();
+
+            if (wS + wH > sT + sH) { //trigger quando o ranking volta a estar visível
+                foo();
+                scrollChart[id] = 1;
+            }
+        }
+    });
 }
 
 
