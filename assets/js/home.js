@@ -232,7 +232,7 @@ charts1 = {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
         //chart animation
-        if (scrollChart[1] === "undefined") {
+        if (typeof scrollChart[1] === "undefined") {
             scrollFireCharts("#myChart", function () {
                 for (var i in chart1.data.datasets) {
                     chart1.data.datasets[i].hidden = false;
@@ -311,7 +311,7 @@ charts2 = {
         chart2.data.labels = labelsArr;
         //chart animation
         
-        if (scrollChart[2] === "undefined") {
+        if (typeof scrollChart[2] === "undefined") {
             scrollFireCharts("#myChart2", function () {
                 for (var i in chart2.data.datasets) {
                     chart2.data.datasets[i].hidden = false;
@@ -378,7 +378,7 @@ charts3 = {
         chart3.data.datasets[datasetIndex].data = dataArr;
         chart3.data.labels = labelsArr;
         //chart animation
-        if (scrollChart[3] === "undefined") {
+        if (typeof scrollChart[3] === "undefined") {
             scrollFireCharts("#myChart3", function () {
                 for (var i in chart3.data.datasets) {
                     chart3.data.datasets[i].hidden = false;
