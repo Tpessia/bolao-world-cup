@@ -232,12 +232,17 @@ charts1 = {
         chart1.data.datasets[datasetIndex].data = dataArr;
         chart1.data.labels = labelsArr;
         //chart animation
-        scrollFireCharts("#myChart", function () {
-            for (var i in chart1.data.datasets) {
-                chart1.data.datasets[i].hidden = false;
-            }
+        if (scrollChart[1] === "undefined") {
+            scrollFireCharts("#myChart", function () {
+                for (var i in chart1.data.datasets) {
+                    chart1.data.datasets[i].hidden = false;
+                }
+                chart1.update();
+            }, 1);
+        }
+        else {
             chart1.update();
-        }, 1);
+        }
         //*chart animation
         // chart1.update();
     }
@@ -305,12 +310,17 @@ charts2 = {
         chart2.data.datasets[datasetIndex].data = dataArr;
         chart2.data.labels = labelsArr;
         //chart animation
-        scrollFireCharts("#myChart2", function () {
-            for (var i in chart2.data.datasets) {
-                chart2.data.datasets[i].hidden = false;
-            }
+        
+        if (scrollChart[2] === "undefined") {
+            scrollFireCharts("#myChart2", function () {
+                for (var i in chart2.data.datasets) {
+                    chart2.data.datasets[i].hidden = false;
+                }
+                chart2.update();
+            }, 2);
+        } else {
             chart2.update();
-        }, 2);
+        }
         //*chart animation
         // chart2.update();
     }
@@ -368,12 +378,16 @@ charts3 = {
         chart3.data.datasets[datasetIndex].data = dataArr;
         chart3.data.labels = labelsArr;
         //chart animation
-        scrollFireCharts("#myChart3", function () {
-            for (var i in chart3.data.datasets) {
-                chart3.data.datasets[i].hidden = false;
-            }            
+        if (scrollChart[3] === "undefined") {
+            scrollFireCharts("#myChart3", function () {
+                for (var i in chart3.data.datasets) {
+                    chart3.data.datasets[i].hidden = false;
+                }
+                chart3.update();
+            }, 3);
+        } else {
             chart3.update();
-        }, 3);
+        }
         //*chart animation
         // chart3.update();
     }
