@@ -17,7 +17,7 @@
     CONCAT('DELETE FROM ',TABLE_NAME,' ORDER BY ID DESC LIMIT 1;') comd
     FROM information_schema.COLUMNS 
     WHERE TABLE_SCHEMA = 'u662107342_db'
-    AND COLUMN_NAME ='column1';
+    AND ORDINAL_POSITION = 1;
 
 
     

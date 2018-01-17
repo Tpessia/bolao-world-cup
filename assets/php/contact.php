@@ -11,7 +11,7 @@
 
         date_default_timezone_set('America/Sao_Paulo');
         
-        $dest = "thiago@pessia.xyz";
+        $dest = "contato@bolaodomauricio.xyz";
         $subject = $_POST["assunto"];
         $txt = $_POST["mensagem"] . "<br><p>Enviada em: " . date('Y-m-d : H-i-s') . " </p>";
         $headers = "From: " . $_POST["email"] . "\r\n" . "Content-Type: text/html; charset=UTF-8";
