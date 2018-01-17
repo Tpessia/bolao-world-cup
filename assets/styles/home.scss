@@ -64,6 +64,21 @@ body {
                 }
             }
 
+            #contato {
+                color: rgba(255, 255, 255, 0.85);
+                text-align : center;
+                font-size: 0.85rem;
+                margin: 20px 0;
+
+                a {
+                    color: rgba(255, 255, 255, 0.85);
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
             .close {
                 display: none;
                 color: white;

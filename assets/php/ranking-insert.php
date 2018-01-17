@@ -61,9 +61,11 @@
 
         // $name = $value->name;
 
-        if(preg_match('/--/', $value->name)){
-            die('Invalid Name (ranking): ' . $value->name);
-        }
+        // if(preg_match('/--/', $value->name)){
+        //     die('Invalid Name (ranking): ' . $value->name);
+        // }
+
+        $value->name = mysqli_real_escape_string($conn, $value->name); //validate
 
         // if(!preg_match('/(?=\^.{0,40}\$)\^[a-zA-Z]\+\s[a-zA-Z]\+\$/', $value->name)){
         //     die('Invalid Name (ranking): ' . $value->name);

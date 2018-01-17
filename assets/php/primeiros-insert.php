@@ -2,11 +2,15 @@
 
 //validate
 
-$primeiro = $_GET["primeiro"];
+date_default_timezone_set('America/Sao_Paulo');
 
-if(preg_match('/--/', $primeiro)){
-    die("Invalid Name (primeiro): " . $primeiro);
-}
+$date = date("Y-m-d");
+
+// $primeiro = $_GET["primeiro"];
+
+// if(preg_match('/--/', $primeiro)){
+//     die("Invalid Name (primeiro): " . $primeiro);
+// }
 
 // if(!preg_match('/(?=^.{0,40}$)^[a-zA-Z]+\s[a-zA-Z]+$/', $primeiro)){
 //     die("Invalid Name (primeiro): " . $primeiro);
@@ -34,11 +38,9 @@ die("Connection failed: " . mysqli_connect_error());
 
 }
 
-date_default_timezone_set('America/Sao_Paulo');
-
 //create
 
-$date = date("Y-m-d");
+$primeiro = mysqli_real_escape_string($conn, $_GET["primeiro"]); //validate
 
 $sql = "
 
