@@ -70,4 +70,4 @@ Options -Indexes
 
 #block php unless from post
 RewriteCond %{REQUEST_METHOD} !^POST$
-RewriteRule ^assets/php/contact.php$ - [NC,R=404,L]
+RewriteRule ^assets/php/contact.php$ - [NC,R=403,L]
