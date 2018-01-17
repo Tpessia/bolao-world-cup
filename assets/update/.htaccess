@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "Inserir Novos Dados"
-AuthUserFile /assets/update/.htpasswd
-Require valid-user
