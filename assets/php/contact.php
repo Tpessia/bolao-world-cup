@@ -4,6 +4,7 @@
 </head>
 <body>
     <?php
+        header("Content-type: text/html; charset=utf-8");
         error_reporting(-1);
         ini_set('display_errors', 'On');
         set_error_handler("var_dump");
@@ -24,7 +25,7 @@
             echo '<p>Something went wrong, Please try again!</p>'; 
         }
         
-        echo "<p>" . date('Y-m-d : H-i-s') . " " . $_POST["mensagem"] . " " . $_POST["assunto"] . " " . $_POST["email"] . "</p>";
+        echo "<p>" . date('Y-m-d H:i:s') . " " . $_POST["mensagem"] . " " . $_POST["assunto"] . " " . $_POST["email"] . "</p>";
     ?>
 </body>
 </html>
