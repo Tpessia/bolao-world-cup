@@ -170,7 +170,7 @@
                 url: "assets/php/contact.php",
                 data: myData,
                 success: function (data) {
-                    alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
+                    // alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
                     $("#email, #mensagem, #assunto").val("");
                     $('#myModal').modal('open');
                 },
