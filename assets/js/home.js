@@ -572,7 +572,9 @@ function onlineGet(pages, ID) { //request spreadsheet page data
     })
 }
 
-function tableCreate(sheetPage, nullify = false) { //create an array based on the spreadsheet page
+function tableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create an array based on the spreadsheet page
+    nullify = typeof nullify === "undefined" ? false : nullify;
+
     if (typeof table == "undefined") {
         table = {};
     }
