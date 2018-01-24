@@ -1,3 +1,10 @@
+//Debug alert
+
+window.onerror = function (msg, url, linenumber) {
+    alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+    return true;
+}
+
 //STOP LOADING ANIM
 
 window.onload = function() { //window load
@@ -304,7 +311,6 @@ charts2 = {
         chart2.data.datasets[datasetIndex].data = dataArr;
         chart2.data.labels = labelsArr;
         //chart animation
-        
         if (typeof scrollChart[2] === "undefined") {
             for (var i in chart2.data.datasets) {
                 chart2.data.datasets[i].hidden = true;
@@ -434,20 +440,26 @@ function bindMain() {
 }
 
 function highlight() { //current user highlight on ranking
-    for (var n in ranking) {
-        var userId = parseInt(n) + 1;
-        var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
-        var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
+    // for (var n in ranking) {
+    //     var userId = parseInt(n) + 1;
+    //     var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
+    //     var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
 
-        if (ranking[n].name == user.name) {
-            card.addClass("colorB");
-            sideCard.addClass("highlight");
-        }
-        else if (card.hasClass("colorB")) {
-            card.removeClass("colorB");
-            sideCard.removeClass("highlight");
-        }
-    }
+    //     if (ranking[n].name == user.name) {
+    //         card.addClass("colorB");
+    //         sideCard.addClass("highlight");
+    //     }
+    //     else if (card.hasClass("colorB")) {
+    //         card.removeClass("colorB");
+    //         sideCard.removeClass("highlight");
+    //     }
+    // }
+
+    $('.rank div.col.colorB').removeClass("colorB");
+    $('#sideRank .col.highlight').removeClass("highlight");
+
+    $('.rank div.col:nth-of-type(' + user.currentPosition + ')>.card').addClass("colorB");
+    $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
 }
 
 function showMoreRank() {
