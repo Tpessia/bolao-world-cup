@@ -350,9 +350,6 @@ charts2 = {
                             min: 1, // minimum will be 0, unless there is a lower value.
                             suggestedMax: ranking.length,
                             reverse: true,
-                            callback: function (value) {
-                                return Number(value).toFixed(0);
-                            }
                         },
                         scaleLabel: {
                             display: true,
@@ -418,11 +415,8 @@ charts3 = {
                         display: true,
                         ticks: {
                             suggestedMin: 0, // minimum will be 0, unless there is a lower value.
-                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0,
+                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
                             //reverse: true,
-                            callback: function (value) {
-                                return Number(value).toFixed(0);
-                            }
                         },
                         scaleLabel: {
                             display: true,
