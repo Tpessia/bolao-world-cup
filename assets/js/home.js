@@ -209,18 +209,22 @@ function userPosition() { //current user position
 }
 
 function resizeArray(arr, size) {
-    var num = arr.length / size; //mostra só 20
-    var num2 = num - Math.floor(num);
-    num2 = (num2 == 0 ? 1 : 1 / num2); //evita Infinity
-    num = Math.round(num * num2);
-    var temp = [];
-    for (var i in arr) {
-        console.log(i + " " + num);
-        if (i % num != 0) {
-            temp.push(arr[i]);
+    if (arr.length > size) {
+        var num = arr.length / size; //mostra só 20
+        var num2 = num - Math.floor(num);
+        num2 = (num2 == 0 ? 1 : 1 / num2); //evita Infinity
+        num = Math.round(num * num2);
+        var temp = [];
+        for (var i in arr) {
+            console.log(i + " " + num);
+            if (i % num != 0) {
+                temp.push(arr[i]);
+            }
         }
+        return temp;
     }
-    return temp;
+
+    return arr;
 }
 
 function resizeChartArrays(size) {
