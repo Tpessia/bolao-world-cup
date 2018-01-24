@@ -216,8 +216,8 @@ function resizeArray(arr, size) {
         num = Math.round(num * num2);
         var temp = [];
         for (var i in arr) {
-            console.log(i + " " + num);
             if (i % num != 0) {
+                console.log("Dentro:" + i + " " + num + " " + arr[i]);
                 temp.push(arr[i]);
             }
         }
