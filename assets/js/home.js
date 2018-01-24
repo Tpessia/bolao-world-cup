@@ -25,7 +25,7 @@ if (typeof localStorage === 'object') {
         Storage.prototype.setItem = function () { };
         alert('O seu navegador não suporta o armazenamento local de informações. No Safari, a causa mais comum é usar "Modo de Navegação Privada". Tente entrar novamente com outro navegador ou entre em contato caso o problema persista.');
         window.stop();
-        $("body").html("");
+        $("body").html("Erro! Aplicação foi parada devido à falta de recursos para seu funcionamento. Tente entrar novamente com outro navegador ou <a href='/contato.html'>entre em contato</a> caso o problema persista.");
         throw new Error("Aplicação parada devido à falta de recursos essenciais!");
     }
 }
