@@ -84,7 +84,7 @@ function login() {
 
         welcome();
         highlight();
-        prepareOffline();
+        // prepareOffline();
     }
 
     //submit cadastro
