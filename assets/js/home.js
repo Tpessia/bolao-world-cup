@@ -209,11 +209,14 @@ function userPosition() { //current user position
 }
 
 function resizeArray(arr, size) {
-    var num = Math.ceil(arr.length / size); //mostra só 20
+    var num = arr.length / size; //mostra só 20
+    var num2 = num = num - Math.floor(num);
+    num2 = 1 / num2;
+    num = num * num2;
     var temp = [];
     for (var i in arr) {
         console.log(i + " " + num);
-        if (i % num == 0) {
+        if (i % num != 0) {
             temp.push(arr[i]);
         }
     }
