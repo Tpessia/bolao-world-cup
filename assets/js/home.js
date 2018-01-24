@@ -210,7 +210,7 @@ function userPosition() { //current user position
 
 function resizeArray(arr, size) {
     var num = arr.length / size; //mostra só 20
-    var num2 = num = num - Math.floor(num);
+    var num2 = num - Math.floor(num);
     num2 = 1 / num2;
     num = num * num2;
     var temp = [];
