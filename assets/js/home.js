@@ -221,11 +221,11 @@ function resizeArray(arr, size) {
 }
 
 function resizeChartArrays(size) {
-    // if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = resizeArray(media.mediaArr, size);}
-    // if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = resizeArray(media.dateArr, size);}
-    // if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = resizeArray(user.pontuacao, size);}
-    // if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = resizeArray(user.date, size);}
-    // if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = resizeArray(user.colocacao, size);}
+    if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = resizeArray(media.mediaArr, size);}
+    if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = resizeArray(media.dateArr, size);}
+    if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = resizeArray(user.pontuacao, size);}
+    if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = resizeArray(user.date, size);}
+    if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = resizeArray(user.colocacao, size);}
     // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = resizeArray(primeiros.ocorrencias, size);}
     // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = resizeArray(primeiros.nome, size);}
 }
