@@ -49,8 +49,10 @@ Header unset X-UA-Compatible
 </IfModule>
 
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^www.bolaodomauricio.xyz$ [NC]
-RewriteRule ^(.*)$ http://www.bolaodomauricio.xyz/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} !=""
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{HTTPS} off
 # First rewrite to HTTPS:
@@ -61,6 +63,9 @@ RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # [NC] is a case-insensitive match
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^test.bolaodomauricio.xyz$
+RewriteRule ^ - [L]
 
 ErrorDocument 404 /assets/errors/404.html
 
