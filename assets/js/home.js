@@ -208,6 +208,28 @@ function userPosition() { //current user position
     }
 }
 
+function resizeArray(arr, size) {
+    var num = Math.ceil(arr.length / size); //mostra só 20
+    var temp = [];
+    for (var i in arr) {
+        console.log(i + " " + num);
+        if (i % num == 0) {
+            temp.push(arr[i]);
+        }
+    }
+    arr = temp;
+}
+
+function resizeChartArrays(size) {
+    if (typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { resizeArray(media.mediaArr, size);}
+    if (typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { resizeArray(media.dateArr, size);}
+    if (typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { resizeArray(user.pontuacao, size);}
+    if (typeof user.date !== "undefined" && user.date.length > 0) { resizeArray(user.date, size);}
+    if (typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { resizeArray(user.colocacao, size);}
+    if (typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { resizeArray(primeiros.ocorrencias, size);}
+    if (typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { resizeArray(primeiros.nome, size);}
+}
+
 charts1 = {
     create: function () {
         ctx1 = document.getElementById('myChart1').getContext('2d');
@@ -714,6 +736,8 @@ function getChartData() {
                 user.colocacao.push(chartData[i].colocacao);
             }
 
+            resizeChartArrays(20);
+
             charts1.change(1, user.pontuacao, user.date);
 
             charts2.change(0, user.colocacao, user.date);
@@ -753,6 +777,8 @@ function getMedias() {
                 media.dateArr.push(formatarData(date));
             }
 
+            resizeChartArrays(20);
+
             charts1.change(0, media.mediaArr, media.dateArr);
 
             localStorage.setItem("media", JSON.stringify(media));
@@ -781,6 +807,8 @@ function getPrimeiros() {
                 primeiros.nome.push(primeirosData[p].nome);
                 primeiros.ocorrencias.push(primeirosData[p].ocorrencia);
             }
+
+            resizeChartArrays(20);
 
             charts3.change(0, primeiros.ocorrencias, primeiros.nome);
 
@@ -915,6 +943,8 @@ function offlineGet() {
     charts2.create();
     charts3.create();
     
+    resizeChartArrays(20);
+
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
