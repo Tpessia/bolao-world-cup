@@ -889,7 +889,7 @@ function search(key) {
                                 $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
                             }
                             if (j == Object.keys(table[page]).length - 2) { //ultima fileira (pontuação final)
-                                table[page].dados.pontuacao = table[page][i][0];
+                                table[page].dados.pontuacao = table[page][i][1];
                                 pontuacao = table[page].dados.pontuacao;
 
                                 $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
