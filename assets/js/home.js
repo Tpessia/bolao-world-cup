@@ -509,10 +509,10 @@ function highlight() { //current user highlight on ranking
     //     }
     // }
 
-    $('.rank div.col .card.colorB').removeClass("colorB");
+    $('#rankContent div.col .card.colorB').removeClass("colorB");
     $('#sideRank .col .card.highlight').removeClass("highlight");
 
-    $('.rank div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorB");
+    $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorB");
     $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
 }
 
