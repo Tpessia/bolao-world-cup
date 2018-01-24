@@ -23,7 +23,8 @@ if (typeof localStorage === 'object') {
     } catch (e) {
         Storage.prototype._setItem = Storage.prototype.setItem;
         Storage.prototype.setItem = function () { };
-        $("body").html('O seu navegador não suporta o armazenamento local de informações. No Safari, a causa mais comum é usar "Modo de Navegação Privada". Tente entrar novamente com outro navegador ou <a href="/contato.html">entre em contato</a> caso o problema persista.')
+        alert('O seu navegador não suporta o armazenamento local de informações. No Safari, a causa mais comum é usar "Modo de Navegação Privada". Tente entrar novamente com outro navegador ou entre em contato caso o problema persista.');
+        $("body").html("");
         throw new Error("Aplicação parada devido à falta de recursos essenciais!");
     }
 }
@@ -465,7 +466,7 @@ function bindMain() {
 function highlight() { //current user highlight on ranking
     // for (var n in ranking) {
     //     var userId = parseInt(n) + 1;
-    //     var card = $('.rank div.col:nth-of-type(' + userId + ')>.card');
+    //     var card = $('.rank div.col:nth-of-type(' + userId + ') .card');
     //     var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
 
     //     if (ranking[n].name == user.name) {
@@ -478,10 +479,10 @@ function highlight() { //current user highlight on ranking
     //     }
     // }
 
-    $('.rank div.col.colorB').removeClass("colorB");
-    $('#sideRank .col.highlight').removeClass("highlight");
+    $('.rank div.col .card.colorB').removeClass("colorB");
+    $('#sideRank .col .card.highlight').removeClass("highlight");
 
-    $('.rank div.col:nth-of-type(' + user.currentPosition + ')>.card').addClass("colorB");
+    $('.rank div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorB");
     $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
 }
 
