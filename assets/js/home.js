@@ -84,7 +84,7 @@ function login() {
 
         welcome();
         highlight();
-        // prepareOffline();
+        // prepareOffline(); //test, parece que funcionou. O erro era o localStorage não atualizar a pontuação do usuario após atualização do db, isso ocorria por que chamavamos o prepareOffline antes do getChartData, entao os valores do usuário permaneciam como o antigo
     }
 
     //submit cadastro
@@ -271,7 +271,7 @@ charts1 = {
                     yAxes: [{
                         display: true,
                         ticks: {
-                            suggestedMin: 0 // minimum will be 0, unless there is a lower value.
+                            suggestedMin: 0, // minimum will be 0, unless there is a lower value.
                         },
                         scaleLabel: {
                             display: true,
@@ -350,6 +350,9 @@ charts2 = {
                             min: 1, // minimum will be 0, unless there is a lower value.
                             suggestedMax: ranking.length,
                             reverse: true,
+                            callback: function (value) {
+                                return Number(value).toFixed(0);
+                            }
                         },
                         scaleLabel: {
                             display: true,
@@ -415,8 +418,11 @@ charts3 = {
                         display: true,
                         ticks: {
                             suggestedMin: 0, // minimum will be 0, unless there is a lower value.
-                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
+                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0,
                             //reverse: true,
+                            callback: function (value) {
+                                return Number(value).toFixed(0);
+                            }
                         },
                         scaleLabel: {
                             display: true,
