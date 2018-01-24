@@ -226,8 +226,8 @@ function resizeChartArrays(size) {
     if (typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { resizeArray(user.pontuacao, size);}
     if (typeof user.date !== "undefined" && user.date.length > 0) { resizeArray(user.date, size);}
     if (typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { resizeArray(user.colocacao, size);}
-    if (typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { resizeArray(primeiros.ocorrencias, size);}
-    if (typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { resizeArray(primeiros.nome, size);}
+    // if (typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { resizeArray(primeiros.ocorrencias, size);}
+    // if (typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { resizeArray(primeiros.nome, size);}
 }
 
 charts1 = {
