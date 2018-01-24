@@ -1,8 +1,31 @@
 //Debug alert
 
-window.onerror = function (msg, url, linenumber) {
-    alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
-    return true;
+// window.onerror = function (msg, url, linenumber) {
+//     alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+//     return true;
+// }
+
+// isLocalStorageNameSupported = function () {
+//     var testKey = 'test', storage = window.sessionStorage;
+//     try {
+//         storage.setItem(testKey, '1');
+//         storage.removeItem(testKey);
+//         return true;
+//     } catch (error) {
+//         return false;
+//     }
+// }
+
+if (typeof localStorage === 'object') {
+    try {
+        localStorage.setItem('localStorage', 1);
+        localStorage.removeItem('localStorage');
+    } catch (e) {
+        Storage.prototype._setItem = Storage.prototype.setItem;
+        Storage.prototype.setItem = function () { };
+        alert('O seu navegador não suporta o armazenamento local de informações. No Safari, a causa mais comum é usar "Modo de Navegação Privada". Tente entrar novamente com outro navegador ou entre em contato caso o problema persista.');
+        throw new Error("Aplicação parada devido à falta de recursos essenciais!");
+    }
 }
 
 //STOP LOADING ANIM
