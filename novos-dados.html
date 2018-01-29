@@ -5,10 +5,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         $(function() {
-            newData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+            NewData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
         });
 
-        function newData(pages, ID) { //request spreadsheet page data
+        function NewData(pages, ID) { //request spreadsheet page data
             id = ID; //cria id global
             pages = pages.split(',');
 
@@ -17,7 +17,7 @@
                 var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
 
                 $.ajax({ //verifica se a url existe
-                        url: urlJSON,
+                    url: urlJSON,
                     dataType: 'html',
                     async: false,
                     timeout: 5000,
@@ -28,7 +28,7 @@
 
                         page = "page" + page; //cria a pageN
 
-                        arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                        Arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
                     },
                     error: function () {
                         alert("A conecção com o servidor foi interrompida, tente novamente!")
@@ -37,7 +37,7 @@
             })
         }
 
-        function arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
+        function Arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
             if (typeof table == "undefined") {table = {}; }
 
             table[sheetPage] = {};
@@ -66,7 +66,7 @@
             }
         }
 
-        function playersArray() {
+        function PlayersArray() {
             players = [];
 
             j = 0;
@@ -83,11 +83,11 @@
             }
         }
 
-        function rankCreate() { //create ranking element
+        function RankCreate() { //create ranking element
 
             $("body").html("Carregando...");
 
-            playersArray();
+            PlayersArray();
 
             ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
@@ -124,7 +124,7 @@
 
             total = 0;
             for (i in ranking) {
-                ranking[i].name = lower(ranking[i].name) + "_" + ranking[i].page;
+                ranking[i].name = LowerClean(ranking[i].name) + "_" + ranking[i].page;
 
                 total += parseInt(ranking[i].pontuacao); 
             }
@@ -148,7 +148,7 @@
             });
         }
 
-        function lower(str) {
+        function LowerClean(str) {
             var lower = str.toLowerCase();
             var upper = str.toUpperCase();
 
@@ -168,7 +168,7 @@
     <!-- <button id="clearLast">Limpar último conjunto de dados!</button> -->
     <script>
         $("#genData").on("click", function () {
-            rankCreate();
+            RankCreate();
         });
 
         $("#clearLast").on("click", function () {
