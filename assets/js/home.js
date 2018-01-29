@@ -460,7 +460,7 @@ function BindNetwork() { //search, close search, ver dados, side ver dados, atua
         nome = nome.split(" ")
         nome.shift()
         nome = nome.join(" ");
-        Search(nome,"card");
+        Search(nome);
     });
 
     $("#refresh").off("click").on("click", function () {
@@ -476,12 +476,12 @@ function BindMain() {
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         $("#searchVal").blur();
-        Search($('#searchVal').val(),"search"); //search on click Magnifying glass
+        Search($('#searchVal').val()); //search on click Magnifying glass
     });
 
     $("#searchVal").on("search", function () {
         $('#searchVal').blur();
-        Search($('#searchVal').val(),"search");
+        Search($('#searchVal').val());
     });
 
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
@@ -713,7 +713,7 @@ function GetChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + LowerClean(user.name) + "_" + user.page,
+        url: "assets/php/ranking-select.php?username=" + ValidadeDbInput(user.name) + "_" + user.page,
         type: "GET",
         success: function (dataDB) {
             try {
@@ -840,24 +840,10 @@ function FormatarData(data) {
 }
 
 
-function Search(key,type) {
-
-    if (type == "card") {
-        var pesquisa = key;
-    }
-    else if (type == "search") {
-        var pesquisa = LowerClean(key); //catch and format name
-    }
-    else {
-        throw "InvalidSearchFunctionParamType";
-    }
+function Search(key) {
 
     for (i in players) { //players[i].name and players[i].page
-        if (type == "card" && pesquisa == players[i].name) {
-            GetSearchedPage();
-            break;
-        }
-        if (type == "search" && pesquisa == LowerClean(players[i].name)) {
+        if (key == players[i].name) {
             GetSearchedPage();
             break;
         }
@@ -945,7 +931,7 @@ function Search(key,type) {
     }
 }
 
-function LowerClean(str) {
+function ValidadeDbInput(str) { //antigo lower()
     var lower = str.toLowerCase();
     var upper = str.toUpperCase();
 
@@ -955,9 +941,8 @@ function LowerClean(str) {
             res += str[i];
     }
 
-    return res/*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/.replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
+    return res /*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/ .replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
 }
-
 
 //OFFLINE FUNCTIONS
 
