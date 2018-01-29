@@ -455,7 +455,8 @@ main.container {
           font-weight: 500; }
 
 #modal2 {
-  height: 30%; }
+  height: 50vh;
+  top: 15%; }
   #modal2 p {
     text-align: justify;
     overflow-wrap: break-word; }
