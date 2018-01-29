@@ -47,12 +47,12 @@ $(function() { //document ready
     //Inicia como Offline ou Online
 
     if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
-        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
         $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
         $("#searchVal").prop('disabled', true);
-        offlineGet();
+        OfflineGet();
     }
 
     //offline/online events
@@ -64,27 +64,27 @@ $(function() { //document ready
     Offline.on("up", function () {
         $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
         $("#searchVal").prop('disabled', false);
-        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 
-    bindMain();
+    BindMain();
 });
 
 
 //LOGIN
 
 
-function login() {
+function Login() {
     //auto log in
 
     if (localStorage.getItem("user") !== null) { //usuário já salvo no local storage
         $("body").removeClass("login");
         user = JSON.parse(localStorage.getItem("user")); //receive user data from local storage
-        userPosition();
+        UserPosition();
 
-        welcome();
-        highlight();
-        // prepareOffline(); //test, parece que funcionou. O erro era o localStorage não atualizar a pontuação do usuario após atualização do db, isso ocorria por que chamavamos o prepareOffline antes do getChartData, entao os valores do usuário permaneciam como o antigo
+        Welcome();
+        Highlight();
+        // PrepareOffline(); //test, parece que funcionou. O erro era o localStorage não atualizar a pontuação do usuario após atualização do db, isso ocorria por que chamavamos o prepareOffline antes do GetChartData, entao os valores do usuário permaneciam como o antigo
     }
 
     //submit cadastro
@@ -98,10 +98,10 @@ function login() {
 
     $("#formLogin").off().on("submit", function (e) {
         e.preventDefault();
-        cadastrar();
+        Cadastrar();
     });
 
-    function cadastrar() {
+    function Cadastrar() {
         user = { name: "", page: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
@@ -125,23 +125,23 @@ function login() {
             playerCount++;
         }
 
-        userPosition();
+        UserPosition();
 
         //cadastro
 
         localStorage.setItem('user', JSON.stringify(user));
 
-        welcome();
+        Welcome();
 
         $("#name").val("");
         $("body").removeClass("login");
 
-        highlight();
+        Highlight();
 
-        getChartData();
+        GetChartData();
     }
 
-    function welcome() { //welcome name update
+    function Welcome() { //welcome name update
         $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name + "!"));
 
         $("#welcome div").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
@@ -162,7 +162,7 @@ function login() {
 //MAIN FUNCTIONS
 
 
-function rankCreate() { //create ranking element and object
+function RankCreate() { //create ranking element and object
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
 
@@ -199,7 +199,7 @@ function rankCreate() { //create ranking element and object
     $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
 }
 
-function userPosition() { //current user position
+function UserPosition() { //current user position
     for (var i in ranking) {
         if (ranking[i].name.match(user.name)) {
             user.currentPosition = parseInt(i) + 1;
@@ -208,7 +208,7 @@ function userPosition() { //current user position
     }
 }
 
-function resizeArray(arr, size) {
+function ResizeArray(arr, size) {
     if (arr.length > size) {
         var num = arr.length / size; //mostra só 20
         var num2 = num - Math.floor(num);
@@ -227,14 +227,14 @@ function resizeArray(arr, size) {
     return arr;
 }
 
-function resizeChartArrays(size) {
-    if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = resizeArray(media.mediaArr, size);}
-    if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = resizeArray(media.dateArr, size);}
-    if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = resizeArray(user.pontuacao, size);}
-    if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = resizeArray(user.date, size);}
-    if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = resizeArray(user.colocacao, size);}
-    // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = resizeArray(primeiros.ocorrencias, size);}
-    // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = resizeArray(primeiros.nome, size);}
+function ResizeChartArrays(size) {
+    if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = ResizeArray(media.mediaArr, size);}
+    if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = ResizeArray(media.dateArr, size);}
+    if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = ResizeArray(user.pontuacao, size);}
+    if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = ResizeArray(user.date, size);}
+    if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = ResizeArray(user.colocacao, size);}
+    // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = ResizeArray(primeiros.ocorrencias, size);}
+    // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = ResizeArray(primeiros.nome, size);}
 }
 
 charts1 = {
@@ -452,31 +452,36 @@ charts3 = {
 
 //events
 
-function bindNetwork() { //search, close search, ver dados, side ver dados, atualizar
+function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
 
 
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
-        nome = $(this).closest(".card").find(".card-title").html(); //modal
+        var nome = $(this).closest(".card").find(".card-title").html(); //modal
         nome = nome.split(" ")
         nome.shift()
         nome = nome.join(" ");
-        search(nome);
+        Search(nome,"card");
     });
 
     $("#refresh").off("click").on("click", function () {
         $(".chartLoading").addClass("active");
-        onlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 }
 
-function bindMain() {
+function BindMain() {
     $("#moreRank").on("click", function () {
-        showMoreRank();
+        ShowMoreRank();
     });
 
     $('.input-field input[type=search]~i:first-of-type').on("click", function () {
         $("#searchVal").blur();
-        search($('#searchVal').val()); //search on click Magnifying glass
+        Search($('#searchVal').val(),"search"); //search on click Magnifying glass
+    });
+
+    $("#searchVal").on("search", function () {
+        $('#searchVal').blur();
+        Search($('#searchVal').val(),"search");
     });
 
     $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
@@ -486,14 +491,9 @@ function bindMain() {
     $(".blockMobile .btn").on("click", function () {
         $(".blockMobile").removeClass("show");
     });
-
-    $("#searchVal").on("search", function() {
-        $('#searchVal').blur();
-        search($('#searchVal').val());
-    });
 }
 
-function highlight() { //current user highlight on ranking
+function Highlight() { //current user highlight on ranking
     // for (var n in ranking) {
     //     var userId = parseInt(n) + 1;
     //     var card = $('.rank div.col:nth-of-type(' + userId + ') .card');
@@ -516,7 +516,7 @@ function highlight() { //current user highlight on ranking
     $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
 }
 
-function showMoreRank() {
+function ShowMoreRank() {
     k += 6; //number of players shown on click (= k-1)
 
     for (i in ranking) {
@@ -529,7 +529,7 @@ function showMoreRank() {
     }
 }
 
-function scrollFire(selector, foo, id) {
+function ScrollFire(selector, foo, id) {
     scroll[id] = 0;
     $(window).scroll(function () {
         var sT = $(selector).offset().top,
@@ -552,12 +552,12 @@ function scrollFire(selector, foo, id) {
     });
 }
 
-function scrolls() {
-    scrollFire('#rankList', function () {
+function Scrolls() {
+    ScrollFire('#rankList', function () {
         $('#sideRank').toggleClass('hideSide');
     }, 1);
 
-    scrollFire('#rankContent>div:first-child', function () {
+    ScrollFire('#rankContent>div:first-child', function () {
         $('#first').toggleClass('transform');
     }, 2);
 }
@@ -586,7 +586,7 @@ function scrollFireCharts(selector, foo, id) {
 //ONLINE FUNCTIONS
 
 
-function onlineGet(pages, ID) { //request spreadsheet page data
+function OnlineGet(pages, ID) { //request spreadsheet page data
     id = ID; //cria id global
     pages = pages.split(',');
 
@@ -608,37 +608,37 @@ function onlineGet(pages, ID) { //request spreadsheet page data
 
                 page = "page" + page; //cria a pageN
 
-                tableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-                rankingArray();
-                rankCreate();
-                playersArray();
-                bindNetwork();
-                scrolls();
+                TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                RankingArray();
+                RankCreate();
+                PlayersArray();
+                BindNetwork();
+                Scrolls();
                 charts1.create(); //create charts
                 charts2.create();
                 charts3.create();
 
-                login(); //manages the login "page" or automatically logs in
+                Login(); //manages the login "page" or automatically logs in
 
                 //se online, verifica os dados no DB
                 if (typeof user !== "undefined") {
-                    getChartData();
+                    GetChartData();
                 }
 
-                getMedias(); //recebe a média de pontuação (DB)
+                GetMedias(); //recebe a média de pontuação (DB)
 
-                getPrimeiros();
+                GetPrimeiros();
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
-                    onlineGet(pages.join(","), id);
+                    OnlineGet(pages.join(","), id);
                 }
             }
         });
     })
 }
 
-function tableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create an array based on the spreadsheet page
+function TableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create an array based on the spreadsheet page
     nullify = typeof nullify === "undefined" ? false : nullify;
 
     if (typeof table == "undefined") {
@@ -675,7 +675,7 @@ function tableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create
     }
 }
 
-function rankingArray() {
+function RankingArray() {
     ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
 
     j = 0;
@@ -690,7 +690,7 @@ function rankingArray() {
     }
 }
 
-function playersArray() {
+function PlayersArray() {
     players = [];
 
     j = 0;
@@ -707,13 +707,13 @@ function playersArray() {
     }
 }
 
-function getChartData() {
+function GetChartData() {
     if (typeof getChartAjax !== "undefined" && getChartAjax.readyState !== 4 && getChartAjax.readyState !== 0) {
         getChartAjax.abort();
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + lower(user.name) + "_" + user.page,
+        url: "assets/php/ranking-select.php?username=" + Lower(user.name) + "_" + user.page,
         type: "GET",
         success: function (dataDB) {
             try {
@@ -738,18 +738,18 @@ function getChartData() {
 
             for (i in chartData) {
                 var date = new Date(chartData[i].date + 'T00:00-02:00'); //weakest link
-                user.date.push(formatarData(date));
+                user.date.push(FormatarData(date));
                 user.pontuacao.push(chartData[i].pontuacao);
                 user.colocacao.push(chartData[i].colocacao);
             }
 
-            resizeChartArrays(20);
+            ResizeChartArrays(20);
 
             charts1.change(1, user.pontuacao, user.date);
 
             charts2.change(0, user.colocacao, user.date);
 
-            prepareOffline();
+            PrepareOffline();
 
             // $("body").removeClass("loading");
             $(".chartLoading").removeClass("active");
@@ -760,12 +760,12 @@ function getChartData() {
             }); //prevent new logins while ajax is running
         },
         error: function () {
-            getChartData();
+            GetChartData();
         }
     });
 }
 
-function getMedias() {
+function GetMedias() {
     if (typeof getMediaAjax !== "undefined" && getMediaAjax.readyState !== 4 && getMediaAjax.readyState !== 0) {
         getMediaAjax.abort();
     }
@@ -781,23 +781,23 @@ function getMedias() {
             for (i in medias) {
                 media.mediaArr.push(medias[i].media);
                 var date = new Date(medias[i].date + 'T00:00-02:00'); //weakest link
-                media.dateArr.push(formatarData(date));
+                media.dateArr.push(FormatarData(date));
             }
 
-            resizeChartArrays(20);
+            ResizeChartArrays(20);
 
             charts1.change(0, media.mediaArr, media.dateArr);
 
             localStorage.setItem("media", JSON.stringify(media));
         },
         error: function () {
-            getMedias();
+            GetMedias();
         }
     });
 }
 
 
-function getPrimeiros() {
+function GetPrimeiros() {
     if (typeof getPrimeirosAjax !== "undefined" && getPrimeirosAjax.readyState !== 4 && getPrimeirosAjax.readyState !== 0) {
         getPrimeirosAjax.abort();
     }
@@ -815,7 +815,7 @@ function getPrimeiros() {
                 primeiros.ocorrencias.push(primeirosData[p].ocorrencia);
             }
 
-            resizeChartArrays(20);
+            ResizeChartArrays(20);
 
             charts3.change(0, primeiros.ocorrencias, primeiros.nome);
 
@@ -824,12 +824,12 @@ function getPrimeiros() {
             localStorage.setItem("primeiros", JSON.stringify(primeiros));
         },
         error: function () {
-            getPrimeiros();
+            GetPrimeiros();
         }
     });
 }
 
-function formatarData(data) {
+function FormatarData(data) {
     var dia = data.getDate();
     if (dia.toString().length == 1)
         dia = "0" + dia;
@@ -840,90 +840,112 @@ function formatarData(data) {
 }
 
 
-function search(key) {
+function Search(key,type) {
 
-    pesquisa = lower(key); //catch and format name
+    if (type == "card") {
+        var pesquisa = key;
+    }
+    else if (type == "search") {
+        var pesquisa = Lower(key); //catch and format name
+    }
+    else {
+        throw "InvalidSearchFunctionParamType";
+    }
 
     for (i in players) { //players[i].name and players[i].page
-        if ( /*pesquisa.match(lower(players[i].name))*/ pesquisa == lower(players[i].name)) {
-
-            if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
-                searchAjax.abort();
-            }
-
-            searchAjax = $.ajax({
-                url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
-                dataType: 'html',
-                success: function (json) {
-                    data = JSON.parse(json).feed.entry //recebe a data como json
-
-                    var searching = "page" + players[i].page; //referencia para o novo array (table.pageN)
-
-                    tableCreate(searching, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-
-                    //Prepare Modal
-                    $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
-
-                    $("#playerStats").html('');
-                    $("#sideGames").html('');
-
-                    pageDadosModal(searching);
-
-                    function pageDadosModal(page) {
-                        table[page].dados = {}; //player data broken down
-
-                        j = 0;
-                        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
-                            //j1 é o header, por isso j > 0
-                            //jImpar é o header de cada jogo
-                            //jPar é o resultado de cada jogo
-                            //jLast é a pontuação final
-                            if (j % 2 != 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
-                                table[page].dados[table[page][i]] = []; //cria jogo1, jogo2...
-                                lastJogo = table[page][i];
-
-                                jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
-                            }
-                            if (j % 2 == 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
-                                table[page].dados[lastJogo].times = [table[page][i][0], table[page][i][1], table[page][i][3], table[page][i][4], table[page][i].pop()];
-                                times = table[page].dados[lastJogo].times;
-
-                                $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
-
-                                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
-                            }
-                            if (j == Object.keys(table[page]).length - 2) { //ultima fileira (pontuação final)
-                                table[page].dados.pontuacao = table[page][i][1];
-                                pontuacao = table[page].dados.pontuacao;
-
-                                $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
-                                $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
-                            }
-
-                            j++;
-                        }
-                    }
-
-                    $('#modal1').modal('open');
-                },
-                error: function (xhr, status, error) {
-                    if (status != "abort") {
-                        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-                        $('#modal2').modal('open');
-                    }
-                }
-            });
-
+        if (type == "card" && pesquisa == players[i].name) {
+            GetSearchedPage();
+            break;
+        }
+        if (type == "search" && pesquisa == Lower(players[i].name)) {
+            GetSearchedPage();
             break;
         }
         else if (i == players.length - 1) {
-            $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-            $('#modal2').modal('open');
+            ShowNameNotFound();
         }
+    }
+
+    function GetSearchedPage() {
+        if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
+            searchAjax.abort();
+        }
+
+        searchAjax = $.ajax({
+            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
+            dataType: 'html',
+            success: function (json) {
+                data = JSON.parse(json).feed.entry //recebe a data como json
+
+                var page = "page" + players[i].page; //referencia para o novo array (table.pageN)
+
+                TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+
+                BuildSearchModal(page);
+            },
+            error: function (xhr, status, error) {
+                if (status != "abort") {
+                    ShowNoConnection();
+                }
+            }
+        });
+    }
+
+    function BuildSearchModal(page) {
+        //Prepare Modal
+        $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
+
+        $("#playerStats").html('');
+        $("#sideGames").html('');
+
+        table[page].dados = {}; //player data broken down
+
+        j = 0;
+        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
+            //j1 é o header, por isso j > 0
+            //jImpar é o header de cada jogo
+            //jPar é o resultado de cada jogo
+            //jLast é a pontuação final
+            if (j % 2 != 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
+                table[page].dados[table[page][i]] = []; //cria jogo1, jogo2...
+                lastJogo = table[page][i];
+
+                jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
+            }
+            if (j % 2 == 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
+                table[page].dados[lastJogo].times = [table[page][i][0], table[page][i][1], table[page][i][3], table[page][i][4], table[page][i].pop()];
+                times = table[page].dados[lastJogo].times;
+
+                $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
+
+                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
+            }
+            if (j == Object.keys(table[page]).length - 2) { //ultima fileira (pontuação final)
+                table[page].dados.pontuacao = table[page][i][1];
+                pontuacao = table[page].dados.pontuacao;
+
+                $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
+                $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
+            }
+
+            j++;
+        }
+
+        $('#modal1').modal('open');
+    }
+
+    function ShowNameNotFound() {
+        $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+        $('#modal2').modal('open');
+    }
+
+    function ShowNoConnection() {
+        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+        $('#modal2').modal('open');
     }
 }
 
-function lower(str) {
+function Lower(str) {
     var lower = str.toLowerCase();
     var upper = str.toUpperCase();
 
@@ -940,17 +962,17 @@ function lower(str) {
 //OFFLINE FUNCTIONS
 
 
-function offlineGet() {
-    offlineParse(); //receive user and ranking
-    rankCreate(); //create DOM based on ranking
+function OfflineGet() {
+    OfflineParse(); //receive user and ranking
+    RankCreate(); //create DOM based on ranking
 
-    login(); //manages the login "page" or automatically logs in
+    Login(); //manages the login "page" or automatically logs in
 
     charts1.create(); //create charts
     charts2.create();
     charts3.create();
     
-    resizeChartArrays(20);
+    ResizeChartArrays(20);
 
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
@@ -959,14 +981,14 @@ function offlineGet() {
 }
 
 
-function prepareOffline() {
+function PrepareOffline() {
     if (navigator.onLine) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
 }
 
-function offlineParse() { //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
+function OfflineParse() { //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
     user = JSON.parse(localStorage.getItem("user"));
     ranking = JSON.parse(localStorage.getItem("ranking"));
     media = JSON.parse(localStorage.getItem("media"));
