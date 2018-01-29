@@ -46,6 +46,7 @@ nav {
         background-color: $colorAl !important;
     }
     .nav-content {
+        background-color: rgba(255, 255, 255, 0.04);
         padding-left: 80%;
         @media screen and (max-width: 992px) {
             padding-left: 0px !important;
