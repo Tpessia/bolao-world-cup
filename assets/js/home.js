@@ -713,7 +713,7 @@ function GetChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + Lower(user.name) + "_" + user.page,
+        url: "assets/php/ranking-select.php?username=" + LowerClean(user.name) + "_" + user.page,
         type: "GET",
         success: function (dataDB) {
             try {
@@ -846,7 +846,7 @@ function Search(key,type) {
         var pesquisa = key;
     }
     else if (type == "search") {
-        var pesquisa = Lower(key); //catch and format name
+        var pesquisa = LowerClean(key); //catch and format name
     }
     else {
         throw "InvalidSearchFunctionParamType";
@@ -857,7 +857,7 @@ function Search(key,type) {
             GetSearchedPage();
             break;
         }
-        if (type == "search" && pesquisa == Lower(players[i].name)) {
+        if (type == "search" && pesquisa == LowerClean(players[i].name)) {
             GetSearchedPage();
             break;
         }
@@ -945,7 +945,7 @@ function Search(key,type) {
     }
 }
 
-function Lower(str) {
+function LowerClean(str) {
     var lower = str.toLowerCase();
     var upper = str.toUpperCase();
 
