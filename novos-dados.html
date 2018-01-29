@@ -166,7 +166,7 @@
         }
 
         $(document).ajaxComplete(function() {
-            if (ajaxTable == 4 || ajaxTable == 0 || ajaxPrimeiros == 4 || ajaxPrimeiros == 0 || ajaxRanking == 4 || ajaxRanking == 0) {
+            if ((ajaxTable == 4 || ajaxTable == 0) && (ajaxPrimeiros == 4 || ajaxPrimeiros == 0) && (ajaxRanking == 4 || ajaxRanking == 0)) {
                 $(window).off('beforeunload');
             }
         });
