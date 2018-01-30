@@ -910,6 +910,8 @@ function Search(key) {
             }
         );
 
+        teste2 = pIndex;
+
         //Prepare Modal
         $("#modal1 .modal-content>h4").html("Dados de " + players[pIndex].name); //MAIN TITLE
 
