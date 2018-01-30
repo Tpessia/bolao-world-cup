@@ -854,7 +854,7 @@ function Search(key) {
         ]
     };
     var fuse = new Fuse(players, options); // "list" is the item array
-    var result = fuse.search("");
+    var result = fuse.search(key);
 
     teste = result;
 
