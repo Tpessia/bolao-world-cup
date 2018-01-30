@@ -106,7 +106,7 @@ function Login() {
 
         //validação
         
-        user.name = $("#name").val();
+        user.name = $("#name").val().trim();
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
