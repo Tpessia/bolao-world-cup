@@ -853,7 +853,7 @@ function Search(key) {
             "name"
         ]
     };
-    var fuse = new Fuse(list, options); // "list" is the item array
+    var fuse = new Fuse(players, options); // "list" is the item array
     var result = fuse.search("");
 
     teste = result;
