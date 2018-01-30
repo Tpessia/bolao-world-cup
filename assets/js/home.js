@@ -843,7 +843,6 @@ function FormatarData(data) {
 function Search(key) {
 
     var options = {
-        caseSensitive: true,
         shouldSort: true,
         threshold: 0.6,
         location: 0,
