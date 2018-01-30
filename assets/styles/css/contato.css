@@ -66,6 +66,7 @@ nav {
     left: 0.5em;
     top: -15% !important; }
   nav .input-field input[type=search] {
+    padding-right: 3.5em;
     border: 0 !important;
     box-sizing: border-box; }
     nav .input-field input[type=search]:focus + i:first-of-type {
