@@ -856,9 +856,10 @@ function Search(key) {
     var fuse = new Fuse(list, options); // "list" is the item array
     var result = fuse.search("");
 
+    teste = result;
+
     if (result.length != 0) {
         GetSearchedPage(result[0].page);
-        break;
     }
     else {
         ShowNameNotFound();
