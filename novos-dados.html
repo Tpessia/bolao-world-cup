@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-        $(window).on('beforeunload', function() {
-            return 'Se você sair agora podem haver problemas ao enviar os dados ao banco de dados. Tem certeza que deseja parar a transferência?';
-        });
-
         $(function() {
             NewData('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
         });
@@ -20,7 +16,7 @@
 
                 var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
 
-                ajaxTable = $.ajax({ //verifica se a url existe
+                $.ajax({ //verifica se a url existe
                     url: urlJSON,
                     dataType: 'html',
                     async: false,
@@ -110,7 +106,7 @@
                 j++;
             }
 
-            ajaxPrimeiros = $.ajax({
+            $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php?primeiro=" + ranking[0].name,
                 method: "GET",
                 success: function (data) {
@@ -138,7 +134,7 @@
             paramsJSON = JSON.stringify(ranking);
             console.log("https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media);
 
-            ajaxRanking = $.ajax({
+            $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media,
                 method: "GET",
                 // data: paramsJSON,
@@ -164,14 +160,6 @@
 
             return res/*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/.replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
         }
-
-        $(document).ajaxComplete(function() {
-            if (typeof ajaxTable !== "undefined" && typeof ajaxPrimeiros !== "undefined" && typeof ajaxRanking !== "undefined") { //se todos já forem inicializados
-                if ((ajaxTable == 4 || ajaxTable == 0) && (ajaxPrimeiros == 4 || ajaxPrimeiros == 0) && (ajaxRanking == 4 || ajaxRanking == 0)) { //se todos já estão concluídos
-                    $(window).off('beforeunload');
-                }
-            }
-        });
     </script>
 </head>
 <body>
