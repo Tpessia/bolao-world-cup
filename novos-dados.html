@@ -166,8 +166,10 @@
         }
 
         $(document).ajaxComplete(function() {
-            if ((ajaxTable == 4 || ajaxTable == 0) && (ajaxPrimeiros == 4 || ajaxPrimeiros == 0) && (ajaxRanking == 4 || ajaxRanking == 0)) {
-                $(window).off('beforeunload');
+            if (typeof ajaxTable !== "undefined" && typeof ajaxPrimeiros !== "undefined" && typeof ajaxRanking !== "undefined") { //se todos já forem inicializados
+                if ((ajaxTable == 4 || ajaxTable == 0) && (ajaxPrimeiros == 4 || ajaxPrimeiros == 0) && (ajaxRanking == 4 || ajaxRanking == 0)) { //se todos já estão concluídos
+                    $(window).off('beforeunload');
+                }
             }
         });
     </script>
