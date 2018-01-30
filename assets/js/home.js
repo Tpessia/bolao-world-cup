@@ -887,11 +887,11 @@ function Search(key) {
             success: function (json) {
                 data = JSON.parse(json).feed.entry //recebe a data como json
 
+                BuildSearchModal(page);
+
                 var pageStr = "page" + page; //referencia para o novo array (table.pageN)
 
                 TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-
-                BuildSearchModal(pageStr);
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
