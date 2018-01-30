@@ -889,9 +889,9 @@ function Search(key) {
 
                 var pageStr = "page" + page; //referencia para o novo array (table.pageN)
 
-                BuildSearchModal(page, pageStr);
-
                 TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+
+                BuildSearchModal(page, pageStr);
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
