@@ -842,32 +842,56 @@ function FormatarData(data) {
 
 function Search(key) {
 
-    for (i in players) { //players[i].name and players[i].page
-        if (key == players[i].name) {
-            GetSearchedPage();
-            break;
-        }
-        else if (i == players.length - 1) {
-            ShowNameNotFound();
-        }
+    var options = {
+        shouldSort: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [
+            "name"
+        ]
+    };
+    var fuse = new Fuse(players, options); // "list" is the item array
+    var result = fuse.search(key);
+
+    teste = result;
+
+    if (result.length != 0) {
+        GetSearchedPage(result[0].page);
+    }
+    else {
+        ShowNameNotFound();
     }
 
-    function GetSearchedPage() {
+
+    // for (i in players) { //players[i].name and players[i].page
+        // if (key == players[i].name) {
+        //     GetSearchedPage();
+        //     break;
+        // }
+        // else if (i == players.length - 1) {
+        //     ShowNameNotFound();
+        // }
+    // }
+
+    function GetSearchedPage(page) {
         if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
             searchAjax.abort();
         }
 
         searchAjax = $.ajax({
-            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + players[i].page + '/public/values?alt=json',
+            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json',
             dataType: 'html',
             success: function (json) {
                 data = JSON.parse(json).feed.entry //recebe a data como json
 
-                var page = "page" + players[i].page; //referencia para o novo array (table.pageN)
+                var pageStr = "page" + page; //referencia para o novo array (table.pageN)
 
-                TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
-                BuildSearchModal(page);
+                BuildSearchModal(page, pageStr);
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
@@ -877,38 +901,46 @@ function Search(key) {
         });
     }
 
-    function BuildSearchModal(page) {
+    function BuildSearchModal(page, pageStr) {
+
+        var pIndex = players.findIndex(
+            function(element) {
+                if (element.page == page) { return true; }
+                else { return false; }
+            }
+        );
+
         //Prepare Modal
-        $("#modal1 .modal-content>h4").html("Dados de " + players[i].name); //MAIN TITLE
+        $("#modal1 .modal-content>h4").html("Dados de " + players[pIndex].name); //MAIN TITLE
 
         $("#playerStats").html('');
         $("#sideGames").html('');
 
-        table[page].dados = {}; //player data broken down
+        table[pageStr].dados = {}; //player data broken down
 
         j = 0;
-        for (i in table[page]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
+        for (var i in table[pageStr]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
             //j1 é o header, por isso j > 0
             //jImpar é o header de cada jogo
             //jPar é o resultado de cada jogo
             //jLast é a pontuação final
-            if (j % 2 != 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
-                table[page].dados[table[page][i]] = []; //cria jogo1, jogo2...
-                lastJogo = table[page][i];
+            if (j % 2 != 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
+                table[pageStr].dados[table[pageStr][i]] = []; //cria jogo1, jogo2...
+                lastJogo = table[pageStr][i];
 
                 jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
             }
-            if (j % 2 == 0 && j < Object.keys(table[page]).length - 2 && j > 0) { //filaira par (timeA 10 x 10 timeB ponto1 ponto2)
-                table[page].dados[lastJogo].times = [table[page][i][0], table[page][i][1], table[page][i][3], table[page][i][4], table[page][i].pop()];
-                times = table[page].dados[lastJogo].times;
+            if (j % 2 == 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira par (timeA 10 x 10 timeB ponto1 ponto2)
+                table[pageStr].dados[lastJogo].times = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
+                times = table[pageStr].dados[lastJogo].times;
 
                 $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
 
                 $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
             }
-            if (j == Object.keys(table[page]).length - 2) { //ultima fileira (pontuação final)
-                table[page].dados.pontuacao = table[page][i][1];
-                pontuacao = table[page].dados.pontuacao;
+            if (j == Object.keys(table[pageStr]).length - 2) { //ultima fileira (pontuação final)
+                table[pageStr].dados.pontuacao = table[pageStr][i][1];
+                pontuacao = table[pageStr].dados.pontuacao;
 
                 $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
                 $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
