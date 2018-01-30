@@ -124,7 +124,7 @@
 
             total = 0;
             for (i in ranking) {
-                ranking[i].name = LowerClean(ranking[i].name) + "_" + ranking[i].page;
+                ranking[i].name = ValidadeDbInput(ranking[i].name) + "_" + ranking[i].page;
 
                 total += parseInt(ranking[i].pontuacao); 
             }
@@ -148,7 +148,7 @@
             });
         }
 
-        function LowerClean(str) {
+        function ValidadeDbInput(str) { //antigo lower()
             var lower = str.toLowerCase();
             var upper = str.toUpperCase();
 
@@ -171,20 +171,20 @@
             RankCreate();
         });
 
-        $("#clearLast").on("click", function () {
-            if(window.confirm("Você realmente deseja remover todos os dados do último conjunto?")) {
-                $.ajax({
-                    url: "https://www.bolaodomauricio.xyz/assets/php/clear-last.php",
-                    method: "GET",
-                    success: function (data) {
-                        $("body").html(data);
-                    },
-                    error: function () {
-                        alert("A conecção com o servidor foi interrompida, tente novamente!")
-                    }
-                });
-            }
-        });
+        // $("#clearLast").on("click", function () {
+        //     if(window.confirm("Você realmente deseja remover todos os dados do último conjunto?")) {
+        //         $.ajax({
+        //             url: "https://www.bolaodomauricio.xyz/assets/php/clear-last.php",
+        //             method: "GET",
+        //             success: function (data) {
+        //                 $("body").html(data);
+        //             },
+        //             error: function () {
+        //                 alert("A conecção com o servidor foi interrompida, tente novamente!")
+        //             }
+        //         });
+        //     }
+        // });
     </script>
 </body>
 </html>
