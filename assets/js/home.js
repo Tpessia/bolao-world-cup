@@ -5,17 +5,6 @@
 //     return true;
 // }
 
-// isLocalStorageNameSupported = function () {
-//     var testKey = 'test', storage = window.sessionStorage;
-//     try {
-//         storage.setItem(testKey, '1');
-//         storage.removeItem(testKey);
-//         return true;
-//     } catch (error) {
-//         return false;
-//     }
-// }
-
 if (typeof localStorage === 'object') {
     try {
         localStorage.setItem('localStorage', 1);
@@ -106,7 +95,7 @@ function Login() {
 
         //validação
         
-        user.name = $("#name").val();
+        user.name = $("#name").val().trim();
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
@@ -494,21 +483,6 @@ function BindMain() {
 }
 
 function Highlight() { //current user highlight on ranking
-    // for (var n in ranking) {
-    //     var userId = parseInt(n) + 1;
-    //     var card = $('.rank div.col:nth-of-type(' + userId + ') .card');
-    //     var sideCard = $("#sideRank .col:nth-of-type(" + userId + ") .card");
-
-    //     if (ranking[n].name == user.name) {
-    //         card.addClass("colorB");
-    //         sideCard.addClass("highlight");
-    //     }
-    //     else if (card.hasClass("colorB")) {
-    //         card.removeClass("colorB");
-    //         sideCard.removeClass("highlight");
-    //     }
-    // }
-
     $('#rankContent div.col .card.colorB').removeClass("colorB");
     $('#sideRank .col .card.highlight').removeClass("highlight");
 
@@ -743,7 +717,7 @@ function GetChartData() {
                 user.colocacao.push(chartData[i].colocacao);
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts1.change(1, user.pontuacao, user.date);
 
@@ -784,7 +758,7 @@ function GetMedias() {
                 media.dateArr.push(FormatarData(date));
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts1.change(0, media.mediaArr, media.dateArr);
 
@@ -815,7 +789,7 @@ function GetPrimeiros() {
                 primeiros.ocorrencias.push(primeirosData[p].ocorrencia);
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts3.change(0, primeiros.ocorrencias, primeiros.nome);
 
@@ -864,17 +838,6 @@ function Search(key) {
     else {
         ShowNameNotFound();
     }
-
-
-    // for (i in players) { //players[i].name and players[i].page
-        // if (key == players[i].name) {
-        //     GetSearchedPage();
-        //     break;
-        // }
-        // else if (i == players.length - 1) {
-        //     ShowNameNotFound();
-        // }
-    // }
 
     function GetSearchedPage(page) {
         if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
@@ -989,7 +952,7 @@ function OfflineGet() {
     charts2.create();
     charts3.create();
     
-    ResizeChartArrays(20);
+    // ResizeChartArrays(20);
 
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);

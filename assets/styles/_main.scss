@@ -60,6 +60,7 @@ nav {
             top: -15% !important;
         }
         input[type=search] {
+            padding-right: 3.5em;
             border: 0 !important;
             box-sizing: border-box;
             &:focus+i:first-of-type {
