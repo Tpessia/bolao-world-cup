@@ -717,7 +717,7 @@ function GetChartData() {
                 user.colocacao.push(chartData[i].colocacao);
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts1.change(1, user.pontuacao, user.date);
 
@@ -758,7 +758,7 @@ function GetMedias() {
                 media.dateArr.push(FormatarData(date));
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts1.change(0, media.mediaArr, media.dateArr);
 
@@ -789,7 +789,7 @@ function GetPrimeiros() {
                 primeiros.ocorrencias.push(primeirosData[p].ocorrencia);
             }
 
-            ResizeChartArrays(20);
+            // ResizeChartArrays(20);
 
             charts3.change(0, primeiros.ocorrencias, primeiros.nome);
 
@@ -952,7 +952,7 @@ function OfflineGet() {
     charts2.create();
     charts3.create();
     
-    ResizeChartArrays(20);
+    // ResizeChartArrays(20);
 
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
