@@ -153,7 +153,8 @@ function Login() {
 
 function RankCreate() { //create ranking element and object
     var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    viewport > 600 ? k = 9 : k = 4; //numero de itens do rank mostrados por vez
+    // viewport > 600 ? k = 9 : 
+    k = 4; //numero de itens do rank mostrados por vez
 
     $("#rankContent").html("");
     $("#moreRank").removeClass("hide");
