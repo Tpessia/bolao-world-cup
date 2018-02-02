@@ -407,6 +407,11 @@ main.container {
 #modal1 {
   min-height: 350px;
   width: 65%; }
+  @media screen and (max-width: 992px) {
+    #modal1 {
+      width: 85%;
+      height: 80%;
+      max-height: 80%; } }
   #modal1 .modal-content {
     padding: 0; }
     #modal1 .modal-content > h4 {
@@ -418,10 +423,14 @@ main.container {
       margin: 0; }
     #modal1 .modal-content #wrapper :not(h5) {
       color: #504a4a; }
-    #modal1 .modal-content #wrapper .jogo {
+    #modal1 .modal-content #wrapper #playerStats .jogo {
       display: inline-block;
       text-align: center;
       margin-bottom: 20px; }
+      @media screen and (max-width: 600px) {
+        #modal1 .modal-content #wrapper #playerStats .jogo:after {
+          content: attr(data-content) " pts";
+          display: block; } }
     #modal1 .modal-content #wrapper #sidePont {
       position: fixed;
       height: 36vh;
@@ -430,13 +439,9 @@ main.container {
       -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
       -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
       box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.25); }
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: 992px) {
         #modal1 .modal-content #wrapper #sidePont {
-          margin-bottom: 20px;
-          position: initial; }
-          #modal1 .modal-content #wrapper #sidePont .sideTotal {
-            position: initial !important;
-            width: auto !important; } }
+          display: none; } }
       #modal1 .modal-content #wrapper #sidePont .sideNum {
         float: right;
         margin-right: 5%; }

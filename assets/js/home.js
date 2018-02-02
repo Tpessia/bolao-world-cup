@@ -897,15 +897,18 @@ function Search(key) {
                 table[pageStr].dados[table[pageStr][i]] = []; //cria jogo1, jogo2...
                 lastJogo = table[pageStr][i];
 
-                jogoTitle = '<span class="jogo col m6 s12"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
+                jogoTitle = '<span id="' + i + '" class="jogo col s12 m6"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
             }
             if (j % 2 == 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira par (timeA 10 x 10 timeB ponto1 ponto2)
-                table[pageStr].dados[lastJogo].times = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
-                times = table[pageStr].dados[lastJogo].times;
+                table[pageStr].dados[lastJogo].jogos = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
+                var jogos = table[pageStr].dados[lastJogo].jogos;
 
-                $("#playerStats").append(jogoTitle + times[0] + " " + times[1] + " x " + times[2] + " " + times[3] + "</span>"); //EACH GAME MAIN BLOCK
+                $("#playerStats").append(jogoTitle + jogos[0] + " " + jogos[1] + " x " + jogos[2] + " " + jogos[3] + "</span>"); //EACH GAME MAIN BLOCK
 
-                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + times[4] + "</span></div>"); //EACH GAME SIDE BLOCK
+                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + jogos[4] + "</span></div>"); //EACH GAME SIDE BLOCK
+
+                var rowAnterior = i.split("row")[1] - 1;
+                $("#playerStats .col#row" + rowAnterior).attr("data-content", jogos[4])
             }
             if (j == Object.keys(table[pageStr]).length - 2) { //ultima fileira (pontuação final)
                 table[pageStr].dados.pontuacao = table[pageStr][i][1];
