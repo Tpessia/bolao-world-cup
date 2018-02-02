@@ -503,6 +503,7 @@ main.container {
 
 #modal1 {
     min-height: 350px;
+    width: 65%;
 
     .modal-content {
         padding: 0;
@@ -553,7 +554,7 @@ main.container {
 
                 .sideNum {
                     float: right;
-                    margin-right: 7px;
+                    margin-right: 5%;
                 }
                 $sizeTotHeight: 35px;
                 #sideGames {

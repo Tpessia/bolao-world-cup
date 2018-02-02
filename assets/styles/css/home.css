@@ -405,7 +405,8 @@ main.container {
             opacity: 0; } }
 
 #modal1 {
-  min-height: 350px; }
+  min-height: 350px;
+  width: 65%; }
   #modal1 .modal-content {
     padding: 0; }
     #modal1 .modal-content > h4 {
@@ -438,7 +439,7 @@ main.container {
             width: auto !important; } }
       #modal1 .modal-content #wrapper #sidePont .sideNum {
         float: right;
-        margin-right: 7px; }
+        margin-right: 5%; }
       #modal1 .modal-content #wrapper #sidePont #sideGames {
         height: calc(100% - 52px - 35px);
         overflow-y: auto; }
