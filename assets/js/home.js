@@ -91,16 +91,19 @@ function Login() {
     });
 
     function Cadastrar() {
-        user = { name: "", page: "", pontuacao: [], colocacao: [], date: [] };
+        user = { name: "", code: "", page: "", pontuacao: [], colocacao: [], date: [] };
 
         //validação
         
-        user.name = $("#name").val().trim();
+        // user.name = $("#name").val().trim();
+        user.code = $("#name").val().trim();
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
-            if (user.name == players[i].name) { //verifica se usuário é válido
+            // if (user.name == players[i].name) { //verifica se usuário é válido
+            if (user.code == players[i].code) { //verifica se usuário é válido
                 user.name = players[i].name;
+                user.code =players[i].code;
                 user.page = players[i].page;
 
                 $(".chartLoading").addClass("active");
@@ -673,9 +676,11 @@ function PlayersArray() {
         if (j > 1) {
             pageVar = table.page1[i][3]; //sheet format (Página)
             nameVar = table.page1[i][4]; //sheet format (Nome)
+            codigoVar = table.page1[i][6]; //sheet format (Nome)
             players.push({
                 page: pageVar,
-                name: nameVar
+                name: nameVar,
+                code: codigoVar
             });
         }
         j++;
