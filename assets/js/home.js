@@ -797,7 +797,7 @@ function GetPrimeiros() {
 
             // ResizeChartArrays(20);
 
-            var primeirosTop = { nome: [], ocorrencias: [] };
+            primeirosTop = { nome: [], ocorrencias: [] };
             for (var user in primeiros.nome) {
                 if (user < 3) {
                     primeirosTop.nome.push(primeiros.nome[i])
