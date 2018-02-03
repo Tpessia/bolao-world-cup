@@ -940,7 +940,7 @@ function Search(key) {
             j++;
         }
 
-        $("#modal1 #primeiroX").html(VezesPrimeiro(result));
+        $("#modal1 #primeiroX").html(VezesPrimeiro(result[0].name));
 
         $('#modal1').modal('open');
     }
