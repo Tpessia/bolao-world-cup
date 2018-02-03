@@ -799,7 +799,7 @@ function GetPrimeiros() {
 
             primeirosTop = { nome: [], ocorrencias: [] };
             for (var i in primeiros.nome) {
-                if (user < 3) {
+                if (i < 3) {
                     primeirosTop.nome.push(primeiros.nome[i]);
                     primeirosTop.ocorrencias.push(primeiros.ocorrencias[i]);
                 }
