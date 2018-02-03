@@ -797,11 +797,23 @@ function GetPrimeiros() {
 
             // ResizeChartArrays(20);
 
-            charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+            var primeirosTop = { nome: [], ocorrencias: [] };
+            for (var user in primeiros.nome) {
+                if (user < 3) {
+                    primeirosTop.nome.push(primeiros.nome[i])
+                    primeirosTop.ocorrencias.push(primeiros.ocorrencias[i])
+                }
+                else {
+                    break;
+                }
+            }
+
+            charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
             chart3.options.scales.yAxes[0].ticks.suggestedMax = primeiros.ocorrencias[0] + 1;
 
             localStorage.setItem("primeiros", JSON.stringify(primeiros));
+            localStorage.setItem("primeirosTop", JSON.stringify(primeirosTop));
         },
         error: function () {
             GetPrimeiros();
@@ -966,7 +978,7 @@ function OfflineGet() {
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
-    charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+    charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 }
 
 
@@ -982,4 +994,5 @@ function OfflineParse() { //recebe as informações de 'user' e 'ranking' do loc
     ranking = JSON.parse(localStorage.getItem("ranking"));
     media = JSON.parse(localStorage.getItem("media"));
     primeiros = JSON.parse(localStorage.getItem("primeiros"));
+    primeirosTop = JSON.parse(localStorage.getItem("primeirosTop"));
 }
