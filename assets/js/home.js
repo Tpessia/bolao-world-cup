@@ -848,8 +848,6 @@ function Search(key) {
     var fuse = new Fuse(players, options); // "list" is the item array
     var result = fuse.search(key);
 
-    teste = result;
-
     if (result.length != 0) {
         GetSearchedPage(result[0].page);
     }
@@ -880,6 +878,15 @@ function Search(key) {
                 }
             }
         });
+    }
+
+    function VezesPrimeiro(nome) {
+        for (var i in primeiros.nome) {
+            if (primeiros.nome[i] == nome) {
+                return primeiros.ocorrencias[i];
+            }
+        }
+        return 0;
     }
 
     function BuildSearchModal(page, pageStr) {
@@ -932,6 +939,8 @@ function Search(key) {
 
             j++;
         }
+
+        $("#modal1 #primeiroX").html(VezesPrimeiro(result));
 
         $('#modal1').modal('open');
     }
