@@ -798,10 +798,10 @@ function GetPrimeiros() {
             // ResizeChartArrays(20);
 
             primeirosTop = { nome: [], ocorrencias: [] };
-            for (var user in primeiros.nome) {
+            for (var i in primeiros.nome) {
                 if (user < 3) {
-                    primeirosTop.nome.push(primeiros.nome[i])
-                    primeirosTop.ocorrencias.push(primeiros.ocorrencias[i])
+                    primeirosTop.nome.push(primeiros.nome[i]);
+                    primeirosTop.ocorrencias.push(primeiros.ocorrencias[i]);
                 }
                 else {
                     break;
