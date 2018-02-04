@@ -548,15 +548,11 @@ main.container {
                     text-align: center;
                     width: auto;
                     margin-bottom: 10px;
-                    // z-index: -1;
                     
                     strong {
                         display: inline-block;
-                        padding: 5px 5px;
+                        padding: 5px 10px;
                         border: 1px solid $colorA;
-                        @media screen and (max-width: 992px) {
-                            padding: 5px 15px;
-                        }
                     }
                 }
             }

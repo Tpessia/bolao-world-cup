@@ -437,11 +437,8 @@ main.container {
       margin-bottom: 10px; }
       #modal1 .modal-content #wrapper #playerStats #primeiro strong {
         display: inline-block;
-        padding: 5px 5px;
+        padding: 5px 10px;
         border: 1px solid #151515; }
-        @media screen and (max-width: 992px) {
-          #modal1 .modal-content #wrapper #playerStats #primeiro strong {
-            padding: 5px 15px; } }
     #modal1 .modal-content #wrapper #sidePont {
       position: fixed;
       height: 40vh;
