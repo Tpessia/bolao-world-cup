@@ -431,6 +431,17 @@ main.container {
         #modal1 .modal-content #wrapper #playerStats .jogo:after {
           content: attr(data-content) " pts";
           display: block; } }
+    #modal1 .modal-content #wrapper #playerStats #primeiro {
+      text-align: center;
+      width: auto;
+      margin-bottom: 10px; }
+      #modal1 .modal-content #wrapper #playerStats #primeiro strong {
+        display: inline-block;
+        padding: 5px 5px;
+        border: 1px solid #151515; }
+        @media screen and (max-width: 992px) {
+          #modal1 .modal-content #wrapper #playerStats #primeiro strong {
+            padding: 5px 15px; } }
     #modal1 .modal-content #wrapper #sidePont {
       position: fixed;
       height: 40vh;
@@ -460,24 +471,6 @@ main.container {
           float: right;
           margin-right: 5px;
           font-weight: 500; }
-    #modal1 .modal-content #wrapper #primeiro {
-      text-align: center; }
-      @media screen and (max-width: 992px) {
-        #modal1 .modal-content #wrapper #primeiro {
-          margin-bottom: 10px; } }
-      @media screen and (min-width: 993px) {
-        #modal1 .modal-content #wrapper #primeiro {
-          position: fixed;
-          bottom: 61px;
-          right: 20px;
-          width: 25%; } }
-      #modal1 .modal-content #wrapper #primeiro strong {
-        display: inline-block;
-        padding: 5px 5px;
-        border: 1px solid #151515; }
-        @media screen and (max-width: 992px) {
-          #modal1 .modal-content #wrapper #primeiro strong {
-            padding: 5px 15px; } }
 
 #modal2 {
   height: 50vh;
