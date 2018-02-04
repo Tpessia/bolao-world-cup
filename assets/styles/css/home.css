@@ -461,11 +461,20 @@ main.container {
           margin-right: 5px;
           font-weight: 500; }
     #modal1 .modal-content #wrapper #primeiro {
-      position: fixed;
-      bottom: 25%;
-      right: 20px;
-      width: 25%;
       text-align: center; }
+      @media screen and (max-width: 600px) {
+        #modal1 .modal-content #wrapper #primeiro {
+          margin-bottom: 10px; } }
+      @media screen and (min-width: 601px) {
+        #modal1 .modal-content #wrapper #primeiro {
+          position: fixed;
+          bottom: 61px;
+          right: 20px;
+          width: 25%; } }
+      #modal1 .modal-content #wrapper #primeiro strong {
+        display: inline-block;
+        padding: 5px 15px;
+        border: 1px solid #151515; }
 
 #modal2 {
   height: 50vh;
