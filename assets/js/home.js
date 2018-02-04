@@ -797,11 +797,23 @@ function GetPrimeiros() {
 
             // ResizeChartArrays(20);
 
-            charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+            primeirosTop = { nome: [], ocorrencias: [] };
+            for (var i in primeiros.nome) {
+                if (i < 3) {
+                    primeirosTop.nome.push(primeiros.nome[i]);
+                    primeirosTop.ocorrencias.push(primeiros.ocorrencias[i]);
+                }
+                else {
+                    break;
+                }
+            }
+
+            charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
             chart3.options.scales.yAxes[0].ticks.suggestedMax = primeiros.ocorrencias[0] + 1;
 
             localStorage.setItem("primeiros", JSON.stringify(primeiros));
+            localStorage.setItem("primeirosTop", JSON.stringify(primeirosTop));
         },
         error: function () {
             GetPrimeiros();
@@ -836,8 +848,6 @@ function Search(key) {
     var fuse = new Fuse(players, options); // "list" is the item array
     var result = fuse.search(key);
 
-    teste = result;
-
     if (result.length != 0) {
         GetSearchedPage(result[0].page);
     }
@@ -868,6 +878,15 @@ function Search(key) {
                 }
             }
         });
+    }
+
+    function VezesPrimeiro(nome) {
+        for (var i in primeiros.nome) {
+            if (primeiros.nome[i] == nome) {
+                return primeiros.ocorrencias[i];
+            }
+        }
+        return 0;
     }
 
     function BuildSearchModal(page, pageStr) {
@@ -921,6 +940,8 @@ function Search(key) {
             j++;
         }
 
+        $("#modal1 #primeiroX").html(VezesPrimeiro(result[0].name));
+
         $('#modal1').modal('open');
     }
 
@@ -966,7 +987,7 @@ function OfflineGet() {
     charts1.change(0, media.mediaArr, media.dateArr);
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
-    charts3.change(0, primeiros.ocorrencias, primeiros.nome);
+    charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 }
 
 
@@ -982,4 +1003,5 @@ function OfflineParse() { //recebe as informações de 'user' e 'ranking' do loc
     ranking = JSON.parse(localStorage.getItem("ranking"));
     media = JSON.parse(localStorage.getItem("media"));
     primeiros = JSON.parse(localStorage.getItem("primeiros"));
+    primeirosTop = JSON.parse(localStorage.getItem("primeirosTop"));
 }

@@ -27,8 +27,7 @@ $sql = '
 SELECT u.Nome, count(*) as "Ocorrencia"
 FROM `primeiros` as u
 GROUP BY u.Nome
-ORDER BY count(*) DESC
-LIMIT 3;
+ORDER BY count(*) DESC;
 
 ';
 
