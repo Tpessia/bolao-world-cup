@@ -30,7 +30,9 @@ window.onload = function() { //window load
 //CONTROLLER
 
 $(function() { //document ready
-    
+    Offline.options = { checks: { xhr: { url: '/assets/img/icon.png' } } };
+
+
     Offline.check();
 
     //Inicia como Offline ou Online
