@@ -40,8 +40,8 @@ self.addEventListener("install", function (event) {
                     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Medium.woff2',
                     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Light.woff2',
                     'https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/offline.min.js',
-                    // 'https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-theme-dark.min.css',
-                    // 'https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-language-portuguese-brazil.min.css'
+                    'https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-theme-dark.min.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-language-portuguese-brazil.min.css'
                 ]);
             })
             .then(function () {
