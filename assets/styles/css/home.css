@@ -473,8 +473,11 @@ main.container {
           width: 25%; } }
       #modal1 .modal-content #wrapper #primeiro strong {
         display: inline-block;
-        padding: 5px 15px;
+        padding: 5px 5px;
         border: 1px solid #151515; }
+        @media screen and (max-width: 600px) {
+          #modal1 .modal-content #wrapper #primeiro strong {
+            padding: 5px 15px; } }
 
 #modal2 {
   height: 50vh;

@@ -610,8 +610,12 @@ main.container {
 
                 strong {
                     display: inline-block;
-                    padding: 5px 15px;
+                    padding: 5px 5px;
                     border: 1px solid $colorA;
+    
+                    @media screen and (max-width: 600px) {
+                        padding: 5px 15px;
+                    }
                 }
             }
         }
