@@ -30,7 +30,7 @@ window.onload = function() { //window load
 //CONTROLLER
 
 $(function() { //document ready
-    
+
     Offline.check();
 
     //Inicia como Offline ou Online
