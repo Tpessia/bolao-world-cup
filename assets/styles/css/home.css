@@ -91,6 +91,9 @@ footer {
           footer .footer-copyright .container div:last-of-type a {
             vertical-align: super; } }
 
+.offline-ui {
+  display: none; }
+
 body {
   background-color: #f5f5f5; }
   body #loading {
