@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bolão Copa 2018</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#db5945">
+
+    <link rel="icon" type="image/png" href="/assets/img/icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/styles/css/min/error.min.css">
+
+</head>
+<body>
+    <header>
+        <nav class="nav-extended navbar-fixed">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
+
+                <a href="#" data-activates="mobileNav" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="/index.html">Ranking</a>
+                    </li>
+                    <li>
+                        <a href="/contato.html">Contato</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
+                <form onsubmit="return false">
+                    <div class="input-field">
+                        <input type="search" id="searchVal" autocomplete="off" placeholder="Pesquise seu nome" onsearch="search($('#searchVal').val())" required style="margin: 0; padding-left: 3.5em;">
+                        <i class="material-icons">search</i>
+                        <i class="material-icons" style="top: -15%;">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+
+        <ul class="side-nav" id="mobileNav">
+            <!--Mobile Nav(2/3)-->
+            <li>
+                <a href="/home.html">Ranking</a>
+            </li>
+        
+            <li>
+                <a href="/contato.html">Contato</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+
+        <h1>Erro 404</h1>
+        <div class="container1">A URL informada está incorreta ou a página não existe!</div>
+
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Contatos</h5>
+                    <p class="grey-text text-lighten-4">Contato</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Notícias</h5>
+                    <ul>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="http://globoesporte.globo.com/futebol/copa-do-mundo" target="_blank">Globo Esporte</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://brasil.elpais.com/tag/mundial_2018/a" target="_blank">El País</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div>
+                    Aplicação Web
+                    <br>
+                    Bolão Copa do Mundo 2018
+                </div>
+                <div>
+                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por <strong>Thiago Pessia</strong></a></div>
+                </div>
+        </div>
+    </footer>
+
+    <style>
+        body {
+            height: 100vh;
+        }
+
+        main {
+            background-image: url(/assets/img/error.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-top: 50px;
+            height: calc(100% - 85px);
+        }
+
+        main h1 {
+            text-align: center;
+            font-size: 45px;
+            margin-top: 27vh;
+        }
+
+        .container1 {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 5%;
+        }
+    </style>
+
+    <script type="text/javascript">
+        /*Mobile Nav (3/3) / Necessário para a sidebar funcionar*/
+        $('.collapsible').collapsible();/*não sei se é necessário*/
+        $(".button-collapse").sideNav();
+    </script>
+
+</body>
+</html>

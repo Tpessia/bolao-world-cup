@@ -1,0 +1,97 @@
+.colorA {
+  background-color: #151515 !important; }
+
+.colorAl {
+  background-color: #3b3b3b !important; }
+
+.colorAd {
+  background-color: black !important; }
+
+.colorB {
+  background-color: #0F1626 !important; }
+
+.colorBl {
+  background-color: #25365d !important; }
+
+.colorBd {
+  background-color: black !important; }
+
+.colorC {
+  background-color: #ffab40 !important; }
+
+.colorCl {
+  background-color: #ffcd8d !important; }
+
+.colorCd {
+  background-color: #f38800 !important; }
+
+.colorD {
+  background-color: #1A2930 !important; }
+
+.colorDl {
+  background-color: #355362 !important; }
+
+.colorDd {
+  background-color: black !important; }
+
+.colorE {
+  background-color: #A9B7C0 !important; }
+
+.colorEl {
+  background-color: #d5dce0 !important; }
+
+.colorEd {
+  background-color: #7d92a0 !important; }
+
+nav {
+  background-color: #151515; }
+  nav .brand-logo {
+    padding-left: 1%; }
+    nav .brand-logo i {
+      margin-left: 7px; }
+      nav .brand-logo i img {
+        margin-top: 5px;
+        height: 80%; }
+  nav .nav-wrapper > ul li.active {
+    background-color: #3b3b3b !important; }
+  nav .nav-content {
+    background-color: rgba(255, 255, 255, 0.04);
+    padding-left: 80%; }
+    @media screen and (max-width: 992px) {
+      nav .nav-content {
+        padding-left: 0px !important; } }
+  nav .input-field i:first-of-type {
+    color: rgba(230, 230, 230, 0.9) !important;
+    right: initial !important;
+    left: 0.5em;
+    top: -15% !important; }
+  nav .input-field input[type=search] {
+    padding-right: 3.5em;
+    border: 0 !important;
+    box-sizing: border-box; }
+    nav .input-field input[type=search]:focus + i:first-of-type {
+      color: #444 !important; }
+
+.side-nav {
+  padding-top: 10px; }
+
+footer {
+  background-color: #151515 !important;
+  margin-top: 60px; }
+  footer a[href="http://www.pessia.xyz/"] {
+    transform: translateY(-50%); }
+  footer .footer-copyright .container div {
+    display: inline-block; }
+    @media screen and (min-width: 600px) {
+      footer .footer-copyright .container div {
+        width: calc(50% - 2px); }
+        footer .footer-copyright .container div:last-of-type {
+          text-align: right;
+          vertical-align: super; }
+          footer .footer-copyright .container div:last-of-type a {
+            vertical-align: super; } }
+
+.nav-content {
+  display: none; }
+
+/*# sourceMappingURL=error.css.map */
