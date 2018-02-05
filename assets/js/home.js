@@ -901,7 +901,7 @@ function Search(key) {
         //Prepare Modal
         $("#modal1 .modal-content>h4").html("Dados de " + players[pIndex].name); //MAIN TITLE
 
-        $("#playerStats").html('');
+        $("#jogos").html('');
         $("#sideGames").html('');
 
         table[pageStr].dados = {}; //player data broken down
@@ -922,12 +922,12 @@ function Search(key) {
                 table[pageStr].dados[lastJogo].jogos = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
                 var jogos = table[pageStr].dados[lastJogo].jogos;
 
-                $("#playerStats").append(jogoTitle + jogos[0] + " " + jogos[1] + " x " + jogos[2] + " " + jogos[3] + "</span>"); //EACH GAME MAIN BLOCK
+                $("#jogos").append(jogoTitle + jogos[0] + " " + jogos[1] + " x " + jogos[2] + " " + jogos[3] + "</span>"); //EACH GAME MAIN BLOCK
 
                 $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + jogos[4] + "</span></div>"); //EACH GAME SIDE BLOCK
 
                 var rowAnterior = i.split("row")[1] - 1;
-                $("#playerStats .col#row" + rowAnterior).attr("data-content", jogos[4])
+                $("#jogos .col#row" + rowAnterior).attr("data-content", jogos[4])
             }
             if (j == Object.keys(table[pageStr]).length - 2) { //ultima fileira (pontuação final)
                 table[pageStr].dados.pontuacao = table[pageStr][i][1];
