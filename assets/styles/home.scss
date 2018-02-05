@@ -1,5 +1,9 @@
 @import '_main.scss';
 
+.offline-ui {
+    display: none;
+}
+
 body {
     background-color: $page-bg;
 
