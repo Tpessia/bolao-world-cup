@@ -543,8 +543,6 @@ main.container {
                         }
                     }
                 }
-<<<<<<< HEAD
-=======
 
                 #primeiro {
                     text-align: center;
@@ -557,7 +555,6 @@ main.container {
                         border: 1px solid $colorA;
                     }
                 }
->>>>>>> test
             }
 
             #sidePont {
@@ -605,31 +602,6 @@ main.container {
                         float: right;
                         margin-right: 5px;
                         font-weight: 500;
-                    }
-                }
-            }
-
-            #primeiro {
-                text-align: center;
-
-                @media screen and (max-width: 992px) {
-                    margin-bottom: 10px;
-                }
-
-                @media screen and (min-width: 993px) {
-                    position: fixed;
-                    bottom: 61px;
-                    right: 20px;
-                    width: 25%;
-                }
-
-                strong {
-                    display: inline-block;
-                    padding: 5px 5px;
-                    border: 1px solid $colorA;
-    
-                    @media screen and (max-width: 992px) {
-                        padding: 5px 15px;
                     }
                 }
             }
