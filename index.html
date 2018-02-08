@@ -49,7 +49,12 @@
     <!-- <script src="lib/addtohomescreen.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
+<script>
+    (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
 
+    pushpad('init', 5049);
+    pushpad('subscribe');
+</script>
 </head>
 <body class="login loading">
     <div id="loading">
@@ -67,7 +72,7 @@
                     <label for="name" class="active">Nome <small>(como na planilha)</small></label>
                 </div>
                 <div class="input-field">
-                    <input type="submit" id="sendLogin" class="btn colorBl" value="Login">
+                    <input type="submit" id="sendLogin" class="btn colorAl" value="Login">
                 </div>
             </form>
 
@@ -300,14 +305,17 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                <div>
-                    Aplicação Web
-                    <br>
-                    Bolão Copa do Mundo 2018
+                <div class="row">
+                    <div class="col l6 s12">
+                        Aplicação Web
+                        <br>
+                        Bolão Copa do Mundo 2018
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por <strong>Thiago Pessia</strong></a>
+                    </div>
                 </div>
-                <div>
-                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por <strong>Thiago Pessia</strong></a></div>
-                </div>
+            </div>
         </div>
     </footer>
 

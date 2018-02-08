@@ -1,46 +1,46 @@
-.colorA {
+.colorNav {
   background-color: #151515 !important; }
 
-.colorAl {
+.colorNavl {
   background-color: #3b3b3b !important; }
+
+.colorNavd {
+  background-color: black !important; }
+
+.colorA {
+  background-color: #0F1626 !important; }
+
+.colorAl {
+  background-color: #25365d !important; }
 
 .colorAd {
   background-color: black !important; }
 
 .colorB {
-  background-color: #0F1626 !important; }
-
-.colorBl {
-  background-color: #25365d !important; }
-
-.colorBd {
-  background-color: black !important; }
-
-.colorC {
   background-color: #ffab40 !important; }
 
-.colorCl {
+.colorBl {
   background-color: #ffcd8d !important; }
 
-.colorCd {
+.colorBd {
   background-color: #f38800 !important; }
 
-.colorD {
+.colorC {
   background-color: #1A2930 !important; }
 
-.colorDl {
+.colorCl {
   background-color: #355362 !important; }
 
-.colorDd {
+.colorCd {
   background-color: black !important; }
 
-.colorE {
+.colorD {
   background-color: #A9B7C0 !important; }
 
-.colorEl {
+.colorDl {
   background-color: #d5dce0 !important; }
 
-.colorEd {
+.colorDd {
   background-color: #7d92a0 !important; }
 
 nav {
@@ -53,13 +53,13 @@ nav {
         margin-top: 5px;
         height: 80%; }
   nav .nav-wrapper > ul li.active {
-    background-color: #3b3b3b !important; }
+    background-color: #3b3b3b; }
   nav .nav-content {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: #181818;
     padding-left: 80%; }
     @media screen and (max-width: 992px) {
       nav .nav-content {
-        padding-left: 0px !important; } }
+        padding-left: 0px; } }
   nav .input-field i:first-of-type {
     color: rgba(230, 230, 230, 0.9) !important;
     right: initial !important;
@@ -73,23 +73,22 @@ nav {
       color: #444 !important; }
 
 .side-nav {
-  padding-top: 10px; }
+  padding-top: 15px; }
 
 footer {
   background-color: #151515 !important;
   margin-top: 60px; }
-  footer a[href="http://www.pessia.xyz/"] {
-    transform: translateY(-50%); }
-  footer .footer-copyright .container div {
-    display: inline-block; }
-    @media screen and (min-width: 600px) {
-      footer .footer-copyright .container div {
-        width: calc(50% - 2px); }
-        footer .footer-copyright .container div:last-of-type {
-          text-align: right;
-          vertical-align: super; }
-          footer .footer-copyright .container div:last-of-type a {
-            vertical-align: super; } }
+  footer .footer-copyright {
+    background-color: #181818; }
+    footer .footer-copyright .container .row {
+      margin-bottom: 0;
+      position: relative; }
+      @media screen and (min-width: 993px) {
+        footer .footer-copyright .container .row div:last-of-type {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0; } }
 
 .nav-content {
   display: none; }

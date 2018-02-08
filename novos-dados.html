@@ -37,7 +37,7 @@
             })
         }
 
-        function Arrayfy(sheetPage, nullify = false) { //create an array based on the spreadsheet page
+        function Arrayfy(sheetPage) { //create an array based on the spreadsheet page
             if (typeof table == "undefined") {table = {}; }
 
             table[sheetPage] = {};
@@ -50,14 +50,6 @@
                 if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {table[sheetPage]["row" + dataTemp.gs$cell.row] = []; } //create table.rowN
 
                 if (lastRow != dataTemp.gs$cell.row) {lastCol = 0; } //new row
-
-                if (dataTemp.gs$cell.col > lastCol && nullify) { //add null para células vazias
-                    var holes = dataTemp.gs$cell.col - lastCol - 1; //number of emptys
-
-                    for (var j = 0; j < holes; j++) {
-                        table[sheetPage]["row" + dataTemp.gs$cell.row].push(null);
-                    }
-                }
 
                 table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
 
@@ -106,15 +98,18 @@
                 j++;
             }
 
+            var myData = { 'primeiro': ranking[0].name };
+
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php?primeiro=" + ranking[0].name,
-                method: "GET",
+                url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php",
+                method: "POST",
+                data: myData,
                 success: function (data) {
                     console.log(data);
                     alert("Primeiros OK!");
                 },
                 error: function () {
-                    alert("A conecção com o servidor foi interrompida, tente novamente!")
+                    alert("A conexão com o servidor foi interrompida, tente novamente!")
                 }
             });
 
@@ -132,18 +127,19 @@
 
             // var params = { "ranking": ranking };
             paramsJSON = JSON.stringify(ranking);
-            console.log("https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media);
+
+            myData = { 'ranking': paramsJSON, 'media': media}
 
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php?ranking=" + paramsJSON + "&media=" + media,
-                method: "GET",
-                // data: paramsJSON,
+                url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php",
+                method: "POST",
+                data: myData,
                 success: function(data) {
                     console.log(data);
                     alert("Media e Dados Gerais OK!");
                 },
                 error: function () {
-                    alert("A conecção com o servidor foi interrompida, tente novamente!")
+                    alert("A conexão com o servidor foi interrompida, tente novamente!")
                 }
             });
         }
@@ -180,7 +176,7 @@
         //                 $("body").html(data);
         //             },
         //             error: function () {
-        //                 alert("A conecção com o servidor foi interrompida, tente novamente!")
+        //                 alert("A conexão com o servidor foi interrompida, tente novamente!")
         //             }
         //         });
         //     }

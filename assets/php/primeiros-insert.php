@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 $date = date("Y-m-d");
 
-// $primeiro = $_GET["primeiro"];
+// $primeiro = $_POST["primeiro"];
 
 // if(preg_match('/--/', $primeiro)){
 //     die("Invalid Name (primeiro): " . $primeiro);
@@ -40,7 +40,7 @@ die("Connection failed: " . mysqli_connect_error());
 
 //create
 
-$primeiro = mysqli_real_escape_string($conn, $_GET["primeiro"]); //validate
+$primeiro = mysqli_real_escape_string($conn, $_POST["primeiro"]); //validate
 
 $sql = "
 

@@ -215,10 +215,10 @@ main.container {
 
         margin: .3rem 0 !important;
 
-        background-color: $colorBl;
+        background-color: $colorAl;
 
         .btn-floating {
-            background-color: $colorCd;
+            background-color: $colorBd;
         }
 
         .row {
@@ -278,7 +278,7 @@ main.container {
 
         .rankElem {
             cursor: pointer;
-            color: $colorC !important;
+            color: $colorB !important;
         }
     }
 
@@ -297,7 +297,7 @@ main.container {
         }
 
         .rankBtn {
-            background-color: $colorAl;
+            background-color: $colorNavl;
             font-size: 0.75em;
             margin-left: .75rem;
             line-height: 50px;
@@ -320,7 +320,7 @@ main.container {
         ;
         right: 7px;
         transition: all .3s ease-in-out;
-        border-right: 7px solid $colorBl;
+        border-right: 7px solid $colorAl;
         box-sizing: content-box;
 
         -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
@@ -328,15 +328,15 @@ main.container {
         box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
 
         .card {
-            background-color: $colorBd;
+            background-color: $colorAd;
 
             &.highlight {
-                border: 3px solid $colorBl;
+                border: 3px solid $colorAl;
             }
         }
 
         .btn-floating {
-            background-color: $colorBl;
+            background-color: $colorAl;
         }
 
         h2 {
@@ -474,7 +474,7 @@ main.container {
 
             .btn {
                 font-size: 0.8rem;
-                background-color: $colorBl;
+                background-color: $colorAl;
             }
 
             &.show {
@@ -556,7 +556,7 @@ main.container {
                     strong {
                         display: inline-block;
                         padding: 5px 10px;
-                        border: 1px solid $colorA;
+                        border: 1px solid $colorNav;
                     }
                 }
             }

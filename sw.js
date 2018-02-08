@@ -189,3 +189,5 @@ self.addEventListener("activate", function (event) {
             })
     );
 });
+
+importScripts('https://pushpad.xyz/service-worker.js');

@@ -487,10 +487,10 @@ function BindMain() {
 }
 
 function Highlight() { //current user highlight on ranking
-    $('#rankContent div.col .card.colorB').removeClass("colorB");
+    $('#rankContent div.col .card.colorA').removeClass("colorA");
     $('#sideRank .col .card.highlight').removeClass("highlight");
 
-    $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorB");
+    $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorA");
     $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
 }
 
@@ -616,9 +616,7 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
     })
 }
 
-function TableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create an array based on the spreadsheet page
-    nullify = typeof nullify === "undefined" ? false : nullify;
-
+function TableCreate(sheetPage) { //create an array based on the spreadsheet page
     if (typeof table == "undefined") {
         table = {};
     }
@@ -637,14 +635,6 @@ function TableCreate(sheetPage, nullify /*= false -invávido no ie*/) { //create
         if (lastRow != dataTemp.gs$cell.row) {
             lastCol = 0;
         } //new row
-
-        if (dataTemp.gs$cell.col > lastCol && nullify) { //add null para células vazias
-            var holes = dataTemp.gs$cell.col - lastCol - 1; //number of emptys
-
-            for (var j = 0; j < holes; j++) {
-                table[sheetPage]["row" + dataTemp.gs$cell.row].push(null);
-            }
-        }
 
         table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
 

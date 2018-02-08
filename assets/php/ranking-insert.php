@@ -14,7 +14,7 @@
         
     
     
-    $ranking = $_GET["ranking"];
+    $ranking = $_POST["ranking"];
 
     $tempData = html_entity_decode($ranking);
     $cleanData = json_decode($tempData);
@@ -107,7 +107,7 @@
 
     //media
 
-    $media = $_GET["media"];
+    $media = $_POST["media"];
 
     $sql = "
 
