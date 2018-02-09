@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110855560-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110855560-1');
+    </script>
+    
+    <title>Login | 9º Bolão Copa do Mundo</title>
+    
+    <meta charset="utf-8">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Bolão do Maurício">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#151515">
+    <meta name="description" content="Faça o login no Bolão!">
+    
+    <link rel="icon" type="image/png" href="assets/img/icon.png">
+    
+    <script> //redirect caso a data de lançamento não tenha chego
+        var lacamento = new Date("2018-02-05T08:45-02:00"),
+            hoje = new Date();
+
+        if (lacamento.getTime() > hoje.getTime()) {
+            window.location.replace("/not_ready.html");
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/styles/css/min/login.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="assets/js/login.js"></script>
+</head>
+<body>
+    <div id="login">
+        <div id="formLogin">
+            <form>
+                <div class="input-field">
+                    <input type="text" id="name" name="codigo">
+                    <label for="name" class="active">Nome <small>(como na planilha)</small></label>
+                </div>
+                <div class="input-field">
+                    <input type="submit" id="sendLogin" class="btn colorAl" value="Login">
+                </div>
+            </form>
+    
+            <div id="contato">
+                <a href="/contato.html" target="_blank">Problemas ou dúvidas? Entre em <strong>contato</strong>.</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

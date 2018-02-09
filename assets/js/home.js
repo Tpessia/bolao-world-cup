@@ -31,6 +31,9 @@ window.onload = function() { //window load
 
 $(function() { //document ready
 
+    if (localStorage.getItem("user") === null)
+        window.location.replace('/login.html');
+
     Offline.check();
 
     //Inicia como Offline ou Online
@@ -73,64 +76,15 @@ function Login() {
 
         Welcome();
         Highlight();
-        // PrepareOffline(); //test, parece que funcionou. O erro era o localStorage não atualizar a pontuação do usuario após atualização do db, isso ocorria por que chamavamos o prepareOffline antes do GetChartData, entao os valores do usuário permaneciam como o antigo
     }
 
-    //submit cadastro
-
-    $('#name').off().keypress(function (e) {
-        if (e.which == 13) {
-            $('#formLogin').submit();
-            return false;
-        }
-    });
-
-    $("#formLogin").off().on("submit", function (e) {
-        e.preventDefault();
-        Cadastrar();
-    });
-
-    function Cadastrar() {
-        user = { name: "", code: "", page: "", pontuacao: [], colocacao: [], date: [] };
-
-        //validação
-        
-        // user.name = $("#name").val().trim();
-        user.code = $("#name").val().trim();
-
-        var playerCount = 1;
-        for (i in players) { //players[i].name and players[i].page
-            // if (user.name == players[i].name) { //verifica se usuário é válido
-            if (user.code == players[i].code) { //verifica se usuário é válido
-                user.name = players[i].name;
-                user.code =players[i].code;
-                user.page = players[i].page;
-
-                $(".chartLoading").addClass("active");
-                $("a.login").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //prevent new logins while ajax is running
+    function UserPosition() { //current user position
+        for (var i in ranking) {
+            if (ranking[i].name.match(user.name)) {
+                user.currentPosition = parseInt(i) + 1;
                 break;
             }
-            if (playerCount == players.length) { //se nenhum for válido, cancela o cadastro
-                $("#name").addClass("invalid");
-                return; //cancela cadastro
-            }
-            playerCount++;
         }
-
-        UserPosition();
-
-        //cadastro
-
-        localStorage.setItem('user', JSON.stringify(user));
-
-        Welcome();
-
-        $("#name").val("");
-        $("body").removeClass("login");
-
-        Highlight();
-
-        GetChartData();
     }
 
     function Welcome() { //welcome name update
@@ -139,15 +93,13 @@ function Login() {
         $("#welcome div").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
     }
 
-    $("a.login").on("click", function () { //nav login open
-        $("#login .close").addClass("active");
-        $("#name").removeClass("invalid");
-        $("body").addClass("login");
-    });
+    function Highlight() { //current user highlight on ranking
+        $('#rankContent div.col .card.colorA').removeClass("colorA");
+        $('#sideRank .col .card.highlight').removeClass("highlight");
 
-    $("#login .close").on("click", function() { //close login page
-        $("body").removeClass("login");
-    });
+        $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorA");
+        $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
+    }
 }
 
 
@@ -190,15 +142,6 @@ function RankCreate() { //create ranking element and object
 
     //winner div
     $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
-}
-
-function UserPosition() { //current user position
-    for (var i in ranking) {
-        if (ranking[i].name.match(user.name)) {
-            user.currentPosition = parseInt(i) + 1;
-            break;
-        }
-    }
 }
 
 function ResizeArray(arr, size) {
@@ -486,14 +429,6 @@ function BindMain() {
     });
 }
 
-function Highlight() { //current user highlight on ranking
-    $('#rankContent div.col .card.colorA').removeClass("colorA");
-    $('#sideRank .col .card.highlight').removeClass("highlight");
-
-    $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorA");
-    $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
-}
-
 function ShowMoreRank() {
     k += 6; //number of players shown on click (= k-1)
 
@@ -597,6 +532,8 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
                 charts3.create();
 
                 Login(); //manages the login "page" or automatically logs in
+
+                $(".chartLoading").addClass("active");
 
                 //se online, verifica os dados no DB
                 if (typeof user !== "undefined") {
@@ -721,7 +658,6 @@ function GetChartData() {
 
             PrepareOffline();
 
-            // $("body").removeClass("loading");
             $(".chartLoading").removeClass("active");
             $("a.login").css({
                 "opacity": "1",
