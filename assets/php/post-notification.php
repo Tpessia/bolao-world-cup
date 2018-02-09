@@ -5,8 +5,8 @@
     Pushpad\Pushpad::$project_id = 5053; # set it here or pass it as a param to methods later
     echo 'ok';
 
-//     $notification = new Pushpad\Notification(array(
-//   'body' => "Hello world!", # max 120 characters
+    $notification = new Pushpad\Notification(array(
+  'body' => "As pontuações foram atualizadas!", # max 120 characters
 //   'title' => "Website Name", # optional, defaults to your project name, max 30 characters
 //   'target_url' => "http://example.com", # optional, defaults to your project website
 //   'icon_url' => "http://example.com/assets/icon.png", # optional, defaults to the project icon
@@ -31,7 +31,7 @@
 //   # optional, add the notification to custom categories for stats aggregation
 //   # see https://pushpad.xyz/docs/monitoring
 //   'custom_metrics' => array('examples', 'another_metric') # up to 3 metrics per notification
-// ));
+));
 
 # deliver to a user
 // $notification->deliver_to($user_id);
@@ -53,10 +53,10 @@
 // $notification->deliver_to($users, ["tags" => ["tag1 && tag2", "tag3"]]); # equal to "tag1 && tag2 || tag3"
 
 # deliver to everyone
-// $notification->broadcast();
-// echo 'ok';
+$notification->broadcast();
+echo 'ok';
 
-
+/*
 
     $ranking = $_POST["ranking"];
 
@@ -100,4 +100,5 @@
         $notification->broadcast(["tags" => [$value->name]]);
         echo 'ok';
     }
+*/
 ?>
