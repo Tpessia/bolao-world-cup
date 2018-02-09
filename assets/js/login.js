@@ -1,5 +1,7 @@
 $(function() {
     OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+    
+    $("#name").trigger("focus");
 
     $('#name').off().keypress(function (e) {
         if (e.which == 13) {
