@@ -5,7 +5,7 @@
     Pushpad\Pushpad::$project_id = 5053; # set it here or pass it as a param to methods later
     echo 'ok';
 
-    $notification = new Pushpad\Notification(array(
+    /*$notification = new Pushpad\Notification(array(
   'body' => "As pontuações foram atualizadas!", # max 120 characters
 //   'title' => "Website Name", # optional, defaults to your project name, max 30 characters
 //   'target_url' => "http://example.com", # optional, defaults to your project website
@@ -54,11 +54,9 @@
 
 # deliver to everyone
 $notification->broadcast();
-echo 'ok';
+echo 'ok';*/
 
-/*
-
-    $ranking = $_POST["ranking"];
+    $ranking = $_POST["users"];
 
     $tempData = html_entity_decode($ranking);
     $cleanData = json_decode($tempData);
@@ -95,10 +93,9 @@ echo 'ok';
         //   'custom_metrics' => array('examples', 'another_metric') # up to 3 metrics per notification
         ));
 
-        $value->name = str_replace(' ', '_', $value->name);
+        $nameKey = preg_replace('/[[:^print:]]/', '', str_replace(' ', '_', $value->name . ' ' . $value->page));
 
-        $notification->broadcast(["tags" => [$value->name]]);
+        $notification->broadcast(["tags" => [$nameKey]]);
         echo 'ok';
     }
-*/
 ?>

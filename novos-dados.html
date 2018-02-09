@@ -125,10 +125,7 @@
             }
             media = (total / ranking.length).toFixed(2);
 
-            // var params = { "ranking": ranking };
-            paramsJSON = JSON.stringify(ranking);
-
-            myData2 = { 'ranking': paramsJSON, 'media': media}
+            var myData2 = { 'ranking': JSON.stringify(ranking), 'media': media}
 
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php",
@@ -147,10 +144,20 @@
         }
 
         function SendNotifications() {
+            users = [];
+            for (var i in ranking) {
+                for (var j in players) {
+                    if (players[j].name == ranking[i].name) {
+                        users.push({ name: players[j].name, code: players[j].code, page: players[j].page, pontuacao: ranking[i].pontuacao });
+                        break;
+                    }
+                }
+            }
+            var myData3 = { 'users': JSON.stringify(users) };
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/post-notification.php",
                 method: "POST",
-                data: myData2,
+                data: myData3,
                 success: function (data) {
                     console.log(data);
                     alert("Notificações Enviadas!");
