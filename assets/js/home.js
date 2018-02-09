@@ -148,6 +148,8 @@ function Login() {
     $("#login .close").on("click", function() { //close login page
         $("body").removeClass("login");
     });
+
+    NotifyPerm();
 }
 
 

@@ -31,7 +31,7 @@
                         Arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
                     },
                     error: function () {
-                        alert("A conecção com o servidor foi interrompida, tente novamente!")
+                        alert("A conexão com o servidor foi interrompida, tente novamente!")
                     }
                 });
             })
@@ -98,7 +98,7 @@
                 j++;
             }
 
-            var myData = { 'primeiro': ranking[0].name };
+            var myData1 = { 'primeiro': ranking[0].name };
 
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php",
@@ -128,12 +128,12 @@
             // var params = { "ranking": ranking };
             paramsJSON = JSON.stringify(ranking);
 
-            myData = { 'ranking': paramsJSON, 'media': media}
+            var myData2 = { 'ranking': paramsJSON, 'media': media}
 
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/ranking-insert.php",
                 method: "POST",
-                data: myData,
+                data: myData2,
                 success: function(data) {
                     console.log(data);
                     alert("Media e Dados Gerais OK!");
@@ -155,6 +155,21 @@
             }
 
             return res/*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/.replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
+        }
+
+        function SendNotifications() {
+            $.ajax({
+                url: "https://www.bolaodomauricio.xyz/assets/php/post-notifications.php",
+                method: "POST",
+                data: myData2,
+                success: function (data) {
+                    console.log(data);
+                    alert("Notificações Enviadas!");
+                },
+                error: function () {
+                    alert("A conexão com o servidor foi interrompida, tente novamente!")
+                }
+            });
         }
     </script>
 </head>

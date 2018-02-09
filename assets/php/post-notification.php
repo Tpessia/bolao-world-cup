@@ -1,8 +1,11 @@
 <?php
-    $auth_token = '07071ad1707106950ecf1927a30038da';
-    $project_id = 5053;
+    require_once('/home/u662107342/vendor/autoload.php');
+    
+    Pushpad\Pushpad::$auth_token = '07071ad1707106950ecf1927a30038da';
+    Pushpad\Pushpad::$project_id = 5053; # set it here or pass it as a param to methods later
+    echo 'ok';
 
-    $notification = new Notification(array(
+    $notification = new Pushpad\Notification(array(
   'body' => "Hello world!", # max 120 characters
 //   'title' => "Website Name", # optional, defaults to your project name, max 30 characters
 //   'target_url' => "http://example.com", # optional, defaults to your project website
@@ -50,5 +53,6 @@
 // $notification->deliver_to($users, ["tags" => ["tag1 && tag2", "tag3"]]); # equal to "tag1 && tag2 || tag3"
 
 # deliver to everyone
-$notification->broadcast(); 
+$notification->broadcast();
+echo 'ok';
 ?>
