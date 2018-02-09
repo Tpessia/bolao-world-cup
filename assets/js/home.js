@@ -19,6 +19,9 @@ if (typeof localStorage === 'object') {
     }
 }
 
+if (localStorage.getItem("user") === null)
+    window.location.replace('/login.html');
+
 //STOP LOADING ANIM
 
 window.onload = function() { //window load
@@ -30,9 +33,6 @@ window.onload = function() { //window load
 //CONTROLLER
 
 $(function() { //document ready
-
-    if (localStorage.getItem("user") === null)
-        window.location.replace('/login.html');
 
     Offline.check();
 

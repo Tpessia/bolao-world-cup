@@ -97,11 +97,21 @@ footer {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: black; }
+  background-image: url("/assets/img/login-gb.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: top; }
+  #login #bg-layer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); }
   #login #formLogin {
     position: absolute;
-    min-width: 25%;
-    top: 45%;
+    width: 65%;
+    max-width: 325px;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%); }
     #login #formLogin #name {
