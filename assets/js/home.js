@@ -19,9 +19,6 @@ if (typeof localStorage === 'object') {
     }
 }
 
-if (localStorage.getItem("user") === null)
-    window.location.replace('/login.html');
-
 //STOP LOADING ANIM
 
 window.onload = function() { //window load

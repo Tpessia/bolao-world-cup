@@ -26,6 +26,13 @@
 
     <link rel="icon" type="image/png" href="assets/img/icon.png">
 
+    <script>
+        if (localStorage.getItem("user") === null) {
+            window.location.replace('/login.html');
+            window.stop();
+        }
+    </script>
+
     <script> //redirect caso a data de lançamento não tenha chego
         var lacamento = new Date("2018-02-05T08:45-02:00"),
             hoje = new Date();
