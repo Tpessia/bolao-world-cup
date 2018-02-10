@@ -119,6 +119,7 @@
 
             total = 0;
             for (i in ranking) {
+                ranking[i].original = ranking[i].name;
                 ranking[i].name = ValidadeDbInput(ranking[i].name) + "_" + ranking[i].page;
 
                 total += parseInt(ranking[i].pontuacao); 
@@ -147,7 +148,7 @@
             users = [];
             for (var i in ranking) {
                 for (var j in players) {
-                    if (players[j].name == ranking[i].name) {
+                    if (players[j].name == ranking[i].original) {
                         users.push({ name: players[j].name, code: players[j].code, page: players[j].page, pontuacao: ranking[i].pontuacao });
                         break;
                     }
