@@ -61,9 +61,11 @@
 
         pushpad('init', 5053);
         pushpad('unsubscribe');
-        setTimeout(() => {
-            pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
-        }, 2000);
+        for (var time = 0; time <= 5000; time = time + 1000) {
+            setTimeout(() => {
+                pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
+            }, time);
+        }
     </script>
 </head>
 <body class="login loading">
