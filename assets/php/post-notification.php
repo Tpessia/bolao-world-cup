@@ -64,12 +64,13 @@ echo 'ok';*/
     $tempData = html_entity_decode($ranking);
     $cleanData = json_decode($tempData);
 
+    $index = 1;
     foreach ($cleanData as $value) {
         // $value->name;
         // $value->pontuacao;
 
         $notification = new Pushpad\Notification(array(
-        'body' => "Olá, " . $value->name . "! Sua pontuação foi atualizada para: " . $value->pontuacao, # max 120 characters
+        'body' => "Olá, " . $value->name . "! Estes são seus dados da nova rodada: " . $value->pontuacao . 'pts | ' . $index . 'º lugar', # max 120 characters
         'title' => "Bolão Maurício - Pontuação", # optional, defaults to your project name, max 30 characters
         //   'target_url' => "http://example.com", # optional, defaults to your project website
         //   'icon_url' => "http://example.com/assets/icon.png", # optional, defaults to the project icon
@@ -99,6 +100,8 @@ echo 'ok';*/
         $nameKey = preg_replace('/[[:^print:]]/', '', preg_replace("/[^ \w]+/", "", str_replace(' ', '_', $value->name . ' ' . $value->page)));
 
         $notification->broadcast(["tags" => [$nameKey]]);
+
+        $index++;
         echo 'ok';
     }
 ?>
