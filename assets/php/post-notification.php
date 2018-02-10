@@ -93,7 +93,7 @@ echo 'ok';*/
         //   'custom_metrics' => array('examples', 'another_metric') # up to 3 metrics per notification
         ));
 
-        $nameKey = preg_replace('/[[:^print:]]/', '', str_replace(' ', '_', $value->name . ' ' . $value->page));
+        $nameKey = preg_replace('/[[:^print:]]/', '', preg_replace("/[^ \w]+/", "", str_replace(' ', '_', $value->name . ' ' . $value->page)));
 
         $notification->broadcast(["tags" => [$nameKey]]);
         echo 'ok';
