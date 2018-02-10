@@ -1,4 +1,7 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     require_once('/home/u662107342/vendor/autoload.php');
     
     Pushpad\Pushpad::$auth_token = '07071ad1707106950ecf1927a30038da';
