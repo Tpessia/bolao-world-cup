@@ -100,4 +100,10 @@ footer {
 #notif {
   margin: 70px 0 45px 0; }
 
+#form-email h4 {
+  padding-top: 20px; }
+  @media screen and (max-width: 600px) {
+    #form-email h4 {
+      padding-top: 10px; } }
+
 /*# sourceMappingURL=contato.css.map */
