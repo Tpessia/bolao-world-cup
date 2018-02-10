@@ -61,7 +61,9 @@
 
         pushpad('init', 5053);
         pushpad('unsubscribe');
-        pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
+        setTimeout(() => {
+            pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
+        }, 2000);
     </script>
 </head>
 <body class="login loading">
