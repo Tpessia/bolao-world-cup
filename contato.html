@@ -87,14 +87,9 @@
     </header>
 
     <main id="conteudo" class="container">
-        <div id="notif">
-            <h4>Notificações</h4>
-            <p>Clique no botão abaixo para remover as notificações deste dispositivo.</p>
-            <button id="unsub" class="btn colorAl">Desinscrever</button>
-        </div>
         <div id="form-email">
             <h4>Email</h4>
-            <p>Entre em contato conosco preenchendo os campos abaixo:</p>
+            <p>Entre em contato por email conosco através dos campos abaixo:</p>
             <form id="form" style="margin-bottom: 30px; margin-top: 45px;" action="assets/php/contact.php" method="post" accept-charset="utf-8">
                 <div class="input-field">
                     <input name="email" id="email" type="email" placeholder="seuemail@exemplo.com.br" required>
@@ -112,6 +107,11 @@
                     <input type="submit" class="btn colorAl" value="Enviar">
                 </div>
             </form>
+        </div>
+        <div id="notif">
+            <h4>Notificações</h4>
+            <p>Clique no botão abaixo para remover as notificações deste dispositivo.</p>
+            <button id="unsub" class="btn colorAl">Desinscrever</button>
         </div>
     </main>
 
@@ -131,6 +131,24 @@
             <h4>ERRO</h4>
             <p>Sua mensagem não pode ser enviada! Tente enviar novamente.</p>
             <p>Se os problemas persistirem, entre em contato utilizando um dos canais de comunicação presentes no rodapé da página!</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
+        </div>
+    </div>
+
+    <div id="unsubed" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Notificações Desativadas!</h4>
+            <p>
+                As notificações do Bolão foram desativadas!
+                <br>
+                Mas <strong>ATENÇÃO</strong>, para evitar que sejam reativadas (ao visitar o site novamente), remova as permições deste site em seu navegador.
+            </p>
+            <p>
+                <strong>Links Úteis:</strong>
+                <a href="https://www.youtube.com/watch?v=36i3yHkVLjY"></a>
+            </p>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
@@ -197,8 +215,13 @@
 
     <script>
         $("#unsub").on("click", function() {
-            pushpad('init', 5053);
-            pushpad('unsubscribe');
+            try {
+                pushpad('init', 5053);
+                pushpad('unsubscribe');
+                timer = setTimeout(function() {$('#unsubed').modal('open');}, 2000);
+            } catch (e) {
+                clearTimeout(timer);
+            }
         });
     </script>
 
