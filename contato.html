@@ -33,10 +33,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
+    <script>
+        (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
+    </script>
 </head>
 
 <body>
-
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
@@ -57,7 +59,6 @@
                         <a href="/contato.html">Contato</a>
                     </li>
                 </ul>
-
             </div>
 
             <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
@@ -86,23 +87,32 @@
     </header>
 
     <main id="conteudo" class="container">
-        <form id="form" style="margin-bottom: 30px; margin-top: 45px;" action="assets/php/contact.php" method="post" accept-charset="utf-8">
-            <div class="input-field">
-                <input name="email" id="email" type="email" placeholder="seuemail@exemplo.com.br" required>
-                <label for="email">Email</label>
-            </div>
-            <div class="input-field">
-                <input name="assunto" id="assunto" type="text" placeholder="Meu Assunto" required>
-                <label for="email">Assunto</label>
-            </div>
-            <div class="input-field">
-                <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' style="height: 40vh; min-height: 170px;" required></textarea>
-                <label for="mensagem">Mensagem</label>
-            </div>
-            <div class="input-field">
-                <input type="submit" class="btn colorAl" value="Enviar">
-            </div>
-        </form>
+        <div id="notif">
+            <h4>Notificações</h4>
+            <p>Clique no botão abaixo para remover as notificações deste dispositivo.</p>
+            <button id="unsub" class="btn colorAl">Desinscrever</button>
+        </div>
+        <div id="form-email">
+            <h4>Email</h4>
+            <p>Entre em contato conosco preenchendo os campos abaixo:</p>
+            <form id="form" style="margin-bottom: 30px; margin-top: 45px;" action="assets/php/contact.php" method="post" accept-charset="utf-8">
+                <div class="input-field">
+                    <input name="email" id="email" type="email" placeholder="seuemail@exemplo.com.br" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input name="assunto" id="assunto" type="text" placeholder="Meu Assunto" required>
+                    <label for="email">Assunto</label>
+                </div>
+                <div class="input-field">
+                    <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' style="height: 40vh; min-height: 170px;" required></textarea>
+                    <label for="mensagem">Mensagem</label>
+                </div>
+                <div class="input-field">
+                    <input type="submit" class="btn colorAl" value="Enviar">
+                </div>
+            </form>
+        </div>
     </main>
 
     <div id="myModal" class="modal modal-fixed-footer">
@@ -182,6 +192,13 @@
                     $("#errorModal").modal("open");
                 }
             });
+        });
+    </script>
+
+    <script>
+        $("#unsub").on("click", function() {
+            pushpad('init', 5053);
+            pushpad('unsubscribe');
         });
     </script>
 
