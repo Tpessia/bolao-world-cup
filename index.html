@@ -59,14 +59,15 @@
     <script>
         (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
 
+        //(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")
         var shaObj = new jsSHA("SHA-1", "TEXT");
         shaObj.setHMACKey("07071ad1707106950ecf1927a30038da", "TEXT");
-        shaObj.update((user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, ""));
+        shaObj.update(user.name);
         var hmac = shaObj.getHMAC("HEX");
 
         pushpad('init', 5053);
         // pushpad('unsubscribe');
-        pushpad('uid', (user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, ""), hmac);
+        pushpad('uid', user.name, hmac);
         // for (var time = 0; time <= 5000; time = time + 1000) {
         //     setTimeout(() => {
         //         pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
