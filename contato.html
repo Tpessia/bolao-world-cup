@@ -110,7 +110,7 @@
         </div>
         <div id="notif">
             <h4>Notificações</h4>
-            <p>Clique no botão abaixo para remover as notificações deste dispositivo.</p>
+            <p>Clique no botão abaixo para remover as notificações deste dispositivo.<br><small>*Apenas remove seu dispositivo de nossa lista de envios, para bloquear permanentemente procure nas configurações do seu navegador</small></p>
             <button id="unsub" class="btn" style="background-color: rgb(201, 58, 58)">Desinscrever</button>
         </div>
     </main>
@@ -146,9 +146,9 @@
             <p>
                 <strong>Links Úteis:</strong>
                 <br>
-                <a href="https://support.google.com/chrome/answer/114662?co=GENIE.Platform%3DDesktop&hl=pt-BR" style="color: rgba(0,0,0,0.87)">Alterar permissões do site - Google</a>
+                <a href="https://support.google.com/chrome/answer/114662?co=GENIE.Platform%3DDesktop&hl=pt-BR">Alterar permissões do site - Google</a>
                 <br>
-                <a href="https://www.youtube.com/watch?v=36i3yHkVLjY" style="color: rgba(0,0,0,0.87)">Remover notificações no Google Chrome - YouTube</a>
+                <a href="https://www.youtube.com/watch?v=36i3yHkVLjY">Remover notificações no Google Chrome - YouTube</a>
             </p>
         </div>
         <div class="modal-footer">
@@ -219,7 +219,7 @@
             try {
                 pushpad('init', 5053);
                 pushpad('unsubscribe');
-                timer = setTimeout(function() {$('#unsubed').modal('open');}, 2000);
+                timer = setTimeout(function() {$('#unsubed').modal('open');}, 1500);
             } catch (e) {
                 clearTimeout(timer);
             }
