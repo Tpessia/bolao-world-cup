@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="assets/styles/css/min/home.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/offline.min.js"></script>
     <script src="assets/js/home.js"></script>
@@ -59,13 +59,19 @@
     <script>
         (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
 
+        var shaObj = new jsSHA("SHA-1", "TEXT");
+        shaObj.setHMACKey("07071ad1707106950ecf1927a30038da", "TEXT");
+        shaObj.update((user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, ""));
+        var hmac = shaObj.getHMAC("HEX");
+
         pushpad('init', 5053);
-        pushpad('unsubscribe');
-        for (var time = 0; time <= 5000; time = time + 1000) {
-            setTimeout(() => {
-                pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
-            }, time);
-        }
+        // pushpad('unsubscribe');
+        pushpad('uid', (user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, ""), hmac);
+        // for (var time = 0; time <= 5000; time = time + 1000) {
+        //     setTimeout(() => {
+        //         pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
+        //     }, time);
+        // }
     </script>
 </head>
 <body class="login loading">
