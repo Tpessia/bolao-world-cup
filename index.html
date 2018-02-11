@@ -350,12 +350,13 @@
         pushpad('uid', user.name, hmac);
 
         var updateButton = function (isSubscribed) {
-            var btn = $('#push-sub i');
+            var btn = $('#push-sub');
+            var btnI = $('#push-sub i');
             if (isSubscribed) {
-                btn.html('notifications_off');
+                btnI.html('notifications_off');
                 btn.addClass('subscribed');
             } else {
-                btn.html('notifications_active');
+                btnI.html('notifications_active');
                 btn.removeClass('subscribed');
             }
         };
