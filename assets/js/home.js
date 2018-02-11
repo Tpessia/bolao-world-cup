@@ -386,8 +386,6 @@ charts3 = {
 //events
 
 function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
-
-
     $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
         var nome = $(this).closest(".card").find(".card-title").html(); //modal
         nome = nome.split(" ")
@@ -423,6 +421,45 @@ function BindMain() {
 
     $(".blockMobile .btn").on("click", function () {
         $(".blockMobile").removeClass("show");
+    });
+
+    var updateButton = function(isSubscribed) {
+        var btn = $("#sub button");
+        if (isSubscribed) {
+            btn.html("Desinscrever");
+            btn.addClass('subscribed');
+        }
+        else {
+            btn.html("Subscrever");
+            btn.removeClass('subscribed');
+        }
+    }
+
+    pushpad('status', updateButton);
+
+    $("#sub button").on('click', function(e) {
+        e.preventDefault();
+
+        if ($(this).hasClass(subscribed)) {
+            pushpad('unsubscribe', function() {
+                updateButton(false);
+            });
+        }
+        else {
+            pushpad('subscribe', function(isSubscribed) {
+                if (isSubscribed) {
+                    updateButton(true);
+                }
+                else {
+                    updateButton(false);
+                    alert("Você bloqueou as notificações deste site no seu navegador, desbloquei-as para habilitar essa função!");
+                }
+            }, { uid: user.name, uidSignature: hmac });
+        }
+    });
+
+    pushpad('unsupported', function () {
+        $('#sub button').prop('disabled', true);
     });
 }
 

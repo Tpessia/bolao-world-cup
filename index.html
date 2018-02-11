@@ -67,8 +67,8 @@
 
         pushpad('init', 5053);
         // pushpad('unsubscribe');
-        pushpad('subscribe');
-        pushpad('uid', user.name, hmac);
+        // pushpad('subscribe', function() {}, {uid: user.name, uidSignature: hmac});
+        // pushpad('uid', user.name, hmac);
         // for (var time = 0; time <= 5000; time = time + 1000) {
         //     setTimeout(() => {
         //         pushpad('subscribe', function () { }, { tags: [(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")] });
@@ -81,6 +81,10 @@
         <span id="ball">
             <img src="assets/img/loading-ball.gif">
         </span>
+    </div>
+
+    <div id="sub">
+        <button type="button" class="btn">Sub</button>        
     </div>
 
     <header>
