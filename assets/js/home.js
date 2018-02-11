@@ -122,7 +122,7 @@ function RankCreate() { //create ranking element and object
 
         sideRank = rankBlock;
 
-        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">add</i></a></span><span class="col s9 m3 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
+        rankBlock += '<div class="card"><div class="card-content white-text row"><span class="card-title col s9 m4 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s2 m5 right"><a class="rankElem large-only">Ver Dados</a><a class="btn-floating ' + btn + ' waves-effect waves-light hide-on-large-only"><i class="material-icons">search</i></a></span><span class="col s9 m3 pontuacao">' + ranking[i].pontuacao + ' pts' + '</span></div></div></div>'; //main rank block
 
         $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
 
