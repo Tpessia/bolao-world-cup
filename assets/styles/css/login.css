@@ -107,7 +107,10 @@ footer {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.75); }
+    background-color: rgba(0, 0, 0, 0.7); }
+    @media screen and (max-width: 600px) {
+      #login #bg-layer {
+        background-color: rgba(0, 0, 0, 0.55); } }
   #login #formLogin {
     position: absolute;
     width: 65%;
