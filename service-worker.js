@@ -23,6 +23,8 @@ self.addEventListener("install", function (event) {
                     '/',
                     '/index.html',
                     '/contato.html',
+                    '/login.html',
+                    '/assets/img/login-bg.jpg',
                     '/assets/img/icon.png',
                     '/assets/img/imgHead.jpg',
                     '/assets/js/home.js',
