@@ -145,7 +145,7 @@ main.container {
 .rank {
     $content-height: 85px;
     $content-padding: 15px;
-    
+
     h1 {
         padding: 4% .75rem;
         text-align: center;
@@ -167,7 +167,6 @@ main.container {
             padding: $content-padding;
 
             >* {
-                line-height: 40px;
                 font-size: 18px;
                 font-weight: 300;
                 white-space: nowrap;
