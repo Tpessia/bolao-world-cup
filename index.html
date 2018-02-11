@@ -352,7 +352,6 @@
         var pushInit = false;
 
         var updateButton = function (isSubscribed) {
-            pushInit = true;
             var btn = $('#push-sub');
             var btnI = $('#push-sub i');
             if (isSubscribed) {
@@ -364,6 +363,7 @@
                 btn.removeClass('subscribed');
                 if (pushInit) Materialize.toast('Notificações desativadas!', 3000);
             }
+            pushInit = true;
         };
         // check whether the user is subscribed to the push notifications and
         // initialize the button status (e.g. display Subscribe or Unsubscribe)
