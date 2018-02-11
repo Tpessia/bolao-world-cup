@@ -430,51 +430,49 @@ function BindMain() {
         // optionally call 'uid' if the user is logged in to your website
         pushpad('uid', user.name, hmac);
 
-        $(function () {
-            var updateButton = function (isSubscribed) {
-                var btn = $('#sub button');
-                if (isSubscribed) {
-                    btn.html('Unsubscribe');
-                    btn.addClass('subscribed');
-                } else {
-                    btn.html('Subscribe');
-                    btn.removeClass('subscribed');
-                }
-            };
-            // check whether the user is subscribed to the push notifications and
-            // initialize the button status (e.g. display Subscribe or Unsubscribe)
-            pushpad('status', updateButton);
+        var updateButton = function (isSubscribed) {
+            var btn = $('#sub button');
+            if (isSubscribed) {
+                btn.html('Unsubscribe');
+                btn.addClass('subscribed');
+            } else {
+                btn.html('Subscribe');
+                btn.removeClass('subscribed');
+            }
+        };
+        // check whether the user is subscribed to the push notifications and
+        // initialize the button status (e.g. display Subscribe or Unsubscribe)
+        pushpad('status', updateButton);
 
-            // when the user clicks the button...
-            $('#sub button').on('click', function (e) {
-                e.preventDefault();
+        // when the user clicks the button...
+        $('#sub button').on('click', function (e) {
+            e.preventDefault();
 
-                // if he wants to unsubscribe
-                if ($(this).hasClass('subscribed')) {
-                    pushpad('unsubscribe', function () {
+            // if he wants to unsubscribe
+            if ($(this).hasClass('subscribed')) {
+                pushpad('unsubscribe', function () {
+                    updateButton(false);
+                });
+
+                // if he wants to subscribe
+            } else {
+                // try to subscribe the user to push notifications
+                pushpad('subscribe', function (isSubscribed) {
+                    if (isSubscribed) {
+                        // success
+                        updateButton(true);
+                    } else {
+                        // oops... the user has denied permission from the browser prompt
                         updateButton(false);
-                    });
+                        alert('You have blocked notifications from your browser preferences.');
+                    }
+                });
+            }
+        });
 
-                    // if he wants to subscribe
-                } else {
-                    // try to subscribe the user to push notifications
-                    pushpad('subscribe', function (isSubscribed) {
-                        if (isSubscribed) {
-                            // success
-                            updateButton(true);
-                        } else {
-                            // oops... the user has denied permission from the browser prompt
-                            updateButton(false);
-                            alert('You have blocked notifications from your browser preferences.');
-                        }
-                    });
-                }
-            });
-
-            pushpad('unsupported', function () {
-                $('#sub button').prop('disabled', true);
-                alert("Your browser doesn't support push notifications.");
-            });
+        pushpad('unsupported', function () {
+            $('#sub button').prop('disabled', true);
+            alert("Your browser doesn't support push notifications.");
         });
     }
 }
