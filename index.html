@@ -349,17 +349,20 @@
         // optionally call 'uid' if the user is logged in to your website
         pushpad('uid', user.name, hmac);
 
+        var pushInit = false;
+
         var updateButton = function (isSubscribed) {
+            pushInit = true;
             var btn = $('#push-sub');
             var btnI = $('#push-sub i');
             if (isSubscribed) {
                 btnI.html('notifications_off');
                 btn.addClass('subscribed');
-                Materialize.toast('Notificações ativadas!', 3000);
+                if (pushInit) Materialize.toast('Notificações ativadas!', 3000);
             } else {
                 btnI.html('notifications_active');
                 btn.removeClass('subscribed');
-                Materialize.toast('Notificações desativadas!', 3000);
+                if (pushInit) Materialize.toast('Notificações desativadas!', 3000);
             }
         };
         // check whether the user is subscribed to the push notifications and
