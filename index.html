@@ -355,9 +355,11 @@
             if (isSubscribed) {
                 btnI.html('notifications_off');
                 btn.addClass('subscribed');
+                Materialize.toast('Notificações ativadas!', 3000);
             } else {
                 btnI.html('notifications_active');
                 btn.removeClass('subscribed');
+                Materialize.toast('Notificações desativadas!', 3000);
             }
         };
         // check whether the user is subscribed to the push notifications and

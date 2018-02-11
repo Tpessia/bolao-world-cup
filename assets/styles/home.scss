@@ -8,7 +8,7 @@
     position : fixed;
     bottom: 6vh;
     right: 6vh;
-    z-index: 1000;
+    z-index: 10001; //para ultrapassar o toast
 
     @media screen and (max-width: 600px) {
         bottom: 4vh;
@@ -33,7 +33,7 @@ body {
             width: 100vw;
             height: 100vh;
             background-color: #fff;
-            z-index: 1000;
+            z-index: 10002; //ultrapassa toast e notif on/off
             #ball {
                 display: inline-block;
                 position: absolute;
