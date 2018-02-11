@@ -288,14 +288,14 @@ main.container {
         line-height: 1.8vw;
         font-size: 1.1vw;
         vertical-align: top; }
-.rank .col:first-of-type .card-content > * {
+.rank #rankContent > .col:first-child .card-content > * {
   line-height: 55px;
   font-size: 30px;
   font-weight: 300; }
-  .rank .col:first-of-type .card-content > *.card-action {
+  .rank #rankContent > .col:first-child .card-content > *.card-action {
     height: 55px; }
   @media screen and (max-width: 992px) {
-    .rank .col:first-of-type .card-content > * {
+    .rank #rankContent > .col:first-child .card-content > * {
       line-height: 40px;
       font-size: 30px;
       font-weight: 300;
