@@ -319,7 +319,7 @@ main.container {
         }
     }
 
-    #rankContent>.col:first-child .card-content > * {
+    .col:first-of-type .card-content > * {
         &.card-action {
             height: $content-height - ($content-padding * 2);
         }
