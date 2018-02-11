@@ -298,9 +298,7 @@ main.container {
     .rank .col:first-of-type .card-content > * {
       line-height: 40px;
       font-size: 30px;
-      font-weight: 300;
-      height: 56px;
-      line-height: 56px; } }
+      font-weight: 300; } }
 .rank #first {
   position: sticky;
   top: 5px;
