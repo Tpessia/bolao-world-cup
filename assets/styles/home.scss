@@ -8,6 +8,11 @@
     position : fixed;
     bottom: 6vh;
     right: 6vh;
+
+    @media screen and (max-width: 600px) {
+        bottom: 4vh;
+        right: 4vh;
+    }
 }
 
 body {
