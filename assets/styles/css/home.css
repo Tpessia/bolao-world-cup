@@ -198,6 +198,7 @@ main.container {
   .rank .card .card-content {
     padding: 15px; }
     .rank .card .card-content > * {
+      line-height: 40px;
       font-size: 18px;
       font-weight: 300;
       white-space: nowrap; }
@@ -299,9 +300,7 @@ main.container {
       font-size: 30px;
       font-weight: 300;
       height: 56px;
-      line-height: 56px; }
-      .rank .col:first-of-type .card-content > *.card-action {
-        height: 40px; } }
+      line-height: 56px; } }
 .rank #first {
   position: sticky;
   top: 5px;

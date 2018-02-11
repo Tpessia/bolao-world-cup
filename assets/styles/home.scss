@@ -145,7 +145,7 @@ main.container {
 .rank {
     $content-height: 85px;
     $content-padding: 15px;
-
+    
     h1 {
         padding: 4% .75rem;
         text-align: center;
@@ -167,6 +167,7 @@ main.container {
             padding: $content-padding;
 
             >* {
+                line-height: 40px;
                 font-size: 18px;
                 font-weight: 300;
                 white-space: nowrap;
@@ -328,9 +329,9 @@ main.container {
         font-weight: 300;
 
         @media screen and (max-width: 992px) {
-            &.card-action {
-                height: $content-height - ($content-padding * 2) - 15px;
-            }
+            // &.card-action {
+            //     height: $content-height - ($content-padding * 2) - 15px;
+            // }
 
             line-height: $content-height - ($content-padding * 2) - 15px;
             font-size: 30px;
