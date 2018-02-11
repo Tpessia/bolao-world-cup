@@ -198,7 +198,6 @@ main.container {
   .rank .card .card-content {
     padding: 15px; }
     .rank .card .card-content > * {
-      line-height: 40px;
       font-size: 18px;
       font-weight: 300;
       white-space: nowrap; }
