@@ -143,7 +143,6 @@ main.container {
 }
 
 .rank {
-
     @mixin content-font($line, $fSize, $weight) {
         line-height: $line;
         font-size: $fSize;
@@ -159,13 +158,12 @@ main.container {
     }
 
     .card {
-
         margin: .3rem 0 !important;
 
         background-color: $colorAl;
 
         .btn-floating {
-            background-color: $colorBd;
+            background-color: $colorB;
         }
 
         .row {
@@ -297,7 +295,7 @@ main.container {
         }
 
         &.hideSide {
-            // z-index: -1;
+            z-index: -1;
             opacity: 0;
         }
 
