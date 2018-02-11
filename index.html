@@ -81,9 +81,9 @@
         </span>
     </div>
 
-    <div id="sub">
-        <button type="button" class="btn">Sub</button>        
-    </div>
+    <a id="push-sub" class="btn-floating btn-large waves-effect waves-light colorB">
+        <i class="material-icons">notifications_active</i>
+    </a>
 
     <header>
         <nav class="nav-extended navbar-fixed">
@@ -350,12 +350,12 @@
         pushpad('uid', user.name, hmac);
 
         var updateButton = function (isSubscribed) {
-            var btn = $('#sub button');
+            var btn = $('#push-sub i');
             if (isSubscribed) {
-                btn.html('Unsubscribe');
+                btn.html('notifications_off');
                 btn.addClass('subscribed');
             } else {
-                btn.html('Subscribe');
+                btn.html('notifications_active');
                 btn.removeClass('subscribed');
             }
         };
@@ -364,7 +364,7 @@
         pushpad('status', updateButton);
 
         // when the user clicks the button...
-        $('#sub button').on('click', function (e) {
+        $('#push-sub').on('click', function (e) {
             e.preventDefault();
 
             // if he wants to unsubscribe
@@ -390,7 +390,7 @@
         });
 
         pushpad('unsupported', function () {
-            $('#sub button').prop('disabled', true);
+            $('#push-sub').prop('disabled', true);
             alert("Your browser doesn't support push notifications.");
         });
     </script>

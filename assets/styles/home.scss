@@ -4,6 +4,12 @@
     display: none;
 }
 
+#push-sub {
+    position : fixed;
+    bottom: 6vh;
+    right: 6vh;
+}
+
 body {
     background-color: $page-bg;
 
