@@ -297,9 +297,10 @@ main.container {
   @media screen and (max-width: 992px) {
     .rank .col:first-of-type .card-content > * {
       line-height: 40px;
-      height: 40px;
       font-size: 30px;
-      font-weight: 300; } }
+      font-weight: 300; }
+      .rank .col:first-of-type .card-content > *.card-action {
+        height: 40px; } }
 .rank #first {
   position: sticky;
   top: 5px;

@@ -143,9 +143,15 @@ main.container {
 }
 
 .rank {
+    @mixin content-font($line, $fSize, $weight) {
+        line-height: $line;
+        font-size: $fSize;
+        font-weight: $weight;
+    }
+
     $content-height: 85px;
     $content-padding: 15px;
-    
+
     h1 {
         padding: 4% .75rem;
         text-align: center;
@@ -153,6 +159,7 @@ main.container {
 
     .card {
         margin: .3rem 0 !important;
+
         background-color: $colorAl;
 
         .btn-floating {
@@ -167,9 +174,8 @@ main.container {
             padding: $content-padding;
 
             >* {
-                line-height: 40px;
-                font-size: 18px;
-                font-weight: 300;
+                @include content-font(40px, 18px, 300);
+
                 white-space: nowrap;
 
                 .card-title {
@@ -323,22 +329,14 @@ main.container {
         &.card-action {
             height: $content-height - ($content-padding * 2);
         }
-
-        line-height: $content-height - ($content-padding * 2);
-        font-size: 30px;
-        font-weight: 300;
+        @include content-font($content-height - ($content-padding * 2), 30px, 300);
 
         @media screen and (max-width: 992px) {
-            // &.card-action {
-            //     height: $content-height - ($content-padding * 2) - 15px;
-            // }
+            &.card-action {
+                height: $content-height - ($content-padding * 2) - 15px;
+            }
 
-            line-height: $content-height - ($content-padding * 2) - 15px;
-            height: $content-height - ($content-padding * 2) - 15px;
-            font-size: 30px;
-            font-weight: 300;
-            // height: 56px;
-            // line-height: 56px;
+            @include content-font($content-height - ($content-padding * 2) - 15px, 30px, 300);
         }
     }
 
