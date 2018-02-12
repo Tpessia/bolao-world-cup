@@ -125,9 +125,9 @@ function RankCreate() { //create ranking element and object
         rankBlock = 
             rankBlock + `
                 <div class="col-wrapper colorA"">
-                    <div class="nome">` + (parseInt(i) + 1) + "." + ranking[i].name + `</div>
+                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
                     <div class="pontuacao">` + ranking[i].pontuacao + `</div>
-                    <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating` + btn + `waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
+                    <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
                 </div>
             </div >
         `;
