@@ -168,7 +168,7 @@ main.container {
                 }
                 
                 .nome, .pontuacao {
-                    overflow: hidden;
+                    // overflow: hidden;
                     white-space: nowrap;
                     display: inline-block;
                     width: 33%;
@@ -197,6 +197,20 @@ main.container {
         }
     }
 
+    .rankBtn {
+        background-color: $colorNavl;
+        font-size: 0.75em;
+        margin-left: .75rem;
+        line-height: 50px;
+        height: 50px;
+        margin-top: 15px;
+    }
+
+    #refresh i {
+        @media screen and (min-width: 600px) {
+            float: right;
+        }
+    }
 
 
 

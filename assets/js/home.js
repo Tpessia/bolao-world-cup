@@ -39,7 +39,7 @@ $(function() { //document ready
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
-        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
+        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
         $("#searchVal").prop('disabled', true);
         OfflineGet();
     }
@@ -47,11 +47,11 @@ $(function() { //document ready
     //offline/online events
 
     Offline.on("down", function () {
-        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //event: when offline, blocks all online content
+        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //event: when offline, blocks all online content
         $("#searchVal").prop('disabled', true);
     });
     Offline.on("up", function () {
-        $("a.login, #refresh, #rankList .card-action.right, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
+        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
         $("#searchVal").prop('disabled', false);
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
@@ -91,10 +91,10 @@ function Login() {
     }
 
     function Highlight() { //current user highlight on ranking
-        $('#rankContent div.col .card.colorA').removeClass("colorA");
+        $('#rankContent div.col .col-wrapper.colorA').removeClass("colorA");
         $('#sideRank .col .card.highlight').removeClass("highlight");
 
-        $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .card').addClass("colorA");
+        $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .col-wrapper').addClass("colorA");
         $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
     }
 }
@@ -124,12 +124,12 @@ function RankCreate() { //create ranking element and object
 
         rankBlock = 
             rankBlock + `
-                <div class="col-wrapper colorA"">
+                <div class="col-wrapper colorAl">
                     <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
                     <div class="pontuacao">` + ranking[i].pontuacao + `</div>
                     <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
                 </div>
-            </div >
+            </div>
         `;
 
         $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
@@ -139,7 +139,7 @@ function RankCreate() { //create ranking element and object
         } //hide players that are not at the top "k+1"
 
         if (i < 5) { //create side rank
-            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
+            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
 
             $("#sideRank>.row").append(sideRank);
         }
@@ -394,8 +394,8 @@ charts3 = {
 //events
 
 function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
-    $(".card-content .rankElem, .card-content .btn-floating").off("click").on("click", function () { //simulates search on "plus" click
-        var nome = $(this).closest(".card").find(".card-title").html(); //modal
+    $(".verMais a").off("click").on("click", function () { //simulates search on "plus" click
+        var nome = $(this).closest(".nome").html(); //modal
         nome = nome.split(" ")
         nome.shift()
         nome = nome.join(" ");
