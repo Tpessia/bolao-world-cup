@@ -188,6 +188,9 @@ body {
 main.container {
   min-width: 85%; }
 
+.rank h1 {
+  padding: 4% .75rem;
+  text-align: center; }
 .rank #rankContent .col {
   font-size: 25px;
   color: white;
@@ -223,16 +226,14 @@ main.container {
 .rank .rankBtn {
   background-color: #3b3b3b;
   font-size: 0.75em;
-  margin-left: .75rem;
   line-height: 50px;
   height: 50px;
   margin-top: 15px; }
-@media screen and (min-width: 600px) {
-  .rank #refresh i {
-    float: right; } }
-.rank h1 {
-  padding: 4% .75rem;
-  text-align: center; }
+  .rank .rankBtn#refresh i {
+    margin-left: 0.75rem !important; }
+    @media screen and (min-width: 600px) {
+      .rank .rankBtn#refresh i {
+        float: right; } }
 .rank#sideRank {
   position: fixed;
   width: 16%;
@@ -293,19 +294,6 @@ main.container {
         line-height: 1.8vw;
         font-size: 1.1vw;
         vertical-align: top; }
-.rank .col:first-of-type .card-content > * {
-  line-height: 55px;
-  font-size: 30px;
-  font-weight: 300; }
-  .rank .col:first-of-type .card-content > *.card-action {
-    height: 55px; }
-  @media screen and (max-width: 992px) {
-    .rank .col:first-of-type .card-content > * {
-      line-height: 40px;
-      font-size: 30px;
-      font-weight: 300; }
-      .rank .col:first-of-type .card-content > *.card-action {
-        height: 40px; } }
 .rank #first {
   position: sticky;
   top: 5px;

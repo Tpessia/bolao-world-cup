@@ -150,6 +150,11 @@ main.container {
 }
 
 .rank {
+    h1 {
+        padding: 4% .75rem;
+        text-align: center;
+    }
+
     #rankContent {
         .col {
             font-size: 25px;
@@ -201,35 +206,17 @@ main.container {
     .rankBtn {
         background-color: $colorNavl;
         font-size: 0.75em;
-        margin-left: .75rem;
         line-height: 50px;
         height: 50px;
         margin-top: 15px;
-    }
 
-    #refresh i {
-        @media screen and (min-width: 600px) {
-            float: right;
+        &#refresh i {
+            margin-left: 0.75rem !important;
+            @media screen and (min-width: 600px) {
+                float: right;
+            }
         }
-    }
-
-
-
-
-
-    @mixin content-font($line, $fSize, $weight) {
-        line-height: $line;
-        font-size: $fSize;
-        font-weight: $weight;
-    }
-
-    $content-height: 85px;
-    $content-padding: 15px;
-
-    h1 {
-        padding: 4% .75rem;
-        text-align: center;
-    }
+    }    
 
     &#sideRank {
         position: fixed;
@@ -320,21 +307,6 @@ main.container {
                     vertical-align: top;
                 }
             }
-        }
-    }
-
-    .col:first-of-type .card-content > * {
-        &.card-action {
-            height: $content-height - ($content-padding * 2);
-        }
-        @include content-font($content-height - ($content-padding * 2), 30px, 300);
-
-        @media screen and (max-width: 992px) {
-            &.card-action {
-                height: $content-height - ($content-padding * 2) - 15px;
-            }
-
-            @include content-font($content-height - ($content-padding * 2) - 15px, 30px, 300);
         }
     }
 
