@@ -106,11 +106,13 @@ footer {
     #form-email h4 {
       padding-top: 10px; } }
 
+#submit input {
+  outline: none; }
+
 img#loading {
   height: 36px;
+  padding: 4px;
   float: right;
   margin-left: 7px; }
-  img#loading.hide {
-    display: none; }
 
 /*# sourceMappingURL=contato.css.map */
