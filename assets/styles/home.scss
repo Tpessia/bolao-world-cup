@@ -155,49 +155,46 @@ main.container {
         text-align: center;
     }
 
-    #rankContent {
-        .col {
-            font-size: 25px;
-            color: white;
-            font-weight: 300;
-            padding: 0 1.5rem;
+    #rankList {
+        padding: 0 1.5rem;
 
-            .col-wrapper {
-                line-height: 55px;
-                padding: 15px;
-                border-radius: 2px;
-                margin: 5px 0;
-                position: relative;
-                background-color: $colorAl;
-
-                @media screen and (max-width: 600px) {
-                    line-height: 45px;
-                }
-                
-                .nome, .pontuacao {
-                    // overflow: hidden;
-                    white-space: nowrap;
-                    display: inline-block;
-                    width: 33%;
-
+        #rankContent {
+            .col {
+                font-size: 25px;
+                color: white;
+                font-weight: 300;
+                .col-wrapper {
+                    line-height: 55px;
+                    padding: 15px;
+                    border-radius: 2px;
+                    margin: 5px 0;
+                    position: relative;
+                    background-color: $colorAl;
                     @media screen and (max-width: 600px) {
-                        width: calc(100% - 70px);
+                        line-height: 45px;
                     }
-                }
-
-                .verMais {
-                    float: right;
-                    cursor: pointer;
-                    
-                    .rankElem {
-                        color: $colorB;
+                    .nome,
+                    .pontuacao {
+                        // overflow: hidden;
+                        white-space: nowrap;
+                        display: inline-block;
+                        width: 33%;
+                        @media screen and (max-width: 600px) {
+                            width: calc(100% - 70px);
+                        }
                     }
-
-                    @media screen and (max-width: 992px) {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        right: 15px;
+                    .verMais {
+                        float: right;
+                        cursor: pointer;
+                        .rankElem {
+                            color: $colorB;
+                        }
+                        @media screen and (max-width: 992px) {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            right: 15px;
+                        }
                     }
                 }
             }

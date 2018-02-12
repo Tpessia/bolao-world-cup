@@ -191,39 +191,42 @@ main.container {
 .rank h1 {
   padding: 4% .75rem;
   text-align: center; }
-.rank #rankContent .col {
-  font-size: 25px;
-  color: white;
-  font-weight: 300;
+.rank #rankList {
   padding: 0 1.5rem; }
-  .rank #rankContent .col .col-wrapper {
-    line-height: 55px;
-    padding: 15px;
-    border-radius: 2px;
-    margin: 5px 0;
-    position: relative;
-    background-color: #25365d; }
-    @media screen and (max-width: 600px) {
-      .rank #rankContent .col .col-wrapper {
-        line-height: 45px; } }
-    .rank #rankContent .col .col-wrapper .nome, .rank #rankContent .col .col-wrapper .pontuacao {
-      white-space: nowrap;
-      display: inline-block;
-      width: 33%; }
+  .rank #rankList #rankContent .col {
+    font-size: 25px;
+    color: white;
+    font-weight: 300; }
+    .rank #rankList #rankContent .col .col-wrapper {
+      line-height: 55px;
+      padding: 15px;
+      border-radius: 2px;
+      margin: 5px 0;
+      position: relative;
+      background-color: #25365d; }
       @media screen and (max-width: 600px) {
-        .rank #rankContent .col .col-wrapper .nome, .rank #rankContent .col .col-wrapper .pontuacao {
-          width: calc(100% - 70px); } }
-    .rank #rankContent .col .col-wrapper .verMais {
-      float: right;
-      cursor: pointer; }
-      .rank #rankContent .col .col-wrapper .verMais .rankElem {
-        color: #ffab40; }
-      @media screen and (max-width: 992px) {
-        .rank #rankContent .col .col-wrapper .verMais {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 15px; } }
+        .rank #rankList #rankContent .col .col-wrapper {
+          line-height: 45px; } }
+      .rank #rankList #rankContent .col .col-wrapper .nome,
+      .rank #rankList #rankContent .col .col-wrapper .pontuacao {
+        white-space: nowrap;
+        display: inline-block;
+        width: 33%; }
+        @media screen and (max-width: 600px) {
+          .rank #rankList #rankContent .col .col-wrapper .nome,
+          .rank #rankList #rankContent .col .col-wrapper .pontuacao {
+            width: calc(100% - 70px); } }
+      .rank #rankList #rankContent .col .col-wrapper .verMais {
+        float: right;
+        cursor: pointer; }
+        .rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
+          color: #ffab40; }
+        @media screen and (max-width: 992px) {
+          .rank #rankList #rankContent .col .col-wrapper .verMais {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px; } }
 .rank .rankBtn {
   background-color: #3b3b3b;
   font-size: 0.75em;
