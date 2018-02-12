@@ -249,20 +249,19 @@ main.container {
   box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px; }
   .rank#sideRank .card {
     margin: .3rem 0 !important;
-    background-color: black; }
+    background-color: black;
+    font-weight: 300; }
     .rank#sideRank .card.highlight {
       border: 3px solid #25365d; }
     .rank#sideRank .card .row {
       margin-bottom: 0 !important; }
     .rank#sideRank .card .card-title {
-      font-weight: 300;
       margin: 0;
       overflow: hidden;
       white-space: nowrap; }
     .rank#sideRank .card .card-action {
       line-height: 55px;
       font-size: 30px;
-      font-weight: 300;
       padding: 0 !important;
       border: 0 !important; }
       .rank#sideRank .card .card-action a {
@@ -273,8 +272,6 @@ main.container {
     font-size: 2.5vw;
     color: black;
     padding: 0 .75rem; }
-  .rank#sideRank > .row > .col:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(6)) {
-    display: none; }
   .rank#sideRank.hideSide {
     z-index: -1;
     opacity: 0; }

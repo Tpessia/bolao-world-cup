@@ -226,8 +226,7 @@ main.container {
         position: fixed;
         width: 16%;
         top: 5%;
-        background-color: darken($page-bg, 5%)
-        ;
+        background-color: darken($page-bg, 5%);
         right: 7px;
         transition: all .3s ease-in-out;
         border-right: 7px solid $colorAl;
@@ -240,6 +239,7 @@ main.container {
         .card {
             margin: .3rem 0 !important;
             background-color: $colorAd;
+            font-weight: 300;
 
             &.highlight {
                 border: 3px solid $colorAl;
@@ -250,7 +250,6 @@ main.container {
             }
 
             .card-title {
-                font-weight: 300;
                 margin: 0;
                 overflow: hidden;
                 white-space: nowrap;
@@ -259,10 +258,8 @@ main.container {
             .card-action {
                 line-height: 55px;
                 font-size: 30px;
-                font-weight: 300;
                 padding: 0 !important;
                 border: 0 !important;
-
                 a {
                     float: right;
                 }
@@ -277,10 +274,6 @@ main.container {
             font-size: 2.5vw;
             color: black;
             padding: 0 .75rem;
-        }
-
-        >.row>.col:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(6)) {
-            display: none;
         }
 
         &.hideSide {
