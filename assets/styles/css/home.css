@@ -97,7 +97,7 @@ footer {
   position: fixed;
   bottom: 6vh;
   right: 6vh;
-  z-index: 10001; }
+  z-index: 500; }
   @media screen and (max-width: 600px) {
     #push-sub {
       bottom: 4vh;
