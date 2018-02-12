@@ -197,7 +197,8 @@ main.container {
     padding: 15px;
     border-radius: 2px;
     margin: 5px 0;
-    position: relative; }
+    position: relative;
+    background-color: #25365d; }
     @media screen and (max-width: 600px) {
       .rank #rankContent .col .col-wrapper {
         line-height: 45px; } }

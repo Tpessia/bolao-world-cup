@@ -124,7 +124,7 @@ function RankCreate() { //create ranking element and object
 
         rankBlock = 
             rankBlock + `
-                <div class="col-wrapper colorAl">
+                <div class="col-wrapper">
                     <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
                     <div class="pontuacao">` + ranking[i].pontuacao + `</div>
                     <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
@@ -395,7 +395,7 @@ charts3 = {
 
 function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
     $(".verMais a").off("click").on("click", function () { //simulates search on "plus" click
-        var nome = $(this).closest(".nome").html(); //modal
+        var nome = $(this).siblings(".nome").html(); //modal
         nome = nome.split(" ")
         nome.shift()
         nome = nome.join(" ");

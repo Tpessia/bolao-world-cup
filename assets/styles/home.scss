@@ -162,6 +162,7 @@ main.container {
                 border-radius: 2px;
                 margin: 5px 0;
                 position: relative;
+                background-color: $colorAl;
 
                 @media screen and (max-width: 600px) {
                     line-height: 45px;
