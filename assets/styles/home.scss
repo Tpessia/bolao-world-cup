@@ -210,12 +210,15 @@ main.container {
         height: 50px;
         margin-top: 15px;
 
-        &#refresh i {
+        &#refresh {
             margin-left: 0.75rem !important;
-            @media screen and (min-width: 600px) {
-                float: right;
-            }
+            i {
+                @media screen and (min-width: 600px) {
+                    float: right;
+                }
+            } 
         }
+        
     }    
 
     &#sideRank {

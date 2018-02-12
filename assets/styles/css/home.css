@@ -229,7 +229,7 @@ main.container {
   line-height: 50px;
   height: 50px;
   margin-top: 15px; }
-  .rank .rankBtn#refresh i {
+  .rank .rankBtn#refresh {
     margin-left: 0.75rem !important; }
     @media screen and (min-width: 600px) {
       .rank .rankBtn#refresh i {
