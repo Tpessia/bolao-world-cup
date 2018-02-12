@@ -188,65 +188,41 @@ body {
 main.container {
   min-width: 85%; }
 
+.rank #rankContent .col {
+  font-size: 25px;
+  color: white;
+  font-weight: 300; }
+  .rank #rankContent .col .col-wrapper {
+    line-height: 55px;
+    padding: 15px;
+    border-radius: 2px;
+    margin: 5px 0;
+    position: relative; }
+    @media screen and (max-width: 600px) {
+      .rank #rankContent .col .col-wrapper {
+        line-height: 45px; } }
+    .rank #rankContent .col .col-wrapper .nome, .rank #rankContent .col .col-wrapper .pontuacao {
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+      width: 33%; }
+      @media screen and (max-width: 600px) {
+        .rank #rankContent .col .col-wrapper .nome, .rank #rankContent .col .col-wrapper .pontuacao {
+          width: calc(100% - 70px); } }
+    .rank #rankContent .col .col-wrapper .verMais {
+      float: right;
+      cursor: pointer; }
+      .rank #rankContent .col .col-wrapper .verMais .rankElem {
+        color: #ffab40; }
+      @media screen and (max-width: 992px) {
+        .rank #rankContent .col .col-wrapper .verMais {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 15px; } }
 .rank h1 {
   padding: 4% .75rem;
   text-align: center; }
-.rank .card {
-  margin: .3rem 0 !important;
-  background-color: #25365d; }
-  .rank .card .btn-floating {
-    background-color: #ffab40; }
-  .rank .card .row {
-    margin-bottom: 0 !important; }
-  .rank .card .card-content {
-    padding: 15px; }
-    .rank .card .card-content > * {
-      line-height: 40px;
-      font-size: 18px;
-      font-weight: 300;
-      white-space: nowrap; }
-      .rank .card .card-content > * .card-title {
-        overflow: hidden; }
-      .rank .card .card-content > * .pontuacao {
-        overflow: hidden; }
-    .rank .card .card-content .card-title {
-      margin: 0;
-      overflow: hidden; }
-    .rank .card .card-content .pontuacao {
-      overflow: hidden; }
-    .rank .card .card-content .card-action {
-      padding: 0 !important;
-      border: 0 !important; }
-      @media screen and (min-width: 992px) {
-        .rank .card .card-content .card-action {
-          overflow: hidden; } }
-      .rank .card .card-content .card-action a {
-        float: right; }
-        @media screen and (max-width: 992px) {
-          .rank .card .card-content .card-action a.large-only {
-            display: none !important; } }
-        .rank .card .card-content .card-action a.btn-large, .rank .card .card-content .card-action a.btn {
-          top: 50%;
-          transform: translateY(-50%); }
-  .rank .card .rankElem {
-    cursor: pointer;
-    color: #ffab40 !important; }
-.rank#rank #rankList #rankContent {
-  margin-left: 0;
-  margin-right: 0; }
-@media screen and (max-width: 600px) {
-  .rank#rank .card-action {
-    transform: translateY(50%); } }
-.rank#rank .rankBtn {
-  background-color: #3b3b3b;
-  font-size: 0.75em;
-  margin-left: .75rem;
-  line-height: 50px;
-  height: 50px;
-  margin-top: 15px; }
-@media screen and (min-width: 600px) {
-  .rank#rank #refresh i {
-    float: right; } }
 .rank#sideRank {
   position: fixed;
   width: 16%;
@@ -260,9 +236,25 @@ main.container {
   -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
   box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px; }
   .rank#sideRank .card {
+    margin: .3rem 0 !important;
     background-color: black; }
     .rank#sideRank .card.highlight {
       border: 3px solid #25365d; }
+    .rank#sideRank .card .row {
+      margin-bottom: 0 !important; }
+    .rank#sideRank .card .card-title {
+      font-weight: 300;
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap; }
+    .rank#sideRank .card .card-action {
+      line-height: 55px;
+      font-size: 30px;
+      font-weight: 300;
+      padding: 0 !important;
+      border: 0 !important; }
+      .rank#sideRank .card .card-action a {
+        float: right; }
   .rank#sideRank .btn-floating {
     background-color: #25365d; }
   .rank#sideRank h2 {
