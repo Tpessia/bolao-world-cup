@@ -351,53 +351,61 @@
 
         var pushInit = false;
 
-        var updateButton = function (isSubscribed) {
-            var btn = $('#push-sub');
-            var btnI = $('#push-sub i');
-            if (isSubscribed) {
-                btnI.html('notifications_off');
-                btn.addClass('subscribed');
-                if (pushInit) Materialize.toast('Notificações ativadas!', 3000);
-            } else {
-                btnI.html('notifications_active');
-                btn.removeClass('subscribed');
-                if (pushInit) Materialize.toast('Notificações desativadas!', 3000);
-            }
-            pushInit = true;
-        };
-        // check whether the user is subscribed to the push notifications and
-        // initialize the button status (e.g. display Subscribe or Unsubscribe)
-        pushpad('status', updateButton);
+        $(function () {
+            var updateButton = function (isSubscribed) {
+                var btn = $('#push-sub');
+                var btnI = $('#push-sub i');
+                if (isSubscribed) {
+                    btnI.html('notifications_off');
+                    btn.addClass('subscribed');
+                    if (pushInit) Materialize.toast('Notificações ativadas!', 3000);
+                } else {
+                    btnI.html('notifications_active');
+                    btn.removeClass('subscribed');
+                    if (pushInit) Materialize.toast('Notificações desativadas!', 3000);
+                }
+                pushInit = true;
+            };
+            // check whether the user is subscribed to the push notifications and
+            // initialize the button status (e.g. display Subscribe or Unsubscribe)
+            pushpad('status', updateButton);
 
-        // when the user clicks the button...
-        $('#push-sub').on('click', function (e) {
-            e.preventDefault();
+            // when the user clicks the button...
+            $('#push-sub').on('click', function (e) {
+                e.preventDefault();
 
-            // if he wants to unsubscribe
-            if ($(this).hasClass('subscribed')) {
-                pushpad('unsubscribe', function () {
-                    updateButton(false);
-                });
-
-                // if he wants to subscribe
-            } else {
-                // try to subscribe the user to push notifications
-                pushpad('subscribe', function (isSubscribed) {
-                    if (isSubscribed) {
-                        // success
-                        updateButton(true);
-                    } else {
-                        // oops... the user has denied permission from the browser prompt
+                // if he wants to unsubscribe
+                if ($(this).hasClass('subscribed')) {
+                    pushpad('unsubscribe', function () {
                         updateButton(false);
-                        alert('You have blocked notifications from your browser preferences.');
-                    }
-                });
-            }
-        });
+                    });
 
-        pushpad('unsupported', function () {
-            $('#push-sub').prop('disabled', true);
-            alert("Your browser doesn't support push notifications.");
+                    // if he wants to subscribe
+                } else {
+                    // try to subscribe the user to push notifications
+                    pushpad('subscribe', function (isSubscribed) {
+                        if (isSubscribed) {
+                            // success
+                            updateButton(true);
+                        } else {
+                            // oops... the user has denied permission from the browser prompt
+                            updateButton(false);
+
+                            var msg = 'Você bloqueou as notificações do seu navegador! Para poder utilizar esta função, reative-as.';
+                            if(typeof showError !== "undefined") { showError(msg); }
+                            else { alert(msg); }
+                        }
+                    });
+                }
+            });
+
+            pushpad('unsupported', function () {
+                $('#push-sub').prop('disabled', true);
+
+                var msg = "Seu navegador não suporta a função de notificações! Você pode tentar usar o Google Chrome ou o Mozilla Firefox para ativa-las.";
+                if(typeof showError !== "undefined") { showError(msg); }
+                else { alert(msg); }
+            });
         });
     </script>
 </body>

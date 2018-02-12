@@ -491,6 +491,20 @@ function scrollFireCharts(selector, foo, id) {
 }
 //*chart animation
 
+function showError(msg) {
+    $("#modal2 .modal-content>p").html(msg);
+    $('#modal2').modal('open');
+}
+
+var load = {
+    start: function() {
+        $("body").addClass("loading opacity");
+    },
+    stop: function() {
+        $("body").removeClass("loading opacity");
+    }
+}
+
 //ONLINE FUNCTIONS
 
 
@@ -621,8 +635,7 @@ function GetChartData() {
             try {
                 var chartData = eval(dataDB);
             } catch (error) {
-                $("#modal2 .modal-content>p").html('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
-                $('#modal2').modal('open');
+                showError('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
 
                 $(".chartLoading").removeClass("active");
                 $("a.login").css({
@@ -755,6 +768,8 @@ function FormatarData(data) {
 
 function Search(key) {
 
+    load.start();
+
     var options = {
         shouldSort: true,
         threshold: 0.6,
@@ -773,6 +788,7 @@ function Search(key) {
         GetSearchedPage(result[0].page);
     }
     else {
+        load.stop();
         ShowNameNotFound();
     }
 
@@ -792,9 +808,14 @@ function Search(key) {
                 TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
                 BuildSearchModal(page, pageStr);
+
+                load.stop();
+
+                $('#modal1').modal('open');
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
+                    load.stop();
                     ShowNoConnection();
                 }
             }
@@ -862,18 +883,14 @@ function Search(key) {
         }
 
         $("#modal1 #primeiroX").html(VezesPrimeiro(result[0].name));
-
-        $('#modal1').modal('open');
     }
 
     function ShowNameNotFound() {
-        $("#modal2 .modal-content>p").html('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-        $('#modal2').modal('open');
+        showError('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
     }
 
     function ShowNoConnection() {
-        $("#modal2 .modal-content>p").html('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-        $('#modal2').modal('open');
+        showError('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
     }
 }
 

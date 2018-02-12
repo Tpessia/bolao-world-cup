@@ -42,44 +42,48 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="/index.html" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
-
+                <a href="#" class="brand-logo">
+                    <i class="material-icons right hide-on-small-only">
+                        <img src="/assets/img/icon.png">
+                    </i>Bolão 2018</a>
+    
                 <a href="#" data-activates="mobileNav" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
-
+    
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="/login.html">Login</a>
-                    </li>
-                    <li>
-                        <a href="/index.html">Ranking</a>
+                        <a href="/login.html" class="login">Login</a>
                     </li>
                     <li class="active">
+                        <a href="/index.html">Ranking</a>
+                    </li>
+                    <li>
                         <a href="/contato.html">Contato</a>
                     </li>
                 </ul>
+    
             </div>
-
+    
             <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
                 <form onsubmit="return false">
                     <div class="input-field">
-                        <input type="search" id="searchVal" autocomplete="off" placeholder="Pesquise seu nome" onsearch="search($('#searchVal').val())" required style="margin: 0; padding-left: 3.5em;">
+                        <input type="search" id="searchVal" placeholder="Pesquisar Nome" required style="margin: 0; padding-left: 3.5em;" name="nome">
                         <i class="material-icons">search</i>
                         <i class="material-icons" style="top: -15%;">close</i>
                     </div>
                 </form>
             </div>
         </nav>
-
+    
         <ul class="side-nav" id="mobileNav">
             <!--Mobile Nav(2/3)-->
             <li>
-                <a href="/login.html">Login</a>
+                <a href="/login.html" class="login">Login</a>
             </li>
             <li>
                 <a href="/index.html">Ranking</a>
-            </li>        
+            </li>
             <li>
                 <a href="/contato.html">Contato</a>
             </li>
@@ -103,16 +107,12 @@
                     <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' style="height: 30vh; min-height: 170px;" required></textarea>
                     <label for="mensagem">Mensagem</label>
                 </div>
-                <div class="input-field">
+                <div id="submit" class="input-field" style="display: inline-block;">
                     <input type="submit" class="btn colorAl waves-effect" value="Enviar">
+                    <img id="loading" class="hide" src="\assets\img\loading.png">
                 </div>
             </form>
         </div>
-        <!-- <div id="notif">
-            <h4>Notificações</h4>
-            <p>Clique no botão abaixo para remover as notificações deste dispositivo.<br><small>*Apenas remove seu dispositivo de nossa lista de envios, para bloquear permanentemente procure nas configurações do seu navegador</small></p>
-            <button id="unsub" class="btn waves-effect" style="background-color: rgb(201, 58, 58)">Desinscrever</button>
-        </div> -->
     </main>
 
     <div id="myModal" class="modal modal-fixed-footer">
@@ -137,25 +137,6 @@
         </div>
     </div>
 
-    <!-- <div id="unsubed" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <h4>Notificações Desativadas!</h4>
-            <p>
-                As notificações do Bolão foram desativadas! Mas <strong>ATENÇÃO</strong>, para evitar que sejam reativadas (ao visitar o site novamente), remova as permições de notificações do site em seu navegador.
-            </p>
-            <p>
-                <strong>Links Úteis:</strong>
-                <br>
-                <a href="https://support.google.com/chrome/answer/114662?co=GENIE.Platform%3DDesktop&hl=pt-BR">Alterar permissões do site - Google</a>
-                <br>
-                <a href="https://www.youtube.com/watch?v=36i3yHkVLjY">Remover notificações no Google Chrome - YouTube</a>
-            </p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Fechar</a>
-        </div>
-    </div> -->
-
     <footer class="page-footer">
         <div class="container">
             <div class="row">
@@ -178,14 +159,16 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                <div>
-                    Aplicação Web
-                    <br> Bolão Copa do Mundo 2018
-                </div>
-                <div>
-                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por
-                        <strong>Thiago Pessia</strong>
-                    </a>
+                <div class="row">
+                    <div class="col l6 s12">
+                        Aplicação Web
+                        <br> Bolão Copa do Mundo 2018
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por
+                            <strong>Thiago Pessia</strong>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,6 +177,9 @@
     <script>
         $("#form").on("submit", function (event) {
             event.preventDefault();
+
+            $("#submit").addClass("disabled");
+            $("#loading").removeClass("hide");
 
             var myData = { email: $("#email").val(), assunto: $("#assunto").val(), mensagem: $("#mensagem").val().replace(/(?:\r\n|\r|\n)/g, '<br />') }
 
@@ -205,6 +191,9 @@
                     // alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
                     $("#email, #mensagem, #assunto").val("");
                     $('#myModal').modal('open');
+
+                    $("#submit").removeClass("disabled");
+                    $("#loading").addClass("hide");
                 },
                 error: function (err, status) {
                     //window.alert("Erro ao enviar a mensagem!");
@@ -213,18 +202,6 @@
             });
         });
     </script>
-
-    <!-- <script>
-        $("#unsub").on("click", function() {
-            try {
-                pushpad('init', 5053);
-                pushpad('unsubscribe');
-                timer = setTimeout(function() {$('#unsubed').modal('open');}, 1500);
-            } catch (e) {
-                clearTimeout(timer);
-            }
-        });
-    </script> -->
 
     <script type="text/javascript">
         /*Mobile Nav (3/3) / Necessário para a sidebar funcionar*/

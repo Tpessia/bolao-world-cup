@@ -20,40 +20,48 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
-
+                <a href="#" class="brand-logo">
+                    <i class="material-icons right hide-on-small-only">
+                        <img src="/assets/img/icon.png">
+                    </i>Bolão 2018</a>
+    
                 <a href="#" data-activates="mobileNav" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
-
+    
                 <ul class="right hide-on-med-and-down">
                     <li>
+                        <a href="/login.html" class="login">Login</a>
+                    </li>
+                    <li class="active">
                         <a href="/index.html">Ranking</a>
                     </li>
                     <li>
                         <a href="/contato.html">Contato</a>
                     </li>
                 </ul>
-
+    
             </div>
-
+    
             <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
                 <form onsubmit="return false">
                     <div class="input-field">
-                        <input type="search" id="searchVal" autocomplete="off" placeholder="Pesquise seu nome" onsearch="search($('#searchVal').val())" required style="margin: 0; padding-left: 3.5em;">
+                        <input type="search" id="searchVal" placeholder="Pesquisar Nome" required style="margin: 0; padding-left: 3.5em;" name="nome">
                         <i class="material-icons">search</i>
                         <i class="material-icons" style="top: -15%;">close</i>
                     </div>
                 </form>
             </div>
         </nav>
-
+    
         <ul class="side-nav" id="mobileNav">
             <!--Mobile Nav(2/3)-->
             <li>
-                <a href="/home.html">Ranking</a>
+                <a href="/login.html" class="login">Login</a>
             </li>
-        
+            <li>
+                <a href="/index.html">Ranking</a>
+            </li>
             <li>
                 <a href="/contato.html">Contato</a>
             </li>
@@ -89,14 +97,18 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                <div>
-                    Aplicação Web
-                    <br>
-                    Bolão Copa do Mundo 2018
+                <div class="row">
+                    <div class="col l6 s12">
+                        Aplicação Web
+                        <br> Bolão Copa do Mundo 2018
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por
+                            <strong>Thiago Pessia</strong>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <a class="grey-text text-lighten-4" href="http://www.pessia.xyz/" target="_blank">Desenvolvido por <strong>Thiago Pessia</strong></a></div>
-                </div>
+            </div>
         </div>
     </footer>
 
