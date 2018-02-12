@@ -395,7 +395,7 @@ charts3 = {
 
 function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
     $(".verMais a").off("click").on("click", function () { //simulates search on "plus" click
-        var nome = $(this).siblings(".nome").html(); //modal
+        var nome = $(this).parent().siblings(".nome").html(); //modal
         nome = nome.split(" ")
         nome.shift()
         nome = nome.join(" ");
