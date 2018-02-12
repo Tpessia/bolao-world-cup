@@ -446,7 +446,7 @@ function ShowMoreRank() {
     }
 }
 
-function ScrollFire(selector, foo, id) {
+function ScrollFire(selector, id, foo1, foo2) {
     scroll[id] = 0;
     $(window).scroll(function () {
         var sT = $(selector).offset().top,
@@ -456,13 +456,13 @@ function ScrollFire(selector, foo, id) {
 
         if (scroll[id] == 0) { //só roda uma vez
             if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
-                foo();
+                foo1();
                 scroll[id] ^= 1;
             }
         }
         else {
             if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
-                foo();
+                (typeof foo2 === "undefined") ? foo1() : foo2();
                 scroll[id] ^= 1;
             }
         }
@@ -470,13 +470,19 @@ function ScrollFire(selector, foo, id) {
 }
 
 function Scrolls() {
-    ScrollFire('#rankList', function () {
-        $('#sideRank').toggleClass('hideSide');
-    }, 1);
+    ScrollFire('#rankList', 1, function () {
+        $('#sideRank').removeClass('hideSide');
+    },
+    function () {
+        $('#sideRank').addClass('hideSide');
+    });
 
-    ScrollFire('#rankContent>div:first-child', function () {
-        $('#first').toggleClass('transform');
-    }, 2);
+    ScrollFire('#rankContent>div:first-child', 2, function () {
+        $('#first').addClass('transform');
+    },
+    function() {
+        $('#first').removeClass('transform');
+    });
 }
 
 //chart animation
