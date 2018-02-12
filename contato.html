@@ -109,7 +109,7 @@
                 </div>
                 <div id="submit" class="input-field" style="display: inline-block;">
                     <input type="submit" class="btn colorAl waves-effect" value="Enviar">
-                    <img id="loading" class="hide" src="\assets\img\loading.png">
+                    <img id="loading" class="hide" src="\assets\img\loading.gif">
                 </div>
             </form>
         </div>
@@ -178,7 +178,7 @@
         $("#form").on("submit", function (event) {
             event.preventDefault();
 
-            $("#submit").addClass("disabled");
+            $("#submit i").addClass("disabled");
             $("#loading").removeClass("hide");
 
             var myData = { email: $("#email").val(), assunto: $("#assunto").val(), mensagem: $("#mensagem").val().replace(/(?:\r\n|\r|\n)/g, '<br />') }
