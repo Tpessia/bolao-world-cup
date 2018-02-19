@@ -15,7 +15,7 @@
         $from = $_POST["email"];
         $name = $_POST["nome"];
         $subject = $_POST["assunto"];
-        $txt = $_POST["mensagem"] . "<br><p>Enviada em: " . date('Y-m-d H:i:s') . " </p>";
+        $txt = $_POST["mensagem"] . "<br><p>Enviada em: " . date('H:i:s Y-m-d') . " </p>";
         $headers = "From: " . $name . "<" . $from . ">". "\r\n" . "Content-Type: text/html; charset=UTF-8";
     
         $status = mail($dest,$subject,$txt,$headers);
