@@ -147,7 +147,8 @@ function RankCreate() { //create ranking element and object
     }
 
     //winner div
-    $("#firstContent").html('<div><h3 style="text-align: center;">' + ranking[0].name + '</h3><h4 style="text-align: center;">' + ranking[0].pontuacao + 'pts</h4></div>');
+    $("#firstContent h3").html('ranking[0].name');
+    $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
 }
 
 function ResizeArray(arr, size) {

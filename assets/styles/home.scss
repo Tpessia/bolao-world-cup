@@ -326,8 +326,11 @@ main.container {
             margin-top: 0;
         }
 
-        #firstContent h4 {
-            margin-bottom: 0;
+        #firstContent {
+            text-align: center;
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }
