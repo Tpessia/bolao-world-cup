@@ -147,7 +147,7 @@ function RankCreate() { //create ranking element and object
     }
 
     //winner div
-    $("#firstContent h3").html('ranking[0].name');
+    $("#firstContent h3").html(ranking[0].name.split(" ")[0] + " " + (ranking[0].name.split(" ").pop().length <= 10 ? ranking[0].name.split(" ").pop() : ranking[0].name.split(" ").pop()[0] + "."));
     $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
 }
 
