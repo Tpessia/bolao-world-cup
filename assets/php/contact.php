@@ -12,9 +12,12 @@
         date_default_timezone_set('America/Sao_Paulo');
         
         $dest = "contato@bolaodomauricio.xyz";
-        $subject = $_POST["assunto"];
+        $name = $_POST["nome"];
+        $subject = $_POST["assunto"] . " - " . $name;
         $txt = $_POST["mensagem"] . "<br><p>Enviada em: " . date('Y-m-d H:i:s') . " </p>";
-        $headers = "From: " . $_POST["email"] . "\r\n" . "Content-Type: text/html; charset=UTF-8";
+        $headers = "From: " . $_POST["email"];
+        $headers .= "Content-Type: text/html; charset=UTF-8";
+        $headers .= "Content-Transfer-Encoding: 8bit";
     
         $status = mail($dest,$subject,$txt,$headers);
 
@@ -24,8 +27,6 @@
         else { 
             echo '<p>Something went wrong, Please try again!</p>'; 
         }
-        
-        echo "<p>" . date('Y-m-d H:i:s') . " " . $_POST["mensagem"] . " " . $_POST["assunto"] . " " . $_POST["email"] . "</p>";
     ?>
 </body>
 </html>
