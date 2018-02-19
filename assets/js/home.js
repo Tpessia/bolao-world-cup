@@ -23,7 +23,7 @@ if (typeof localStorage === 'object') {
 
 window.onload = function() { //window load
     function removeLoading() {
-        if ((getChartAjax == 4 && getMediaAjax == 4 && getPrimeirosAjax == 4) || (typeof offlineFinished != "undefined")) {
+        if ((getChartAjax.readyState == 4 && getMediaAjax.readyState == 4 && getPrimeirosAjax.readyState == 4) || (typeof offlineFinished != "undefined")) {
             setTimeout(function () {
                 $("body").removeClass("loading");
             }, 500);
