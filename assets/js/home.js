@@ -24,7 +24,7 @@ if (typeof localStorage === 'object') {
 window.onload = function() { //window load
     removeLoading();
     function removeLoading() {
-        if ((getChartAjax.readyState == 4 && getMediaAjax.readyState == 4 && getPrimeirosAjax.readyState == 4) || (typeof offlineFinished != "undefined")) {
+        if (typeof logged != "undefined") {
             setTimeout(function () {
                 $("body").removeClass("loading");
             }, 500);
@@ -32,7 +32,7 @@ window.onload = function() { //window load
         else {
             setTimeout(() => {
                 removeLoading();
-            }, 1000);
+            }, 500);
         }
     }
 };
@@ -83,6 +83,8 @@ function Login() {
 
         Welcome();
         Highlight();
+
+        logged = true;
     }
 
     function UserPosition() { //current user position
@@ -955,8 +957,6 @@ function OfflineGet() {
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
     charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
-
-    offlineFinished = true;
 }
 
 
