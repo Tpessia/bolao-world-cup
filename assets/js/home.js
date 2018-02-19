@@ -147,7 +147,10 @@ function RankCreate() { //create ranking element and object
     }
 
     //winner div
-    $("#firstContent h3").html(ranking[0].name.split(" ")[0] + " " + (ranking[0].name.split(" ").pop().length <= 10 ? ranking[0].name.split(" ").pop() : ranking[0].name.split(" ").pop()[0] + "."));
+    // function smallSurname(fullName) {
+    //     return fullName.split(" ")[0] + " " + (fullName.split(" ").pop().length <= 10 ? fullName.split(" ").pop() : fullName.split(" ").pop()[0] + ".")
+    // }
+    $("#firstContent h3").html(ranking[0].name);
     $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
 }
 

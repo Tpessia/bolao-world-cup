@@ -46,7 +46,7 @@
 @font-face {
   font-family: Russia;
   src: url("/assets/font/Dusha_-_FIFA_World_Cup_2018.ttf"); }
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6, .brand-logo {
   font-family: Russia !important; }
 
 #firstContent * {
