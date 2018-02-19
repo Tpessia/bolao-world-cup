@@ -200,7 +200,10 @@ main.container {
                 }
                 &:first-child {
                     .col-wrapper {
-                        line-height: 6px;
+                        line-height: 60px;
+                    }
+                    @media screen and (max-width: 600px) {
+                        line-height: 55px;
                     }
                 }
             }

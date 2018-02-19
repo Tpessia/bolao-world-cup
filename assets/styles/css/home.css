@@ -239,7 +239,10 @@ main.container {
             transform: translateY(-50%);
             right: 15px; } }
     .rank #rankList #rankContent .col:first-child .col-wrapper {
-      line-height: 6px; }
+      line-height: 60px; }
+    @media screen and (max-width: 600px) {
+      .rank #rankList #rankContent .col:first-child {
+        line-height: 55px; } }
 .rank .rankBtn {
   background-color: #3b3b3b;
   font-size: 0.75em;
