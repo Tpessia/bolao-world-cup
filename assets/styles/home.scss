@@ -164,7 +164,7 @@ main.container {
                 color: white;
                 font-weight: 300;
                 .col-wrapper {
-                    line-height: 55px;
+                    line-height: 50px;
                     padding: 15px;
                     border-radius: 2px;
                     margin: 5px 0;
@@ -175,7 +175,8 @@ main.container {
                     }
                     .nome,
                     .pontuacao {
-                        // overflow: hidden;
+                        overflow: hidden;
+                        vertical-align: middle;
                         white-space: nowrap;
                         display: inline-block;
                         width: 33%;
@@ -195,6 +196,11 @@ main.container {
                             transform: translateY(-50%);
                             right: 15px;
                         }
+                    }
+                }
+                &:first-child {
+                    .col-wrapper {
+                        line-height: 6px;
                     }
                 }
             }

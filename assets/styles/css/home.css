@@ -46,6 +46,9 @@
 @font-face {
   font-family: Russia;
   src: url("/assets/font/Dusha_-_FIFA_World_Cup_2018.ttf"); }
+@font-face {
+  font-family: Dusha;
+  src: url("/assets/font/dusha-v5-regular.ttf"); }
 body {
   font-family: Russia !important; }
 
@@ -204,7 +207,7 @@ main.container {
     color: white;
     font-weight: 300; }
     .rank #rankList #rankContent .col .col-wrapper {
-      line-height: 55px;
+      line-height: 50px;
       padding: 15px;
       border-radius: 2px;
       margin: 5px 0;
@@ -215,6 +218,8 @@ main.container {
           line-height: 45px; } }
       .rank #rankList #rankContent .col .col-wrapper .nome,
       .rank #rankList #rankContent .col .col-wrapper .pontuacao {
+        overflow: hidden;
+        vertical-align: middle;
         white-space: nowrap;
         display: inline-block;
         width: 33%; }
@@ -233,6 +238,8 @@ main.container {
             top: 50%;
             transform: translateY(-50%);
             right: 15px; } }
+    .rank #rankList #rankContent .col:first-child .col-wrapper {
+      line-height: 6px; }
 .rank .rankBtn {
   background-color: #3b3b3b;
   font-size: 0.75em;
