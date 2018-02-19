@@ -191,7 +191,7 @@
                 data: myData,
                 success: function () {
                     // alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
-                    $("#form input").val("");
+                    $("#form input, #form textarea").val("");
                     $('#myModal').modal('open');
                 },
                 error: function () {
