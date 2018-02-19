@@ -22,6 +22,7 @@ if (typeof localStorage === 'object') {
 //STOP LOADING ANIM
 
 window.onload = function() { //window load
+    removeLoading();
     function removeLoading() {
         if ((getChartAjax.readyState == 4 && getMediaAjax.readyState == 4 && getPrimeirosAjax.readyState == 4) || (typeof offlineFinished != "undefined")) {
             setTimeout(function () {
