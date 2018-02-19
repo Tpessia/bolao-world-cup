@@ -22,12 +22,18 @@ if (typeof localStorage === 'object') {
 //STOP LOADING ANIM
 
 window.onload = function() { //window load
-    $(document).ajaxStop(function () {
-        // place code to be executed on completion of last outstanding ajax call here
-        setTimeout(function () {
-            $("body").removeClass("loading");
-        }, 1000);
-    });
+    function removeLoading() {
+        if (getChartAjax == 4 && getMediaAjax == 4 && getPrimeirosAjax == 4) {
+            setTimeout(function () {
+                $("body").removeClass("loading");
+            }, 500);
+        }
+        else {
+            setTimeout(() => {
+                removeLoading();
+            }, 1000);
+        }
+    }
 };
 
 //CONTROLLER
