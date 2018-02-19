@@ -35,7 +35,7 @@ $(function() { //document ready
 
     //Inicia como Offline ou Online
 
-    if (navigator.onLine) { //typeof Offline !== "undefined" && Offline.state == "up"
+    if (Offline.state) { //typeof Offline !== "undefined" && Offline.state == "up"
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
@@ -945,7 +945,7 @@ function OfflineGet() {
 
 
 function PrepareOffline() {
-    if (navigator.onLine) {
+    if (Offline.state) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
