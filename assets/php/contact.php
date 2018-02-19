@@ -26,6 +26,8 @@
         else { 
             echo '<p>Something went wrong, Please try again!</p>'; 
         }
+
+        echo "<p>$subject</p>";
     ?>
 </body>
 </html>
