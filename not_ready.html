@@ -4,26 +4,44 @@
         <meta charset="UTF-8">
     </head>
     <body style="
-        margin: 0;
-        font-family: Verdana;
-        overflow: hidden;
-                ">
-        <div id="bg" style="
-            background-image: url(/assets/img/imgHead.jpg);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            position:  absolute;
-            height:  100vh;
-            width: 100vw;
-            top: 0;
-            left: 0;
-            opacity: 0.9;
-        "></div>
+            margin:  0;
+            font-family: sans-serif;
+            overflow: hidden;
+            background-color:  #0F1626;
+            color:  white;
+            ">
     
-        <div style="height: 40vh;margin: 30vh 20vw;position:  relative;color: white;">
-            <h2 style="text-align: center;margin-bottom: 10vh;font-size: 4.5vw;">Obrigado visitar o site!</h2>
-            <p style="font-size: 2.3rem;text-align: center;">Infelizmente, ainda não podemos mostrar nenhum dado, já que ainda estamos no processo de cadastramento de usuários. Mas não se preocupe, no dia <strong>DD/MM/YYYY</strong> começaremos a funcionar!</p>
+    
+        <div style="
+        position:  absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align:  center;
+        width: 100%;
+    ">
+            <h1 style="
+        font-size: 3.5vw;
+    ">
+                AINDA NÃO ESTAMOS PRONTOS
+            </h1>
+            <p style="
+        font-size: 1.25vw;
+    ">
+                A Copa ainda não começou! Entre novamente em DD/MM para poder utilizar o app.
+            </p>
         </div>
     </body>
+
+    <style>
+        @media screen and (max-width: 600px) {
+            p {
+                font-size: 4vw;
+            }
+
+            h1 {
+                font-size: 8.5vw;
+            }
+        }
+    </style>
 </html>
