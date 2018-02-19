@@ -36,6 +36,10 @@ $colorDl: lighten($colorD, 15%);
     src: url("/assets/font/Dusha_-_FIFA_World_Cup_2018.ttf");
 }
 
+body {
+    font-family: Russia !important;
+}
+
 nav {
     background-color: $colorNav;
     .brand-logo {
