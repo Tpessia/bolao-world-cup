@@ -43,6 +43,9 @@
 .colorDd {
   background-color: #7d92a0 !important; }
 
+@font-face {
+  font-family: Russia;
+  src: url("/assets/font/Dusha_-_FIFA_World_Cup_2018.ttf"); }
 nav {
   background-color: #151515; }
   nav .brand-logo {
@@ -301,7 +304,7 @@ main.container {
   transition: all .25s; }
   .rank #first.transform {
     transform: translateX(-14%); }
-  .rank #first > h2 {
+  .rank #first > h3 {
     margin-top: 0; }
   .rank #first #firstContent h4 {
     margin-bottom: 0; }
