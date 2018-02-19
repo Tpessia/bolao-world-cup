@@ -23,7 +23,7 @@ if (typeof localStorage === 'object') {
 
 window.onload = function() { //window load
     function removeLoading() {
-        if (getChartAjax == 4 && getMediaAjax == 4 && getPrimeirosAjax == 4) {
+        if ((getChartAjax == 4 && getMediaAjax == 4 && getPrimeirosAjax == 4) || (typeof offlineFinished != "undefined")) {
             setTimeout(function () {
                 $("body").removeClass("loading");
             }, 500);
@@ -954,6 +954,8 @@ function OfflineGet() {
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
     charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
+
+    offlineFinished = true;
 }
 
 
