@@ -94,8 +94,8 @@ footer {
   display: none; }
 
 .modal {
-  height: 35%;
-  min-height: 250px; }
+  height: 35% !important;
+  min-height: 250px !important; }
 
 #notif {
   margin: 70px 0 45px 0; }
