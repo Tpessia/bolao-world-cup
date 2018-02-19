@@ -93,9 +93,9 @@ footer {
 .nav-content {
   display: none; }
 
-#myModal {
-  top: 20vh;
-  height: 50vh; }
+.modal {
+  height: 35%;
+  min-height: 250px; }
 
 #notif {
   margin: 70px 0 45px 0; }

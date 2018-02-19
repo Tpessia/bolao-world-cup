@@ -32,10 +32,6 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-    <!-- <script>
-        (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
-    </script> -->
 </head>
 
 <body>
@@ -77,7 +73,6 @@
         </nav>
     
         <ul class="side-nav" id="mobileNav">
-            <!--Mobile Nav(2/3)-->
             <li>
                 <a href="/login.html" class="login">Login</a>
             </li>
@@ -129,7 +124,7 @@
     <div id="errorModal" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4>ERRO</h4>
-            <p>Sua mensagem não pode ser enviada! Tente enviar novamente.</p>
+            <p>Sua mensagem não pode ser enviada! Verifique sua conexão e tente enviar novamente.</p>
             <p>Se os problemas persistirem, entre em contato utilizando um dos canais de comunicação presentes no rodapé da página!</p>
         </div>
         <div class="modal-footer">
@@ -187,28 +182,26 @@
                 method: "POST",
                 url: "assets/php/contact.php",
                 data: myData,
-                success: function (data) {
+                success: function () {
                     // alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
                     $("#email, #mensagem, #assunto").val("");
                     $('#myModal').modal('open');
-
+                },
+                error: function () {
+                    $("#errorModal").modal("open");
+                },
+                complete: function() {
                     $("#submit i").removeClass("disabled");
                     $("#loading").addClass("hide");
-                },
-                error: function (err, status) {
-                    //window.alert("Erro ao enviar a mensagem!");
-                    $("#errorModal").modal("open");
                 }
             });
         });
     </script>
 
     <script type="text/javascript">
-        /*Mobile Nav (3/3) / Necessário para a sidebar funcionar*/
-        $('.collapsible').collapsible();/*não sei se é necessário*/
+        $('.collapsible').collapsible();
         $(".button-collapse").sideNav();
         $(document).ready(function () {
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
             $('.modal').modal();
         });
     </script>
