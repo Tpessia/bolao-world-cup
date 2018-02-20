@@ -151,7 +151,7 @@ function RankCreate() { //create ranking element and object
         } //hide players that are not at the top "k+1"
 
         if (i < 5) { //create side rank
-            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">add</i></a></span></div></div></div>';
+            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
 
             $("#sideRank>.row").append(sideRank);
             $("#sideRank>.row>.col:gt(4)").remove();

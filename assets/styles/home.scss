@@ -51,6 +51,12 @@ body {
     }
 }
 
+.brand-logo {
+    font-size: 2.5rem;
+    overflow: visible;
+    white-space: nowrap;
+}
+
 
 #imgHead {
     @media screen and (min-width: 1200px) {
@@ -218,7 +224,9 @@ main.container {
         margin-top: 15px;
 
         &#refresh {
-            margin-left: 0.75rem !important;
+            @media screen and (min-width: 992px) {
+                margin-left: 0.75rem !important;
+            }
             i {
                 @media screen and (min-width: 600px) {
                     float: right;
