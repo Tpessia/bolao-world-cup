@@ -105,6 +105,10 @@ footer {
           transform: translateY(-50%);
           right: 0; } }
 
+body {
+  height: 100%;
+  width: 100%; }
+
 #login {
   overflow-y: hidden;
   display: block;

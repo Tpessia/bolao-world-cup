@@ -1,5 +1,10 @@
 @import '_main.scss';
 
+body {
+    height: 100%;
+    width: 100%;
+}
+
 #login {
     overflow-y: hidden;
     display: block;
