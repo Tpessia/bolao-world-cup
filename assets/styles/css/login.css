@@ -130,9 +130,8 @@ body {
     background-color: rgba(0, 0, 0, 0.7); }
   #login #wrapper {
     position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
+    margin-top: 30%;
+    text-align: center; }
     #login #wrapper h2 {
       text-align: center;
       margin: 15px 0;
