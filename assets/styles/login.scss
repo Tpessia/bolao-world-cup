@@ -18,7 +18,8 @@ body {
     background-image: url("/assets/img/login-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    -webkit-background-size: 280% auto;
+    //-webkit-background-size: 280% auto;
+    -webkit-background-size: cover;
     background-attachment: fixed;
     background-position: top;
 
@@ -30,13 +31,10 @@ body {
     }
 
     #wrapper {
-        //position: absolute;
-        margin-top: 40%;
-        text-align: center;
-        transform: translateY(-50%);
-        //top: 40%;
-        //left: 50%;
-        //transform: translate(-50%, -50%);
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         h2 {
             text-align : center;

@@ -121,7 +121,7 @@ body {
   background-image: url("/assets/img/login-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-background-size: 280% auto;
+  -webkit-background-size: cover;
   background-attachment: fixed;
   background-position: top; }
   #login #bg-layer {
@@ -130,9 +130,10 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); }
   #login #wrapper {
-    margin-top: 40%;
-    text-align: center;
-    transform: translateY(-50%); }
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
     #login #wrapper h2 {
       text-align: center;
       margin: 15px 0;
