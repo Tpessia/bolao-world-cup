@@ -33,9 +33,10 @@ body {
         position: absolute;
         margin-top: 40%;
         text-align: center;
+        transform: translateY(-50%);
         //top: 40%;
         //left: 50%;
-        transform: translate(-50%, -50%);
+        //transform: translate(-50%, -50%);
 
         h2 {
             text-align : center;

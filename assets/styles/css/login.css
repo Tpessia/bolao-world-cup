@@ -133,7 +133,7 @@ body {
     position: absolute;
     margin-top: 40%;
     text-align: center;
-    transform: translate(-50%, -50%); }
+    transform: translateY(-50%); }
     #login #wrapper h2 {
       text-align: center;
       margin: 15px 0;
