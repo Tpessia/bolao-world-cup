@@ -130,7 +130,6 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); }
   #login #wrapper {
-    position: absolute;
     margin-top: 40%;
     text-align: center;
     transform: translateY(-50%); }
@@ -140,6 +139,7 @@ body {
       color: rgba(255, 255, 255, 0.9); }
     #login #wrapper #formLogin {
       width: 65vw;
+      margin: 0 auto;
       max-width: 325px;
       padding: 30px;
       box-sizing: content-box;
