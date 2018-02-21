@@ -51,12 +51,6 @@ body {
     }
 }
 
-.brand-logo {
-    font-size: 2.5rem;
-    overflow: visible;
-    white-space: nowrap;
-}
-
 
 #imgHead {
     @media screen and (min-width: 1200px) {
@@ -157,7 +151,7 @@ main.container {
 
 .rank {
     h1 {
-        padding: 4% .75rem;
+        padding: 4% .75rem 10px .75rem;
         text-align: center;
     }
 
@@ -256,7 +250,7 @@ main.container {
             font-weight: 300;
 
             &.highlight {
-                border: 3px solid $colorAl;
+                background-color: #0f1626 !important;
             }
 
             .row {
@@ -307,7 +301,7 @@ main.container {
                 height: $heightCard;
             }
             .btn {
-                $sizeBtn: 1.8vw;
+                $sizeBtn: 1.65vw;
                 width: $sizeBtn;
                 height: $sizeBtn;
                 top: 50%;
