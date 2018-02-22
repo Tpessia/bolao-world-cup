@@ -21,21 +21,22 @@ if (typeof localStorage === 'object') {
 
 //STOP LOADING ANIM
 
-window.onload = function() { //window load
+window.onload = function () { //window load
     removeLoading();
-    function removeLoading() {
-        if (typeof logged != "undefined") {
-            setTimeout(function () {
-                $("body").removeClass("loading");
-            }, 500);
-        }
-        else {
-            setTimeout(() => {
-                removeLoading();
-            }, 500);
-        }
-    }
 };
+
+function removeLoading() {
+    if (typeof logged != "undefined") {
+        setTimeout(function () {
+            $("body").removeClass("loading");
+        }, 500);
+    }
+    else {
+        setTimeout(() => {
+            removeLoading();
+        }, 500);
+    }
+}
 
 //CONTROLLER
 
@@ -957,6 +958,8 @@ function OfflineGet() {
     charts1.change(1, user.pontuacao, user.date);
     charts2.change(0, user.colocacao, user.date);
     charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
+
+    removeLoading();
 }
 
 
