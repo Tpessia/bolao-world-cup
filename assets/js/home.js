@@ -481,7 +481,7 @@ function FormatarData(data) {
 //CHART LOGIC
 
 var charts = {
-    charts1 = {
+    charts1: {
         create: function () {
             ctx1 = document.getElementById('myChart1').getContext('2d');
             chart1 = new Chart(ctx1, {
@@ -548,7 +548,7 @@ var charts = {
             // chart1.update();
         }
     },
-    charts2 = {
+    charts2: {
         create: function () {
             ctx2 = document.getElementById('myChart2').getContext('2d');
             // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
@@ -624,7 +624,7 @@ var charts = {
             // charts.chart2.update();
         }
     },
-    charts3 = {
+    charts3: {
         create: function () {
             ctx3 = document.getElementById('myChart3').getContext('2d');
             chart3 = new Chart(ctx3, {
