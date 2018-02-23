@@ -93,8 +93,6 @@ $(function() { //document ready
         Network.bind();
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
-
-    BindEvents();
 });
 
 //LOGIN
@@ -165,6 +163,7 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
                 RankingArray();
                 RankCreate();
                 PlayersArray();
+                BindEvents();
                 Scrolls();
                 charts.charts1.create(); //create charts
                 charts.charts2.create();
@@ -197,6 +196,8 @@ function OfflineGet() {
     RankCreate(); //create DOM based on ranking
 
     Login(); //manages the login "page" or automatically logs in
+
+    BindEvents();
 
     charts.charts1.create(); //create charts
     charts.charts2.create();
