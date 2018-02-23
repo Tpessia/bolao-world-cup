@@ -1,9 +1,11 @@
-//Debug alert
+//DEBUG ALERT
 
 // window.onerror = function (msg, url, linenumber) {
 //     alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
 //     return true;
 // }
+
+//SAFARI BUG
 
 if (typeof localStorage === 'object') {
     try {
@@ -19,24 +21,33 @@ if (typeof localStorage === 'object') {
     }
 }
 
-//STOP LOADING ANIM
+//LOADING ANIMATION
 
-window.onload = function () { //window load
-    removeLoading();
-};
-
-function removeLoading() {
-    if (typeof logged != "undefined") {
-        setTimeout(function () {
-            $("body").removeClass("loading");
-        }, 500);
-    }
-    else {
-        setTimeout(() => {
-            removeLoading();
-        }, 500);
+var loading = {
+    remove: () => {
+        if (typeof logged != "undefined") {
+            setTimeout(function () {
+                $("body").removeClass("loading");
+            }, 500);
+        } else {
+            setTimeout(() => {
+                loading.remove();
+            }, 500);
+        }
+    },
+    soft: {
+        start: () => {
+            $("body").addClass("loading opacity");
+        },
+        stop: () => {
+            $("body").removeClass("loading opacity");
+        }
     }
 }
+
+window.onload = function () { //window load
+    loading.remove();
+};
 
 //CONTROLLER
 
@@ -48,29 +59,24 @@ $(function() { //document ready
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
     }
     else {
-        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //blocks all online content
-        $("#searchVal").prop('disabled', true);
         OfflineGet();
+        Network.unbind();
     }
 
     //offline/online events
 
     Offline.on("down", function () {
-        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //event: when offline, blocks all online content
-        $("#searchVal").prop('disabled', true);
+        Network.unbind();
     });
     Offline.on("up", function () {
-        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({ "opacity": "1", "cursor": "pointer", "pointer-events": "auto" }); //event: when online, allow all online content
-        $("#searchVal").prop('disabled', false);
+        Network.bind();
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 
-    BindMain();
+    BindEvents();
 });
 
-
 //LOGIN
-
 
 function Login() {
     //auto log in
@@ -110,433 +116,7 @@ function Login() {
     }
 }
 
-
-//MAIN FUNCTIONS
-
-
-function RankCreate() { //create ranking element and object
-    var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    // viewport > 600 ? k = 9 : 
-    k = 4; //numero de itens do rank mostrados por vez
-
-    $("#rankContent").html("");
-    $("#moreRank").removeClass("hide");
-
-    for (i in ranking) { //só mostra na div (remover no projeto oficial)
-        if (i == 0) {
-            rankBlock = '<div class="col s12">'; //maior se for o primeiro
-            btn = 'btn-large';
-        } else {
-            rankBlock = '<div class="col s11">'; //2nd,3rd,4th...
-            btn = 'btn';
-        }
-
-        sideRank = rankBlock;
-
-        rankBlock = 
-            rankBlock + `
-                <div class="col-wrapper">
-                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
-                    <div class="pontuacao">` + ranking[i].pontuacao + " pts" + `</div>
-                    <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
-                </div>
-            </div>
-        `;
-
-        $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
-
-        if (i > k) {
-            $($("#rankContent>.col")[i]).addClass("hide");
-        } //hide players that are not at the top "k+1"
-
-        if (i < 5) { //create side rank
-            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
-
-            $("#sideRank>.row").append(sideRank);
-            $("#sideRank>.row>.col:gt(4)").remove();
-        }
-    }
-
-    //winner div
-    // function smallSurname(fullName) {
-    //     return fullName.split(" ")[0] + " " + (fullName.split(" ").pop().length <= 10 ? fullName.split(" ").pop() : fullName.split(" ").pop()[0] + ".")
-    // }
-    $("#firstContent h3").html(ranking[0].name);
-    $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
-}
-
-function ResizeArray(arr, size) {
-    if (arr.length > size) {
-        var num = arr.length / size; //mostra só 20
-        var num2 = num - Math.floor(num);
-        num2 = (num2 == 0 ? 1 : 1 / num2); //evita Infinity
-        num = Math.round(num * num2);
-        var temp = [];
-        for (var i in arr) {
-            // console.log(i % num == 0 ? "Fora:" + i + " " + num + " " + arr[i] + " Resto:" + i % num : "Dentro" + i + " " + num + " " + arr[i] + " Resto:" + i % num );
-            if (i % num != 0) {
-                temp.push(arr[i]);
-            }
-        }
-        return temp;
-    }
-
-    return arr;
-}
-
-function ResizeChartArrays(size) {
-    if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = ResizeArray(media.mediaArr, size);}
-    if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = ResizeArray(media.dateArr, size);}
-    if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = ResizeArray(user.pontuacao, size);}
-    if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = ResizeArray(user.date, size);}
-    if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = ResizeArray(user.colocacao, size);}
-    // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = ResizeArray(primeiros.ocorrencias, size);}
-    // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = ResizeArray(primeiros.nome, size);}
-}
-
-charts1 = {
-    create: function () {
-        ctx1 = document.getElementById('myChart1').getContext('2d');
-        chart1 = new Chart(ctx1, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: [
-                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-                ],
-                datasets: [{
-                        label: "Pontuação Média",
-                        backgroundColor: 'rgba(0, 0, 0, 0)',
-                        borderColor: 'rgb(0,0,0)',
-                        // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
-                    },
-
-                    {
-                        label: "Minha Pontuação",
-                        backgroundColor: 'rgba(255, 171, 64, 0.7)',
-                        borderColor: 'rgb(255, 171, 64)',
-                        // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
-                    }
-                ]
-            },
-
-            // Configuration options go here
-            options: {
-                scales: {
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            suggestedMin: 0, // minimum will be 0, unless there is a lower value.
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Pontuação'
-                        }
-                    }]
-                }
-            }
-        });
-    },
-
-    change: function (datasetIndex, dataArr, labelsArr) {
-        chart1.data.datasets[datasetIndex].data = dataArr;
-        chart1.data.labels = labelsArr;
-        //chart animation
-        if (typeof scrollChart[1] === "undefined") {
-            for (var i in chart1.data.datasets) {
-                chart1.data.datasets[i].hidden = true;
-            }
-            scrollFireCharts("#myChart1", function () {
-                for (var i in chart1.data.datasets) {
-                    chart1.data.datasets[i].hidden = false;
-                }
-                chart1.update();
-            }, 1);
-        }
-        else {
-            chart1.update();
-        }
-        //*chart animation
-        // chart1.update();
-    }
-}
-
-charts2 = {
-    create: function () {
-        ctx2 = document.getElementById('myChart2').getContext('2d');
-        // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
-        // gradient.addColorStop(0, '#25365d33');
-        // gradient.addColorStop(1, '#25365dff');
-        chart2 = new Chart(ctx2, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: [
-                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-                ],
-                datasets: [
-                    // {
-                    //     label: "Minha Colocação",
-                    //     backgroundColor: gradient,
-                    //     hoverBackgroundColor: "#102149",
-                    //     data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
-                    // },
-
-                    {
-                        label: "Minha Colocação",
-                        // backgroundColor: '#25365d66',
-                        backgroundColor: 'rgba(0,0,0,0)',
-                        borderColor: '#25365d',
-                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
-                    }
-                ]
-            },
-
-            // Configuration options go here
-            options: {
-                legend: false,
-
-                scales: {
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            min: 1, // minimum will be 0, unless there is a lower value.
-                            suggestedMax: ranking.length,
-                            reverse: true,
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Colocação'
-                        }
-                    }]
-                }
-            }
-        });
-    },
-
-    change: function (datasetIndex, dataArr, labelsArr) {
-        chart2.data.datasets[datasetIndex].data = dataArr;
-        chart2.data.labels = labelsArr;
-        //chart animation
-        if (typeof scrollChart[2] === "undefined") {
-            for (var i in chart2.data.datasets) {
-                chart2.data.datasets[i].hidden = true;
-            }
-            scrollFireCharts("#myChart2", function () {
-                for (var i in chart2.data.datasets) {
-                    chart2.data.datasets[i].hidden = false;
-                }
-                chart2.update();
-            }, 2);
-        } else {
-            chart2.update();
-        }
-        //*chart animation
-        // chart2.update();
-    }
-}
-
-charts3 = {
-    create: function () {
-        ctx3 = document.getElementById('myChart3').getContext('2d');
-        chart3 = new Chart(ctx3, {
-            // The type of chart we want to create
-            type: 'bar',
-
-            // The data for our dataset
-            data: {
-                labels: [
-                    // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
-                ],
-                datasets: [
-                    {
-                        label: "Primeiro Colocado",
-                        // backgroundColor: '#25365d66',
-                        backgroundColor: 'rgba(11,21,43,0.9)',
-                        // borderColor: '#25365d',
-                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
-                    }
-                ]
-            },
-
-            // Configuration options go here
-            options: {
-                legend: false,
-
-                scales: {
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            suggestedMin: 0, // minimum will be 0, unless there is a lower value.
-                            suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
-                            //reverse: true,
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Vezes como Primeiro'
-                        }
-                    }]
-                }
-            }
-        });
-    },
-
-    change: function (datasetIndex, dataArr, labelsArr) {
-        chart3.data.datasets[datasetIndex].data = dataArr;
-        chart3.data.labels = labelsArr;
-        //chart animation
-        if (typeof scrollChart[3] === "undefined") {
-            for (var i in chart3.data.datasets) {
-                chart3.data.datasets[i].hidden = true;
-            }
-            scrollFireCharts("#myChart3", function () {
-                for (var i in chart3.data.datasets) {
-                    chart3.data.datasets[i].hidden = false;
-                }
-                chart3.update();
-            }, 3);
-        } else {
-            chart3.update();
-        }
-        //*chart animation
-        // chart3.update();
-    }
-}
-
-//events
-
-function BindNetwork() { //search, close search, ver dados, side ver dados, atualizar
-    $(".verMais a").off("click").on("click", function () { //simulates search on "plus" click
-        var nome = $(this).parent().siblings(".nome").html(); //modal
-        nome = nome.split(" ")
-        nome.shift()
-        nome = nome.join(" ");
-        Search(nome);
-    });
-
-    $("#refresh").off("click").on("click", function () {
-        $(".chartLoading").addClass("active");
-        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-    });
-}
-
-function BindMain() {
-    $("#moreRank").on("click", function () {
-        ShowMoreRank();
-    });
-
-    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
-        $("#searchVal").blur();
-        Search($('#searchVal').val()); //search on click Magnifying glass
-    });
-
-    $("#searchVal").on("search", function () {
-        $('#searchVal').blur();
-        Search($('#searchVal').val());
-    });
-
-    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
-        $('#searchVal').val(''); //clean search on close
-    });
-
-    $(".blockMobile .btn").on("click", function () {
-        $(".blockMobile").removeClass("show");
-    });
-}
-
-function ShowMoreRank() {
-    k += 6; //number of players shown on click (= k-1)
-
-    for (i in ranking) {
-        if (i < k) {
-            $($("#rankContent>.col")[i]).removeClass("hide"); //show player
-        }
-        if (k > ranking.length - 1) {
-            $("#moreRank").addClass('hide'); //hide button if there are no more players
-        }
-    }
-}
-
-function ScrollFire(selector, id, foo1, foo2) {
-    scroll[id] = 0;
-    $(window).scroll(function () {
-        var sT = $(selector).offset().top,
-            sH = $(selector).outerHeight(),
-            wH = $(window).height(),
-            wS = $(window).scrollTop();
-
-        if (scroll[id] == 0) { //só roda uma vez
-            if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
-                foo1();
-                scroll[id] ^= 1;
-            }
-        }
-        else {
-            if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
-                (typeof foo2 === "undefined") ? foo1() : foo2();
-                scroll[id] ^= 1;
-            }
-        }
-    });
-}
-
-function Scrolls() {
-    ScrollFire('#rankList', 1, function () {
-        $('#sideRank').removeClass('hideSide');
-    },
-    function () {
-        $('#sideRank').addClass('hideSide');
-    });
-
-    ScrollFire('#rankContent>div:first-child', 2, function () {
-        $('#first').addClass('transform');
-    },
-    function() {
-        $('#first').removeClass('transform');
-    });
-}
-
-//chart animation
-scrollChart = [];
-function scrollFireCharts(selector, foo, id) {
-    scrollChart[id] = 0;
-
-    $(window).scroll(function () {
-        if (scrollChart[id] == 0) {
-            var sT = $(selector).offset().top,
-                sH = $(selector).outerHeight(),
-                wH = $(window).height(),
-                wS = $(window).scrollTop();
-
-            if (wS + wH + window.innerHeight * ((window.innerWidth > 900) ? 0.15 : 0.4) > sT + sH) {
-                foo();
-                scrollChart[id] = 1;
-            }
-        }
-    });
-}
-//*chart animation
-
-function showError(msg) {
-    $("#modal2 .modal-content>p").html(msg);
-    $('#modal2').modal('open');
-}
-
-var load = {
-    start: function() {
-        $("body").addClass("loading opacity");
-    },
-    stop: function() {
-        $("body").removeClass("loading opacity");
-    }
-}
-
-//ONLINE FUNCTIONS
-
+//DATA PARSING
 
 function OnlineGet(pages, ID) { //request spreadsheet page data
     id = ID; //cria id global
@@ -545,7 +125,7 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
     pages.forEach(function (page, index) {
 
         var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
-        
+
         if (typeof onlineGetAjax !== "undefined" && onlineGetAjax.readyState !== 4 && onlineGetAjax.readyState !== 0) {
             onlineGetAjax.abort();
         }
@@ -564,7 +144,6 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
                 RankingArray();
                 RankCreate();
                 PlayersArray();
-                BindNetwork();
                 Scrolls();
                 charts1.create(); //create charts
                 charts2.create();
@@ -592,66 +171,27 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
     })
 }
 
-function TableCreate(sheetPage) { //create an array based on the spreadsheet page
-    if (typeof table == "undefined") {
-        table = {};
-    }
+function OfflineGet() {
+    OfflineParse(); //receive user and ranking
+    RankCreate(); //create DOM based on ranking
 
-    table[sheetPage] = {};
+    Login(); //manages the login "page" or automatically logs in
 
-    var lastRow = 0;
+    charts1.create(); //create charts
+    charts2.create();
+    charts3.create();
 
-    for (var i = 0; i < data.length; i++) {
-        var dataTemp = data[i];
+    // ResizeChartArrays(20);
 
-        if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
-            table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
-        } //create table.rowN
+    charts1.change(0, media.mediaArr, media.dateArr);
+    charts1.change(1, user.pontuacao, user.date);
+    charts2.change(0, user.colocacao, user.date);
+    charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
-        if (lastRow != dataTemp.gs$cell.row) {
-            lastCol = 0;
-        } //new row
-
-        table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
-
-        lastCol = dataTemp.gs$cell.col;
-        lastRow = dataTemp.gs$cell.row;
-    }
+    loading.remove();
 }
 
-function RankingArray() {
-    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
-
-    j = 0;
-    for (i in table.page1) { //cria array do ranking
-        if (j > 1) {
-            ranking.push({
-                name: table.page1[i][1], //sheet format (Participante)
-                pontuacao: table.page1[i][2] //sheet format (Pontuação)
-            });
-        }
-        j++;
-    }
-}
-
-function PlayersArray() {
-    players = [];
-
-    j = 0;
-    for (i in table.page1) {
-        if (j > 1) {
-            pageVar = table.page1[i][3]; //sheet format (Página)
-            nameVar = table.page1[i][4]; //sheet format (Nome)
-            codigoVar = table.page1[i][6]; //sheet format (Nome)
-            players.push({
-                page: pageVar,
-                name: nameVar,
-                code: codigoVar
-            });
-        }
-        j++;
-    }
-}
+//online
 
 function GetChartData() {
     if (typeof getChartAjax !== "undefined" && getChartAjax.readyState !== 4 && getChartAjax.readyState !== 0) {
@@ -740,7 +280,6 @@ function GetMedias() {
     });
 }
 
-
 function GetPrimeiros() {
     if (typeof getPrimeirosAjax !== "undefined" && getPrimeirosAjax.readyState !== 4 && getPrimeirosAjax.readyState !== 0) {
         getPrimeirosAjax.abort();
@@ -785,6 +324,150 @@ function GetPrimeiros() {
     });
 }
 
+function ValidadeDbInput(str) { //antigo lower()
+    var lower = str.toLowerCase();
+    var upper = str.toUpperCase();
+
+    var res = "";
+    for (var i = 0; i < lower.length; ++i) {
+        if (lower[i] != upper[i] || lower[i].trim() === '')
+            res += str[i];
+    }
+
+    return res /*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/.replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
+}
+
+//offline
+
+function PrepareOffline() {
+    if (navigator.onLine) {
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("ranking", JSON.stringify(ranking));
+    }
+}
+
+function OfflineParse() { //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
+    user = JSON.parse(localStorage.getItem("user"));
+    ranking = JSON.parse(localStorage.getItem("ranking"));
+    media = JSON.parse(localStorage.getItem("media"));
+    primeiros = JSON.parse(localStorage.getItem("primeiros"));
+    primeirosTop = JSON.parse(localStorage.getItem("primeirosTop"));
+}
+
+//RANK LOGIC
+
+function RankCreate() { //create ranking element and object
+    var viewport = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    // viewport > 600 ? k = 9 : 
+    k = 4; //numero de itens do rank mostrados por vez
+
+    $("#rankContent").html("");
+    $("#moreRank").removeClass("hide");
+
+    for (i in ranking) { //só mostra na div (remover no projeto oficial)
+        if (i == 0) {
+            rankBlock = '<div class="col s12">'; //maior se for o primeiro
+            btn = 'btn-large';
+        } else {
+            rankBlock = '<div class="col s11">'; //2nd,3rd,4th...
+            btn = 'btn';
+        }
+
+        sideRank = rankBlock;
+
+        rankBlock =
+            rankBlock + `
+                <div class="col-wrapper">
+                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
+                    <div class="pontuacao">` + ranking[i].pontuacao + " pts" + `</div>
+                    <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
+                </div>
+            </div>
+        `;
+
+        $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
+
+        if (i > k) {
+            $($("#rankContent>.col")[i]).addClass("hide");
+        } //hide players that are not at the top "k+1"
+
+        if (i < 5) { //create side rank
+            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
+
+            $("#sideRank>.row").append(sideRank);
+            $("#sideRank>.row>.col:gt(4)").remove();
+        }
+    }
+
+    //winner div
+    // function smallSurname(fullName) {
+    //     return fullName.split(" ")[0] + " " + (fullName.split(" ").pop().length <= 10 ? fullName.split(" ").pop() : fullName.split(" ").pop()[0] + ".")
+    // }
+    $("#firstContent h3").html(ranking[0].name);
+    $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
+}
+
+function TableCreate(sheetPage) { //create an array based on the spreadsheet page
+    if (typeof table == "undefined") {
+        table = {};
+    }
+
+    table[sheetPage] = {};
+
+    var lastRow = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        var dataTemp = data[i];
+
+        if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
+            table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
+        } //create table.rowN
+
+        if (lastRow != dataTemp.gs$cell.row) {
+            lastCol = 0;
+        } //new row
+
+        table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+
+        lastCol = dataTemp.gs$cell.col;
+        lastRow = dataTemp.gs$cell.row;
+    }
+}
+
+function RankingArray() {
+    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+
+    j = 0;
+    for (i in table.page1) { //cria array do ranking
+        if (j > 1) {
+            ranking.push({
+                name: table.page1[i][1], //sheet format (Participante)
+                pontuacao: table.page1[i][2] //sheet format (Pontuação)
+            });
+        }
+        j++;
+    }
+}
+
+function PlayersArray() {
+    players = [];
+
+    j = 0;
+    for (i in table.page1) {
+        if (j > 1) {
+            pageVar = table.page1[i][3]; //sheet format (Página)
+            nameVar = table.page1[i][4]; //sheet format (Nome)
+            codigoVar = table.page1[i][6]; //sheet format (Nome)
+            players.push({
+                page: pageVar,
+                name: nameVar,
+                code: codigoVar
+            });
+        }
+        j++;
+    }
+}
+
 function FormatarData(data) {
     var dia = data.getDate();
     if (dia.toString().length == 1)
@@ -795,10 +478,297 @@ function FormatarData(data) {
     return dia + "/" + mes;
 }
 
+//CHART LOGIC
+
+var charts = {
+    charts1 = {
+        create: function () {
+            ctx1 = document.getElementById('myChart1').getContext('2d');
+            chart1 = new Chart(ctx1, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: [
+                        // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                    ],
+                    datasets: [{
+                            label: "Pontuação Média",
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+                            borderColor: 'rgb(0,0,0)',
+                            // data: [0, 25, 40, 50, 90, 100, 125, 145, 180, 180, 200, 230],
+                        },
+
+                        {
+                            label: "Minha Pontuação",
+                            backgroundColor: 'rgba(255, 171, 64, 0.7)',
+                            borderColor: 'rgb(255, 171, 64)',
+                            // data: [0, 10, 15, 20, 20, 30, 50, 100, 125, 125, 200, 230]
+                        }
+                    ]
+                },
+
+                // Configuration options go here
+                options: {
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                suggestedMin: 0, // minimum will be 0, unless there is a lower value.
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Pontuação'
+                            }
+                        }]
+                    }
+                }
+            });
+        },
+
+        change: function (datasetIndex, dataArr, labelsArr) {
+            charts.chart1.data.datasets[datasetIndex].data = dataArr;
+            charts.chart1.data.labels = labelsArr;
+            //chart animation
+            if (typeof scrollChart[1] === "undefined") {
+                for (var i in charts.chart1.data.datasets) {
+                    charts.chart1.data.datasets[i].hidden = true;
+                }
+                scrollFireCharts("#myChart1", function () {
+                    for (var i in charts.chart1.data.datasets) {
+                        charts.chart1.data.datasets[i].hidden = false;
+                    }
+                    charts.chart1.update();
+                }, 1);
+            } else {
+                charts.chart1.update();
+            }
+            //*chart animation
+            // chart1.update();
+        }
+    },
+    charts2 = {
+        create: function () {
+            ctx2 = document.getElementById('myChart2').getContext('2d');
+            // var gradient = ctx2.createLinearGradient(0, 0, 0, 400);
+            // gradient.addColorStop(0, '#25365d33');
+            // gradient.addColorStop(1, '#25365dff');
+            chart2 = new Chart(ctx2, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: [
+                        // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                    ],
+                    datasets: [
+                        // {
+                        //     label: "Minha Colocação",
+                        //     backgroundColor: gradient,
+                        //     hoverBackgroundColor: "#102149",
+                        //     data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                        // },
+
+                        {
+                            label: "Minha Colocação",
+                            // backgroundColor: '#25365d66',
+                            backgroundColor: 'rgba(0,0,0,0)',
+                            borderColor: '#25365d',
+                            // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                        }
+                    ]
+                },
+
+                // Configuration options go here
+                options: {
+                    legend: false,
+
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                min: 1, // minimum will be 0, unless there is a lower value.
+                                suggestedMax: ranking.length,
+                                reverse: true,
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Colocação'
+                            }
+                        }]
+                    }
+                }
+            });
+        },
+
+        change: function (datasetIndex, dataArr, labelsArr) {
+            charts.chart2.data.datasets[datasetIndex].data = dataArr;
+            charts.chart2.data.labels = labelsArr;
+            //chart animation
+            if (typeof scrollChart[2] === "undefined") {
+                for (var i in charts.chart2.data.datasets) {
+                    charts.chart2.data.datasets[i].hidden = true;
+                }
+                scrollFireCharts("#myChart2", function () {
+                    for (var i in charts.chart2.data.datasets) {
+                        charts.chart2.data.datasets[i].hidden = false;
+                    }
+                    charts.chart2.update();
+                }, 2);
+            } else {
+                charts.chart2.update();
+            }
+            //*chart animation
+            // charts.chart2.update();
+        }
+    },
+    charts3 = {
+        create: function () {
+            ctx3 = document.getElementById('myChart3').getContext('2d');
+            chart3 = new Chart(ctx3, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                    labels: [
+                        // "01/Jan", "15/Jan", "01/Fev", "15/Fev", "01/Mar", "15/Mar", "01/Abr", "15/Abr", "01/Mai", "15/Mai", "01/Jun", "15/Jun"
+                    ],
+                    datasets: [{
+                        label: "Primeiro Colocado",
+                        // backgroundColor: '#25365d66',
+                        backgroundColor: 'rgba(11,21,43,0.9)',
+                        // borderColor: '#25365d',
+                        // data: [5, 2, 4, 5, 9, 10, 5, 4, 8, 8, 2, 3]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    legend: false,
+
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                suggestedMin: 0, // minimum will be 0, unless there is a lower value.
+                                suggestedMax: typeof primeiros !== "undefined" ? primeiros.ocorrencias[0] + 1 : 0
+                                //reverse: true,
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Vezes como Primeiro'
+                            }
+                        }]
+                    }
+                }
+            });
+        },
+
+        change: function (datasetIndex, dataArr, labelsArr) {
+            charts.chart3.data.datasets[datasetIndex].data = dataArr;
+            charts.chart3.data.labels = labelsArr;
+            //chart animation
+            if (typeof scrollChart[3] === "undefined") {
+                for (var i in charts.chart3.data.datasets) {
+                    charts.chart3.data.datasets[i].hidden = true;
+                }
+                scrollFireCharts("#myChart3", function () {
+                    for (var i in charts.chart3.data.datasets) {
+                        charts.chart3.data.datasets[i].hidden = false;
+                    }
+                    charts.chart3.update();
+                }, 3);
+            } else {
+                charts.chart3.update();
+            }
+            //*chart animation
+            // charts.chart3.update();
+        }
+    }
+}
+
+function scrollFireCharts(selector, foo, id) {
+    if (typeof scrollChart === "undefined") scrollChart = [];
+
+    scrollChart[id] = 0;
+
+    $(window).scroll(function () {
+        if (scrollChart[id] == 0) {
+            var sT = $(selector).offset().top,
+                sH = $(selector).outerHeight(),
+                wH = $(window).height(),
+                wS = $(window).scrollTop();
+
+            if (wS + wH + window.innerHeight * ((window.innerWidth > 900) ? 0.15 : 0.4) > sT + sH) {
+                foo();
+                scrollChart[id] = 1;
+            }
+        }
+    });
+}
+
+//DOM EVENTS
+
+//bind
+
+function BindEvents() {
+    $(".verMais a").on("click", function () { //simulates search on "plus" click
+        var nome = $(this).parent().siblings(".nome").html(); //modal
+        nome = nome.split(" ")
+        nome.shift()
+        nome = nome.join(" ");
+        Search(nome);
+    });
+
+    $("#refresh").on("click", function () {
+        $(".chartLoading").addClass("active");
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+    });
+
+    $("#moreRank").on("click", function () {
+        ShowMoreRank();
+    });
+
+    $('.input-field input[type=search]~i:first-of-type').on("click", function () {
+        $("#searchVal").blur();
+        Search($('#searchVal').val()); //search on click Magnifying glass
+    });
+
+    $("#searchVal").on("search", function () {
+        $('#searchVal').blur();
+        Search($('#searchVal').val());
+    });
+
+    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function () {
+        $('#searchVal').val(''); //clean search on close
+    });
+
+    $(".blockMobile .btn").on("click", function () {
+        $(".blockMobile").removeClass("show");
+    });
+}
+
+function ShowMoreRank() {
+    k += 6; //number of players shown on click (= k-1)
+
+    for (i in ranking) {
+        if (i < k) {
+            $($("#rankContent>.col")[i]).removeClass("hide"); //show player
+        }
+        if (k > ranking.length - 1) {
+            $("#moreRank").addClass('hide'); //hide button if there are no more players
+        }
+    }
+}
+
+//search
 
 function Search(key) {
 
-    load.start();
+    loading.soft.start();
 
     var options = {
         shouldSort: true,
@@ -818,7 +788,7 @@ function Search(key) {
         GetSearchedPage(result[0].page);
     }
     else {
-        load.stop();
+        loading.soft.stop();
         ShowNameNotFound();
     }
 
@@ -839,13 +809,13 @@ function Search(key) {
 
                 BuildSearchModal(page, pageStr);
 
-                load.stop();
+                loading.soft.stop();
 
                 $('#modal1').modal('open');
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
-                    load.stop();
+                    loading.soft.stop();
                     ShowNoConnection();
                 }
             }
@@ -864,7 +834,7 @@ function Search(key) {
     function BuildSearchModal(page, pageStr) {
 
         var pIndex = players.findIndex(
-            function(element) {
+            function (element) {
                 if (element.page == page) { return true; }
                 else { return false; }
             }
@@ -924,54 +894,79 @@ function Search(key) {
     }
 }
 
-function ValidadeDbInput(str) { //antigo lower()
-    var lower = str.toLowerCase();
-    var upper = str.toUpperCase();
+//scroll
 
-    var res = "";
-    for (var i = 0; i < lower.length; ++i) {
-        if (lower[i] != upper[i] || lower[i].trim() === '')
-            res += str[i];
-    }
+function ScrollFire(selector, id, foo1, foo2) {
+    scroll[id] = 0;
+    $(window).scroll(function () {
+        var sT = $(selector).offset().top,
+            sH = $(selector).outerHeight(),
+            wH = $(window).height(),
+            wS = $(window).scrollTop();
 
-    return res /*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/ .replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
+        if (scroll[id] == 0) { //só roda uma vez
+            if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
+                foo1();
+                scroll[id] ^= 1;
+            }
+        }
+        else {
+            if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
+                (typeof foo2 === "undefined") ? foo1() : foo2();
+                scroll[id] ^= 1;
+            }
+        }
+    });
 }
 
-//OFFLINE FUNCTIONS
+function Scrolls() {
+    ScrollFire('#rankList', 1, function () {
+        $('#sideRank').removeClass('hideSide');
+    },
+    function () {
+        $('#sideRank').addClass('hideSide');
+    });
 
-
-function OfflineGet() {
-    OfflineParse(); //receive user and ranking
-    RankCreate(); //create DOM based on ranking
-
-    Login(); //manages the login "page" or automatically logs in
-
-    charts1.create(); //create charts
-    charts2.create();
-    charts3.create();
-    
-    // ResizeChartArrays(20);
-
-    charts1.change(0, media.mediaArr, media.dateArr);
-    charts1.change(1, user.pontuacao, user.date);
-    charts2.change(0, user.colocacao, user.date);
-    charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
-
-    removeLoading();
+    ScrollFire('#rankContent>div:first-child', 2, function () {
+        $('#first').addClass('transform');
+    },
+    function() {
+        $('#first').removeClass('transform');
+    });
 }
 
+//error
 
-function PrepareOffline() {
-    if (navigator.onLine) {
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("ranking", JSON.stringify(ranking));
-    }
+function showError(msg) {
+    $("#modal2 .modal-content>p").html(msg);
+    $('#modal2').modal('open');
 }
 
-function OfflineParse() { //recebe as informações de 'user' e 'ranking' do localStorage, para serem usadas no gráfico e no ranking
-    user = JSON.parse(localStorage.getItem("user"));
-    ranking = JSON.parse(localStorage.getItem("ranking"));
-    media = JSON.parse(localStorage.getItem("media"));
-    primeiros = JSON.parse(localStorage.getItem("primeiros"));
-    primeirosTop = JSON.parse(localStorage.getItem("primeirosTop"));
-}
+// function ResizeArray(arr, size) {
+//     if (arr.length > size) {
+//         var num = arr.length / size; //mostra só 20
+//         var num2 = num - Math.floor(num);
+//         num2 = (num2 == 0 ? 1 : 1 / num2); //evita Infinity
+//         num = Math.round(num * num2);
+//         var temp = [];
+//         for (var i in arr) {
+//             // console.log(i % num == 0 ? "Fora:" + i + " " + num + " " + arr[i] + " Resto:" + i % num : "Dentro" + i + " " + num + " " + arr[i] + " Resto:" + i % num );
+//             if (i % num != 0) {
+//                 temp.push(arr[i]);
+//             }
+//         }
+//         return temp;
+//     }
+
+//     return arr;
+// }
+
+// function ResizeChartArrays(size) {
+//     if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = ResizeArray(media.mediaArr, size);}
+//     if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = ResizeArray(media.dateArr, size);}
+//     if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = ResizeArray(user.pontuacao, size);}
+//     if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = ResizeArray(user.date, size);}
+//     if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = ResizeArray(user.colocacao, size);}
+//     // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = ResizeArray(primeiros.ocorrencias, size);}
+//     // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = ResizeArray(primeiros.nome, size);}
+// }
