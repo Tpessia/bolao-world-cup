@@ -145,9 +145,9 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
                 RankCreate();
                 PlayersArray();
                 Scrolls();
-                charts1.create(); //create charts
-                charts2.create();
-                charts3.create();
+                charts.charts1.create(); //create charts
+                charts.charts2.create();
+                charts.charts3.create();
 
                 Login(); //manages the login "page" or automatically logs in
 
@@ -177,16 +177,16 @@ function OfflineGet() {
 
     Login(); //manages the login "page" or automatically logs in
 
-    charts1.create(); //create charts
-    charts2.create();
-    charts3.create();
+    charts.charts1.create(); //create charts
+    charts.charts2.create();
+    charts.charts3.create();
 
     // ResizeChartArrays(20);
 
-    charts1.change(0, media.mediaArr, media.dateArr);
-    charts1.change(1, user.pontuacao, user.date);
-    charts2.change(0, user.colocacao, user.date);
-    charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
+    charts.charts1.change(0, media.mediaArr, media.dateArr);
+    charts.charts1.change(1, user.pontuacao, user.date);
+    charts.charts2.change(0, user.colocacao, user.date);
+    charts.charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
     loading.remove();
 }
@@ -230,9 +230,9 @@ function GetChartData() {
 
             // ResizeChartArrays(20);
 
-            charts1.change(1, user.pontuacao, user.date);
+            charts.charts1.change(1, user.pontuacao, user.date);
 
-            charts2.change(0, user.colocacao, user.date);
+            charts.charts2.change(0, user.colocacao, user.date);
 
             PrepareOffline();
 
@@ -270,7 +270,7 @@ function GetMedias() {
 
             // ResizeChartArrays(20);
 
-            charts1.change(0, media.mediaArr, media.dateArr);
+            charts.charts1.change(0, media.mediaArr, media.dateArr);
 
             localStorage.setItem("media", JSON.stringify(media));
         },
@@ -311,7 +311,7 @@ function GetPrimeiros() {
                 }
             }
 
-            charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
+            charts.charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
             chart3.options.scales.yAxes[0].ticks.suggestedMax = primeiros.ocorrencias[0] + 1;
 
@@ -528,21 +528,21 @@ var charts = {
         },
 
         change: function (datasetIndex, dataArr, labelsArr) {
-            charts.chart1.data.datasets[datasetIndex].data = dataArr;
-            charts.chart1.data.labels = labelsArr;
+            chart1.data.datasets[datasetIndex].data = dataArr;
+            chart1.data.labels = labelsArr;
             //chart animation
             if (typeof scrollChart[1] === "undefined") {
-                for (var i in charts.chart1.data.datasets) {
-                    charts.chart1.data.datasets[i].hidden = true;
+                for (var i in chart1.data.datasets) {
+                    chart1.data.datasets[i].hidden = true;
                 }
                 scrollFireCharts("#myChart1", function () {
-                    for (var i in charts.chart1.data.datasets) {
-                        charts.chart1.data.datasets[i].hidden = false;
+                    for (var i in chart1.data.datasets) {
+                        chart1.data.datasets[i].hidden = false;
                     }
-                    charts.chart1.update();
+                    chart1.update();
                 }, 1);
             } else {
-                charts.chart1.update();
+                chart1.update();
             }
             //*chart animation
             // chart1.update();
@@ -604,24 +604,24 @@ var charts = {
         },
 
         change: function (datasetIndex, dataArr, labelsArr) {
-            charts.chart2.data.datasets[datasetIndex].data = dataArr;
-            charts.chart2.data.labels = labelsArr;
+            chart2.data.datasets[datasetIndex].data = dataArr;
+            chart2.data.labels = labelsArr;
             //chart animation
             if (typeof scrollChart[2] === "undefined") {
-                for (var i in charts.chart2.data.datasets) {
-                    charts.chart2.data.datasets[i].hidden = true;
+                for (var i in chart2.data.datasets) {
+                    chart2.data.datasets[i].hidden = true;
                 }
                 scrollFireCharts("#myChart2", function () {
-                    for (var i in charts.chart2.data.datasets) {
-                        charts.chart2.data.datasets[i].hidden = false;
+                    for (var i in chart2.data.datasets) {
+                        chart2.data.datasets[i].hidden = false;
                     }
-                    charts.chart2.update();
+                    chart2.update();
                 }, 2);
             } else {
-                charts.chart2.update();
+                chart2.update();
             }
             //*chart animation
-            // charts.chart2.update();
+            // chart2.update();
         }
     },
     charts3: {
@@ -668,24 +668,24 @@ var charts = {
         },
 
         change: function (datasetIndex, dataArr, labelsArr) {
-            charts.chart3.data.datasets[datasetIndex].data = dataArr;
-            charts.chart3.data.labels = labelsArr;
+            chart3.data.datasets[datasetIndex].data = dataArr;
+            chart3.data.labels = labelsArr;
             //chart animation
             if (typeof scrollChart[3] === "undefined") {
-                for (var i in charts.chart3.data.datasets) {
-                    charts.chart3.data.datasets[i].hidden = true;
+                for (var i in chart3.data.datasets) {
+                    chart3.data.datasets[i].hidden = true;
                 }
                 scrollFireCharts("#myChart3", function () {
-                    for (var i in charts.chart3.data.datasets) {
-                        charts.chart3.data.datasets[i].hidden = false;
+                    for (var i in chart3.data.datasets) {
+                        chart3.data.datasets[i].hidden = false;
                     }
-                    charts.chart3.update();
+                    chart3.update();
                 }, 3);
             } else {
-                charts.chart3.update();
+                chart3.update();
             }
             //*chart animation
-            // charts.chart3.update();
+            // chart3.update();
         }
     }
 }
