@@ -690,8 +690,8 @@ var charts = {
     }
 }
 
+scrollChart = []
 function scrollFireCharts(selector, foo, id) {
-    if (typeof scrollChart === "undefined") scrollChart = [];
 
     scrollChart[id] = 0;
 
