@@ -49,6 +49,27 @@ window.onload = function () { //window load
     loading.remove();
 };
 
+//NETWORK EVENTS
+
+var Network = {
+    bind: () => {
+        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
+            "opacity": "1",
+            "cursor": "pointer",
+            "pointer-events": "auto"
+        }); //event: when online, allow all online content
+        $("#searchVal").prop('disabled', false);
+    },
+    unbind: () => {
+        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
+            "opacity": "0.5",
+            "cursor": "default",
+            "pointer-events": "none"
+        }); //blocks all online content
+        $("#searchVal").prop('disabled', true);
+    }
+}
+
 //CONTROLLER
 
 $(function() { //document ready
