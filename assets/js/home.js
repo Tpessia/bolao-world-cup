@@ -337,6 +337,16 @@ function ValidadeDbInput(str) { //antigo lower()
     return res /*.replace(/ã|Ã|á|Á|â|Â|à|À|ä|Ä/g, "a").replace(/é|É|ê|Ê|è|È|ë|Ë/g, "e").replace(/í|Í|î|Î|ì|Ì|ï|Ï/g, "i").replace(/õ|Õ|ó|Ó|ô|Ô|ò|Ò|ö|Ö/g, "o").replace(/ú|Ú|û|Û|ù|Ù|ü|Ü/g, "u").replace(/ñ/g, "n")*/.replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3").replace(/ç/g, "c").replace(/ª/g, "a").replace(/°|º/g, "o").replace(/^-|-$|@+|#+|\$+|%+|&+|\*+|\++|´+|`+|¨+|\^+|!+|\?+|'+|"+|~+|£+|¢+|¬+|<+|>+|®+/g, "").replace(/0-9/g, "").replace(/ /g, "_");
 }
 
+function FormatarData(data) {
+    var dia = data.getDate();
+    if (dia.toString().length == 1)
+        dia = "0" + dia;
+    var mes = data.getMonth() + 1;
+    if (mes.toString().length == 1)
+        mes = "0" + mes;
+    return dia + "/" + mes;
+}
+
 //offline
 
 function PrepareOffline() {
@@ -466,16 +476,6 @@ function PlayersArray() {
         }
         j++;
     }
-}
-
-function FormatarData(data) {
-    var dia = data.getDate();
-    if (dia.toString().length == 1)
-        dia = "0" + dia;
-    var mes = data.getMonth() + 1;
-    if (mes.toString().length == 1)
-        mes = "0" + mes;
-    return dia + "/" + mes;
 }
 
 //CHART LOGIC
