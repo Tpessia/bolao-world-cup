@@ -220,10 +220,10 @@ main.container {
                         }
                     }
                 }
-                &#moreRank.hide+#refresh {
-                    @media screen and (min-width: 992px) {
-                        margin-left: 0 !important;
-                    }
+            }
+            #moreRank.hide+#refresh {
+                @media screen and (min-width: 992px) {
+                    margin-left: 0 !important;
                 }
             }
         }
