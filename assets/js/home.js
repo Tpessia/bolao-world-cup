@@ -24,22 +24,22 @@ if (typeof localStorage === 'object') {
 //LOADING ANIMATION
 
 var loading = {
-    remove: () => {
+    remove: function() {
         if (typeof logged != "undefined") {
             setTimeout(function () {
                 $("body").removeClass("loading");
             }, 500);
         } else {
-            setTimeout(() => {
+            setTimeout(function() {
                 loading.remove();
             }, 500);
         }
     },
     soft: {
-        start: () => {
+        start: function() {
             $("body").addClass("loading opacity");
         },
-        stop: () => {
+        stop: function() {
             $("body").removeClass("loading opacity");
         }
     }
@@ -52,7 +52,7 @@ window.onload = function () { //window load
 //NETWORK EVENTS
 
 var Network = {
-    bind: () => {
+    bind: function() {
         $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
             "opacity": "1",
             "cursor": "pointer",
@@ -60,7 +60,7 @@ var Network = {
         }); //event: when online, allow all online content
         $("#searchVal").prop('disabled', false);
     },
-    unbind: () => {
+    unbind: function() {
         $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
             "opacity": "0.5",
             "cursor": "default",
@@ -737,9 +737,9 @@ function scrollFireCharts(selector, foo, id) {
 //bind
 
 function BindEvents() {
-    $(".arrow-pulse-down").on("click", () => { $('html,body').animate({ scrollTop: window.innerHeight }, 'slow'); return false; });
+    $(".arrow-pulse-down").on("click", function() { $('html,body').animate({ scrollTop: window.innerHeight }, 'slow'); return false; });
 
-    $(".verMais a").on("click", () => { //simulates search on "plus" click
+    $(".verMais a").on("click", function() { //simulates search on "plus" click
         var nome = $(this).parent().siblings(".nome").html(); //modal
         nome = nome.split(" ")
         nome.shift()
@@ -747,28 +747,28 @@ function BindEvents() {
         Search(nome);
     });
 
-    $("#refresh").on("click", () => {
+    $("#refresh").on("click", function() {
         $(".chartLoading").addClass("active");
         OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     });
 
-    $("#moreRank").on("click", () => { ShowMoreRank(); });
+    $("#moreRank").on("click", function() { ShowMoreRank(); });
 
-    $('.input-field input[type=search]~i:first-of-type').on("click", () => {
+    $('.input-field input[type=search]~i:first-of-type').on("click", function() {
         $("#searchVal").blur();
         Search($('#searchVal').val()); //search on click Magnifying glass
     });
 
-    $("#searchVal").on("search", () => {
+    $("#searchVal").on("search", function() {
         $('#searchVal').blur();
         Search($('#searchVal').val());
     });
 
-    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", () => {
+    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function() {
         $('#searchVal').val(''); //clean search on close
     });
 
-    $(".blockMobile .btn").on("click", () => {
+    $(".blockMobile .btn").on("click", function() {
         $(".blockMobile").removeClass("show");
     });
 }
