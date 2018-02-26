@@ -202,66 +202,144 @@ body {
     opacity: 1; } }
 main.container {
   min-width: 85%; }
-
-.rank h1 {
-  padding: 4% .75rem 10px .75rem;
-  text-align: center; }
-.rank #rankList {
-  padding: 0 1.5rem; }
-  .rank #rankList #rankContent .col {
-    font-size: 25px;
-    color: white;
-    font-weight: 300; }
-    .rank #rankList #rankContent .col .col-wrapper {
-      line-height: 50px;
-      padding: 15px;
-      border-radius: 2px;
-      margin: 5px 0;
-      position: relative;
-      background-color: #25365d; }
-      @media screen and (max-width: 600px) {
-        .rank #rankList #rankContent .col .col-wrapper {
-          line-height: 45px; } }
-      .rank #rankList #rankContent .col .col-wrapper .nome,
-      .rank #rankList #rankContent .col .col-wrapper .pontuacao {
-        overflow: hidden;
-        vertical-align: middle;
-        white-space: nowrap;
-        display: inline-block;
-        width: 33%; }
+  main.container #rank h1 {
+    padding: 4% .75rem 10px .75rem;
+    text-align: center; }
+  main.container #rank #rankList {
+    padding: 0 1.5rem; }
+    main.container #rank #rankList #rankContent .col {
+      font-size: 25px;
+      color: white;
+      font-weight: 300; }
+      main.container #rank #rankList #rankContent .col .col-wrapper {
+        line-height: 50px;
+        padding: 15px;
+        border-radius: 2px;
+        margin: 5px 0;
+        position: relative;
+        background-color: #25365d; }
         @media screen and (max-width: 600px) {
-          .rank #rankList #rankContent .col .col-wrapper .nome,
-          .rank #rankList #rankContent .col .col-wrapper .pontuacao {
-            width: calc(100% - 70px); } }
-      .rank #rankList #rankContent .col .col-wrapper .verMais {
-        float: right;
-        cursor: pointer; }
-        .rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
-          color: #ffab40; }
-        @media screen and (max-width: 992px) {
-          .rank #rankList #rankContent .col .col-wrapper .verMais {
+          main.container #rank #rankList #rankContent .col .col-wrapper {
+            line-height: 45px; } }
+        main.container #rank #rankList #rankContent .col .col-wrapper .nome,
+        main.container #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+          overflow: hidden;
+          vertical-align: middle;
+          white-space: nowrap;
+          display: inline-block;
+          width: 33%; }
+          @media screen and (max-width: 600px) {
+            main.container #rank #rankList #rankContent .col .col-wrapper .nome,
+            main.container #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+              width: calc(100% - 70px); } }
+        main.container #rank #rankList #rankContent .col .col-wrapper .verMais {
+          float: right;
+          cursor: pointer; }
+          main.container #rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
+            color: #ffab40; }
+          @media screen and (max-width: 992px) {
+            main.container #rank #rankList #rankContent .col .col-wrapper .verMais {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              right: 15px; } }
+      main.container #rank #rankList #rankContent .col:first-child .col-wrapper {
+        line-height: 60px; }
+      @media screen and (max-width: 600px) {
+        main.container #rank #rankList #rankContent .col:first-child {
+          line-height: 55px; } }
+    main.container #rank #rankList .rankBtn {
+      background-color: #3b3b3b;
+      font-size: 0.75em;
+      line-height: 50px;
+      height: 50px;
+      margin-top: 15px; }
+      @media screen and (min-width: 992px) {
+        main.container #rank #rankList .rankBtn#refresh {
+          margin-left: 0.75rem !important; } }
+      @media screen and (min-width: 600px) {
+        main.container #rank #rankList .rankBtn#refresh i {
+          float: right; } }
+      @media screen and (min-width: 992px) {
+        main.container #rank #rankList .rankBtn #moreRank.hide + #refresh {
+          margin-left: 0 !important; } }
+  main.container #rank #first {
+    position: sticky;
+    top: 5px;
+    transition: all .25s; }
+    main.container #rank #first.transform {
+      transform: translateX(-14%); }
+    main.container #rank #first > h3 {
+      margin-top: 0; }
+    main.container #rank #first #firstContent {
+      text-align: center; }
+      main.container #rank #first #firstContent:last-child {
+        margin-bottom: 0; }
+  main.container #chart {
+    position: relative; }
+    main.container #chart h1 {
+      padding-top: 5%;
+      text-align: center; }
+      @media screen and (max-width: 400px) {
+        main.container #chart h1 {
+          padding-top: 10%; } }
+    main.container #chart > div {
+      position: relative; }
+      main.container #chart > div:not(:first-of-type) {
+        margin-top: 40px; }
+      main.container #chart > div h2 {
+        margin-left: 20px; }
+        main.container #chart > div h2 + p {
+          margin-left: 25px; }
+        @media screen and (max-width: 400px) {
+          main.container #chart > div h2 {
+            text-align: center;
+            margin-left: 0; }
+            main.container #chart > div h2 + p {
+              text-align: center;
+              margin-left: 0; } }
+      main.container #chart > div .chartLoading {
+        display: none; }
+        main.container #chart > div .chartLoading.active {
+          display: initial;
+          position: absolute;
+          z-index: 10;
+          width: calc(100% - .75rem);
+          height: 50%; }
+          main.container #chart > div .chartLoading.active div {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            right: 15px; } }
-    .rank #rankList #rankContent .col:first-child .col-wrapper {
-      line-height: 60px; }
-    @media screen and (max-width: 600px) {
-      .rank #rankList #rankContent .col:first-child {
-        line-height: 55px; } }
-.rank .rankBtn {
-  background-color: #3b3b3b;
-  font-size: 0.75em;
-  line-height: 50px;
-  height: 50px;
-  margin-top: 15px; }
-  @media screen and (min-width: 992px) {
-    .rank .rankBtn#refresh {
-      margin-left: 0.75rem !important; } }
-  @media screen and (min-width: 600px) {
-    .rank .rankBtn#refresh i {
-      float: right; } }
-.rank#sideRank {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: inline-table;
+            font-size: 1.5rem; }
+      main.container #chart > div .blockMobile {
+        display: none; }
+        main.container #chart > div .blockMobile .btn {
+          font-size: 0.8rem;
+          background-color: #25365d; }
+        @media screen and (max-width: 400px) {
+          main.container #chart > div .blockMobile.show {
+            display: initial;
+            position: absolute;
+            z-index: 10;
+            width: calc(100% - .75rem);
+            height: 50%;
+            background-color: #f5f5f5; }
+            main.container #chart > div .blockMobile.show div {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              text-align: center;
+              display: inline-table; }
+              main.container #chart > div .blockMobile.show div i {
+                font-size: 15vh; }
+            main.container #chart > div .blockMobile.show + canvas {
+              opacity: 0; } }
+
+aside #sideRank {
   position: fixed;
   width: 16%;
   top: 5%;
@@ -273,164 +351,88 @@ main.container {
   -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
   -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
   box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px; }
-  .rank#sideRank .card {
+  aside #sideRank .card {
     margin: .3rem 0 !important;
     background-color: black;
     font-weight: 300; }
-    .rank#sideRank .card.highlight {
+    aside #sideRank .card.highlight {
       background-color: #0f1626 !important; }
-    .rank#sideRank .card .row {
+    aside #sideRank .card .row {
       margin-bottom: 0 !important; }
-    .rank#sideRank .card .card-title {
+    aside #sideRank .card .card-title {
       margin: 0;
       overflow: hidden;
       white-space: nowrap; }
-    .rank#sideRank .card .card-action {
+    aside #sideRank .card .card-action {
       line-height: 55px;
       font-size: 30px;
       padding: 0 !important;
       border: 0 !important; }
-      .rank#sideRank .card .card-action a {
+      aside #sideRank .card .card-action a {
         float: right; }
-  .rank#sideRank .btn-floating {
+  aside #sideRank .btn-floating {
     background-color: #25365d; }
-  .rank#sideRank h2 {
+  aside #sideRank h2 {
     font-size: 2.5vw;
     color: black;
     padding: 0 .75rem; }
-  .rank#sideRank.hideSide {
+  aside #sideRank.hideSide {
     z-index: -1;
     opacity: 0; }
-  .rank#sideRank .card-content {
+  aside #sideRank .card-content {
     padding: 0px;
     height: 30px; }
-    .rank#sideRank .card-content .card-title {
+    aside #sideRank .card-content .card-title {
       font-size: 1.2vw;
       line-height: 30px; }
-    .rank#sideRank .card-content .card-action {
+    aside #sideRank .card-content .card-action {
       height: 30px; }
-    .rank#sideRank .card-content .btn {
+    aside #sideRank .card-content .btn {
       width: 1.65vw;
       height: 1.65vw;
       top: 50%;
       transform: translateY(-50%); }
-      .rank#sideRank .card-content .btn i {
+      aside #sideRank .card-content .btn i {
         line-height: 1.65vw;
         font-size: 1.1vw;
         vertical-align: top; }
-.rank #first {
-  position: sticky;
-  top: 5px;
-  transition: all .25s; }
-  .rank #first.transform {
-    transform: translateX(-14%); }
-  .rank #first > h3 {
-    margin-top: 0; }
-  .rank #first #firstContent {
-    text-align: center; }
-    .rank #first #firstContent:last-child {
-      margin-bottom: 0; }
 
-#chart {
-  position: relative; }
-  #chart h1 {
-    padding-top: 5%;
-    text-align: center; }
-    @media screen and (max-width: 400px) {
-      #chart h1 {
-        padding-top: 10%; } }
-  #chart > div {
-    position: relative; }
-    #chart > div:not(:first-of-type) {
-      margin-top: 40px; }
-    #chart > div h2 {
-      margin-left: 20px; }
-      #chart > div h2 + p {
-        margin-left: 25px; }
-      @media screen and (max-width: 400px) {
-        #chart > div h2 {
-          text-align: center;
-          margin-left: 0; }
-          #chart > div h2 + p {
-            text-align: center;
-            margin-left: 0; } }
-    #chart > div .chartLoading {
-      display: none; }
-      #chart > div .chartLoading.active {
-        display: initial;
-        position: absolute;
-        z-index: 10;
-        width: calc(100% - .75rem);
-        height: 50%; }
-        #chart > div .chartLoading.active div {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          display: inline-table;
-          font-size: 1.5rem; }
-    #chart > div .blockMobile {
-      display: none; }
-      #chart > div .blockMobile .btn {
-        font-size: 0.8rem;
-        background-color: #25365d; }
-      @media screen and (max-width: 400px) {
-        #chart > div .blockMobile.show {
-          display: initial;
-          position: absolute;
-          z-index: 10;
-          width: calc(100% - .75rem);
-          height: 50%;
-          background-color: #f5f5f5; }
-          #chart > div .blockMobile.show div {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: inline-table; }
-            #chart > div .blockMobile.show div i {
-              font-size: 15vh; }
-          #chart > div .blockMobile.show + canvas {
-            opacity: 0; } }
-
-#modal1 {
+section #modal1 {
   min-height: 350px;
   width: 65%;
   height: 80%;
   max-height: 80%; }
   @media screen and (max-width: 992px) {
-    #modal1 {
+    section #modal1 {
       width: 85%; } }
-  #modal1 .modal-content {
+  section #modal1 .modal-content {
     padding: 0; }
-    #modal1 .modal-content > h4 {
+    section #modal1 .modal-content > h4 {
       text-align: center;
       position: sticky;
       top: 0;
       background-color: #fafafa;
       padding: 22px;
       margin: 0; }
-    #modal1 .modal-content #wrapper :not(h5) {
+    section #modal1 .modal-content #wrapper :not(h5) {
       color: #504a4a; }
-    #modal1 .modal-content #wrapper #playerStats .jogo {
+    section #modal1 .modal-content #wrapper #playerStats .jogo {
       display: inline-block;
       text-align: center;
       margin-bottom: 20px; }
       @media screen and (max-width: 600px) {
-        #modal1 .modal-content #wrapper #playerStats .jogo:after {
+        section #modal1 .modal-content #wrapper #playerStats .jogo:after {
           content: attr(data-content) " pts";
           display: block; } }
-    #modal1 .modal-content #wrapper #playerStats #primeiro {
+    section #modal1 .modal-content #wrapper #playerStats #primeiro {
       text-align: center;
       width: auto;
       margin-bottom: 10px; }
-      #modal1 .modal-content #wrapper #playerStats #primeiro strong {
+      section #modal1 .modal-content #wrapper #playerStats #primeiro strong {
         display: inline-block;
         padding: 5px 10px;
         border: 1px solid #151515; }
-    #modal1 .modal-content #wrapper #sidePont {
+    section #modal1 .modal-content #wrapper #sidePont {
       position: fixed;
       height: calc(100% - 175px);
       right: 20px;
@@ -439,15 +441,15 @@ main.container {
       -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
       box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.25); }
       @media screen and (max-width: 992px) {
-        #modal1 .modal-content #wrapper #sidePont {
+        section #modal1 .modal-content #wrapper #sidePont {
           display: none; } }
-      #modal1 .modal-content #wrapper #sidePont .sideNum {
+      section #modal1 .modal-content #wrapper #sidePont .sideNum {
         float: right;
         margin-right: 5%; }
-      #modal1 .modal-content #wrapper #sidePont #sideGames {
+      section #modal1 .modal-content #wrapper #sidePont #sideGames {
         height: calc(100% - 52px - 35px);
         overflow-y: auto; }
-      #modal1 .modal-content #wrapper #sidePont .sideTotal {
+      section #modal1 .modal-content #wrapper #sidePont .sideTotal {
         position: absolute;
         bottom: 0;
         width: calc(100% - 1.5rem);
@@ -455,15 +457,14 @@ main.container {
         background-color: #f3f3f3;
         padding-top: 2px;
         border-top: 1px solid rgba(100, 100, 100, 0.3); }
-        #modal1 .modal-content #wrapper #sidePont .sideTotal span:nth-child(2) {
+        section #modal1 .modal-content #wrapper #sidePont .sideTotal span:nth-child(2) {
           float: right;
           margin-right: 5px;
           font-weight: 500; }
-
-#modal2 {
+section #modal2 {
   height: 50vh;
   top: 15%; }
-  #modal2 p {
+  section #modal2 p {
     text-align: justify;
     overflow-wrap: break-word; }
 

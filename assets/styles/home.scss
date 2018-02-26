@@ -147,90 +147,190 @@ body {
 
 main.container {
     min-width: 85%;
-}
 
-.rank {
-    h1 {
-        padding: 4% .75rem 10px .75rem;
-        text-align: center;
+    #rank {
+        h1 {
+            padding: 4% .75rem 10px .75rem;
+            text-align: center;
+        }
+        #rankList {
+            padding: 0 1.5rem;
+            #rankContent {
+                .col {
+                    font-size: 25px;
+                    color: white;
+                    font-weight: 300;
+                    .col-wrapper {
+                        line-height: 50px;
+                        padding: 15px;
+                        border-radius: 2px;
+                        margin: 5px 0;
+                        position: relative;
+                        background-color: $colorAl;
+                        @media screen and (max-width: 600px) {
+                            line-height: 45px;
+                        }
+                        .nome,
+                        .pontuacao {
+                            overflow: hidden;
+                            vertical-align: middle;
+                            white-space: nowrap;
+                            display: inline-block;
+                            width: 33%;
+                            @media screen and (max-width: 600px) {
+                                width: calc(100% - 70px);
+                            }
+                        }
+                        .verMais {
+                            float: right;
+                            cursor: pointer;
+                            .rankElem {
+                                color: $colorB;
+                            }
+                            @media screen and (max-width: 992px) {
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                right: 15px;
+                            }
+                        }
+                    }
+                    &:first-child {
+                        .col-wrapper {
+                            line-height: 60px;
+                        }
+                        @media screen and (max-width: 600px) {
+                            line-height: 55px;
+                        }
+                    }
+                }
+            }
+            .rankBtn {
+                background-color: $colorNavl;
+                font-size: 0.75em;
+                line-height: 50px;
+                height: 50px;
+                margin-top: 15px;
+                &#refresh {
+                    @media screen and (min-width: 992px) {
+                        margin-left: 0.75rem !important;
+                    }
+                    i {
+                        @media screen and (min-width: 600px) {
+                            float: right;
+                        }
+                    }
+                }
+                #moreRank.hide+#refresh {
+                    @media screen and (min-width: 992px) {
+                        margin-left: 0 !important;
+                    }
+                }
+            }
+        }
+        #first {
+            position: sticky;
+            top: 5px;
+            transition: all .25s;
+            &.transform {
+                transform: translateX(-14%);
+            }
+            &>h3 {
+                margin-top: 0;
+            }
+            #firstContent {
+                text-align: center;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
     }
 
-    #rankList {
-        padding: 0 1.5rem;
-
-        #rankContent {
-            .col {
-                font-size: 25px;
-                color: white;
-                font-weight: 300;
-                .col-wrapper {
-                    line-height: 50px;
-                    padding: 15px;
-                    border-radius: 2px;
-                    margin: 5px 0;
-                    position: relative;
+    #chart {
+        position: relative;
+        h1 {
+            padding-top: 5%;
+            text-align: center;
+            @media screen and (max-width: 400px) {
+                padding-top: 10%;
+            }
+        }
+        >div {
+            &:not(:first-of-type) {
+                margin-top: 40px;
+            }
+            position: relative;
+            h2 {
+                margin-left: 20px;
+                &+p {
+                    margin-left: 25px;
+                }
+                @media screen and (max-width: 400px) {
+                    text-align: center;
+                    margin-left: 0;
+                    &+p {
+                        text-align: center;
+                        margin-left: 0;
+                    }
+                }
+            }
+            .chartLoading {
+                display: none;
+                &.active {
+                    display: initial;
+                    position: absolute;
+                    z-index: 10;
+                    width: calc(100% - .75rem);
+                    height: 50%;
+                    div {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        display: inline-table;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+            .blockMobile {
+                display: none;
+                .btn {
+                    font-size: 0.8rem;
                     background-color: $colorAl;
-                    @media screen and (max-width: 600px) {
-                        line-height: 45px;
-                    }
-                    .nome,
-                    .pontuacao {
-                        overflow: hidden;
-                        vertical-align: middle;
-                        white-space: nowrap;
-                        display: inline-block;
-                        width: 33%;
-                        @media screen and (max-width: 600px) {
-                            width: calc(100% - 70px);
-                        }
-                    }
-                    .verMais {
-                        float: right;
-                        cursor: pointer;
-                        .rankElem {
-                            color: $colorB;
-                        }
-                        @media screen and (max-width: 992px) {
+                }
+                &.show {
+                    @media screen and (max-width: 400px) {
+                        display: initial;
+                        position: absolute;
+                        z-index: 10;
+                        width: calc(100% - .75rem);
+                        height: 50%;
+                        background-color: $page-bg;
+                        div {
                             position: absolute;
                             top: 50%;
-                            transform: translateY(-50%);
-                            right: 15px;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            text-align: center;
+                            display: inline-table;
+                            i {
+                                font-size: 15vh;
+                            }
                         }
-                    }
-                }
-                &:first-child {
-                    .col-wrapper {
-                        line-height: 60px;
-                    }
-                    @media screen and (max-width: 600px) {
-                        line-height: 55px;
+                        &+canvas {
+                            opacity: 0;
+                        }
                     }
                 }
             }
         }
     }
+}
 
-    .rankBtn {
-        background-color: $colorNavl;
-        font-size: 0.75em;
-        line-height: 50px;
-        height: 50px;
-        margin-top: 15px;
-
-        &#refresh {
-            @media screen and (min-width: 992px) {
-                margin-left: 0.75rem !important;
-            }
-            i {
-                @media screen and (min-width: 600px) {
-                    float: right;
-                }
-            } 
-        }
-        
-    }    
-
-    &#sideRank {
+aside {
+    #sideRank {
         position: fixed;
         width: 16%;
         top: 5%;
@@ -239,30 +339,24 @@ main.container {
         transition: all .3s ease-in-out;
         border-right: 7px solid $colorAl;
         box-sizing: content-box;
-
         -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
         -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
         box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-
         .card {
             margin: .3rem 0 !important;
             background-color: $colorAd;
             font-weight: 300;
-
             &.highlight {
                 background-color: #0f1626 !important;
             }
-
             .row {
                 margin-bottom: 0 !important;
             }
-
             .card-title {
                 margin: 0;
                 overflow: hidden;
                 white-space: nowrap;
             }
-
             .card-action {
                 line-height: 55px;
                 font-size: 30px;
@@ -273,22 +367,18 @@ main.container {
                 }
             }
         }
-
         .btn-floating {
             background-color: $colorAl;
         }
-
         h2 {
             font-size: 2.5vw;
             color: black;
             padding: 0 .75rem;
         }
-
         &.hideSide {
             z-index: -1;
             opacity: 0;
         }
-
         .card-content {
             $heightCard: 30px;
             padding: 0px;
@@ -314,235 +404,105 @@ main.container {
             }
         }
     }
-
-    #first {
-        position: sticky;
-        top: 5px;
-        transition: all .25s;
-
-        &.transform {
-            transform: translateX(-14%);
-        }
-
-        &>h3 {
-            margin-top: 0;
-        }
-
-        #firstContent {
-            text-align: center;
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
 }
 
-#chart {
-    position: relative;
-
-    h1 {
-        padding-top: 5%;
-        text-align: center;
-
-        @media screen and (max-width: 400px) {
-            padding-top: 10%;
+section {
+    #modal1 {
+        min-height: 350px;
+        width: 65%;
+        height: 80%;
+        max-height: 80%;
+        @media screen and (max-width: 992px) {
+            width: 85%;
         }
-    }
-
-    >div {
-        &:not(:first-of-type) {
-            margin-top: 40px;
-        }
-        position: relative;
-
-        h2 {
-            margin-left: 20px;
-            &+p {
-                margin-left: 25px;
+        .modal-content {
+            padding: 0;
+            &>h4 {
+                text-align: center; //text-transform: capitalize;
+                position: sticky;
+                top: 0;
+                background-color: #fafafa;
+                padding: 22px;
+                margin: 0;
             }
-            @media screen and (max-width: 400px) {
-                text-align: center;
-                margin-left: 0;
-                &+p {
-                    text-align: center;
-                    margin-left: 0;
+            #wrapper {
+                :not(h5) {
+                    color: #504a4a;
                 }
-            }
-        }
-
-        .chartLoading {
-            display: none;
-
-            &.active {
-                display: initial;
-                position: absolute;
-                z-index: 10;
-                width: calc(100% - .75rem);
-                height: 50%;
-
-                div {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    display: inline-table;
-                    font-size: 1.5rem;
-                }
-            }
-        }
-
-        .blockMobile {
-            display: none;
-
-            .btn {
-                font-size: 0.8rem;
-                background-color: $colorAl;
-            }
-
-            &.show {
-                @media screen and (max-width: 400px) {
-                    display: initial;
-                    position: absolute;
-                    z-index: 10;
-                    width: calc(100% - .75rem);
-                    height: 50%;
-                    background-color: $page-bg;
-                    div {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        text-align: center;
-                        display: inline-table;
-                        i {
-                            font-size: 15vh;
-                        }
-                    }
-                    &+canvas {
-                        opacity: 0;
-                    }
-                }
-            }
-        }
-    }
-}
-
-#modal1 {
-    min-height: 350px;
-    width: 65%;
-    height: 80%;
-    max-height: 80%;
-
-    @media screen and (max-width: 992px) {
-        width: 85%;
-    }
-
-    .modal-content {
-        padding: 0;
-
-        &>h4 {
-            text-align: center;
-            //text-transform: capitalize;
-            position: sticky;
-            top: 0;
-            background-color: #fafafa;
-            padding: 22px;
-            margin: 0;
-        }
-
-        #wrapper {
-
-            :not(h5) {
-                color: #504a4a;
-            }
-
-            #playerStats {
-                .jogo {
-                    display: inline-block;
-                    text-align: center;
-                    margin-bottom: 20px;
-
-                    &:after {
-                        @media screen and (max-width: 600px) {
-                            content: attr(data-content) ' pts';
-                            display: block;
-                        }
-                    }
-                }
-
-                #primeiro {
-                    text-align: center;
-                    width: auto;
-                    margin-bottom: 10px;
-                    
-                    strong {
+                #playerStats {
+                    .jogo {
                         display: inline-block;
-                        padding: 5px 10px;
-                        border: 1px solid $colorNav;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        &:after {
+                            @media screen and (max-width: 600px) {
+                                content: attr(data-content) ' pts';
+                                display: block;
+                            }
+                        }
+                    }
+                    #primeiro {
+                        text-align: center;
+                        width: auto;
+                        margin-bottom: 10px;
+                        strong {
+                            display: inline-block;
+                            padding: 5px 10px;
+                            border: 1px solid $colorNav;
+                        }
                     }
                 }
-            }
-
-            #sidePont {
-                position: fixed;
-                height: calc(100% - 175px);
-                right: 20px;
-                background-color: #f3f3f3;
-
-                -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
-                -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.25);
-
-                @media screen and (max-width: 992px) {
-                    display: none;
-
-                    // margin-bottom: 20px;
-                    // position: initial;
-
-                    // .sideTotal {
-                    //     position: initial !important;
-                    //     width: auto !important;
-                    // }
-                }
-
-                .sideNum {
-                    float: right;
-                    margin-right: 5%;
-                }
-                $sizeTotHeight: 35px;
-                #sideGames {
-                    height: calc(100% - 52px - #{$sizeTotHeight});
-                    overflow-y: auto;
-                }
-
-                .sideTotal {
-                    position: absolute;
-                    bottom: 0;
-                    width: calc(100% - 1.5rem);
-                    line-height: $sizeTotHeight;
+                #sidePont {
+                    position: fixed;
+                    height: calc(100% - 175px);
+                    right: 20px;
                     background-color: #f3f3f3;
-                    padding-top: 2px;
-                    border-top: 1px solid rgba(100, 100, 100, 0.3);
-
-                    span:nth-child(2) {
+                    -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
+                    -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
+                    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.25);
+                    @media screen and (max-width: 992px) {
+                        display: none; // margin-bottom: 20px;
+                        // position: initial;
+                        // .sideTotal {
+                        //     position: initial !important;
+                        //     width: auto !important;
+                        // }
+                    }
+                    .sideNum {
                         float: right;
-                        margin-right: 5px;
-                        font-weight: 500;
+                        margin-right: 5%;
+                    }
+                    $sizeTotHeight: 35px;
+                    #sideGames {
+                        height: calc(100% - 52px - #{$sizeTotHeight});
+                        overflow-y: auto;
+                    }
+                    .sideTotal {
+                        position: absolute;
+                        bottom: 0;
+                        width: calc(100% - 1.5rem);
+                        line-height: $sizeTotHeight;
+                        background-color: #f3f3f3;
+                        padding-top: 2px;
+                        border-top: 1px solid rgba(100, 100, 100, 0.3);
+                        span:nth-child(2) {
+                            float: right;
+                            margin-right: 5px;
+                            font-weight: 500;
+                        }
                     }
                 }
             }
         }
     }
-}
-
-#modal2 {
-    height: 50vh;
-    top: 15%;
-
-    p {
-        text-align: justify;
-        overflow-wrap: break-word;
+    
+    #modal2 {
+        height: 50vh;
+        top: 15%;
+        p {
+            text-align: justify;
+            overflow-wrap: break-word;
+        }
     }
 }
 
@@ -556,6 +516,6 @@ main.container {
 //auto-fill fix
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill { 
-     background-color: #fff !important;
-     -webkit-box-shadow: 0 0 0px 300px white inset !important;
+    background-color: #fff !important;
+    -webkit-box-shadow: 0 0 0px 300px white inset !important;
 }

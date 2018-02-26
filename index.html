@@ -11,13 +11,13 @@
         gtag('config', 'UA-110855560-1');
     </script>
     
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
     (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-4666327139123387",
         enable_page_level_ads: true
     });
-    </script>
+    </script> -->
 
     <title>Bolão do Maurício | 9º Bolão Copa do Mundo</title>
     
@@ -147,11 +147,11 @@
             <h2>Bem Vindo(a), verifique seus dados!</h2>
             <div></div>
         </div>
-        <div class="arrow-pulse-down" onclick="window.scrollTo(0, window.innerHeight)"></div>
+        <div class="arrow-pulse-down"></div>
     </div>
 
     <main class="container">
-        <div id="rank" class="row rank">
+        <div id="rank" class="row">
             
             <h1>RANKING</h1>
 
@@ -251,12 +251,12 @@
     </main>
 
     <aside>
-        <div id="sideRank" class="rank hideSide hide-on-med-and-down">
+        <div id="sideRank" class="hideSide hide-on-med-and-down">
             <div class="row">
                     <h2>Top 5</h2>
             </div>
         </div>
-    <aside>
+    </aside>
 
     <section>
         <div id="modal1" class="modal modal-fixed-footer">
@@ -341,19 +341,6 @@
             });
     </script>
 
-    <script> //SERVICE WORKER PWA
-        if ('serviceWorker' in navigator) {
-            console.log('CLIENT: service worker registration in progress.');
-            navigator.serviceWorker.register('/service-worker.js').then(function() {
-                console.log('CLIENT: service worker registration complete.');
-            }, function() {
-                console.log('CLIENT: service worker registration failure.');
-            });
-            } else {
-            console.log('CLIENT: service worker is not supported.');
-        }
-    </script>
-
     <script>
         pushpad('init', 5053);
 
@@ -418,6 +405,19 @@
                 else { alert(msg); }
             });
         });
+    </script>
+
+    <script> //SERVICE WORKER PWA
+        if ('serviceWorker' in navigator) {
+            console.log('CLIENT: service worker registration in progress.');
+            navigator.serviceWorker.register('/service-worker.js').then(function() {
+                console.log('CLIENT: service worker registration complete.');
+            }, function() {
+                console.log('CLIENT: service worker registration failure.');
+            });
+            } else {
+            console.log('CLIENT: service worker is not supported.');
+        }
     </script>
 </body>
 </html>
