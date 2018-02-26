@@ -261,7 +261,7 @@ main.container {
         main.container #rank #rankList .rankBtn#refresh i {
           float: right; } }
       @media screen and (min-width: 992px) {
-        main.container #rank #rankList .rankBtn #moreRank.hide + #refresh {
+        main.container #rank #rankList .rankBtn#moreRank.hide + #refresh {
           margin-left: 0 !important; } }
   main.container #rank #first {
     position: sticky;
