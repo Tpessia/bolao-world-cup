@@ -919,23 +919,24 @@ function Search(key) {
 //scroll
 
 function ScrollFire(selector, id, foo1, foo2) {
-    scroll[id] = 0;
+    if (typeof scrollIds === "undefined") { scrollIds = [] }
+    scrollIds[id] = 0;
     $(window).scroll(function () {
         var sT = $(selector).offset().top,
             sH = $(selector).outerHeight(),
             wH = $(window).height(),
             wS = $(window).scrollTop();
 
-        if (scroll[id] == 0) { //só roda uma vez
+        if (scrollIds[id] == 0) { //só roda uma vez
             if (wS > sT + sH) { //trigger quando o ranking não está acima da visão
                 foo1();
-                scroll[id] ^= 1;
+                scrollIds[id] ^= 1;
             }
         }
         else {
             if (wS < sT + sH) { //trigger quando o ranking volta a estar visível
                 (typeof foo2 === "undefined") ? foo1() : foo2();
-                scroll[id] ^= 1;
+                scrollIds[id] ^= 1;
             }
         }
     });
