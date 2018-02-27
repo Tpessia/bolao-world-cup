@@ -1,9 +1,9 @@
 ##cache force
-#<IfModule mod_headers.c>
+<IfModule mod_headers.c>
 #Header unset ETag
-#</IfModule>
+</IfModule>
 # FileETag None
-#<IfModule mod_expires.c>
+<IfModule mod_expires.c>
 #ExpiresActive on
 #ExpiresDefault "access plus 15 days"
 #ExpiresByType text/cache-manifest "access plus 0 seconds"
@@ -40,10 +40,10 @@
 #ExpiresByType application/javascript "access plus 1 day"
 #ExpiresByType application/x-javascript "access plus 1 day"
 ##SW
-#<FilesMatch "^(service-worker.js)$">
-#  ExpiresActive on 
-#  ExpiresDefault "access plus 0 seconds"
-#</FilesMatch>
+<FilesMatch "^(service-worker.js)$">
+ ExpiresActive on 
+ ExpiresDefault "access plus 0 seconds"
+</FilesMatch>
 #</IfModule>
 ##Força o IE a sempre carregar utilizando a última versão disponível
 #<IfModule mod_headers.c>
@@ -51,7 +51,7 @@
 #<FilesMatch "\.(js|css|gif|png|jpeg|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
 #Header unset X-UA-Compatible
 #</FilesMatch>
-#</IfModule>
+</IfModule>
 
 #Redirect
 RewriteEngine On
