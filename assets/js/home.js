@@ -739,6 +739,8 @@ function scrollFireCharts(selector, foo, id) {
 function BindEvents() {
     $(".arrow-pulse-down").on("click", function() { $('html,body').animate({ scrollTop: window.innerHeight }, 'slow'); return false; });
 
+    Scrolls();
+
     $(".verMais a").on("click", function() { //simulates search on "plus" click
         var nome = $(this).parent().siblings(".nome").html(); //modal
         nome = nome.split(" ")
