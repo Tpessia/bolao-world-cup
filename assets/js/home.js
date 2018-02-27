@@ -164,7 +164,6 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
                 RankCreate();
                 PlayersArray();
                 BindEvents();
-                Scrolls();
                 charts.charts1.create(); //create charts
                 charts.charts2.create();
                 charts.charts3.create();

@@ -191,78 +191,80 @@ html {
     opacity: 1; } }
   html main {
     min-width: 85%; }
-    html main #rank h1 {
-      padding: 4% .75rem 10px .75rem;
-      text-align: center; }
-    html main #rank #rankList {
-      padding: 0 1.5rem; }
-      html main #rank #rankList #rankContent .col {
-        font-size: 25px;
-        color: white;
-        font-weight: 300; }
-        html main #rank #rankList #rankContent .col .col-wrapper {
-          line-height: 50px;
-          padding: 15px;
-          border-radius: 2px;
-          margin: 5px 0;
-          position: relative;
-          background-color: #25365d; }
-          @media screen and (max-width: 600px) {
-            html main #rank #rankList #rankContent .col .col-wrapper {
-              line-height: 45px; } }
-          html main #rank #rankList #rankContent .col .col-wrapper .nome,
-          html main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
-            overflow: hidden;
-            vertical-align: middle;
-            white-space: nowrap;
-            display: inline-block;
-            width: 33%; }
-            @media screen and (max-width: 600px) {
-              html main #rank #rankList #rankContent .col .col-wrapper .nome,
-              html main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
-                width: calc(100% - 70px); } }
-          html main #rank #rankList #rankContent .col .col-wrapper .verMais {
-            float: right;
-            cursor: pointer; }
-            html main #rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
-              color: #ffab40; }
-            @media screen and (max-width: 992px) {
-              html main #rank #rankList #rankContent .col .col-wrapper .verMais {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 15px; } }
-        html main #rank #rankList #rankContent .col:first-child .col-wrapper {
-          line-height: 60px; }
-        @media screen and (max-width: 600px) {
-          html main #rank #rankList #rankContent .col:first-child {
-            line-height: 55px; } }
-      html main #rank #rankList .rankBtn {
-        background-color: #3b3b3b;
-        font-size: 0.75em;
-        line-height: 50px;
-        height: 50px;
-        margin-top: 15px; }
-        @media screen and (min-width: 992px) {
-          html main #rank #rankList .rankBtn#refresh {
-            margin-left: 0.75rem !important; } }
-        @media screen and (min-width: 600px) {
-          html main #rank #rankList .rankBtn#refresh i {
-            float: right; } }
-        html main #rank #rankList .rankBtn#moreRank.hide + #refresh {
-          margin-left: 0 !important; }
-    html main #rank #first {
-      position: sticky;
-      top: 5px;
-      transition: all .25s; }
-      html main #rank #first.transform {
-        transform: translateX(-14%); }
-      html main #rank #first > h3 {
-        margin-top: 0; }
-      html main #rank #first #firstContent {
+    html main #rank {
+      overflow-x: initial; }
+      html main #rank h1 {
+        padding: 4% .75rem 10px .75rem;
         text-align: center; }
-        html main #rank #first #firstContent:last-child {
-          margin-bottom: 0; }
+      html main #rank #rankList {
+        padding: 0 1.5rem; }
+        html main #rank #rankList #rankContent .col {
+          font-size: 25px;
+          color: white;
+          font-weight: 300; }
+          html main #rank #rankList #rankContent .col .col-wrapper {
+            line-height: 50px;
+            padding: 15px;
+            border-radius: 2px;
+            margin: 5px 0;
+            position: relative;
+            background-color: #25365d; }
+            @media screen and (max-width: 600px) {
+              html main #rank #rankList #rankContent .col .col-wrapper {
+                line-height: 45px; } }
+            html main #rank #rankList #rankContent .col .col-wrapper .nome,
+            html main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+              overflow: hidden;
+              vertical-align: middle;
+              white-space: nowrap;
+              display: inline-block;
+              width: 33%; }
+              @media screen and (max-width: 600px) {
+                html main #rank #rankList #rankContent .col .col-wrapper .nome,
+                html main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+                  width: calc(100% - 70px); } }
+            html main #rank #rankList #rankContent .col .col-wrapper .verMais {
+              float: right;
+              cursor: pointer; }
+              html main #rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
+                color: #ffab40; }
+              @media screen and (max-width: 992px) {
+                html main #rank #rankList #rankContent .col .col-wrapper .verMais {
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  right: 15px; } }
+          html main #rank #rankList #rankContent .col:first-child .col-wrapper {
+            line-height: 60px; }
+          @media screen and (max-width: 600px) {
+            html main #rank #rankList #rankContent .col:first-child {
+              line-height: 55px; } }
+        html main #rank #rankList .rankBtn {
+          background-color: #3b3b3b;
+          font-size: 0.75em;
+          line-height: 50px;
+          height: 50px;
+          margin-top: 15px; }
+          @media screen and (min-width: 992px) {
+            html main #rank #rankList .rankBtn#refresh {
+              margin-left: 0.75rem !important; } }
+          @media screen and (min-width: 600px) {
+            html main #rank #rankList .rankBtn#refresh i {
+              float: right; } }
+          html main #rank #rankList .rankBtn#moreRank.hide + #refresh {
+            margin-left: 0 !important; }
+      html main #rank #first {
+        position: sticky;
+        top: 5px;
+        transition: all .25s; }
+        html main #rank #first.transform {
+          transform: translateX(-14%); }
+        html main #rank #first > h3 {
+          margin-top: 0; }
+        html main #rank #first #firstContent {
+          text-align: center; }
+          html main #rank #first #firstContent:last-child {
+            margin-bottom: 0; }
     html main #chart {
       position: relative; }
       html main #chart h1 {
@@ -467,6 +469,7 @@ html {
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   background-color: #fff !important;
-  -webkit-box-shadow: 0 0 0px 300px white inset !important; }
+  -webkit-box-shadow: 0 0 0px 300px white inset !important;
+  box-shadow: 0 0 0px 300px white inset !important; }
 
 /*# sourceMappingURL=home.css.map */
