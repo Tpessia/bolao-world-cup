@@ -1,10 +1,10 @@
 @import '_main.scss';
 
 html {
-    overflow-x: none;
+    overflow-x: hidden;
 
     body {
-        overflow-x: none;
+        overflow-x: hidden;
         background-color: $page-bg; //loading
         #loading {
             display: none;
