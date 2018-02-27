@@ -121,7 +121,7 @@ function Login() {
     }
 
     function Welcome() { //welcome name update
-        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name + "!"));
+        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name.split(" ")[0] + "!"));
 
         $("#welcome div").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
     }

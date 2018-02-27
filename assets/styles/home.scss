@@ -224,6 +224,12 @@ html {
                         &:last-child {
                             margin-bottom: 0;
                         }
+                        h3 {
+                            overflow-x: hidden;
+                            overflow-y: hidden;
+                            max-height: calc(48.18px * 2);
+                            font-size: 2.6rem;
+                        }
                     }
                 }
             }

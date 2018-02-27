@@ -270,6 +270,11 @@ html body {
         text-align: center; }
         html body main #rank #first #firstContent:last-child {
           margin-bottom: 0; }
+        html body main #rank #first #firstContent h3 {
+          overflow-x: hidden;
+          overflow-y: hidden;
+          max-height: calc(48.18px * 2);
+          font-size: 2.6rem; }
     html body main #chart {
       position: relative; }
       html body main #chart h1 {
