@@ -823,6 +823,7 @@ function Search(key) {
         searchAjax = $.ajax({
             url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json',
             dataType: 'html',
+            timeout: 5000,
             success: function (json) {
                 data = JSON.parse(json).feed.entry //recebe a data como json
 
