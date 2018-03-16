@@ -1,4 +1,8 @@
 $(function() {
+    $("#wrapper").css("margin-top", (window.innerHeight * 0.4));
+    $("html").css("height", (window.innerHeight));
+    $(".bg-layer").css("height", (window.innerHeight));
+
     OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
     
     $("#name").trigger("focus");
