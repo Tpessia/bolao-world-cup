@@ -133,6 +133,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5); }
   #login #wrapper {
     position: absolute;
+    margin-top: 40%;
     left: 50%;
     transform: translate(-50%, -50%); }
     #login #wrapper h2 {
