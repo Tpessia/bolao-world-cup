@@ -15,6 +15,14 @@ $(function() {
         Cadastrar();
     });
 
+    var url = new URL(window.location);
+    var login = url.searchParams.get("login");
+
+    if (login) {
+        $("#name").val(login);
+        $('#formLogin').submit();
+    }
+
     function Cadastrar() {
         user = { name: "", code: "", page: "", pontuacao: [], colocacao: [], date: [] };
 
