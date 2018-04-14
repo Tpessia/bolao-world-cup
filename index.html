@@ -45,7 +45,7 @@
         var url = new URL(window.location.href);
         var admin = url.searchParams.get("admin");
         
-        if (adms.filter(function(adm) { return admin == adm }) != 0) {            
+        if (adms.filter(function(adm) { return admin == adm }) == 0) {            
             var lacamento = new Date("2018-06-14T18:00-03:00"),
                 hoje = new Date();
 
