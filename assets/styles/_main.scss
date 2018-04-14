@@ -86,6 +86,9 @@ nav {
         input[type=search] {
             padding-right: 3.5em;
             border: 0 !important;
+            border-bottom: 0px solid transparent !important;
+            -webkit-box-shadow: 0 0px 0 0 transparent !important;
+            box-shadow: 0 0px 0 0 transparent !important;
             box-sizing: border-box;
             &:focus+i:first-of-type {
                 color: #444 !important;

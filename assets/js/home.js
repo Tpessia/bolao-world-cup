@@ -766,7 +766,7 @@ function BindEvents() {
         data: playersJSON,
         limit: 3, // The max amount of results that can be shown at once. Default: Infinity.
         onAutocomplete: function (val) {
-            // Callback function when value is autcompleted.
+            Search(val);
         },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
@@ -871,6 +871,7 @@ function Search(key) {
                 loading.soft.stop();
 
                 $('#modal1').modal('open');
+                $("#modal1 .modal-footer a").trigger("focus");
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
