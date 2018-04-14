@@ -91,6 +91,19 @@ nav {
                 color: #444 !important;
             }
         }
+        .autocomplete-content {
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            li {
+                span {
+                    color: rgba(0, 0, 0, 0.5);
+                    &.highlight {
+                        color: rgba(0, 0, 0, 0.87);
+                    }
+                }
+            }
+        }
     }
 }
 

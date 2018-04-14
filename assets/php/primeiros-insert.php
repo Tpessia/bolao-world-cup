@@ -19,12 +19,9 @@ $date = date("Y-m-d");
 //dbinfo
 
 $servername = "mysql.hostinger.com.br";
-
-$username = "u662107342_user";
-
-$password = "k]9VFku[OHBf]Dc^SM";
-
-$dbname = "u662107342_db";
+$username = "u432755883_user";
+$password = "IhSoAnXZFmBi@314159";
+$dbname = "u432755883_db";
 
 // Create connection
 

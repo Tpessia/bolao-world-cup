@@ -85,6 +85,14 @@ nav {
     box-sizing: border-box; }
     nav .input-field input[type=search]:focus + i:first-of-type {
       color: #444 !important; }
+  nav .input-field .autocomplete-content {
+    margin: 0;
+    position: absolute;
+    width: 100%; }
+    nav .input-field .autocomplete-content li span {
+      color: rgba(0, 0, 0, 0.5); }
+      nav .input-field .autocomplete-content li span.highlight {
+        color: rgba(0, 0, 0, 0.87); }
 
 .side-nav {
   padding-top: 15px;

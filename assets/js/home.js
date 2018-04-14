@@ -1,3 +1,27 @@
+//NETWORK CONTROLLER
+
+$(function () { //document ready
+
+    //Inicia como Offline ou Online
+
+    if (navigator.onLine) {
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
+    } else {
+        OfflineGet();
+        Network.unbind();
+    }
+
+    //offline/online events
+
+    Offline.on("down", function () {
+        Network.unbind();
+    });
+    Offline.on("up", function () {
+        Network.bind();
+        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
+    });
+});
+
 //DEBUG ALERT
 
 // window.onerror = function (msg, url, linenumber) {
@@ -69,31 +93,6 @@ var Network = {
         $("#searchVal").prop('disabled', true);
     }
 }
-
-//NETWORK CONTROLLER
-
-$(function() { //document ready
-
-    //Inicia como Offline ou Online
-
-    if (navigator.onLine) {
-        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0'); //Recebe o JSON do Google Sheets, e o transforma no objeto table.pageN.rows, além de chamar as funções que criam os objetos/arrays ranking (guarda os nomes e as pontuações em ordem decrescente), players (guarda o nome dos jogadores e a página em que estão no Google Sheets - referência para o search - ) e a winner div
-    }
-    else {
-        OfflineGet();
-        Network.unbind();
-    }
-
-    //offline/online events
-
-    Offline.on("down", function () {
-        Network.unbind();
-    });
-    Offline.on("up", function () {
-        Network.bind();
-        OnlineGet('1', '1I5avuVF1MCJyDQAEk9lrflQsuA4q6wWoMiVqO6pKiT0');
-    });
-});
 
 //LOGIN
 
@@ -224,18 +223,12 @@ function GetChartData() {
         type: "GET",
         success: function (dataDB) {
             try {
-                var chartData = eval(dataDB);
+                console.log(dataDB);
+                var chartData = evalSecure(dataDB);
             } catch (error) {
-                showError('Encontramos alguns problemas ao procurar seu cadastro no banco de dados, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>');
-
-                $(".chartLoading").removeClass("active");
-                $("a.login").css({
-                    "opacity": "1",
-                    "cursor": "pointer",
-                    "pointer-events": "auto"
-                });
-
-                throw "UnableToFindUser";
+                var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                var error = 'UnableToFindUser';
+                parseError(msg, error);
             }
 
             user.date = [];
@@ -279,7 +272,13 @@ function GetMedias() {
         url: "assets/php/media-select.php",
         type: "GET",
         success: function (data) {
-            var medias = eval(data);
+            try {
+                var medias = evalSecure(data);
+            } catch (error) {
+                // var msg = 'Encontramos alguns problemas ao procurar pela pontuação média dos usuários, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                // var error = 'UnableToFindMedias';
+                // parseError(msg, error);
+            }
 
             media = { mediaArr: [], dateArr: [] };
 
@@ -310,7 +309,13 @@ function GetPrimeiros() {
         url: "assets/php/primeiros-select.php",
         type: "GET",
         success: function (data) {
-            var primeirosData = eval(data);
+            try {
+                var primeirosData = evalSecure(data);
+            } catch (error) {
+                // var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                // var error = 'UnableToFindUser';
+                // parseError(msg, error);
+            }
 
             primeiros = { nome: [], ocorrencias: [] };
 
@@ -343,6 +348,23 @@ function GetPrimeiros() {
             GetPrimeiros();
         }
     });
+}
+
+function evalSecure(obj) {
+    return Function('"use strict";return (' + obj + ')')();
+}
+
+function parseError(msg,error) {
+    showError(msg);
+
+    $(".chartLoading").removeClass("active");
+    $("a.login").css({
+        "opacity": "1",
+        "cursor": "pointer",
+        "pointer-events": "auto"
+    });
+
+    throw error;
 }
 
 function ValidadeDbInput(str) { //antigo lower()
@@ -736,6 +758,20 @@ function scrollFireCharts(selector, foo, id) {
 //bind
 
 function BindEvents() {
+    var playersJSON = {};
+    for (var p in players) {
+        playersJSON[players[p].name] = null;
+    }
+
+    $('input.autocomplete').autocomplete({
+        data: playersJSON,
+        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+        onAutocomplete: function (val) {
+            // Callback function when value is autcompleted.
+        },
+        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    });
+
     $(".arrow-pulse-down").on("click", function() { $('html,body').animate({ scrollTop: window.innerHeight }, 'slow'); return false; });
 
     Scrolls();
