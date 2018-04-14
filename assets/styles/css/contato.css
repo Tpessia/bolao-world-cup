@@ -137,6 +137,13 @@ footer {
   box-shadow: 0 1px 0 0 #25365d; }
   #form-email input:focus ~ label, #form-email textarea:focus ~ label {
     color: #25365d; }
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent; } }
+#form-email input:not([type=submit]):-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both; }
 
 #submit input {
   outline: none; }

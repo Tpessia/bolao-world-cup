@@ -29,6 +29,18 @@
             color: #25365d;
         }
     }
+    input:not([type=submit]) {
+        @-webkit-keyframes autofill {
+            to {
+                color: inherit;
+                background: transparent;
+            }
+        }
+        &:-webkit-autofill {
+            -webkit-animation-name: autofill;
+            -webkit-animation-fill-mode: both;
+        }
+    }
 }
 
 #submit input {
