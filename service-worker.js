@@ -1,6 +1,6 @@
 importScripts('/lib/cache-polyfill.js');
 
-var version = 'v0.5.7::';
+var version = 'v0.6::';
 
 self.addEventListener("install", function (event) {
     console.log('WORKER: install event in progress.');
