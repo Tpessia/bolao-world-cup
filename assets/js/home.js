@@ -284,7 +284,7 @@ function GetMedias() {
 
             for (i in medias) {
                 media.mediaArr.push(medias[i].media);
-                var date = new Date(medias[i].date + 'T00:00-02:00'); //weakest link
+                var date = new Date(medias[i].date + 'T00:00-03:00'); //weakest link
                 media.dateArr.push(FormatarData(date));
             }
 
