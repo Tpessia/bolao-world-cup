@@ -1,6 +1,6 @@
 importScripts('/lib/cache-polyfill.js');
 
-var version = 'v0.6.6.1::';
+var version = 'v0.6.7::';
 
 self.addEventListener("install", function (event) {
     console.log('WORKER: install event in progress.');
@@ -52,7 +52,7 @@ self.addEventListener("install", function (event) {
 
 
 self.addEventListener("fetch", function (event) {
-    console.log('WORKER: fetch event in progress.');
+    // console.log('WORKER: fetch event in progress.');
 
     /* We should only cache GET requests, and deal with the rest of method in the
        client-side, by handling failed POST,PUT,PATCH,etc. requests.
@@ -61,7 +61,7 @@ self.addEventListener("fetch", function (event) {
         /* If we don't block the event as shown below, then the request will go to
            the network as usual.
         */
-        console.log('WORKER: fetch event ignored.', event.request.method, event.request.url);
+        // console.log('WORKER: fetch event ignored.', event.request.method, event.request.url);
         return;
     }
     /* Similar to event.waitUntil in that it blocks the fetch event on a promise.
@@ -92,7 +92,7 @@ self.addEventListener("fetch", function (event) {
                 /* We return the cached response immediately if there is one, and fall
                    back to waiting on the network as usual.
                 */
-                console.log('WORKER: fetch event', cached ? '(cached)' : '(network)', event.request.url);
+                // console.log('WORKER: fetch event', cached ? '(cached)' : '(network)', event.request.url);
                 return cached || networked;
 
                 function fetchedFromNetwork(response) {
@@ -101,7 +101,7 @@ self.addEventListener("fetch", function (event) {
                     */
                     var cacheCopy = response.clone();
 
-                    console.log('WORKER: fetch response from network.', event.request.url);
+                    // console.log('WORKER: fetch response from network.', event.request.url);
 
                     caches
                         // We open a cache to store the response for this request.
@@ -114,7 +114,7 @@ self.addEventListener("fetch", function (event) {
                             cache.put(event.request, cacheCopy);
                         })
                         .then(function () {
-                            console.log('WORKER: fetch response stored in cache.', event.request.url);
+                            // console.log('WORKER: fetch response stored in cache.', event.request.url);
                         });
 
                     // Return the response so that the promise is settled in fulfillment.
