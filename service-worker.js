@@ -1,6 +1,6 @@
 importScripts('/lib/cache-polyfill.js');
 
-var version = 'v0.6.5::';
+var version = 'v0.6.6::';
 
 self.addEventListener("install", function (event) {
     console.log('WORKER: install event in progress.');
@@ -179,6 +179,7 @@ self.addEventListener("activate", function (event) {
                             /* Return a promise that's fulfilled
                                when each outdated cache is deleted.
                             */
+                            console.log("Content Updated!")
                             return caches.delete(key);
                         })
                 );
