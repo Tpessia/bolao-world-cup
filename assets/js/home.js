@@ -142,7 +142,7 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
 
     pages.forEach(function (page, index) {
 
-        var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+        var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime();
 
         if (typeof onlineGetAjax !== "undefined" && onlineGetAjax.readyState !== 4 && onlineGetAjax.readyState !== 0) {
             onlineGetAjax.abort();
@@ -219,7 +219,7 @@ function GetChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + ValidadeDbInput(user.name) + "_" + user.page,
+        url: "assets/php/ranking-select.php?username=" + ValidadeDbInput(user.name) + "_" + user.page + '&_=' + new Date().getTime(),
         type: "GET",
         success: function (dataDB) {
             try {
@@ -268,7 +268,7 @@ function GetMedias() {
     }
 
     getMediaAjax = $.ajax({
-        url: "assets/php/media-select.php",
+        url: "assets/php/media-select.php?_=" + new Date().getTime(),
         type: "GET",
         success: function (data) {
             try {
@@ -305,7 +305,7 @@ function GetPrimeiros() {
     }
 
     getPrimeirosAjax = $.ajax({
-        url: "assets/php/primeiros-select.php",
+        url: "assets/php/primeiros-select.php?_=" + new Date().getTime(),
         type: "GET",
         success: function (data) {
             try {
@@ -856,7 +856,7 @@ function Search(key) {
         }
 
         searchAjax = $.ajax({
-            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json',
+            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime(),
             dataType: 'html',
             timeout: 10000,
             success: function (json) {
