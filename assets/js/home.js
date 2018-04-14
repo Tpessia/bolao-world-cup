@@ -236,7 +236,7 @@ function GetChartData() {
             user.colocacao = [];
 
             for (i in chartData) {
-                var date = new Date(chartData[i].date + 'T00:00-02:00'); //weakest link
+                var date = new Date(chartData[i].date + 'T00:00-03:00'); //weakest link
                 user.date.push(FormatarData(date));
                 user.pontuacao.push(chartData[i].pontuacao);
                 user.colocacao.push(chartData[i].colocacao);

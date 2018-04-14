@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Gerar Novos Dados</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         $(function() {
@@ -106,10 +108,10 @@
                 data: myData1,
                 success: function (data) {
                     console.log(data);
-                    alert("Primeiros OK!");
+                    $("#primeiros .boxes").css("background-color", "#1f8a45");
                 },
                 error: function () {
-                    alert("A conexão com o servidor foi interrompida, tente novamente!")
+                    $("#primeiros .boxes").css("background-color", "#da3030");
                 }
             });
 
@@ -134,10 +136,10 @@
                 data: myData2,
                 success: function(data) {
                     console.log(data);
-                    alert("Media e Dados Gerais OK!");
+                    $("#medias .boxes").css("background-color", "#1f8a45");
                 },
                 error: function () {
-                    alert("A conexão com o servidor foi interrompida, tente novamente!")
+                    $("#medias .boxes").css("background-color", "#da3030");
                 }
             });
 
@@ -161,10 +163,10 @@
                 data: myData3,
                 success: function (data) {
                     console.log(data);
-                    alert("Notificações Enviadas!");
+                    $("#notificacoes .boxes").css("background-color","#1f8a45");
                 },
                 error: function () {
-                    alert("A conexão com o servidor foi interrompida, tente novamente!")
+                    $("#notificacoes .boxes").css("background-color", "#da3030");
                 }
             });
         }
@@ -185,6 +187,33 @@
 </head>
 <body>
     <button id="genData">Gerar novos dados!</button>
+    <div id="leds">
+        <div id="primeiros">
+            <span class="boxes"></span> Primeiros Colocados</div>
+        <div id="medias">
+            <span class="boxes"></span> Pontuações Médias</div>
+        <div id="notificacoes">
+            <span class="boxes"></span> Notificações</div>
+    </div>
+
+    <style>
+        #genData {
+            height: 50px;
+        }
+        #leds {
+            margin-top: 10px;
+        }
+        #leds>div {
+            line-height: 40px;
+        }
+        .boxes {
+            height: 15px;
+            width: 15px;
+            background-color: #c3c3c3;
+            display: inline-block;
+            vertical-align: text-top;
+        }
+    </style>
 
     <!-- <button id="clearLast">Limpar último conjunto de dados!</button> -->
     <script>
