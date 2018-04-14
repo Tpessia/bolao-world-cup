@@ -425,7 +425,7 @@ function RankCreate() { //create ranking element and object
             btn = 'btn';
         }
 
-        sideRank = rankBlock;
+        sideRank = "<h2>Top 5</h2>" + rankBlock;
 
         rankBlock =
             rankBlock + `
@@ -446,7 +446,7 @@ function RankCreate() { //create ranking element and object
         if (i < 5) { //create side rank
             sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
 
-            $("#sideRank>.row").append(sideRank);
+            $("#sideRank>.row").html(sideRank);
             $("#sideRank>.row>.col:gt(4)").remove();
         }
     }
