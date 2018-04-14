@@ -79,8 +79,8 @@
 
         function RankCreate() { //create ranking element
 
-            $("body").html($("body").html() + "Carregando...");
-
+            $("#primeiros .boxes, #notificacoes .boxes, #medias .boxes").css("background-color", "##656565");
+            
             PlayersArray();
 
             ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
@@ -115,7 +115,7 @@
                 }
             });
 
-            $("body").html($("body").html() + "<div>Primeiro: " + ranking[0].name + "</div><br><br>")
+            $("body").html($("body").html() + "<div>Primeiro: " + ranking[0].name + "</div><br>")
 
             for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
 
