@@ -223,7 +223,6 @@ function GetChartData() {
         type: "GET",
         success: function (dataDB) {
             try {
-                console.log(dataDB);
                 var chartData = evalSecure(dataDB);
             } catch (error) {
                 var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
