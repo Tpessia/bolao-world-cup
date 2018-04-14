@@ -21,6 +21,14 @@
             padding-top: 10px;
         }
     }
+    input:focus, textarea:focus {
+        border-bottom: 1px solid #25365d;
+        -webkit-box-shadow: 0 1px 0 0 #25365d;
+        box-shadow: 0 1px 0 0 #25365d;
+        ~label {
+            color: #25365d;
+        }
+    }
 }
 
 #submit input {

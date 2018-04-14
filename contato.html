@@ -106,11 +106,11 @@
                     <label for="email">Assunto</label>
                 </div>
                 <div class="input-field">
-                    <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' style="height: 30vh; min-height: 170px;" required></textarea>
+                    <textarea name="mensagem" id="mensagem"  class="materialize-textarea" data-length="750" maxlength="750" placeholder='Insira sua mensagem e clique em "Enviar"!' required></textarea>
                     <label for="mensagem">Mensagem</label>
                 </div>
                 <div id="submit" class="input-field" style="display: inline-block;">
-                    <input type="submit" class="btn colorAl waves-effect" value="Enviar">
+                    <input type="submit" class="btn colorA waves-effect" value="Enviar">
                     <img id="loading" class="hide" src="\assets\img\loading.gif">
                 </div>
             </form>
@@ -189,10 +189,14 @@
                 method: "POST",
                 url: "assets/php/contact.php",
                 data: myData,
-                success: function () {
-                    // alert("Sent -> Email: " + myData.email + "\nAssunto: " + myData.assunto + "\nMensagem: " + myData.mensagem + "\n\nResponse -> " + data);
-                    $("#email, #mensagem, #assunto, #nome").val("");
-                    $('#myModal').modal('open');
+                success: function (data) {
+                    if (data == "1") {
+                        $("#email, #mensagem, #assunto, #nome").val("");
+                        $('#myModal').modal('open');
+                    }
+                    else {
+                        $("#errorModal").modal("open");
+                    }
                 },
                 error: function () {
                     $("#errorModal").modal("open");

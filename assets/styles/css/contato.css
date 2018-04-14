@@ -128,6 +128,12 @@ footer {
   @media screen and (max-width: 600px) {
     #form-email h4 {
       padding-top: 10px; } }
+#form-email input:focus, #form-email textarea:focus {
+  border-bottom: 1px solid #25365d;
+  -webkit-box-shadow: 0 1px 0 0 #25365d;
+  box-shadow: 0 1px 0 0 #25365d; }
+  #form-email input:focus ~ label, #form-email textarea:focus ~ label {
+    color: #25365d; }
 
 #submit input {
   outline: none; }

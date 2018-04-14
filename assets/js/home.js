@@ -764,7 +764,7 @@ function BindEvents() {
 
     $('input.autocomplete').autocomplete({
         data: playersJSON,
-        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+        limit: 3, // The max amount of results that can be shown at once. Default: Infinity.
         onAutocomplete: function (val) {
             // Callback function when value is autcompleted.
         },
