@@ -378,14 +378,14 @@
             $('#push-sub').on('click', function (e) {
                 e.preventDefault();
                 
-                $(this).toggleClass("colorBl colorB");
+                $("#push-sub").toggleClass("colorBl colorB");
 
                 // if he wants to unsubscribe
                 if ($(this).hasClass('subscribed')) {
                     pushpad('unsubscribe', function () {
                         updateButton(false);
-                        
-                        $(this).toggleClass("colorBl colorB");
+
+                        $("#push-sub").toggleClass("colorBl colorB");
                     });
 
                     // if he wants to subscribe
@@ -396,12 +396,12 @@
                             // success
                             updateButton(true);
 
-                            $(this).toggleClass("colorBl colorB");
+                            $("#push-sub").toggleClass("colorBl colorB");
                         } else {
                             // oops... the user has denied permission from the browser prompt
                             updateButton(false);
 
-                            $(this).toggleClass("colorBl colorB");
+                            $("#push-sub").toggleClass("colorBl colorB");
 
                             var msg = 'Você bloqueou as notificações do seu navegador! Para poder utilizar esta função, reative-as.';
                             if(typeof showError !== "undefined") { showError(msg); }
