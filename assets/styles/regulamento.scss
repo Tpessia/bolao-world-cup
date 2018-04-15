@@ -1,0 +1,16 @@
+@import '_main.scss';
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    main {
+        flex: 1 0 auto;
+        padding-top: 30px;
+        text-align: justify;
+    }
+}
+
+.nav-content {
+    display: none;
+}

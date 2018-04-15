@@ -65,7 +65,11 @@ nav {
         margin-top: 5px;
         height: 80%; }
   nav .nav-wrapper > ul li.active {
-    background-color: #3b3b3b; }
+    background-color: #3b3b3b !important; }
+  nav .nav-wrapper > ul li:hover {
+    background-color: #ffffff14; }
+  nav .nav-wrapper > ul li a:hover {
+    background-color: transparent; }
   nav .nav-wrapper .button-collapse i {
     font-size: 30px; }
   nav .nav-content {

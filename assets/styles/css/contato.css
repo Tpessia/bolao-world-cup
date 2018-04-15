@@ -65,7 +65,11 @@ nav {
         margin-top: 5px;
         height: 80%; }
   nav .nav-wrapper > ul li.active {
-    background-color: #3b3b3b; }
+    background-color: #3b3b3b !important; }
+  nav .nav-wrapper > ul li:hover {
+    background-color: #ffffff14; }
+  nav .nav-wrapper > ul li a:hover {
+    background-color: transparent; }
   nav .nav-wrapper .button-collapse i {
     font-size: 30px; }
   nav .nav-content {
@@ -138,11 +142,11 @@ body {
   @media screen and (max-width: 600px) {
     #form-email h4 {
       padding-top: 10px; } }
-#form-email input:focus, #form-email textarea:focus {
+#form-email input:not([type=submit]):focus, #form-email textarea:focus {
   border-bottom: 1px solid #25365d;
   -webkit-box-shadow: 0 1px 0 0 #25365d;
   box-shadow: 0 1px 0 0 #25365d; }
-  #form-email input:focus ~ label, #form-email textarea:focus ~ label {
+  #form-email input:not([type=submit]):focus ~ label, #form-email textarea:focus ~ label {
     color: #25365d; }
 @-webkit-keyframes autofill {
   to {
@@ -151,6 +155,13 @@ body {
 #form-email input:not([type=submit]):-webkit-autofill {
   -webkit-animation-name: autofill;
   -webkit-animation-fill-mode: both; }
+#form-email #submit .btn {
+  width: 116px;
+  padding: 0; }
+  #form-email #submit .btn input[type=submit] {
+    width: 100%;
+    height: 100%;
+    padding: 0; }
 
 #submit input {
   outline: none; }

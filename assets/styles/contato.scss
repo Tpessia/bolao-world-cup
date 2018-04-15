@@ -30,7 +30,7 @@ body {
             padding-top: 10px;
         }
     }
-    input:focus, textarea:focus {
+    input:not([type=submit]):focus, textarea:focus {
         border-bottom: 1px solid #25365d;
         -webkit-box-shadow: 0 1px 0 0 #25365d;
         box-shadow: 0 1px 0 0 #25365d;
@@ -48,6 +48,17 @@ body {
         &:-webkit-autofill {
             -webkit-animation-name: autofill;
             -webkit-animation-fill-mode: both;
+        }
+    }
+    #submit {
+        .btn {
+            width: 116px;
+            padding: 0;
+            input[type=submit] {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+            }
         }
     }
 }

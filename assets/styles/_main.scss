@@ -60,8 +60,20 @@ nav {
         }
     }
     .nav-wrapper {
-        &>ul li.active {
-            background-color: $colorNavl;
+        &>ul {
+            li {
+                &.active {
+                    background-color: $colorNavl !important;
+                }
+                &:hover {
+                    background-color: #ffffff14;
+                }
+                a {
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+            }
         }
         .button-collapse {
             i {

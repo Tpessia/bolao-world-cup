@@ -1,6 +1,6 @@
 importScripts('/lib/cache-polyfill.js');
 
-var version = 'v0.8.3::';
+var version = 'v0.8.4::';
 
 self.addEventListener("install", function (event) {
     console.log('WORKER: install event in progress.');
@@ -24,6 +24,7 @@ self.addEventListener("install", function (event) {
                     '/index.html',
                     '/contato.html',
                     '/login.html',
+                    '/regulamento.html',
                     '/assets/img/login-bg.jpg',
                     '/assets/img/icon.png',
                     '/assets/img/imgHead.jpg',
