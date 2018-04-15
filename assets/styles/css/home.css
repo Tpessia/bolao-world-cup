@@ -474,8 +474,6 @@ html body {
             float: right;
             margin-right: 5px;
             font-weight: 500; }
-    html body section #modal1 .modal-footer a:focus {
-      background: transparent; }
   html body section #modal2 {
     height: 50vh;
     top: 15%; }

@@ -872,7 +872,7 @@ function Search(key) {
                 loading.soft.stop();
 
                 $('#modal1').modal('open');
-                $("#modal1 .modal-footer a").trigger("focus");
+                $("#searchVal").trigger("blur");
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
