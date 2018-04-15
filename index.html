@@ -359,6 +359,7 @@
             var updateButton = function (isSubscribed) {
                 var btn = $('#push-sub');
                 var btnI = $('#push-sub i');
+                btn.toggleClass("colorBl colorB");
                 if (isSubscribed) {
                     btnI.html('notifications_off');
                     btn.addClass('subscribed');
@@ -378,14 +379,12 @@
             $('#push-sub').on('click', function (e) {
                 e.preventDefault();
                 
-                $("#push-sub").toggleClass("colorBl colorB");
+                $(this).toggleClass("colorBl colorB");
 
                 // if he wants to unsubscribe
                 if ($(this).hasClass('subscribed')) {
                     pushpad('unsubscribe', function () {
                         updateButton(false);
-
-                        $("#push-sub").toggleClass("colorBl colorB");
                     });
 
                     // if he wants to subscribe
@@ -395,13 +394,9 @@
                         if (isSubscribed) {
                             // success
                             updateButton(true);
-
-                            $("#push-sub").toggleClass("colorBl colorB");
                         } else {
                             // oops... the user has denied permission from the browser prompt
                             updateButton(false);
-
-                            $("#push-sub").toggleClass("colorBl colorB");
 
                             var msg = 'Você bloqueou as notificações do seu navegador! Para poder utilizar esta função, reative-as.';
                             if(typeof showError !== "undefined") { showError(msg); }
