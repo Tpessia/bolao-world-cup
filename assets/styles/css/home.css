@@ -146,6 +146,10 @@ html body {
       html body #push-sub {
         bottom: 4vh;
         right: 4vh; } }
+    html body #push-sub .processing {
+      background-color: #ffcd8d !important;
+      pointer-events: none;
+      cursor: default; }
   html body #imgHead {
     overflow: hidden;
     width: 100%;

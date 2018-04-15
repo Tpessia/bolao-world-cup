@@ -359,7 +359,7 @@
             var updateButton = function (isSubscribed) {
                 var btn = $('#push-sub');
                 var btnI = $('#push-sub i');
-                btn.toggleClass("colorBl colorB");
+                btn.remove("processing");
                 if (isSubscribed) {
                     btnI.html('notifications_off');
                     btn.addClass('subscribed');
@@ -379,7 +379,7 @@
             $('#push-sub').on('click', function (e) {
                 e.preventDefault();
                 
-                $(this).toggleClass("colorBl colorB");
+                $(this).add("processing");
 
                 // if he wants to unsubscribe
                 if ($(this).hasClass('subscribed')) {

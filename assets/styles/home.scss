@@ -42,6 +42,11 @@ html {
                 bottom: 4vh;
                 right: 4vh;
             }
+            .processing {
+                background-color: $colorBl !important;
+                pointer-events: none;
+                cursor: default;
+            }
         }
 
         #imgHead {
