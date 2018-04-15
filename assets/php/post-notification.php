@@ -2,7 +2,7 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    require_once('/home/u662107342/vendor/autoload.php');
+    require_once('/home/u432755883/vendor/autoload.php');
     
     Pushpad\Pushpad::$auth_token = '7c7364248f2e32846e5797984fe01532';
     Pushpad\Pushpad::$project_id = 5374; # set it here or pass it as a param to methods later
