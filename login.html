@@ -27,11 +27,17 @@
     <link rel="icon" type="image/png" href="assets/img/icon.png">
 
     <script> //redirect caso a data de lançamento não tenha chego
-        var lacamento = new Date("2018-02-05T08:45-02:00"),
-            hoje = new Date();
+        var adms = ["mauricio", "guilherme", "thiago"];
+        var url = new URL(window.location.href);
+        var admin = url.searchParams.get("admin");
 
-        if (lacamento.getTime() > hoje.getTime()) {
-            window.location.replace("/not-ready.html");
+        if (adms.filter(function (adm) { return admin == adm }) == 0) {
+            var lacamento = new Date("2018-06-14T18:00-03:00"),
+                hoje = new Date();
+
+            if (lacamento.getTime() > hoje.getTime()) {
+                window.location.replace("/not-ready.html");
+            }
         }
     </script>
     

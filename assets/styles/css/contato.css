@@ -116,6 +116,13 @@ footer {
           transform: translateY(-50%);
           right: 0; } }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+  body main {
+    flex: 1 0 auto; }
+
 .nav-content {
   display: none; }
 
