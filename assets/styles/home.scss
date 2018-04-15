@@ -42,7 +42,7 @@ html {
                 bottom: 4vh;
                 right: 4vh;
             }
-            .processing {
+            &.processing {
                 background-color: $colorBl !important;
                 pointer-events: none;
                 cursor: default;
