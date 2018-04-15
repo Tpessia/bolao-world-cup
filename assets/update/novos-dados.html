@@ -158,7 +158,7 @@
             }
             var myData3 = { 'users': JSON.stringify(users) };
             $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/post-notification.php",
+                url: "https://www.bolaodomauricio.xyz/assets/php/post-notification.php?_=" + new Date().getTime(),
                 method: "POST",
                 data: myData3,
                 success: function (data) {
