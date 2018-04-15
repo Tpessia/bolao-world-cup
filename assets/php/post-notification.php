@@ -4,8 +4,8 @@
     error_reporting(E_ALL);
     require_once('/home/u662107342/vendor/autoload.php');
     
-    Pushpad\Pushpad::$auth_token = 'e3d31aa87f2d0131ae32a69bd3049b09';
-    Pushpad\Pushpad::$project_id = 5110; # set it here or pass it as a param to methods later
+    Pushpad\Pushpad::$auth_token = '7c7364248f2e32846e5797984fe01532';
+    Pushpad\Pushpad::$project_id = 5374; # set it here or pass it as a param to methods later
     echo 'ok';
 
     /*$notification = new Pushpad\Notification(array(
