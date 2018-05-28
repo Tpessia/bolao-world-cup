@@ -95,7 +95,7 @@
 
         $sql = "
         INSERT INTO $value->nome (Data, Colocacao, Pontuacao)
-        VALUES ('".$date."', '".$value->pos."', ".$value->pontos.")
+        VALUES ('".$date."', '".$value->col."', ".$value->pontos.")
         ";
             
         if (!mysqli_query($conn, $sql)) {
