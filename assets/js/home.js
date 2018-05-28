@@ -444,7 +444,7 @@ function RankCreate() { //create ranking element and object
         rankBlock =
             rankBlock + `
                 <div class="col-wrapper">
-                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].nome + `</div>
+                    <div class="nome">` + /*(parseInt(i) + 1)*/ ranking[i].col + ". " + ranking[i].nome + `</div>
                     <div class="pontuacao">` + ranking[i].pontos + " pts" + `</div>
                 </div>
             </div>
