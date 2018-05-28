@@ -24,20 +24,20 @@ $(function() {
     }
 
     function Cadastrar() {
-        user = { name: "", code: "", page: "", pontuacao: [], colocacao: [], date: [] };
+        user = {};
 
         //validação
 
         // user.name = $("#name").val().trim();
-        user.code = $("#name").val().trim();
+        user.nr = $("#name").val().trim();
 
         var playerCount = 1;
         for (i in players) { //players[i].name and players[i].page
             // if (user.name == players[i].name) { //verifica se usuário é válido
-            if (user.code == players[i].code) { //verifica se usuário é válido
-                user.name = players[i].name;
-                user.code = players[i].code;
-                user.page = players[i].page;
+            if (user.nr == players[i].nr) { //verifica se usuário é válido
+                user.nome = players[i].nome;
+                user.col = players[i].col;
+                user.pontos = players[i].pontos;
 
                 $("a.login").css({ "opacity": "0.5", "cursor": "default", "pointer-events": "none" }); //prevent new logins while ajax is running
                 break;
@@ -55,12 +55,13 @@ $(function() {
     }
 
     function OnlineGet(pages, ID) { //request spreadsheet page data
-        id = ID; //cria id global
-        pages = pages.split(',');
+        // id = ID; //cria id global
+        // pages = pages.split(',');
 
-        pages.forEach(function (page, index) {
+        // pages.forEach(function (page, index) {
 
-            var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+            // var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+            var urlJSON = '/assets/files/ranking.json?_=' + new Date().getTime();
 
             if (typeof onlineGetAjax !== "undefined" && onlineGetAjax.readyState !== 4 && onlineGetAjax.readyState !== 0) {
                 onlineGetAjax.abort();
@@ -72,65 +73,77 @@ $(function() {
                 // async: false,
                 // timeout: 5000,
                 success: function (json) {
-                    data = JSON.parse(json).feed.entry //recebe a data como json
+                    // data = JSON.parse(json).feed.entry //recebe a data como json
 
-                    page = "page" + page; //cria a pageN
+                    // page = "page" + page; //cria a pageN
 
-                    TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-                    PlayersArray();
+                    // TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                    // PlayersArray();
+                    players = JSON.parse(json);
+                    for (var i in players) {
+                        var doDelete = false;
+                        for (var j in players[i]) {
+                            if (players[i][j] == "") {
+                                doDelete = true;
+                            }
+                        }
+                        if (doDelete) {
+                            players.splice(i, 1);
+                        }
+                    }
                 },
                 error: function (xhr, status, error) {
                     if (status != "abort") {
-                        OnlineGet(pages.join(","), id);
+                        OnlineGet();
                     }
                 }
             });
-        })
+        // })
     }
 
-    function TableCreate(sheetPage) { //create an array based on the spreadsheet page
-        if (typeof table == "undefined") {
-            table = {};
-        }
+    // function TableCreate(sheetPage) { //create an array based on the spreadsheet page
+    //     if (typeof table == "undefined") {
+    //         table = {};
+    //     }
 
-        table[sheetPage] = {};
+    //     table[sheetPage] = {};
 
-        var lastRow = 0;
+    //     var lastRow = 0;
 
-        for (var i = 0; i < data.length; i++) {
-            var dataTemp = data[i];
+    //     for (var i = 0; i < data.length; i++) {
+    //         var dataTemp = data[i];
 
-            if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
-                table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
-            } //create table.rowN
+    //         if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
+    //             table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
+    //         } //create table.rowN
 
-            if (lastRow != dataTemp.gs$cell.row) {
-                lastCol = 0;
-            } //new row
+    //         if (lastRow != dataTemp.gs$cell.row) {
+    //             lastCol = 0;
+    //         } //new row
 
-            table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+    //         table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
 
-            lastCol = dataTemp.gs$cell.col;
-            lastRow = dataTemp.gs$cell.row;
-        }
-    }
+    //         lastCol = dataTemp.gs$cell.col;
+    //         lastRow = dataTemp.gs$cell.row;
+    //     }
+    // }
 
-    function PlayersArray() {
-        players = [];
+    // function PlayersArray() {
+    //     players = [];
 
-        j = 0;
-        for (i in table.page1) {
-            if (j > 1) {
-                pageVar = table.page1[i][3]; //sheet format (Página)
-                nameVar = table.page1[i][4]; //sheet format (Nome)
-                codigoVar = table.page1[i][6]; //sheet format (Nome)
-                players.push({
-                    page: pageVar,
-                    name: nameVar,
-                    code: codigoVar
-                });
-            }
-            j++;
-        }
-    }
+    //     j = 0;
+    //     for (i in table.page1) {
+    //         if (j > 1) {
+    //             pageVar = table.page1[i][3]; //sheet format (Página)
+    //             nameVar = table.page1[i][4]; //sheet format (Nome)
+    //             codigoVar = table.page1[i][6]; //sheet format (Nome)
+    //             players.push({
+    //                 page: pageVar,
+    //                 name: nameVar,
+    //                 nr: codigoVar
+    //             });
+    //         }
+    //         j++;
+    //     }
+    // }
 });

@@ -77,7 +77,7 @@ window.onload = function () { //window load
 
 var Network = {
     bind: function() {
-        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
+        $("a.login, #refresh, .input-field input[type=search]~i:first-of-type, #push-sub").css({ // #rankList .verMais, #sideRank .card-action,
             "opacity": "1",
             "cursor": "pointer",
             "pointer-events": "auto"
@@ -85,7 +85,7 @@ var Network = {
         $("#searchVal").prop('disabled', false);
     },
     unbind: function() {
-        $("a.login, #refresh, #rankList .verMais, #sideRank .card-action, .input-field input[type=search]~i:first-of-type, #push-sub").css({
+        $("a.login, #refresh, .input-field input[type=search]~i:first-of-type, #push-sub").css({ // #rankList .verMais, #sideRank .card-action,
             "opacity": "0.5",
             "cursor": "default",
             "pointer-events": "none"
@@ -112,7 +112,7 @@ function Login() {
 
     function UserPosition() { //current user position
         for (var i in ranking) {
-            if (ranking[i].name.match(user.name)) {
+            if (ranking[i].nome.match(user.nome)) {
                 user.currentPosition = parseInt(i) + 1;
                 break;
             }
@@ -120,29 +120,30 @@ function Login() {
     }
 
     function Welcome() { //welcome name update
-        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.name.split(" ")[0] + "!"));
+        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
 
         $("#welcome div").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
     }
 
     function Highlight() { //current user highlight on ranking
         $('#rankContent div.col .col-wrapper.colorA').removeClass("colorA");
-        $('#sideRank .col .card.highlight').removeClass("highlight");
+        // $('#sideRank .col .card.highlight').removeClass("highlight");
 
         $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .col-wrapper').addClass("colorA");
-        $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
+        // $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
     }
 }
 
 //DATA PARSING
 
-function OnlineGet(pages, ID) { //request spreadsheet page data
-    id = ID; //cria id global
-    pages = pages.split(',');
+function OnlineGet() { //request spreadsheet page data
+    // id = ID; //cria id global
+    // pages = pages.split(',');
 
-    pages.forEach(function (page, index) {
+    // pages.forEach(function (page, index) {
 
-        var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime();
+        // var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime();
+        var urlJSON = '/assets/files/ranking.json?_=' + new Date().getTime();
 
         if (typeof onlineGetAjax !== "undefined" && onlineGetAjax.readyState !== 4 && onlineGetAjax.readyState !== 0) {
             onlineGetAjax.abort();
@@ -154,14 +155,26 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
             // async: false,
             // timeout: 5000,
             success: function (json) {
-                data = JSON.parse(json).feed.entry //recebe a data como json
+                // data = JSON.parse(json).feed.entry //recebe a data como json
 
-                page = "page" + page; //cria a pageN
+                // page = "page" + page; //cria a pageN
 
-                TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
-                RankingArray();
+                // TableCreate(page, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                // RankingArray();
+                ranking = JSON.parse(json);
+                for (var i in ranking) {
+                    var doDelete = false;
+                    for (var j in ranking[i]) {
+                        if (ranking[i][j] == "") {
+                            doDelete = true;
+                        }
+                    }
+                    if (doDelete) {
+                        ranking.splice(i, 1);
+                    }
+                }
                 RankCreate();
-                PlayersArray();
+                // PlayersArray();
                 BindEvents();
                 charts.charts1.create(); //create charts
                 charts.charts2.create();
@@ -182,11 +195,11 @@ function OnlineGet(pages, ID) { //request spreadsheet page data
             },
             error: function (xhr, status, error) {
                 if (status != "abort") {
-                    OnlineGet(pages.join(","), id);
+                    OnlineGet();
                 }
             }
         });
-    })
+    // })
 }
 
 function OfflineGet() {
@@ -204,8 +217,8 @@ function OfflineGet() {
     // ResizeChartArrays(20);
 
     charts.charts1.change(0, media.mediaArr, media.dateArr);
-    charts.charts1.change(1, user.pontuacao, user.date);
-    charts.charts2.change(0, user.colocacao, user.date);
+    charts.charts1.change(1, user.pontos, user.date);
+    charts.charts2.change(0, user.col, user.date);
     charts.charts3.change(0, primeirosTop.ocorrencias, primeirosTop.nome);
 
     loading.remove();
@@ -219,7 +232,7 @@ function GetChartData() {
     }
 
     getChartAjax = $.ajax({
-        url: "assets/php/ranking-select.php?username=" + ValidadeDbInput(user.name) + "_" + user.page + '&_=' + new Date().getTime(),
+        url: "assets/php/ranking-select.php?username=" + ValidadeDbInput(user.nome) + "_" + user.nr + '&_=' + new Date().getTime(),
         type: "GET",
         success: function (dataDB) {
             try {
@@ -231,21 +244,21 @@ function GetChartData() {
             }
 
             user.date = [];
-            user.pontuacao = [];
-            user.colocacao = [];
+            user.pontos = [];
+            user.col = [];
 
             for (i in chartData) {
                 var date = new Date(chartData[i].date + 'T00:00-03:00'); //weakest link
                 user.date.push(FormatarData(date));
-                user.pontuacao.push(chartData[i].pontuacao);
-                user.colocacao.push(chartData[i].colocacao);
+                user.pontos.push(chartData[i].pontuacao);
+                user.col.push(chartData[i].colocacao);
             }
 
             // ResizeChartArrays(20);
 
-            charts.charts1.change(1, user.pontuacao, user.date);
+            charts.charts1.change(1, user.pontos, user.date);
 
-            charts.charts2.change(0, user.colocacao, user.date);
+            charts.charts2.change(0, user.col, user.date);
 
             PrepareOffline();
 
@@ -415,7 +428,7 @@ function RankCreate() { //create ranking element and object
 
     $("#rankContent").html("");
     $("#moreRank").removeClass("hide");
-    $("#sideRank .row").html("<h2>Top 5</h2>");
+    // $("#sideRank .row").html("<h2>Top 5</h2>");
 
     for (i in ranking) { //só mostra na div (remover no projeto oficial)
         if (i == 0) {
@@ -426,17 +439,18 @@ function RankCreate() { //create ranking element and object
             btn = 'btn';
         }
 
-        sideRank = rankBlock;
+        // sideRank = rankBlock;
 
         rankBlock =
             rankBlock + `
                 <div class="col-wrapper">
-                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].name + `</div>
-                    <div class="pontuacao">` + ranking[i].pontuacao + " pts" + `</div>
-                    <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
+                    <div class="nome">` + (parseInt(i) + 1) + ". " + ranking[i].nome + `</div>
+                    <div class="pontuacao">` + ranking[i].pontos + " pts" + `</div>
                 </div>
             </div>
         `;
+
+        // <div class="verMais"><a class="rankElem hide-on-med-and-down">VER DADOS</a><a class="btn-floating ` + btn + ` waves-effect waves-light hide-on-large-only colorB"><i class="material-icons">search</i></a></div>
 
         $("#rankContent").html($("#rankContent").html() + rankBlock); //append main rank block
 
@@ -444,82 +458,67 @@ function RankCreate() { //create ranking element and object
             $($("#rankContent>.col")[i]).addClass("hide");
         } //hide players that are not at the top "k+1"
 
-        if (i < 5) { //create side rank
-            sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
+        // if (i < 5) { //create side rank
+        //     sideRank += '<div class="card"><div class="card-content white-text row"><span class="card-title col s8 nome">' + (parseInt(i) + 1) + ". " + ranking[i].name + '</span><span class="card-action col s3 verMais"><a class="btn-floating btn waves-effect waves-light"><i class="material-icons">search</i></a></span></div></div></div>';
 
-            $("#sideRank>.row").append(sideRank);
-            $("#sideRank>.row>.col:gt(4)").remove();
-        }
+        //     $("#sideRank>.row").append(sideRank);
+        //     $("#sideRank>.row>.col:gt(4)").remove();
+        // }
     }
 
     //winner div
     // function smallSurname(fullName) {
     //     return fullName.split(" ")[0] + " " + (fullName.split(" ").pop().length <= 10 ? fullName.split(" ").pop() : fullName.split(" ").pop()[0] + ".")
     // }
-    $("#firstContent h3").html(ranking[0].name);
-    $("#firstContent h4").html(ranking[0].pontuacao + 'pts');
+    $("#firstContent h3").html(ranking[0].nome);
+    $("#firstContent h4").html(ranking[0].pontos + 'pts');
 }
 
-function TableCreate(sheetPage) { //create an array based on the spreadsheet page
-    if (typeof table == "undefined") {
-        table = {};
-    }
+// function TableCreate(sheetPage) { //create an array based on the spreadsheet page
+//     if (typeof table == "undefined") {
+//         table = {};
+//     }
 
-    table[sheetPage] = {};
+//     table[sheetPage] = {};
 
-    var lastRow = 0;
+//     var lastRow = 0;
 
-    for (var i = 0; i < data.length; i++) {
-        var dataTemp = data[i];
+//     for (var i = 0; i < data.length; i++) {
+//         var dataTemp = data[i];
 
-        if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
-            table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
-        } //create table.rowN
+//         if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {
+//             table[sheetPage]["row" + dataTemp.gs$cell.row] = [];
+//         } //create table.rowN
 
-        if (lastRow != dataTemp.gs$cell.row) {
-            lastCol = 0;
-        } //new row
+//         if (lastRow != dataTemp.gs$cell.row) {
+//             lastCol = 0;
+//         } //new row
 
-        table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+//         table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
 
-        lastCol = dataTemp.gs$cell.col;
-        lastRow = dataTemp.gs$cell.row;
-    }
-}
+//         lastCol = dataTemp.gs$cell.col;
+//         lastRow = dataTemp.gs$cell.row;
+//     }
+// }
 
-function RankingArray() {
-    ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+// function PlayersArray() {
+//     players = [];
 
-    j = 0;
-    for (i in table.page1) { //cria array do ranking
-        if (j > 1) {
-            ranking.push({
-                name: table.page1[i][1], //sheet format (Participante)
-                pontuacao: table.page1[i][2] //sheet format (Pontuação)
-            });
-        }
-        j++;
-    }
-}
-
-function PlayersArray() {
-    players = [];
-
-    j = 0;
-    for (i in table.page1) {
-        if (j > 1) {
-            pageVar = table.page1[i][3]; //sheet format (Página)
-            nameVar = table.page1[i][4]; //sheet format (Nome)
-            codigoVar = table.page1[i][6]; //sheet format (Nome)
-            players.push({
-                page: pageVar,
-                name: nameVar,
-                code: codigoVar
-            });
-        }
-        j++;
-    }
-}
+//     j = 0;
+//     for (i in table.page1) {
+//         if (j > 1) {
+//             pageVar = table.page1[i][3]; //sheet format (Página)
+//             nameVar = table.page1[i][4]; //sheet format (Nome)
+//             codigoVar = table.page1[i][6]; //sheet format (Nome)
+//             players.push({
+//                 page: pageVar,
+//                 name: nameVar,
+//                 code: codigoVar
+//             });
+//         }
+//         j++;
+//     }
+// }
 
 //CHART LOGIC
 
@@ -758,31 +757,31 @@ function scrollFireCharts(selector, foo, id) {
 //bind
 
 function BindEvents() {
-    var playersJSON = {};
-    for (var p in players) {
-        playersJSON[players[p].name] = null;
-    }
+    // var playersJSON = {};
+    // for (var p in players) {
+    //     playersJSON[players[p].name] = null;
+    // }
 
-    $('input.autocomplete').autocomplete({
-        data: playersJSON,
-        limit: 3, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function (val) {
-            Search(val);
-        },
-        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    });
+    // $('input.autocomplete').autocomplete({
+    //     data: playersJSON,
+    //     limit: 3, // The max amount of results that can be shown at once. Default: Infinity.
+    //     onAutocomplete: function (val) {
+    //         Search(val);
+    //     },
+    //     minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    // });
 
     $(".arrow-pulse-down").on("click", function() { $('html,body').animate({ scrollTop: window.innerHeight }, 'slow'); return false; });
 
     Scrolls();
 
-    $(".verMais a").on("click", function() { //simulates search on "plus" click
-        var nome = $(this).parent().siblings(".nome").html(); //modal
-        nome = nome.split(" ")
-        nome.shift()
-        nome = nome.join(" ");
-        Search(nome);
-    });
+    // $(".verMais a").on("click", function() { //simulates search on "plus" click
+    //     var nome = $(this).parent().siblings(".nome").html(); //modal
+    //     nome = nome.split(" ")
+    //     nome.shift()
+    //     nome = nome.join(" ");
+    //     Search(nome);
+    // });
 
     $("#refresh").on("click", function() {
         $(".chartLoading").addClass("active");
@@ -791,19 +790,19 @@ function BindEvents() {
 
     $("#moreRank").on("click", function() { ShowMoreRank(); });
 
-    $('.input-field input[type=search]~i:first-of-type').on("click", function() {
-        $("#searchVal").blur();
-        Search($('#searchVal').val()); //search on click Magnifying glass
-    });
+    // $('.input-field input[type=search]~i:first-of-type').on("click", function() {
+    //     $("#searchVal").blur();
+    //     Search($('#searchVal').val()); //search on click Magnifying glass
+    // });
 
-    $("#searchVal").on("search", function() {
-        $('#searchVal').blur();
-        Search($('#searchVal').val());
-    });
+    // $("#searchVal").on("search", function() {
+    //     $('#searchVal').blur();
+    //     Search($('#searchVal').val());
+    // });
 
-    $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function() {
-        $('#searchVal').val(''); //clean search on close
-    });
+    // $('.input-field input[type=search]~i:nth-of-type(2)').on("click", function() {
+    //     $('#searchVal').val(''); //clean search on close
+    // });
 
     $(".blockMobile .btn").on("click", function() {
         $(".blockMobile").removeClass("show");
@@ -825,135 +824,135 @@ function ShowMoreRank() {
 
 //search
 
-function Search(key) {
+// function Search(key) {
 
-    loading.soft.start();
+//     loading.soft.start();
 
-    var options = {
-        shouldSort: true,
-        threshold: 0.6,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-            "name"
-        ]
-    };
-    var fuse = new Fuse(players, options); // "list" is the item array
-    var result = fuse.search(key);
+//     var options = {
+//         shouldSort: true,
+//         threshold: 0.6,
+//         location: 0,
+//         distance: 100,
+//         maxPatternLength: 32,
+//         minMatchCharLength: 1,
+//         keys: [
+//             "name"
+//         ]
+//     };
+//     var fuse = new Fuse(players, options); // "list" is the item array
+//     var result = fuse.search(key);
 
-    if (result.length != 0) {
-        GetSearchedPage(result[0].page);
-    }
-    else {
-        loading.soft.stop();
-        ShowNameNotFound();
-    }
+//     if (result.length != 0) {
+//         GetSearchedPage(result[0].page);
+//     }
+//     else {
+//         loading.soft.stop();
+//         ShowNameNotFound();
+//     }
 
-    function GetSearchedPage(page) {
-        if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
-            searchAjax.abort();
-        }
+//     function GetSearchedPage(page) {
+//         if (typeof searchAjax !== "undefined" && searchAjax.readyState !== 4 && searchAjax.readyState !== 0) {
+//             searchAjax.abort();
+//         }
 
-        searchAjax = $.ajax({
-            url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime(),
-            dataType: 'html',
-            timeout: 10000,
-            success: function (json) {
-                data = JSON.parse(json).feed.entry //recebe a data como json
+//         searchAjax = $.ajax({
+//             url: 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json&_=' + new Date().getTime(),
+//             dataType: 'html',
+//             timeout: 10000,
+//             success: function (json) {
+//                 data = JSON.parse(json).feed.entry //recebe a data como json
 
-                var pageStr = "page" + page; //referencia para o novo array (table.pageN)
+//                 var pageStr = "page" + page; //referencia para o novo array (table.pageN)
 
-                TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+//                 TableCreate(pageStr, false); //gera array (table.pageN.rowM[cell1,cell2,cell3])
 
-                BuildSearchModal(page, pageStr);
+//                 BuildSearchModal(page, pageStr);
 
-                loading.soft.stop();
+//                 loading.soft.stop();
 
-                $('#modal1').modal('open');
-                $("#searchVal").trigger("blur");
-            },
-            error: function (xhr, status, error) {
-                if (status != "abort") {
-                    loading.soft.stop();
-                    ShowNoConnection();
-                }
-            }
-        });
-    }
+//                 $('#modal1').modal('open');
+//                 $("#searchVal").trigger("blur");
+//             },
+//             error: function (xhr, status, error) {
+//                 if (status != "abort") {
+//                     loading.soft.stop();
+//                     ShowNoConnection();
+//                 }
+//             }
+//         });
+//     }
 
-    function VezesPrimeiro(nome) {
-        for (var i in primeiros.nome) {
-            if (primeiros.nome[i] == nome) {
-                return primeiros.ocorrencias[i];
-            }
-        }
-        return 0;
-    }
+//     function VezesPrimeiro(nome) {
+//         for (var i in primeiros.nome) {
+//             if (primeiros.nome[i] == nome) {
+//                 return primeiros.ocorrencias[i];
+//             }
+//         }
+//         return 0;
+//     }
 
-    function BuildSearchModal(page, pageStr) {
+//     function BuildSearchModal(page, pageStr) {
 
-        var pIndex = players.findIndex(
-            function (element) {
-                if (element.page == page) { return true; }
-                else { return false; }
-            }
-        );
+//         var pIndex = players.findIndex(
+//             function (element) {
+//                 if (element.page == page) { return true; }
+//                 else { return false; }
+//             }
+//         );
 
-        //Prepare Modal
-        $("#modal1 .modal-content>h4").html("Dados de " + players[pIndex].name); //MAIN TITLE
+//         //Prepare Modal
+//         $("#modal1 .modal-content>h4").html("Dados de " + players[pIndex].name); //MAIN TITLE
 
-        $("#jogos").html('');
-        $("#sideGames").html('');
+//         $("#jogos").html('');
+//         $("#sideGames").html('');
 
-        table[pageStr].dados = {}; //player data broken down
+//         table[pageStr].dados = {}; //player data broken down
 
-        j = 0;
-        for (var i in table[pageStr]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
-            //j1 é o header, por isso j > 0
-            //jImpar é o header de cada jogo
-            //jPar é o resultado de cada jogo
-            //jLast é a pontuação final
-            if (j % 2 != 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
-                table[pageStr].dados[table[pageStr][i]] = []; //cria jogo1, jogo2...
-                lastJogo = table[pageStr][i];
+//         j = 0;
+//         for (var i in table[pageStr]) { //itera sobre a página, e i é row1, row2, row3... //sheet format (Participante)
+//             //j1 é o header, por isso j > 0
+//             //jImpar é o header de cada jogo
+//             //jPar é o resultado de cada jogo
+//             //jLast é a pontuação final
+//             if (j % 2 != 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira impar (jogo1, jogo2...)
+//                 table[pageStr].dados[table[pageStr][i]] = []; //cria jogo1, jogo2...
+//                 lastJogo = table[pageStr][i];
 
-                jogoTitle = '<span id="' + i + '" class="jogo col s12 m6"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
-            }
-            if (j % 2 == 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira par (timeA 10 x 10 timeB ponto1 ponto2)
-                table[pageStr].dados[lastJogo].jogos = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
-                var jogos = table[pageStr].dados[lastJogo].jogos;
+//                 jogoTitle = '<span id="' + i + '" class="jogo col s12 m6"><h5>' + lastJogo + '</h5>'; //GAME TITLE (JOGO 1...)
+//             }
+//             if (j % 2 == 0 && j < Object.keys(table[pageStr]).length - 2 && j > 0) { //fileira par (timeA 10 x 10 timeB ponto1 ponto2)
+//                 table[pageStr].dados[lastJogo].jogos = [table[pageStr][i][0], table[pageStr][i][1], table[pageStr][i][3], table[pageStr][i][4], table[pageStr][i].pop()];
+//                 var jogos = table[pageStr].dados[lastJogo].jogos;
 
-                $("#jogos").append(jogoTitle + jogos[0] + " " + jogos[1] + " x " + jogos[2] + " " + jogos[3] + "</span>"); //EACH GAME MAIN BLOCK
+//                 $("#jogos").append(jogoTitle + jogos[0] + " " + jogos[1] + " x " + jogos[2] + " " + jogos[3] + "</span>"); //EACH GAME MAIN BLOCK
 
-                $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + jogos[4] + "</span></div>"); //EACH GAME SIDE BLOCK
+//                 $("#sideGames").append("<div><span class='sideJogo'>" + lastJogo + "</span><span class='sideNum'>" + jogos[4] + "</span></div>"); //EACH GAME SIDE BLOCK
 
-                var rowAnterior = i.split("row")[1] - 1;
-                $("#jogos .col#row" + rowAnterior).attr("data-content", jogos[4])
-            }
-            if (j == Object.keys(table[pageStr]).length - 2) { //ultima fileira (pontuação final)
-                table[pageStr].dados.pontuacao = table[pageStr][i][1];
-                pontuacao = table[pageStr].dados.pontuacao;
+//                 var rowAnterior = i.split("row")[1] - 1;
+//                 $("#jogos .col#row" + rowAnterior).attr("data-content", jogos[4])
+//             }
+//             if (j == Object.keys(table[pageStr]).length - 2) { //ultima fileira (pontuação final)
+//                 table[pageStr].dados.pontuacao = table[pageStr][i][1];
+//                 pontuacao = table[pageStr].dados.pontuacao;
 
-                $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
-                $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
-            }
+//                 $(".sideTotal").remove(); //REFRESH SIDETOTAL (FOOTER)
+//                 $("#sidePont").append("<div class='sideTotal'><span>Final</span><span>" + pontuacao + "</span></div>"); //SIDETOTAL
+//             }
 
-            j++;
-        }
+//             j++;
+//         }
 
-        $("#modal1 #primeiroX").html(VezesPrimeiro(result[0].name));
-    }
+//         $("#modal1 #primeiroX").html(VezesPrimeiro(result[0].name));
+//     }
 
-    function ShowNameNotFound() {
-        showError('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-    }
+//     function ShowNameNotFound() {
+//         showError('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+//     }
 
-    function ShowNoConnection() {
-        showError('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
-    }
-}
+//     function ShowNoConnection() {
+//         showError('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+//     }
+// }
 
 //scroll
 
@@ -982,12 +981,12 @@ function ScrollFire(selector, id, foo1, foo2) {
 }
 
 function Scrolls() {
-    ScrollFire('#rankList', 1, function () {
-        $('#sideRank').removeClass('hideSide');
-    },
-    function () {
-        $('#sideRank').addClass('hideSide');
-    });
+    // ScrollFire('#rankList', 1, function () {
+    //     $('#sideRank').removeClass('hideSide');
+    // },
+    // function () {
+    //     $('#sideRank').addClass('hideSide');
+    // });
 
     ScrollFire('#rankContent>div:first-child', 2, function () {
         $('#first').addClass('transform');
@@ -1026,9 +1025,9 @@ function showError(msg) {
 // function ResizeChartArrays(size) {
 //     if (typeof media !== "undefined" && typeof media.mediaArr !== "undefined" && media.mediaArr.length > 0) { media.mediaArr = ResizeArray(media.mediaArr, size);}
 //     if (typeof media !== "undefined" && typeof media.dateArr !== "undefined" && media.dateArr.length > 0) { media.dateArr = ResizeArray(media.dateArr, size);}
-//     if (typeof user !== "undefined" && typeof user.pontuacao !== "undefined" && user.pontuacao.length > 0) { user.pontuacao = ResizeArray(user.pontuacao, size);}
+//     if (typeof user !== "undefined" && typeof user.pontos !== "undefined" && user.pontos.length > 0) { user.pontos = ResizeArray(user.pontos, size);}
 //     if (typeof user !== "undefined" && typeof user.date !== "undefined" && user.date.length > 0) { user.date = ResizeArray(user.date, size);}
-//     if (typeof user !== "undefined" && typeof user.colocacao !== "undefined" && user.colocacao.length > 0) { user.colocacao = ResizeArray(user.colocacao, size);}
+//     if (typeof user !== "undefined" && typeof user.col !== "undefined" && user.col.length > 0) { user.col = ResizeArray(user.col, size);}
 //     // if (typeof primeiros !== "undefined" && typeof primeiros.ocorrencias !== "undefined" && primeiros.ocorrencias.length > 0) { primeiros.ocorrencias = ResizeArray(primeiros.ocorrencias, size);}
 //     // if (typeof primeiros !== "undefined" && typeof primeiros.nome !== "undefined" && primeiros.nome.length > 0) { primeiros.nome = ResizeArray(primeiros.nome, size);}
 // }

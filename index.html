@@ -64,7 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/offline.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script> -->
     <script src="assets/js/home.js"></script>
 
     <script>
@@ -75,7 +75,7 @@
         //(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")
         var shaObj = new jsSHA("SHA-1", "TEXT");
         shaObj.setHMACKey("7c7364248f2e32846e5797984fe01532", "TEXT");
-        shaObj.update(user.name);
+        shaObj.update(user.nome);
         var hmac = shaObj.getHMAC("HEX");
 
         // pushpad('init', 5053);
@@ -123,7 +123,7 @@
 
             </div>
 
-            <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
+            <!-- <div class="nav-content" style="border-top: 3px solid rgba(0,0,0,0.1)">
                 <form onsubmit="return false">
                     <div class="input-field">
                         <input type="search" id="searchVal" class="autocomplete" placeholder="Pesquisar Nome" required autocomplete="off" style="margin: 0; padding-left: 3.5em;" name="nome">
@@ -131,7 +131,7 @@
                         <i class="material-icons" style="top: -15%;">close</i>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </nav>
 
         <ul class="side-nav" id="mobileNav">
@@ -257,13 +257,13 @@
         </div>
     </main>
 
-    <aside>
+    <!-- <aside>
         <div id="sideRank" class="hideSide hide-on-med-and-down">
             <div class="row">
                     <h2>Top 5</h2>
             </div>
         </div>
-    </aside>
+    </aside> -->
 
     <section>
         <div id="modal1" class="modal modal-fixed-footer">
@@ -307,7 +307,7 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Contatos</h5>
-                    <p class="grey-text text-lighten-4">Contato</p>
+                    <p class="grey-text text-lighten-4"><a href="/contato" class="grey-text text-lighten-4">Contato</a></p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Notícias</h5>
@@ -352,7 +352,7 @@
         pushpad('init', 5374);
 
         // optionally call 'uid' if the user is logged in to your website
-        pushpad('uid', user.name, hmac);
+        pushpad('uid', user.nome, hmac);
 
         var pushInit = false;
 

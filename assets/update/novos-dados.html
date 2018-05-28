@@ -11,12 +11,13 @@
         });
 
         function NewData(pages, ID) { //request spreadsheet page data
-            id = ID; //cria id global
-            pages = pages.split(',');
+            // id = ID; //cria id global
+            // pages = pages.split(',');
 
-            pages.forEach(function (page, index) {
+            // pages.forEach(function (page, index) {
 
-                var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+                // var urlJSON = 'https://spreadsheets.google.com/feeds/cells/' + id + '/' + page + '/public/values?alt=json';
+                var urlJSON = '/assets/files/ranking.json?_=' + new Date().getTime();
 
                 $.ajax({ //verifica se a url existe
                     url: urlJSON,
@@ -26,81 +27,94 @@
                     success: function (json) {
                         console.log(json);
 
-                        data = JSON.parse(json).feed.entry //recebe a data como json
+                        ranking = JSON.parse(json);
+                        for (var i in ranking) {
+                            var doDelete = false;
+                            for (var j in ranking[i]) {
+                                if (ranking[i][j] == "") {
+                                    doDelete = true;
+                                }
+                            }
+                            if (doDelete) {
+                                ranking.splice(i, 1);
+                            }
+                        }
 
-                        page = "page" + page; //cria a pageN
+                        // data = JSON.parse(json).feed.entry //recebe a data como json
 
-                        Arrayfy(page, true); //gera array (table.pageN.rowM[cell1,cell2,cell3])
+                        // page = "page" + page; //cria a pageN
+
+                        // Arrayfy(page, true); //gera array (table.nrN.rowM[cell1,cell2,cell3])
                     },
                     error: function () {
                         alert("A conexão com o servidor foi interrompida, tente novamente!")
                     }
                 });
-            })
+            // })
         }
 
-        function Arrayfy(sheetPage) { //create an array based on the spreadsheet page
-            if (typeof table == "undefined") {table = {}; }
+        // function Arrayfy(sheetPage) { //create an array based on the spreadsheet page
+        //     if (typeof table == "undefined") {table = {}; }
 
-            table[sheetPage] = {};
+        //     table[sheetPage] = {};
 
-            var lastRow = 0;
+        //     var lastRow = 0;
 
-            for (var i = 0; i < data.length; i++) {
-                var dataTemp = data[i];
+        //     for (var i = 0; i < data.length; i++) {
+        //         var dataTemp = data[i];
 
-                if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {table[sheetPage]["row" + dataTemp.gs$cell.row] = []; } //create table.rowN
+        //         if (!table[sheetPage]["row" + dataTemp.gs$cell.row]) {table[sheetPage]["row" + dataTemp.gs$cell.row] = []; } //create table.rowN
 
-                if (lastRow != dataTemp.gs$cell.row) {lastCol = 0; } //new row
+        //         if (lastRow != dataTemp.gs$cell.row) {lastCol = 0; } //new row
 
-                table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
+        //         table[sheetPage]["row" + dataTemp.gs$cell.row].push(dataTemp.gs$cell.$t); //add value
 
-                lastCol = dataTemp.gs$cell.col;
-                lastRow = dataTemp.gs$cell.row;
-            }
-        }
+        //         lastCol = dataTemp.gs$cell.col;
+        //         lastRow = dataTemp.gs$cell.row;
+        //     }
+        // }
 
-        function PlayersArray() {
-            players = [];
+        // function PlayersArray() {
+        //     players = [];
 
-            j = 0;
-            for (i in table.page1) {
-                if (j > 1) {
-                    pageVar = table.page1[i][3]; //sheet format (Página)
-                    nameVar = table.page1[i][4]; //sheet format (Nome)
-                    players.push({
-                        page: pageVar,
-                        name: nameVar
-                    });
-                }
-                j++;
-            }
-        }
+        //     j = 0;
+        //     for (i in table.nr1) {
+        //         if (j > 1) {
+        //             pageVar = table.nr1[i][3]; //sheet format (Página)
+        //             nameVar = table.nr1[i][4]; //sheet format (Nome)
+        //             players.push({
+        //                 page: pageVar,
+        //                 name: nameVar
+        //             });
+        //         }
+        //         j++;
+        //     }
+        // }
 
         function RankCreate() { //create ranking element
 
             $("#primeiros .boxes, #notificacoes .boxes, #medias .boxes").css("background-color", "#656565");
 
-            PlayersArray();
+            // PlayersArray();
 
-            ranking = []; //array ranking (ranking[i].name; ranking[i].pontuacao)
+            // ranking = []; //array ranking (ranking[i].nome; ranking[i].pontos)
 
-            j = 0;
+            // j = 0;
 
-            for (i in table.page1) { //cria array do ranking
-                if (j > 1) {
-                        ranking.push({ name: table.page1[i][1], pontuacao: table.page1[i][2] });
+            // for (i in table.nr1) { //cria array do ranking
+            //     if (j > 1) {
+            //             ranking.push({ name: table.nr1[i][1], pontuacao: table.nr1[i][2] });
 
-                        for (k in players) { //player page passed to ranking array
-                            if (ranking[j - 2].name == players[k].name) {
-                                ranking[j - 2].page = players[k].page;
-                            }
-                        }
-                    }
-                j++;
-            }
+            //             for (k in players) { //player page passed to ranking array
+            //                 if (ranking[j - 2].nome == players[k].nome) {
+            //                     ranking[j - 2].nr = players[k].nr;
+            //                 }
+            //             }
+            //         }
+            //     j++;
+            // }
 
-            var myData1 = { 'primeiro': ranking[0].name };
+            var myData1 = { 'primeiro': ranking[0].nome };
 
             $.ajax({
                 url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php",
@@ -115,16 +129,16 @@
                 }
             });
 
-            $("body").html($("body").html() + "<div>Primeiro: " + ranking[0].name + "</div><br>")
+            $("body").html($("body").html() + "<div>Primeiro: " + ranking[0].nome + "</div><br>")
 
-            for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].name + " " + ranking[i].pontuacao + "<br>") }
+            for (i in ranking) { $("body").html($("body").html() + (parseInt(i) + 1) + " " + ranking[i].nome + " " + ranking[i].pontos + "<br>") }
 
             total = 0;
             for (i in ranking) {
-                ranking[i].original = ranking[i].name;
-                ranking[i].name = ValidadeDbInput(ranking[i].name) + "_" + ranking[i].page;
+                ranking[i].original = ranking[i].nome;
+                ranking[i].nome = ValidadeDbInput(ranking[i].nome) + "_" + ranking[i].nr;
 
-                total += parseInt(ranking[i].pontuacao); 
+                total += parseInt(ranking[i].pontos); 
             }
             media = (total / ranking.length).toFixed(2);
 
@@ -148,13 +162,8 @@
 
         function SendNotifications() {
             users = [];
-            for (var i in ranking) {
-                for (var j in players) {
-                    if (players[j].name == ranking[i].original) {
-                        users.push({ name: players[j].name, code: players[j].code, page: players[j].page, pontuacao: ranking[i].pontuacao });
-                        break;
-                    }
-                }
+            for (var j in ranking) {
+                users.push({ name: ranking[j].nome, code: ranking[j].nr, page: ranking[j].nr, pontuacao: ranking[i].pontos });
             }
             var myData3 = { 'users': JSON.stringify(users) };
             $.ajax({

@@ -52,16 +52,16 @@ html {
         #imgHead {
             overflow: hidden;
             @media screen and (min-width: 1200px) {
-                height: calc(100vh - 112px);
+                height: calc(100vh - 112px + 48px);
             }
             @media screen and (max-width: 1200px) {
-                height: calc(100vh - 110.5px);
+                height: calc(100vh - 110.5px + 48px);
             }
             @media screen and (max-width: 992px) {
-                height: calc(100vh - 109px);
+                height: calc(100vh - 109px + 48px);
             }
             @media screen and (max-width: 600px) {
-                height: calc(100vh - 101px);
+                height: calc(100vh - 101px + 48px);
             }
             width: 100%;
             background-image: url(/assets/img/imgHead.jpg);
@@ -164,24 +164,27 @@ html {
                                     vertical-align: middle;
                                     white-space: nowrap;
                                     display: inline-block;
-                                    width: 33%;
+                                    width: 49%; // 33%
                                     @media screen and (max-width: 600px) {
                                         width: calc(100% - 70px);
                                     }
                                 }
-                                .verMais {
-                                    float: right;
-                                    cursor: pointer;
-                                    .rankElem {
-                                        color: $colorB;
-                                    }
-                                    @media screen and (max-width: 992px) {
-                                        position: absolute;
-                                        top: 50%;
-                                        transform: translateY(-50%);
-                                        right: 15px;
-                                    }
+                                .pontuacao {
+                                    text-align: center;
                                 }
+                                // .verMais {
+                                //     float: right;
+                                //     cursor: pointer;
+                                //     .rankElem {
+                                //         color: $colorB;
+                                //     }
+                                //     @media screen and (max-width: 992px) {
+                                //         position: absolute;
+                                //         top: 50%;
+                                //         transform: translateY(-50%);
+                                //         right: 15px;
+                                //     }
+                                // }
                             }
                             &:first-child {
                                 .col-wrapper {
@@ -320,82 +323,82 @@ html {
             }
         }
 
-        aside {
-            #sideRank {
-                position: fixed;
-                width: 16%;
-                top: 5%;
-                background-color: darken($page-bg, 5%);
-                right: 7px;
-                transition: all .3s ease-in-out;
-                border-right: 7px solid $colorAl;
-                box-sizing: content-box;
-                -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-                -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-                box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-                .card {
-                    margin: .3rem 0 !important;
-                    background-color: $colorAd;
-                    font-weight: 300;
-                    &.highlight {
-                        background-color: #0f1626 !important;
-                    }
-                    .row {
-                        margin-bottom: 0 !important;
-                    }
-                    .card-title {
-                        margin: 0;
-                        overflow: hidden;
-                        white-space: nowrap;
-                    }
-                    .card-action {
-                        line-height: 55px;
-                        font-size: 30px;
-                        padding: 0 !important;
-                        border: 0 !important;
-                        a {
-                            float: right;
-                        }
-                    }
-                }
-                .btn-floating {
-                    background-color: $colorAl;
-                }
-                h2 {
-                    font-size: 2.5vw;
-                    color: black;
-                    padding: 0 .75rem;
-                }
-                &.hideSide {
-                    z-index: -1;
-                    opacity: 0;
-                }
-                .card-content {
-                    $heightCard: 30px;
-                    padding: 0px;
-                    height: $heightCard;
-                    .card-title {
-                        font-size: 1.2vw;
-                        line-height: $heightCard;
-                    }
-                    .card-action {
-                        height: $heightCard;
-                    }
-                    .btn {
-                        $sizeBtn: 1.65vw;
-                        width: $sizeBtn;
-                        height: $sizeBtn;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        i {
-                            line-height: $sizeBtn;
-                            font-size: 1.1vw;
-                            vertical-align: top;
-                        }
-                    }
-                }
-            }
-        }
+        // aside {
+        //     #sideRank {
+        //         position: fixed;
+        //         width: 16%;
+        //         top: 5%;
+        //         background-color: darken($page-bg, 5%);
+        //         right: 7px;
+        //         transition: all .3s ease-in-out;
+        //         border-right: 7px solid $colorAl;
+        //         box-sizing: content-box;
+        //         -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
+        //         -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
+        //         box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
+        //         .card {
+        //             margin: .3rem 0 !important;
+        //             background-color: $colorAd;
+        //             font-weight: 300;
+        //             &.highlight {
+        //                 background-color: #0f1626 !important;
+        //             }
+        //             .row {
+        //                 margin-bottom: 0 !important;
+        //             }
+        //             .card-title {
+        //                 margin: 0;
+        //                 overflow: hidden;
+        //                 white-space: nowrap;
+        //             }
+        //             .card-action {
+        //                 line-height: 55px;
+        //                 font-size: 30px;
+        //                 padding: 0 !important;
+        //                 border: 0 !important;
+        //                 a {
+        //                     float: right;
+        //                 }
+        //             }
+        //         }
+        //         .btn-floating {
+        //             background-color: $colorAl;
+        //         }
+        //         h2 {
+        //             font-size: 2.5vw;
+        //             color: black;
+        //             padding: 0 .75rem;
+        //         }
+        //         &.hideSide {
+        //             z-index: -1;
+        //             opacity: 0;
+        //         }
+        //         .card-content {
+        //             $heightCard: 30px;
+        //             padding: 0px;
+        //             height: $heightCard;
+        //             .card-title {
+        //                 font-size: 1.2vw;
+        //                 line-height: $heightCard;
+        //             }
+        //             .card-action {
+        //                 height: $heightCard;
+        //             }
+        //             .btn {
+        //                 $sizeBtn: 1.65vw;
+        //                 width: $sizeBtn;
+        //                 height: $sizeBtn;
+        //                 top: 50%;
+        //                 transform: translateY(-50%);
+        //                 i {
+        //                     line-height: $sizeBtn;
+        //                     font-size: 1.1vw;
+        //                     vertical-align: top;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         section {
             #modal1 {

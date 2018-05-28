@@ -35,7 +35,7 @@ self.addEventListener("install", function (event) {
                     'https://code.jquery.com/jquery-3.2.1.min.js',
                     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js',
                     'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js',
-                    'https://www.bolaodomauricio.xyz/assets/img/loading-ball.gif',
+                    '/assets/img/loading-ball.gif',
                     'https://fonts.googleapis.com/icon?family=Material+Icons',
                     'https://fonts.gstatic.com/s/materialicons/v32/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2',
                     'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/fonts/roboto/Roboto-Regular.woff2',

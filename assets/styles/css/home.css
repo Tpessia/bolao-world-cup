@@ -165,16 +165,16 @@ html body {
     position: relative; }
     @media screen and (min-width: 1200px) {
       html body #imgHead {
-        height: calc(100vh - 112px); } }
+        height: calc(100vh - 112px + 48px); } }
     @media screen and (max-width: 1200px) {
       html body #imgHead {
-        height: calc(100vh - 110.5px); } }
+        height: calc(100vh - 110.5px + 48px); } }
     @media screen and (max-width: 992px) {
       html body #imgHead {
-        height: calc(100vh - 109px); } }
+        height: calc(100vh - 109px + 48px); } }
     @media screen and (max-width: 600px) {
       html body #imgHead {
-        height: calc(100vh - 101px); } }
+        height: calc(100vh - 101px + 48px); } }
     html body #imgHead #overlay {
       width: 100%;
       height: 100%;
@@ -242,22 +242,13 @@ html body {
             vertical-align: middle;
             white-space: nowrap;
             display: inline-block;
-            width: 33%; }
+            width: 49%; }
             @media screen and (max-width: 600px) {
               html body main #rank #rankList #rankContent .col .col-wrapper .nome,
               html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
                 width: calc(100% - 70px); } }
-          html body main #rank #rankList #rankContent .col .col-wrapper .verMais {
-            float: right;
-            cursor: pointer; }
-            html body main #rank #rankList #rankContent .col .col-wrapper .verMais .rankElem {
-              color: #ffab40; }
-            @media screen and (max-width: 992px) {
-              html body main #rank #rankList #rankContent .col .col-wrapper .verMais {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 15px; } }
+          html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+            text-align: center; }
         html body main #rank #rankList #rankContent .col:first-child .col-wrapper {
           line-height: 60px; }
         @media screen and (max-width: 600px) {
@@ -357,63 +348,6 @@ html body {
                   font-size: 15vh; }
               html body main #chart > div .blockMobile.show + canvas {
                 opacity: 0; } }
-  html body aside #sideRank {
-    position: fixed;
-    width: 16%;
-    top: 5%;
-    background-color: #e8e8e8;
-    right: 7px;
-    transition: all .3s ease-in-out;
-    border-right: 7px solid #25365d;
-    box-sizing: content-box;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px;
-    box-shadow: rgba(0, 0, 0, 0.36) 5px 5px 10px 1px; }
-    html body aside #sideRank .card {
-      margin: .3rem 0 !important;
-      background-color: black;
-      font-weight: 300; }
-      html body aside #sideRank .card.highlight {
-        background-color: #0f1626 !important; }
-      html body aside #sideRank .card .row {
-        margin-bottom: 0 !important; }
-      html body aside #sideRank .card .card-title {
-        margin: 0;
-        overflow: hidden;
-        white-space: nowrap; }
-      html body aside #sideRank .card .card-action {
-        line-height: 55px;
-        font-size: 30px;
-        padding: 0 !important;
-        border: 0 !important; }
-        html body aside #sideRank .card .card-action a {
-          float: right; }
-    html body aside #sideRank .btn-floating {
-      background-color: #25365d; }
-    html body aside #sideRank h2 {
-      font-size: 2.5vw;
-      color: black;
-      padding: 0 .75rem; }
-    html body aside #sideRank.hideSide {
-      z-index: -1;
-      opacity: 0; }
-    html body aside #sideRank .card-content {
-      padding: 0px;
-      height: 30px; }
-      html body aside #sideRank .card-content .card-title {
-        font-size: 1.2vw;
-        line-height: 30px; }
-      html body aside #sideRank .card-content .card-action {
-        height: 30px; }
-      html body aside #sideRank .card-content .btn {
-        width: 1.65vw;
-        height: 1.65vw;
-        top: 50%;
-        transform: translateY(-50%); }
-        html body aside #sideRank .card-content .btn i {
-          line-height: 1.65vw;
-          font-size: 1.1vw;
-          vertical-align: top; }
   html body section #modal1 {
     min-height: 350px;
     width: 65%;

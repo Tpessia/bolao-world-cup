@@ -17,8 +17,6 @@ die("Connection failed: " . mysqli_connect_error());
 
 }
 
-$username = $_GET["username"];
-
 $sql = '
 
 SELECT u.Nome, count(*) as "Ocorrencia"
