@@ -130,20 +130,27 @@
             //     j++;
             // }
 
-            var myData1 = { 'primeiro': ranking[0].nome };
+            for (var i in ranking) {
+                if (ranking[i].col == "1") {
+                    var myData1 = { 'primeiro': ranking[i].nome };
 
-            $.ajax({
-                url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php",
-                method: "POST",
-                data: myData1,
-                success: function (data) {
-                    console.log(data);
-                    $("#primeiros .boxes").css("background-color", "#1f8a45");
-                },
-                error: function () {
-                    $("#primeiros .boxes").css("background-color", "#da3030");
+                    $.ajax({
+                        url: "https://www.bolaodomauricio.xyz/assets/php/primeiros-insert.php",
+                        method: "POST",
+                        data: myData1,
+                        success: function (data) {
+                            console.log(data);
+                            $("#primeiros .boxes").css("background-color", "#1f8a45");
+                        },
+                        error: function () {
+                            $("#primeiros .boxes").css("background-color", "#da3030");
+                        }
+                    });
                 }
-            });
+                else {
+                    break;
+                }
+            }
 
             $("body").html($("body").html() + "<div>Primeiro: " + ranking[0].nome + "</div><br>")
 
