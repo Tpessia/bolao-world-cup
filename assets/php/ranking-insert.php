@@ -38,7 +38,7 @@
     $index = 1;
     foreach ($cleanData as $value) {
 
-        // $name = strtolower($value->name);
+        // $name = strtolower($value->nome);
         // $arr = array("ã","Ã","á","Á","â","Â","à","À","ä","Ä");
         // $name = str_replace($arr,"a",$name);
         // $arr = array("é","É","ê","Ê","è","È","ë","Ë");
@@ -59,21 +59,21 @@
         // $name = str_replace($arr,"",$name);
         // $name = str_replace(" ","",$name);
 
-        // $name = $value->name;
+        // $name = $value->nome;
 
-        // if(preg_match('/--/', $value->name)){
-        //     die('Invalid Name (ranking): ' . $value->name);
+        // if(preg_match('/--/', $value->nome)){
+        //     die('Invalid Name (ranking): ' . $value->nome);
         // }
 
-        $value->name = mysqli_real_escape_string($conn, $value->name); //validate
+        $value->nome = mysqli_real_escape_string($conn, $value->nome); //validate
 
-        // if(!preg_match('/(?=\^.{0,40}\$)\^[a-zA-Z]\+\s[a-zA-Z]\+\$/', $value->name)){
-        //     die('Invalid Name (ranking): ' . $value->name);
+        // if(!preg_match('/(?=\^.{0,40}\$)\^[a-zA-Z]\+\s[a-zA-Z]\+\$/', $value->nome)){
+        //     die('Invalid Name (ranking): ' . $value->nome);
         // }
 
         $sql = "
 
-        CREATE TABLE IF NOT EXISTS $value->name (
+        CREATE TABLE IF NOT EXISTS $value->nome (
 
         ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
@@ -94,8 +94,8 @@
 
 
         $sql = "
-        INSERT INTO $value->name (Data, Colocacao, Pontuacao)
-        VALUES ('".$date."', '".$index."', ".$value->pontuacao.")
+        INSERT INTO $value->nome (Data, Colocacao, Pontuacao)
+        VALUES ('".$date."', '".$value->pos."', ".$value->pontos.")
         ";
             
         if (!mysqli_query($conn, $sql)) {
