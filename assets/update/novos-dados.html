@@ -186,7 +186,7 @@
         function SendNotifications() {
             users = [];
             for (var j in ranking) {
-                users.push({ name: ranking[j].nome, code: ranking[j].nr, page: ranking[j].nr, pontuacao: ranking[i].pontos });
+                users.push({ name: ranking[j].nome, code: ranking[j].nr, page: ranking[j].nr, pontuacao: ranking[j].pontos });
             }
             var myData3 = { 'users': JSON.stringify(users) };
             $.ajax({
