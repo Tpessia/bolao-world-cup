@@ -173,6 +173,19 @@ function OnlineGet() { //request spreadsheet page data
                         ranking.splice(i, 1);
                     }
                 }
+                ranking.sort(function (a, b) {
+                    if (a.col > b.col) {
+                        return 1;
+                    } else if (a.col < b.col) {
+                        return -1;
+                    } else if (a.col == b.col) {
+                        if (a.nr > b.nr) {
+                            return 1;
+                        } else if (a.nr < b.nr) {
+                            return -1;
+                        }
+                    }
+                });
                 RankCreate();
                 // PlayersArray();
                 BindEvents();
