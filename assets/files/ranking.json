@@ -1,20 +1,27 @@
 ﻿[
 	{
 		"col": "1",
-		"nr": "0001",
+		"nr": "1",
+		"nome": "Maurício",
+		"pontos": "600"
+	},
+	{
+		"col": "2",
+		"nr": "2",
+		"nome": "Guilherme",
+		"pontos": "500"
+	},
+	{
+		"col": "3",
+		"nr": "3",
 		"nome": "Thiago",
 		"pontos": "300"
 	},
 	{
-		"col": "1",
-		"nr": "0002",
-		"nome": "Admin",
-		"pontos": "300"
-	}, {
-		"col": "3",
-		"nr": "0003",
-		"nome": "Nome3",
-		"pontos": "200"
+		"col": "4",
+		"nr": "4",
+		"nome": "João",
+		"pontos": "150"
 	},
 	{
 		"col": ""
