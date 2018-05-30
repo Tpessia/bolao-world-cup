@@ -190,13 +190,30 @@ body {
     opacity: 1; } }
   body main {
     flex: 1 0 auto;
-    margin-top: 40px; }
-    body main .downloads button {
-      background-color: #1A2930;
-      margin: 0 10px 10px 0; }
-      body main .downloads button:hover {
-        background-color: #355362; }
-      body main .downloads button a {
-        color: white; }
+    margin-top: 40px;
+    font-size: 1.1rem; }
+    body main ul li,
+    body main ol li {
+      margin-bottom: .5em; }
+    body main ul.dashed {
+      margin-left: 0;
+      padding-left: 0;
+      list-style-type: none; }
+      body main ul.dashed > li {
+        display: block;
+        margin-left: 2em; }
+        body main ul.dashed > li:before {
+          padding-right: 3px;
+          display: inline-block;
+          content: "-"; }
+    body main .downloads {
+      margin-top: 20px; }
+      body main .downloads button {
+        background-color: #1A2930;
+        margin: 0 10px 10px 0; }
+        body main .downloads button:hover {
+          background-color: #355362; }
+        body main .downloads button a {
+          color: white; }
 
 /*# sourceMappingURL=not-ready.css.map */

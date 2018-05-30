@@ -94,8 +94,32 @@ body {
     main {
         flex: 1 0 auto;
         margin-top: 40px;
+        font-size: 1.1rem;
+
+        ul,
+        ol {
+            li {
+                margin-bottom: .5em;
+            }
+        }
+
+        ul.dashed {
+            margin-left: 0;
+            padding-left: 0;
+            list-style-type: none;
+            &>li {
+                display: block;
+                margin-left: 2em;
+                &:before {
+                    padding-right: 3px;
+                    display: inline-block;
+                    content: "-";
+                }
+            }
+        }
 
         .downloads {
+            margin-top: 20px;
             button {
                 background-color: $colorC;
                 margin: 0 10px 10px 0;
