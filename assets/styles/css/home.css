@@ -249,6 +249,9 @@ html body {
                 width: calc(100% - 70px); } }
           html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
             text-align: center; }
+            @media (max-width: 600px) {
+              html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
+                text-align: left; } }
         html body main #rank #rankList #rankContent .col:first-child .col-wrapper {
           line-height: 60px; }
         @media screen and (max-width: 600px) {

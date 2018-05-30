@@ -15,6 +15,13 @@
     $name = $_POST["nome"];
     $msg = $_POST["mensagem"];
 
+    if ( preg_match( "/[\r\n]/", $name ) || preg_match( "/[\r\n]/", $from ) ) {
+
+        http_response_code(404);
+        die("404");
+
+    }
+
     $txt = $msg . "<br><p>" . $name . "<br>" . $date . "</p>";
     $headers = "From: " . $from . "\r\n" . "Content-Type: text/html; charset=UTF-8\r\n";
 

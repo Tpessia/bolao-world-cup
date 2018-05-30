@@ -129,11 +129,18 @@ body {
     flex: 1 0 auto;
     padding-top: 30px;
     text-align: justify; }
+    @media (max-width: 600px) {
+      body main #regulamento h1 {
+        font-size: 12vw; }
+      body main #regulamento .main-title {
+        font-size: 10vw; }
+      body main #regulamento .title {
+        font-size: 8vw; } }
     body main #regulamento .dwnld .downloads {
       margin-top: 15px; }
       body main #regulamento .dwnld .downloads button {
         background-color: #1A2930;
-        margin-right: 10px; }
+        margin: 0 10px 10px 0; }
         body main #regulamento .dwnld .downloads button:hover {
           background-color: #355362; }
         body main #regulamento .dwnld .downloads button a {
@@ -142,6 +149,8 @@ body {
       margin: 40px 0 30px 0; }
     body main #regulamento .texto-reg .title {
       margin-top: 30px; }
+    body main #regulamento .texto-reg .title, body main #regulamento .texto-reg .main-title {
+      text-align: left; }
     body main #regulamento .texto-reg ul li,
     body main #regulamento .texto-reg ol li {
       margin-bottom: .5em; }

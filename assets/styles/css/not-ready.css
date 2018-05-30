@@ -193,7 +193,7 @@ body {
     margin-top: 40px; }
     body main .downloads button {
       background-color: #1A2930;
-      margin-right: 10px; }
+      margin: 0 10px 10px 0; }
       body main .downloads button:hover {
         background-color: #355362; }
       body main .downloads button a {
