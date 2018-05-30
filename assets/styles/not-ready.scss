@@ -1,0 +1,111 @@
+@import '_main.scss';
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    .nav-content {
+        display: none;
+    }
+    #imgHead {
+        overflow: hidden;
+        @media screen and (min-width: 1200px) {
+            height: calc(60vh - 112px + 48px);
+        }
+        @media screen and (max-width: 1200px) {
+            height: calc(60vh - 110.5px + 48px);
+        }
+        @media screen and (max-width: 992px) {
+            height: calc(60vh - 109px + 48px);
+        }
+        @media screen and (max-width: 600px) {
+            height: calc(60vh - 101px + 48px);
+        }
+        width: 100%;
+        background-image: url(/assets/img/imgHead.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: top;
+        position: relative;
+        #overlay {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        #welcome {
+            max-width: 700px;
+            width: 90vw;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #f5f5f5;
+            h2 {
+                font-size: 8vh;
+            }
+            div {
+                font-size: 3.5vh;
+            }
+        }
+        .arrow-pulse-down:after {
+            // content: "\01F863";
+            /* Here you can change the style of the arrow */
+            // position: absolute;
+            // color: white;
+            // width: 50px;
+            // height: 50px;
+            // margin: 0 auto;
+            // left: 0;
+            // right: 0;
+            // font-size: 50px;
+            // animation: arrow-pulse-down 700ms linear infinite;
+            // cursor: pointer;
+            content: url(https://www.bolaodomauricio.xyz/assets/img/down-arrow.png);
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 30%) scale(0.5);
+            animation: arrow-pulse-down .7s linear infinite;
+            cursor: pointer;
+            @media screen and (max-width: 900px) {
+                transform: translate(-50%, 40%) scale(0.25);
+            }
+        }
+        @keyframes arrow-pulse-down {
+            0% {
+                bottom: 40px;
+                opacity: 0;
+            }
+            25% {
+                opacity: .25;
+            }
+            50% {
+                opacity: .5;
+            }
+            75% {
+                opacity: .75;
+            }
+            100% {
+                bottom: 20px;
+                opacity: 1;
+            }
+        }
+    }
+    main {
+        flex: 1 0 auto;
+        margin-top: 40px;
+
+        .downloads {
+            button {
+                background-color: $colorC;
+                margin-right: 10px;
+                &:hover {
+                    background-color: $colorCl;
+                }
+                a {
+                    color: white;
+                }
+            }
+        }
+    }
+}

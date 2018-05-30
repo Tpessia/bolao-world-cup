@@ -50,6 +50,9 @@ body {
             -webkit-animation-fill-mode: both;
         }
     }
+    textarea {
+        min-height: 10vh;
+    }
     #submit {
         .btn {
             width: 116px;

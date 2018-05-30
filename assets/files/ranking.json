@@ -1,11 +1,5 @@
 ﻿[
 	{
-		"col": "3",
-		"nr": "0003",
-		"nome": "Nome3",
-		"pontos": "200"
-	},
-	{
 		"col": "1",
 		"nr": "0001",
 		"nome": "Thiago",
@@ -16,6 +10,11 @@
 		"nr": "0002",
 		"nome": "Admin",
 		"pontos": "300"
+	}, {
+		"col": "3",
+		"nr": "0003",
+		"nome": "Nome3",
+		"pontos": "200"
 	},
 	{
 		"col": ""

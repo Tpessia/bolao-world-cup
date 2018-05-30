@@ -9,7 +9,7 @@
     mb_internal_encoding('UTF-8');
     
     $date = date('d/m/Y H:i:s');
-    $dest = "contato@bolaodomauricio.xyz";
+    $dest = "bolaodomauricio@gmail.com";
     $subject = $_POST["assunto"];$e_subject = mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n", strlen('Subject: '));        
     $from = $_POST["email"];
     $name = $_POST["nome"];
