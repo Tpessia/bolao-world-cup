@@ -1,6 +1,6 @@
 importScripts('/lib/cache-polyfill.js');
 
-var version = 'v0.9.3::';
+var version = 'v0.9.5::';
 
 self.addEventListener("install", function (event) {
     console.log('WORKER: install event in progress.');
@@ -21,10 +21,10 @@ self.addEventListener("install", function (event) {
                 */
                 return cache.addAll([
                     // '/.htaccess',
-                    '/index.html',
-                    '/contato.html',
-                    '/login.html',
-                    '/regulamento.html',
+                    '/index.php',
+                    '/contato.php',
+                    '/login.php',
+                    '/regulamento.php',
                     '/assets/img/login-bg.jpg',
                     '/assets/img/icon.png',
                     '/assets/img/imgHead.jpg',

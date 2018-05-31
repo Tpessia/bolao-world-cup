@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110855560-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-110855560-1');
-    </script> -->
-
     <title>Contato | Bolão do Maurício</title>
     
     <meta charset="utf-8">
@@ -40,7 +30,7 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="/index.html" class="brand-logo">
+                <a href="/index.php" class="brand-logo">
                     <i class="material-icons right hide-on-small-only">
                         <img src="/assets/img/icon.png">
                     </i>Bolão 2018</a>
@@ -50,17 +40,27 @@
                 </a>
     
                 <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a href="/login.html" class="login">Login</a>
-                    </li>
-                    <li>
-                        <a href="/index.html">Ranking</a>
-                    </li>
+                    <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
+                            
+                        <li>
+                            <a href="/apresentacao.php">Apresentação</a>
+                        </li>
+
+                    <?php } else { ?>
+
+                        <li>
+                            <a href="/login.php" class="login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/index.php">Ranking</a>
+                        </li>
+
+                    <?php } ?>
                     <li class="active">
-                        <a href="/contato.html">Contato</a>
+                        <a href="/contato.php">Contato</a>
                     </li>
                     <li>
-                        <a href="/regulamento.html">Regulamento</a>
+                        <a href="/regulamento.php">Regulamento</a>
                     </li>
                 </ul>
     
@@ -78,17 +78,27 @@
         </nav>
     
         <ul class="side-nav" id="mobileNav">
-            <li>
-                <a href="/login.html" class="login">Login</a>
-            </li>
-            <li>
-                <a href="/index.html">Ranking</a>
-            </li>
+            <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
+                            
+                <li>
+                    <a href="/apresentacao.php">Apresentação</a>
+                </li>
+
+            <?php } else { ?>
+
+                <li>
+                    <a href="/login.php" class="login">Login</a>
+                </li>
+                <li>
+                    <a href="/index.php">Ranking</a>
+                </li>
+
+            <?php } ?>
             <li class="active">
-                <a href="/contato.html">Contato</a>
+                <a href="/contato.php">Contato</a>
             </li>
             <li>
-                <a href="/regulamento.html">Regulamento</a>
+                <a href="/regulamento.php">Regulamento</a>
             </li>
         </ul>
     </header>
@@ -155,7 +165,7 @@
                 <div class="col l6 s12">
                     <h5 class="white-text">Contatos</h5>
                     <p class="grey-text text-lighten-4">
-                        <a href="/contato.html" class="grey-text text-lighten-4">Formulário</a>
+                        <a href="/contato.php" class="grey-text text-lighten-4">Formulário</a>
                         <br>
                         <a href="mailto:bolaodomauricio@gmail.com" class="grey-text text-lighten-4">bolaodomauricio@gmail.com</a>
                     </p>

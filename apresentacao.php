@@ -23,42 +23,61 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="/index.html" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
+                <a href="/index.php" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
 
                 <a href="#" data-activates="mobileNav" class="button-collapse">
                     <i class="material-icons">menu</i>
                 </a>
 
                 <ul class="right hide-on-med-and-down">
+                    <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
+                            
+                        <li class="active">
+                            <a href="/apresentacao.php">Apresentação</a>
+                        </li>
+
+                    <?php } else { ?>
+
+                        <li>
+                            <a href="/login.php" class="login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/index.php">Ranking</a>
+                        </li>
+
+                    <?php } ?>
                     <li>
-                        <a href="/login.html" class="login">Login</a>
+                        <a href="/contato.php">Contato</a>
                     </li>
                     <li>
-                        <a href="/index.html">Ranking</a>
-                    </li>
-                    <li>
-                        <a href="/contato.html">Contato</a>
-                    </li>
-                    <li>
-                        <a href="/regulamento.html">Regulamento</a>
+                        <a href="/regulamento.php">Regulamento</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
         <ul class="side-nav" id="mobileNav">
-            <!--Mobile Nav(2/3)-->
+            <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
+                            
+                <li class="active">
+                    <a href="/apresentacao.php">Apresentação</a>
+                </li>
+
+            <?php } else { ?>
+
+                <li>
+                    <a href="/login.php" class="login">Login</a>
+                </li>
+                <li>
+                    <a href="/index.php">Ranking</a>
+                </li>
+
+            <?php } ?>
             <li>
-                <a href="/login.html" class="login">Login</a>
+                <a href="/contato.php">Contato</a>
             </li>
             <li>
-                <a href="/index.html">Ranking</a>
-            </li>        
-            <li>
-                <a href="/contato.html">Contato</a>
-            </li>
-            <li>
-                <a href="/regulamento.html">Regulamento</a>
+                <a href="/regulamento.php">Regulamento</a>
             </li>
         </ul>
     </header>
@@ -114,7 +133,7 @@
                 <div class="col l6 s12">
                     <h5 class="white-text">Contatos</h5>
                     <p class="grey-text text-lighten-4">
-                        <a href="/contato.html" class="grey-text text-lighten-4">Formulário</a>
+                        <a href="/contato.php" class="grey-text text-lighten-4">Formulário</a>
                         <br>
                         <a href="mailto:bolaodomauricio@gmail.com" class="grey-text text-lighten-4">bolaodomauricio@gmail.com</a>
                     </p>

@@ -1,23 +1,19 @@
+<?php
+    date_default_timezone_set('America/Sao_Paulo');
+
+    if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) {
+        header('Location: '.'/apresentacao.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110855560-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-110855560-1');
-    </script> -->
-    
-    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-4666327139123387",
-        enable_page_level_ads: true
-    });
-    </script> -->
+        if (localStorage.getItem("user") === null) {
+            window.location.replace('/login.php');
+        }
+    </script>
 
     <title>Bolão do Maurício</title>
     
@@ -34,27 +30,6 @@
     <meta name="description" content="9º Bolão Copa do Mundo (do Maurício). Participe do Bolão da Copa do Mundo de 2018!">
 
     <link rel="icon" type="image/png" href="assets/img/icon.png">
-
-    <script>
-        if (localStorage.getItem("user") === null) {
-            window.location.replace('/login.html');
-        }
-    </script>
-
-    <script> //redirect caso a data de lançamento não tenha chego
-        var adms = ["mauricio","guilherme","thiago"];
-        var url = new URL(window.location.href);
-        var admin = url.searchParams.get("admin");
-        
-        if (adms.filter(function(adm) { return admin == adm }) == 0) {            
-            var lacamento = new Date("2018-06-14T18:00-03:00"),
-                hoje = new Date();
-
-            if (lacamento.getTime() > hoje.getTime()) {
-                window.location.replace("/apresentacao.html");
-            }
-        }
-    </script>
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -103,7 +78,7 @@
     <header>
         <nav class="nav-extended navbar-fixed">
             <div class="nav-wrapper">
-                <a href="/index.html" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
+                <a href="/index.php" class="brand-logo"><i class="material-icons right hide-on-small-only"><img src="/assets/img/icon.png"></i>Bolão 2018</a>
 
                 <a href="#" data-activates="mobileNav" class="button-collapse">
                     <i class="material-icons">menu</i>
@@ -111,16 +86,16 @@
 
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a href="/login.html" class="login">Login</a>
+                        <a href="/login.php" class="login">Login</a>
                     </li>
                     <li class="active">
-                        <a href="/index.html">Ranking</a>
+                        <a href="/index.php">Ranking</a>
                     </li>
                     <li>
-                        <a href="/contato.html">Contato</a>
+                        <a href="/contato.php">Contato</a>
                     </li>
                     <li>
-                        <a href="/regulamento.html">Regulamento</a>
+                        <a href="/regulamento.php">Regulamento</a>
                     </li>
                 </ul>
 
@@ -140,16 +115,16 @@
         <ul class="side-nav" id="mobileNav">
             <!--Mobile Nav(2/3)-->
             <li>
-                <a href="/login.html" class="login">Login</a>
+                <a href="/login.php" class="login">Login</a>
             </li>
             <li class="active">
-                <a href="/index.html">Ranking</a>
+                <a href="/index.php">Ranking</a>
             </li>        
             <li>
-                <a href="/contato.html">Contato</a>
+                <a href="/contato.php">Contato</a>
             </li>
             <li>
-                <a href="/regulamento.html">Regulamento</a>
+                <a href="/regulamento.php">Regulamento</a>
             </li>
         </ul>
     </header>
@@ -314,7 +289,7 @@
                 <div class="col l6 s12">
                     <h5 class="white-text">Contatos</h5>
                     <p class="grey-text text-lighten-4">
-                        <a href="/contato.html" class="grey-text text-lighten-4">Formulário</a>
+                        <a href="/contato.php" class="grey-text text-lighten-4">Formulário</a>
                         <br>
                         <a href="mailto:bolaodomauricio@gmail.com" class="grey-text text-lighten-4">bolaodomauricio@gmail.com</a>
                     </p>

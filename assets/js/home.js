@@ -251,7 +251,7 @@ function GetChartData() {
             try {
                 var chartData = evalSecure(dataDB);
             } catch (error) {
-                var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.php">www.bolaodomauricio.xyz/contato.php</a>';
                 var error = 'UnableToFindUser';
                 parseError(msg, error);
             }
@@ -300,7 +300,7 @@ function GetMedias() {
             try {
                 var medias = evalSecure(data);
             } catch (error) {
-                // var msg = 'Encontramos alguns problemas ao procurar pela pontuação média dos usuários, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                // var msg = 'Encontramos alguns problemas ao procurar pela pontuação média dos usuários, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.php">www.bolaodomauricio.xyz/contato.php</a>';
                 // var error = 'UnableToFindMedias';
                 // parseError(msg, error);
             }
@@ -337,7 +337,7 @@ function GetPrimeiros() {
             try {
                 var primeirosData = evalSecure(data);
             } catch (error) {
-                // var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.html">www.bolaodomauricio.xyz/contato.html</a>';
+                // var msg = 'Encontramos alguns problemas ao procurar seu cadastro no banco de dados, caso o problema persista, entre em contato conosco na seguinte página: <a href="/contato.php">www.bolaodomauricio.xyz/contato.php</a>';
                 // var error = 'UnableToFindUser';
                 // parseError(msg, error);
             }
@@ -959,11 +959,11 @@ function ShowMoreRank() {
 //     }
 
 //     function ShowNameNotFound() {
-//         showError('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+//         showError('Nome não encontrado! Verifique se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.php" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
 //     }
 
 //     function ShowNoConnection() {
-//         showError('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.html" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
+//         showError('Pesquisa Inválida! Verifique sua conexão com a internet e/ou se o nome inserido está correto.<br>Se o problema persistir, entre em contato através da <a href="contato.php" target="_blank" style="color: rgba(0,0,0,0.87);"><em>página de contato</em></a>.');
 //     }
 // }
 

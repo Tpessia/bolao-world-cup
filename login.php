@@ -1,16 +1,14 @@
+<?php
+    date_default_timezone_set('America/Sao_Paulo');
+
+    if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) {
+        header('Location: '.'/apresentacao.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110855560-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-110855560-1');
-    </script> -->
-    
+<head>    
     <title>Login | Bolão do Maurício</title>
     
     <meta charset="utf-8">
@@ -27,30 +25,6 @@
     <meta name="description" content="Faça o login no Bolão!">
     
     <link rel="icon" type="image/png" href="assets/img/icon.png">
-
-    <script> //redirect caso a data de lançamento não tenha chego
-        var adms = ["mauricio", "guilherme", "thiago"];
-        var url = new URL(window.location.href);
-        var admin = url.searchParams.get("admin");
-
-        if (adms.filter(function (adm) { return admin == adm }) == 0) {
-            var lacamento = new Date("2018-06-14T18:00-03:00"),
-                hoje = new Date();
-
-            if (lacamento.getTime() > hoje.getTime()) {
-                window.location.replace("/apresentacao.html");
-            }
-        }
-    </script>
-    
-    <script> //redirect caso a data de lançamento não tenha chego
-        var lacamento = new Date("2018-02-05T08:45-02:00"),
-            hoje = new Date();
-
-        if (lacamento.getTime() > hoje.getTime()) {
-            window.location.replace("/apresentacao.html");
-        }
-    </script>
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -77,7 +51,7 @@
                 </form>
         
                 <div id="contato">
-                    <a href="/contato.html" target="_blank">Problemas ou dúvidas? Entre em <strong>contato</strong>.</a>
+                    <a href="/contato.php" target="_blank">Problemas ou dúvidas? Entre em <strong>contato</strong>.</a>
                 </div>
             </div>
         </div>

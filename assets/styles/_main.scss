@@ -68,6 +68,12 @@ nav {
                 &:hover {
                     background-color: #ffffff14;
                 }
+                &.disabled {
+                    pointer-events: none;
+                    a {
+                        color: #c3c3c3;
+                    }
+                }
                 a {
                     &:hover {
                         background-color: transparent;

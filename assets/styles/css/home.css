@@ -68,6 +68,10 @@ nav {
     background-color: #3b3b3b !important; }
   nav .nav-wrapper > ul li:hover {
     background-color: #ffffff14; }
+  nav .nav-wrapper > ul li.disabled {
+    pointer-events: none; }
+    nav .nav-wrapper > ul li.disabled a {
+      color: #c3c3c3; }
   nav .nav-wrapper > ul li a:hover {
     background-color: transparent; }
   nav .nav-wrapper .button-collapse i {
