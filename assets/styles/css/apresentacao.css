@@ -215,7 +215,7 @@ body {
       body main .downloads button {
         background-color: #1A2930;
         margin: 0 10px 10px 0; }
-        body main .downloads button:hover {
+        body main .downloads button:hover, body main .downloads button:focus {
           background-color: #355362; }
         body main .downloads button a {
           color: white; }

@@ -113,25 +113,25 @@
                         <p>
                             Baixar a cartela:
                         </p>
-                        <button class="btn">
-                            <a href="/assets/files/Cartela - Bolão do Maurício.xlsx" download="Cartela - Bolão do Maurício.xlsx">Baixar Cartela</a>
-                        </button>
+                        <a href="/assets/files/Cartela - Bolão do Maurício.xlsx" download="Cartela - Bolão do Maurício.xlsx">
+                            <button class="btn">Baixar Cartela</button>
+                        </a>
                     </div>
                     <div>
                         <p>
                             Veja o regulamento na seguinte página:
                         </p>
-                        <button class="btn">
-                            <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">Ver Regulamento</a>
-                        </button>
+                            <a href="/regulamento.php" target="_blank">
+                                <button class="btn">Ver Regulamento</button>
+                            </a>
                     </div>
                     <div>
                         <p>
                             Ou, se preferir, baixe-o clicando abaixo:
                         </p>
-                        <button class="btn">
-                            <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">Baixar Regulamento</a>
-                        </button>
+                        <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">
+                            <button class="btn">Baixar Regulamento</button>
+                        </a>
                     </div>
                 </div>
 
