@@ -99,14 +99,11 @@
 
             <div class="dwnld">
                 <div>
-                    <strong>Faça o download dos arquivos:</strong>
+                    <strong>Faça o download do regulamento:</strong>
                 </div>
                 <div class="downloads">
                     <button class="btn">
-                        <a href="/assets/files/Cartela - Bolão do Maurício.xlsx" download="Cartela - Bolão do Maurício.xlsx">Cartela</a>
-                    </button>
-                    <button class="btn">
-                        <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">Regulamento</a>
+                        <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">Baixar</a>
                     </button>
                 </div>
             </div>
