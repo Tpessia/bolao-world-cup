@@ -108,6 +108,8 @@
                 </div>
             </div>
 
+            <hr style="margin: 40px 0;">
+
             <div class="texto-reg">
                 <h3 class="main-title">9º BOLÃO COPA DO MUNDO (do Maurício) – RÚSSIA 2018</h3>
 
@@ -225,6 +227,7 @@
                 <p>Muito obrigado e Boa Sorte!</p>
                 
                 <p style="text-align: center">
+                    <br><br>
                     MAURÍCIO VASCO DA SILVA<br>
                     GUILHERME CAMPOS DA SILVA<br>
                     THIAGO VINÍCIUS PESSIA<br>
