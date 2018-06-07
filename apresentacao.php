@@ -108,6 +108,8 @@
                     <li>demais informações, como dados bancários para pagamento da Cartela, encontram-se no Regulamento, disponível para download abaixo.</li>
                 </ul>
 
+                <hr style="margin: 30px 0;">
+
                 <div class="downloads">
                     <div>
                         <p>
@@ -136,6 +138,7 @@
                 </div>
 
                 <p>
+                    <br>
                     A partir de 14/06, após todos os jogos do dia serem realizados, estaremos publicando diariamente neste site a posição (ranking) dos participantes.<!-- E, a partir de 18/06, estaremos disponibilizando a função de Notificações.-->
                 </p>
             </div>
