@@ -212,7 +212,7 @@
 
                 <p>O Prêmio será de 80% (Oitenta por cento) do total arrecadado. Entenda-se como total arrecadado como o número de Cartelas vezes R$. 20,00. Ex.: se 100 cartelas estiverem em disputa, o prêmio será de R$. 1.600,00 (Mil e Seiscentos Reais, 80% de R$. 2.000,00 = 100 cartelas x R$. 20,00).</p>
 
-                <p><strong>A Cartela, bem como o comprovante de pagamento, deverão ser enviados <u>até dia 12 de junho de 2018</u>, quinta-feira, (dois dias antes do início da Copa do Mundo de 2018) para o e-mail: <a href="mailto:bolaodomauricio@gmail.com">bolaodomauricio@gmail.com</a>.</strong> Após recebimento da Cartela, enviaremos resposta ao Participante acusando a recepção e informando o número da mesma. Com o número da Cartela e o pagamento identificado, o Participante estará concorrendo ao Prêmio.</p>
+                <p><strong>A Cartela, bem como o comprovante de pagamento, deverão ser enviados <u>até dia 12 de junho de 2018</u>, terça-feira, (dois dias antes do início da Copa do Mundo de 2018) para o e-mail: <a href="mailto:bolaodomauricio@gmail.com">bolaodomauricio@gmail.com</a>.</strong> Após recebimento da Cartela, enviaremos resposta ao Participante acusando a recepção e informando o número da mesma. Com o número da Cartela e o pagamento identificado, o Participante estará concorrendo ao Prêmio.</p>
 
                 <p>Os Organizadores, (Maurício Vasco da Silva, Guilherme Campos da Silva e Thiago Vinícius Pessia poderão participar do Bolão, mas estarão concorrendo apenas a metade (50%) do Prêmio. O participante posteriormente colocado após um ou mais Organizador(es) receberá a metade restante.</p>
 
