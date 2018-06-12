@@ -1,5 +1,5 @@
 <?php
-    $servername = preg_match('/localhost/' ,$_SERVER["SERVER_NAME"]) ? "sql131.main-hosting.eu" : "mysql.hostinger.com.br";
+    $servername = $_SERVER["SERVER_ADDR"] == "127.0.0.1" ? "sql131.main-hosting.eu" : "mysql.hostinger.com.br";
     $username = "u432755883_user";
     $password = "IhSoAnXZFmBi@314159";
     $dbname = "u432755883_db";

@@ -71,9 +71,9 @@
         </span>
     </div>
 
-    <a id="push-sub" class="btn-floating btn-large waves-effect waves-light colorB">
+    <!-- <a id="push-sub" class="btn-floating btn-large waves-effect waves-light colorB">
         <i class="material-icons">notifications_active</i>
-    </a>
+    </a> -->
 
     <header>
         <nav class="nav-extended navbar-fixed">
@@ -130,6 +130,9 @@
     </header>
 
     <div id="imgHead">
+        <span id="download-app">
+            <a class="btn-floating waves-effect waves-light modal-trigger" href="#modal-download"><i class="material-icons">file_download</i></a>
+        </span>
         <div id="overlay"></div>
         <div id="welcome">
             <h2>Bem Vindo(a), verifique seus dados!</h2>
@@ -264,7 +267,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-teal btn-flat ">Fechar</a>
+                <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Fechar</a>
             </div>
         </div>
     </section>
@@ -278,7 +281,27 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-teal btn-flat ">Fechar</a>
+                <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Fechar</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="modal-download" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>BAIXE O APP</h4>
+                <p>
+                    Caso o banner de download não apareça automaticamente, siga os seguintes passo:
+                </p>
+                <p>
+                    <strong>Google Chrome:</strong> Clique no botão de configurações <i class="material-icons" style="vertical-align: text-bottom;">more_vert</i>, na parte superior direita da tela, e, em seguida, selecione a opção "Adicionar à tela inicial". Caso tenha dúvidas, <a href="http://www.techtudo.com.br/dicas-e-tutoriais/noticia/2015/12/chrome-adicione-um-atalho-para-site-na-area-de-trabalho-do-android.html" target="_blank">siga estes passos</a>.
+                </p>
+                <p>
+                    <strong>Safari (iPhone):</strong> Clique no botão de compartilhamento <img src="\assets\img\safari-share.png" alt="Share" style="width: 25px;vertical-align: text-bottom;">, na parte inferior da tela, e, em seguida, selecione a opção "Tela de Início". Caso tenha dúvidas, <a href="http://www.techtudo.com.br/dicas-e-tutoriais/noticia/2011/06/como-adicionar-um-atalho-para-um-site-na-tela-de-inicio-do-iphone.html" target="_blank">siga estes passo</a>.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect btn-flat">Fechar</a>
             </div>
         </div>
     </section>
