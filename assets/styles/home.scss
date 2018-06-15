@@ -75,7 +75,7 @@ html {
                 position: absolute;
                 right: 15px;
                 top: 15px;
-                @media (min-width: 601px) {
+                @media (min-width: 601px), (display-mode: standalone) {
                     display: none;
                 }
                 a {
