@@ -102,7 +102,7 @@ function Login() {
     if (localStorage.getItem("user") !== null) { //usuário já salvo no local storage
         $("body").removeClass("login");
         user = JSON.parse(localStorage.getItem("user")); //receive user data from local storage
-        UserPosition();
+        // UserPosition();
 
         Welcome();
         Highlight();
@@ -111,25 +111,26 @@ function Login() {
     }
 
     function UserPosition() { //current user position
-        for (var i in ranking) {
-            if (ranking[i].nome.match(user.nome)) {
-                user.currentPosition = parseInt(i) + 1;
-                break;
-            }
-        }
+        // for (var i in ranking) {
+        //     if (ranking[i].nome.match(user.nome)) {
+        //         user.currentPosition = parseInt(i) + 1;
+        //         break;
+        //     }
+        // }
+        // user.currentPosition = user.col[0];
     }
 
     function Welcome() { //welcome name update
         $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
 
-        $("#welcome div").html("Você é o " + user.currentPosition + "º dentre " + ranking.length + " pessoas.");
+        $("#welcome div").html("Você é o " + user.col[0] + "º dentre " + ranking.length + " pessoas.");
     }
 
     function Highlight() { //current user highlight on ranking
         $('#rankContent div.col .col-wrapper.colorA').removeClass("colorA");
         // $('#sideRank .col .card.highlight').removeClass("highlight");
 
-        $('#rankContent div.col:nth-of-type(' + user.currentPosition + ') .col-wrapper').addClass("colorA");
+        $('#rankContent div.col .col-wrapper[data-nr=' + user.nr + ']').addClass("colorA");
         // $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
     }
 }
@@ -282,8 +283,11 @@ function GetChartData() {
                 "pointer-events": "auto"
             }); //prevent new logins while ajax is running
         },
-        error: function () {
-            GetChartData();
+        error: function (xhr, status, error) {
+            if (xhr.status != 500) {
+                parseError('Server with problem.');
+                GetChartData();
+            }
         }
     });
 }
@@ -319,8 +323,11 @@ function GetMedias() {
 
             localStorage.setItem("media", JSON.stringify(media));
         },
-        error: function () {
-            GetMedias();
+        error: function (xhr) {
+            if (xhr.status != 500) {
+                parseError('Server with problem.');
+                GetMedias();
+            }
         }
     });
 }
@@ -369,8 +376,11 @@ function GetPrimeiros() {
             localStorage.setItem("primeiros", JSON.stringify(primeiros));
             localStorage.setItem("primeirosTop", JSON.stringify(primeirosTop));
         },
-        error: function () {
-            GetPrimeiros();
+        error: function (xhr) {
+            if (xhr.status != 500) {
+                parseError('Server with problem.');
+                GetPrimeiros();
+            }
         }
     });
 }
@@ -456,7 +466,7 @@ function RankCreate() { //create ranking element and object
 
         rankBlock =
             rankBlock + `
-                <div class="col-wrapper">
+                <div class="col-wrapper" data-nr="` + ranking[i].nr + `">
                     <div class="nome">` + /*(parseInt(i) + 1)*/ ranking[i].col + ". " + ranking[i].nome + `</div>
                     <div class="pontuacao">` + ranking[i].pontos + " pts" + `</div>
                 </div>

@@ -265,7 +265,6 @@ html body {
           html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
             overflow: hidden;
             vertical-align: middle;
-            white-space: nowrap;
             display: inline-block;
             width: 49%; }
             @media screen and (max-width: 600px) {
