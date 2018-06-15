@@ -217,7 +217,7 @@
                 <canvas id="myChart2"></canvas>
             </div>
 
-            <div class="col s12 l10">
+            <div class="col s12 l10" style="display: none;">
                 <h2>Primeiros Colocados</h2>
                 <p>Jogadores que ficaram por maior tempo na primeira posição do ranking.</p>
                 <br>

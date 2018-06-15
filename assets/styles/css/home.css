@@ -298,7 +298,7 @@ html body {
           margin-left: 0 !important; }
     html body main #rank #first {
       position: sticky;
-      top: 5px;
+      top: 70px;
       transition: all .25s; }
       html body main #rank #first.transform {
         transform: translateX(-14%); }
