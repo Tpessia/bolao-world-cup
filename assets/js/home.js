@@ -122,8 +122,8 @@ function Login() {
 
     function Welcome() { //welcome name update
         $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
-
-        $("#welcome div").html("Você é o " + user.col[0] + "º dentre " + ranking.length + " pessoas.");
+        
+        $("#welcome div").html("Você é o " + user.col[user.col.length - 1] + "º dentre " + ranking.length + " pessoas.");
     }
 
     function Highlight() { //current user highlight on ranking
@@ -175,14 +175,19 @@ function OnlineGet() { //request spreadsheet page data
                     }
                 }
                 ranking.sort(function (a, b) {
-                    if (a.col > b.col) {
+                    var acol = parseInt(a.col);
+                    var bcol = parseInt(b.col);
+                    var anr = parseInt(a.nr);
+                    var bnr = parseInt(b.nr);
+
+                    if (acol > bcol) {
                         return 1;
-                    } else if (a.col < b.col) {
+                    } else if (acol < bcol) {
                         return -1;
-                    } else if (a.col == b.col) {
-                        if (a.nr > b.nr) {
+                    } else if (acol == bcol) {
+                        if (anr > bnr) {
                             return 1;
-                        } else if (a.nr < b.nr) {
+                        } else if (anr < bnr) {
                             return -1;
                         }
                     }

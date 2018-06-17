@@ -1,27 +1,561 @@
 ﻿[
 	{
 		"col": "1",
-		"nr": "1",
-		"nome": "Maurício",
-		"pontos": "600"
+		"nome": "FELIPE MORI ARRUDA 026",
+		"nr": "026",
+		"pontos": "240"
 	},
 	{
 		"col": "2",
-		"nr": "2",
-		"nome": "Guilherme",
-		"pontos": "500"
+		"nome": "EDILSON CARLOS ZARPELÃO 012",
+		"nr": "012",
+		"pontos": "220"
 	},
 	{
 		"col": "3",
-		"nr": "3",
-		"nome": "Thiago",
-		"pontos": "300"
+		"nome": "SÉRGIO GONÇALVES ARRUDA 027",
+		"nr": "027",
+		"pontos": "201"
 	},
 	{
 		"col": "4",
-		"nr": "4",
-		"nome": "João",
-		"pontos": "150"
+		"nome": "LEONARDO ARAGÃO 056",
+		"nr": "056",
+		"pontos": "180"
+	},
+	{
+		"col": "5",
+		"nome": "MARCELO GONÇALVES DE ASSIS 043",
+		"nr": "043",
+		"pontos": "171"
+	},
+	{
+		"col": "6",
+		"nome": "SIDNEI ALEXANDRE MARTINS 082",
+		"nr": "082",
+		"pontos": "170"
+	},
+	{
+		"col": "6",
+		"nome": "MAURICIO VASCO 087",
+		"nr": "087",
+		"pontos": "170"
+	},
+	{
+		"col": "8",
+		"nome": "MARCIO SAVINO 010",
+		"nr": "010",
+		"pontos": "160"
+	},
+	{
+		"col": "8",
+		"nome": "MARIZETE OLIVEIRA COSTA 011",
+		"nr": "011",
+		"pontos": "160"
+	},
+	{
+		"col": "8",
+		"nome": "CARLOS ALBERTO DA SILVA 046",
+		"nr": "046",
+		"pontos": "160"
+	},
+	{
+		"col": "8",
+		"nome": "JOSE ANDERSON DE LIMA PEREIRA 079",
+		"nr": "079",
+		"pontos": "160"
+	},
+	{
+		"col": "8",
+		"nome": "JOSÉ OSVALDO DE ARAUJO 084",
+		"nr": "084",
+		"pontos": "160"
+	},
+	{
+		"col": "13",
+		"nome": "PRISCILA NODARIO MARTINS 022",
+		"nr": "022",
+		"pontos": "152"
+	},
+	{
+		"col": "13",
+		"nome": "EDSON DE SOUZA GOULART 050",
+		"nr": "050",
+		"pontos": "152"
+	},
+	{
+		"col": "15",
+		"nome": "SIDNEI ALEXANDRE MARTINS 080",
+		"nr": "080",
+		"pontos": "151"
+	},
+	{
+		"col": "16",
+		"nome": "ITALO CAMPOS 088",
+		"nr": "088",
+		"pontos": "141"
+	},
+	{
+		"col": "17",
+		"nome": "ATAIDE DE PAULA JUNIOR 073",
+		"nr": "073",
+		"pontos": "140"
+	},
+	{
+		"col": "18",
+		"nome": "DJALMA PEDRO DE OLIVEIRA 048",
+		"nr": "048",
+		"pontos": "132"
+	},
+	{
+		"col": "19",
+		"nome": "THIAGO ROCCA DE AMARAL 057",
+		"nr": "057",
+		"pontos": "131"
+	},
+	{
+		"col": "20",
+		"nome": "SONIA CONCILIO 004",
+		"nr": "004",
+		"pontos": "130"
+	},
+	{
+		"col": "20",
+		"nome": "HELTON DA SILVA LESSA 059",
+		"nr": "059",
+		"pontos": "130"
+	},
+	{
+		"col": "22",
+		"nome": "VAGNER TRINDADE 037",
+		"nr": "037",
+		"pontos": "120"
+	},
+	{
+		"col": "22",
+		"nome": "ELIAS SOUZA DOS SANTOS 072",
+		"nr": "072",
+		"pontos": "120"
+	},
+	{
+		"col": "24",
+		"nome": "MARIA CLARA ZELI 092",
+		"nr": "092",
+		"pontos": "110"
+	},
+	{
+		"col": "25",
+		"nome": "MARTA MARIA BASTO MEIRELLES 054",
+		"nr": "054",
+		"pontos": "100"
+	},
+	{
+		"col": "26",
+		"nome": "ERIC SOLLA DA SILVA 066",
+		"nr": "066",
+		"pontos": "91"
+	},
+	{
+		"col": "27",
+		"nome": "MARCO CONCILIO 002",
+		"nr": "002",
+		"pontos": "90"
+	},
+	{
+		"col": "27",
+		"nome": "MARCELO GONÇALVES DE ASSIS 039",
+		"nr": "039",
+		"pontos": "90"
+	},
+	{
+		"col": "27",
+		"nome": "GUSTAVO MEIRELLES NETO 053",
+		"nr": "053",
+		"pontos": "90"
+	},
+	{
+		"col": "30",
+		"nome": "RAFAEL OLIVEIRA 005",
+		"nr": "005",
+		"pontos": "81"
+	},
+	{
+		"col": "30",
+		"nome": "ADRIANO FRANCISCO DO NASCIMENTO 030",
+		"nr": "030",
+		"pontos": "81"
+	},
+	{
+		"col": "32",
+		"nome": "MAURICIO CHINAGLIA 008",
+		"nr": "008",
+		"pontos": "80"
+	},
+	{
+		"col": "32",
+		"nome": "JOSE ANDERSON DE LIMA PEREIRA 078",
+		"nr": "078",
+		"pontos": "80"
+	},
+	{
+		"col": "34",
+		"nome": "MARCELO GONÇALVES DE ASSIS 042",
+		"nr": "042",
+		"pontos": "71"
+	},
+	{
+		"col": "34",
+		"nome": "ANTONIO EDUARDO DE ARAUJO 051",
+		"nr": "051",
+		"pontos": "71"
+	},
+	{
+		"col": "36",
+		"nome": "ADRIANO DURÃO LAGO 023",
+		"nr": "023",
+		"pontos": "70"
+	},
+	{
+		"col": "36",
+		"nome": "SERGIO LUIZ COELHO 047",
+		"nr": "047",
+		"pontos": "70"
+	},
+	{
+		"col": "36",
+		"nome": "JOSE MARCELO ZELI 091",
+		"nr": "091",
+		"pontos": "70"
+	},
+	{
+		"col": "39",
+		"nome": "VICTOR DOS SANTOS SOUZA 062",
+		"nr": "062",
+		"pontos": "63"
+	},
+	{
+		"col": "40",
+		"nome": "FELIPE MORI ARRUDA 025",
+		"nr": "025",
+		"pontos": "62"
+	},
+	{
+		"col": "41",
+		"nome": "ADRIANO CORBETTA 029",
+		"nr": "029",
+		"pontos": "61"
+	},
+	{
+		"col": "41",
+		"nome": "ROGÉRIO DE QUEIROZ SILVA 038",
+		"nr": "038",
+		"pontos": "61"
+	},
+	{
+		"col": "41",
+		"nome": "JOÃO HELIO TAVARES DA SILVA 045",
+		"nr": "045",
+		"pontos": "61"
+	},
+	{
+		"col": "41",
+		"nome": "RAFAEL ANTONIO RICCIARDELLI 055",
+		"nr": "055",
+		"pontos": "61"
+	},
+	{
+		"col": "41",
+		"nome": "DENIS DE CARVALHO PINHEIRO 065",
+		"nr": "065",
+		"pontos": "61"
+	},
+	{
+		"col": "41",
+		"nome": "EDSON ANTONIO CORREA 086",
+		"nr": "086",
+		"pontos": "61"
+	},
+	{
+		"col": "47",
+		"nome": "SÉRGIO BARBOSA DE OLIVEIRA 021",
+		"nr": "021",
+		"pontos": "60"
+	},
+	{
+		"col": "47",
+		"nome": "EDILSON BARBOSA CAMPOS 049",
+		"nr": "049",
+		"pontos": "60"
+	},
+	{
+		"col": "47",
+		"nome": "FLAVIO DE SOUZA LIMA NETO 052",
+		"nr": "052",
+		"pontos": "60"
+	},
+	{
+		"col": "47",
+		"nome": "ROGÉRIO DE LIMA TAVARES 060",
+		"nr": "060",
+		"pontos": "60"
+	},
+	{
+		"col": "51",
+		"nome": "THIAGO VINÍCIUS PESSIA 031",
+		"nr": "031",
+		"pontos": "52"
+	},
+	{
+		"col": "51",
+		"nome": "JOSE MARCELO ZELI 090",
+		"nr": "090",
+		"pontos": "52"
+	},
+	{
+		"col": "53",
+		"nome": "EDILSON CARLOS ZARPELÃO 013",
+		"nr": "013",
+		"pontos": "51"
+	},
+	{
+		"col": "53",
+		"nome": "ADRYAN LUCAS CARACHO ALVES 017",
+		"nr": "017",
+		"pontos": "51"
+	},
+	{
+		"col": "53",
+		"nome": "VICTOR DOS SANTOS SOUZA 063",
+		"nr": "063",
+		"pontos": "51"
+	},
+	{
+		"col": "56",
+		"nome": "ROSANA CONCILIO 003",
+		"nr": "003",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "FLAVIO CIOCIOLA LOPES 014",
+		"nr": "014",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "VINÍCIUS FERREIRA 028",
+		"nr": "028",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "ALEX DOS SANTOS 032",
+		"nr": "032",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "MATHEUS DE SOUZA GONZALEZ 064",
+		"nr": "064",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "CIPIRANO LEMMO 070",
+		"nr": "070",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "MARCELO GONÇALVES DE ASSIS 076",
+		"nr": "076",
+		"pontos": "50"
+	},
+	{
+		"col": "56",
+		"nome": "JOSÉ IRAILSON DE SOUZA 077",
+		"nr": "077",
+		"pontos": "50"
+	},
+	{
+		"col": "64",
+		"nome": "DARLAN NASCIMENTO MOTA 020",
+		"nr": "020",
+		"pontos": "41"
+	},
+	{
+		"col": "64",
+		"nome": "VITOR DA FONTE MARTINS DE PAULA 058",
+		"nr": "058",
+		"pontos": "41"
+	},
+	{
+		"col": "66",
+		"nome": "GABRIEL ALMEIDA CAMPOS 006",
+		"nr": "006",
+		"pontos": "40"
+	},
+	{
+		"col": "66",
+		"nome": "GABRIEL ALMEIDA CAMPOS 007",
+		"nr": "007",
+		"pontos": "40"
+	},
+	{
+		"col": "66",
+		"nome": "SIDNEI ALEXANDRE MARTINS 081",
+		"nr": "081",
+		"pontos": "40"
+	},
+	{
+		"col": "66",
+		"nome": "JACOB ARCHANGE RICHARDSON 083",
+		"nr": "083",
+		"pontos": "40"
+	},
+	{
+		"col": "66",
+		"nome": "MARIA DA PENHA ZELI 093",
+		"nr": "093",
+		"pontos": "40"
+	},
+	{
+		"col": "71",
+		"nome": "CARLOS ALBERTO ALVES 009",
+		"nr": "009",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "ADRIANO DA SILV ALVES 019",
+		"nr": "019",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "MARCELO GONÇALVES DE ASSIS 040",
+		"nr": "040",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "FELIPE SILVA LIMA 044",
+		"nr": "044",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "ANDRÉ GUSTAVO NASCIMENTO DE SOUZA 068",
+		"nr": "068",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "DIEGO ENDRIGO DE SOUZA ARAUJO 069",
+		"nr": "069",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "MARCELO GONÇALVES DE ASSIS 074",
+		"nr": "074",
+		"pontos": "31"
+	},
+	{
+		"col": "71",
+		"nome": "MARCELO GONÇALVES DE ASSIS 075",
+		"nr": "075",
+		"pontos": "31"
+	},
+	{
+		"col": "79",
+		"nome": "FLAVIO CIOCIOLA LOPES 015",
+		"nr": "015",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "FLAVIO CIOCIOLA LOPES 016",
+		"nr": "016",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "ANDREW MATHEUS CARACHO ALVES 018",
+		"nr": "018",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "CARLOS ZAMOT FILHO 024",
+		"nr": "024",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "VAGNER TRINDADE 036",
+		"nr": "036",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "MARCELO GONÇALVES DE ASSIS 041",
+		"nr": "041",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "EDERSON ALMEIDA SANTOS 061",
+		"nr": "061",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "TIAGO MATOSO 085",
+		"nr": "085",
+		"pontos": "30"
+	},
+	{
+		"col": "79",
+		"nome": "BRUNO DURAES 089",
+		"nr": "089",
+		"pontos": "30"
+	},
+	{
+		"col": "88",
+		"nome": "FLÁVIO MAZIEIRO 067",
+		"nr": "067",
+		"pontos": "21"
+	},
+	{
+		"col": "89",
+		"nome": "WEBER DANILO ANDREOLLI MARQUES 071",
+		"nr": "071",
+		"pontos": "20"
+	},
+	{
+		"col": "90",
+		"nome": "KATIA ZELI 094",
+		"nr": "094",
+		"pontos": "10"
+	},
+	{
+		"col": "90",
+		"nome": "MARCIA NUNES 097",
+		"nr": "097",
+		"pontos": "10"
+	},
+	{
+		"col": "92",
+		"nome": "JOSE MARCELO ZELI 095",
+		"nr": "095",
+		"pontos": "0"
+	},
+	{
+		"col": "92",
+		"nome": "GUILHERME CAMPOS 096",
+		"nr": "096",
+		"pontos": "0"
 	},
 	{
 		"col": ""
