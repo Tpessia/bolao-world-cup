@@ -131,9 +131,11 @@ function Login() {
 
 function Welcome() { //welcome name update
     $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
-    console.log(user)
-    console.log(user.col[user.col.length - 1])
-    $("#welcome div").html("Você é o " + user.col[user.col.length - 1] + "º dentre " + ranking.length + " pessoas.");
+    // console.log(user)
+    // console.log(user.col[user.col.length - 1])
+    // console.log(typeof user.col)
+    var userCol = typeof user.col !== "string" ? user.col[user.col.length - 1] : user.col;
+    $("#welcome div").html("Você é o " + userCol + "º dentre " + ranking.length + " pessoas.");
 }
 
 //DATA PARSING
