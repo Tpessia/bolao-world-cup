@@ -120,12 +120,6 @@ function Login() {
         // user.currentPosition = user.col[0];
     }
 
-    function Welcome() { //welcome name update
-        $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
-        
-        $("#welcome div").html("Você é o " + user.col[user.col.length - 1] + "º dentre " + ranking.length + " pessoas.");
-    }
-
     function Highlight() { //current user highlight on ranking
         $('#rankContent div.col .col-wrapper.colorA').removeClass("colorA");
         // $('#sideRank .col .card.highlight').removeClass("highlight");
@@ -133,6 +127,13 @@ function Login() {
         $('#rankContent div.col .col-wrapper[data-nr=' + user.nr + ']').addClass("colorA");
         // $('#sideRank .col:nth-of-type(' + user.currentPosition + ') .card').addClass("highlight");
     }
+}
+
+function Welcome() { //welcome name update
+    $("#welcome h2").html($("#welcome h2").html().replace(/,.*/, ", " + user.nome.split(" ")[0] + "!"));
+    console.log(user)
+    console.log(user.col[user.col.length - 1])
+    $("#welcome div").html("Você é o " + user.col[user.col.length - 1] + "º dentre " + ranking.length + " pessoas.");
 }
 
 //DATA PARSING
@@ -436,6 +437,10 @@ function PrepareOffline() {
     if (navigator.onLine) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("ranking", JSON.stringify(ranking));
+
+        user = JSON.parse(localStorage.getItem("user"));
+
+        Welcome();
     }
 }
 
