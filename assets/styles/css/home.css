@@ -272,7 +272,8 @@ html body {
               html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
                 width: calc(100% - 70px); } }
           html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
-            text-align: center; }
+            text-align: center;
+            font-weight: 400; }
             @media (max-width: 600px) {
               html body main #rank #rankList #rankContent .col .col-wrapper .pontuacao {
                 text-align: left; } }
@@ -310,8 +311,9 @@ html body {
         html body main #rank #first #firstContent h3 {
           overflow-x: hidden;
           overflow-y: hidden;
-          max-height: calc(48.18px * 2);
-          font-size: 2.6rem; }
+          font-size: 1.8rem; }
+        html body main #rank #first #firstContent h4 {
+          font-size: 1.8rem; }
     html body main #chart {
       position: relative; }
       html body main #chart h1 {

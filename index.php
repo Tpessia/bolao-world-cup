@@ -45,12 +45,16 @@
     <script>
         user = JSON.parse(localStorage.getItem("user"));
 
+        var userNome = JSON.parse(localStorage.getItem("user")).nome.split(' ').filter(function (e,i,a) {
+            return i == 0 || i == a.length - 1;
+        }).join(' ');
+
         (function (p, u, s, h, x) { p.pushpad = p.pushpad || function () { (p.pushpad.q = p.pushpad.q || []).push(arguments) }; h = u.getElementsByTagName('head')[0]; x = u.createElement('script'); x.async = 1; x.src = s; h.appendChild(x); })(window, document, 'https://pushpad.xyz/pushpad.js');
 
         //(user.name + ' ' + user.page.toString()).replace(/ /gi, '_').replace(/\W/g, '').replace(/[^\x00-\x7F]/g, "")
         var shaObj = new jsSHA("SHA-1", "TEXT");
-        shaObj.setHMACKey("7c7364248f2e32846e5797984fe01532", "TEXT");
-        shaObj.update(user.nome);
+        shaObj.setHMACKey("c223935a7b4863008aab7455ea0048c5", "TEXT");
+        shaObj.update(userNome);
         var hmac = shaObj.getHMAC("HEX");
 
         // pushpad('init', 5053);
@@ -71,9 +75,9 @@
         </span>
     </div>
 
-    <!-- <a id="push-sub" class="btn-floating btn-large waves-effect waves-light colorB">
+    <a id="push-sub" class="btn-floating btn-large waves-effect waves-light colorB">
         <i class="material-icons">notifications_active</i>
-    </a> -->
+    </a>
 
     <header>
         <nav class="nav-extended navbar-fixed">
@@ -360,10 +364,10 @@
     </script>
 
     <script>
-        pushpad('init', 5374);
+        pushpad('init', 5606);
 
         // optionally call 'uid' if the user is logged in to your website
-        pushpad('uid', user.nome, hmac);
+        pushpad('uid', userNome, hmac);
 
         var pushInit = false;
 

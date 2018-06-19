@@ -188,6 +188,7 @@ html {
                                 }
                                 .pontuacao {
                                     text-align: center;
+                                    font-weight: 400;
                                     @media (max-width: 600px) {
                                         text-align: left;
                                     }
@@ -255,8 +256,11 @@ html {
                         h3 {
                             overflow-x: hidden;
                             overflow-y: hidden;
-                            max-height: calc(48.18px * 2);
-                            font-size: 2.6rem;
+                            // max-height: calc(48.18px * 2);
+                            font-size: 1.8rem;
+                        }
+                        h4 {
+                            font-size: 1.8rem;
                         }
                     }
                 }

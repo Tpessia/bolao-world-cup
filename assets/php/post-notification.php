@@ -4,8 +4,8 @@
     error_reporting(E_ALL);
     require_once('/home/u432755883/vendor/autoload.php');
     
-    Pushpad\Pushpad::$auth_token = '7c7364248f2e32846e5797984fe01532';
-    Pushpad\Pushpad::$project_id = 5374; # set it here or pass it as a param to methods later
+    Pushpad\Pushpad::$auth_token = 'c223935a7b4863008aab7455ea0048c5';
+    Pushpad\Pushpad::$project_id = 5606; # set it here or pass it as a param to methods later
     echo 'ok';
 
     /*$notification = new Pushpad\Notification(array(
@@ -70,7 +70,7 @@ echo 'ok';*/
         // $value->pontuacao;
 
         $notification = new Pushpad\Notification(array(
-        'body' => "Olá, " . $value->name . "! Estes são seus dados da nova rodada: " . $value->pontuacao . 'pts | ' . $index . 'º lugar', # max 120 characters
+        'body' => "Olá, " . ucfirst(strtolower(explode(" ",$value->name)[0])) . "! Estes são seus dados da nova rodada: " . $value->pontuacao . 'pts | ' . $index . 'º lugar', # max 120 characters
         'title' => "Bolão Maurício - Pontuação", # optional, defaults to your project name, max 30 characters
         //   'target_url' => "http://example.com", # optional, defaults to your project website
         //   'icon_url' => "http://example.com/assets/icon.png", # optional, defaults to the project icon

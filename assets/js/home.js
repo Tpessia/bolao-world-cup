@@ -134,8 +134,9 @@ function Welcome() { //welcome name update
     // console.log(user)
     // console.log(user.col[user.col.length - 1])
     // console.log(typeof user.col)
-    var userCol = typeof user.col !== "string" ? user.col[user.col.length - 1] : user.col;
-    $("#welcome div").html("Você é o " + userCol + "º dentre " + ranking.length + " pessoas.");
+    var userCol = typeof user.col !== "string" ? user.col[user.col.length - 1] : user.col,
+        userPont = typeof user.pontos !== "string" ? user.pontos[user.pontos.length - 1] : user.pontos;
+    $("#welcome div").html("Você é o " + userCol + "º dentre " + ranking.length + " pessoas, com " + userPont + " pontos.");
 }
 
 //DATA PARSING
@@ -845,7 +846,7 @@ function BindEvents() {
 }
 
 function ShowMoreRank() {
-    k += 6; //number of players shown on click (= k-1)
+    k += 21; //number of players shown on click (= k-1)
 
     for (i in ranking) {
         if (i < k) {
