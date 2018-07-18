@@ -54,6 +54,9 @@
                         <li>
                             <a href="/index.php">Ranking</a>
                         </li>
+                        <li>
+                            <a href="/ganhador.php">Ganhador</a>
+                        </li>
 
                     <?php } ?>
                     <li class="active">
@@ -91,6 +94,9 @@
                 </li>
                 <li>
                     <a href="/index.php">Ranking</a>
+                </li>
+                <li>
+                    <a href="/ganhador.php">Ganhador</a>
                 </li>
 
             <?php } ?>

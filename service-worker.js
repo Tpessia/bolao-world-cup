@@ -25,6 +25,7 @@ self.addEventListener("install", function (event) {
                     '/contato.php',
                     '/login.php',
                     '/regulamento.php',
+                    '/ganhador.php',
                     '/assets/img/login-bg.jpg',
                     '/assets/img/icon.png',
                     '/assets/img/imgHead.jpg',
