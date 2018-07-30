@@ -175,13 +175,13 @@
                 success: function(data) {
                     console.log(data);
                     $("#medias .boxes").css("background-color", "#1f8a45");
+                    $("#genData").attr("disabled",true);
+                    $("#triggerNotif").attr("disabled",false);
                 },
                 error: function () {
                     $("#medias .boxes").css("background-color", "#da3030");
                 }
             });
-
-            SendNotifications();
         }
 
         function SendNotifications() {
@@ -223,6 +223,7 @@
 </head>
 <body>
     <button id="genData">Gerar novos dados!</button>
+    <button id="triggerNotif" disabled="true">Enviar notificações!</button>
     <div id="leds">
         <div id="primeiros">
             <span class="boxes"></span> Primeiros Colocados</div>
@@ -233,7 +234,7 @@
     </div>
 
     <style>
-        #genData {
+        #genData, #triggerNotif {
             height: 50px;
         }
         #leds {
@@ -255,6 +256,11 @@
     <script>
         $("#genData").on("click", function () {
             RankCreate();
+        });
+
+        $("#triggerNotif").on("click", function () {
+            SendNotifications();
+            $("#triggerNotif").attr("disabled",true);
         });
 
         // $("#clearLast").on("click", function () {

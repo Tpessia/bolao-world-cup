@@ -136,7 +136,7 @@ function Welcome() { //welcome name update
     // console.log(typeof user.col)
     var userCol = typeof user.col !== "string" ? user.col[user.col.length - 1] : user.col,
         userPont = typeof user.pontos !== "string" ? user.pontos[user.pontos.length - 1] : user.pontos;
-    $("#welcome div").html("Você é o " + userCol + "º dentre " + ranking.length + " pessoas, com " + userPont + " pontos.");
+    $("#welcome div").html("Sua cartela está em " + userCol + "º lugar dentre " + ranking.length + ", com " + userPont + " pontos.");
 }
 
 //DATA PARSING
