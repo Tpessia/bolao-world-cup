@@ -32,7 +32,7 @@
                 <ul class="right hide-on-med-and-down">
                     <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
                             
-                        <li class="active">
+                        <li>
                             <a href="/apresentacao.php">Apresentação</a>
                         </li>
 
@@ -43,8 +43,8 @@
                         </li>
                         <li>
                             <a href="/index.php">Ranking</a>
-                        </li>
-                        <li>
+                        </li>                        
+                        <li class="active">
                             <a href="/ganhador.php">Ganhador</a>
                         </li>
 
@@ -62,7 +62,7 @@
         <ul class="side-nav" id="mobileNav">
             <?php if(date('m/d/Y H:i:s') < date_format(date_create('06/15/2018 00:00:00'), 'm/d/Y H:i:s') && (!isset($_GET["admin"]) || $_GET["admin"] != "thiago")) { ?>
                             
-                <li class="active">
+                <li>
                     <a href="/apresentacao.php">Apresentação</a>
                 </li>
 
@@ -73,8 +73,8 @@
                 </li>
                 <li>
                     <a href="/index.php">Ranking</a>
-                </li>
-                <li>
+                </li>                
+                <li class="active">
                     <a href="/ganhador.php">Ganhador</a>
                 </li>
 
@@ -99,54 +99,30 @@
     <main class="container">
         <div class="row">
             <div class="col s12">
-                <h2>Copa do Mundo - Rússia 2018</h2>
-
-                <p>Olá,</p>
-
-                <p>Seja bem-vindo à 9ª edição do Bolão da Copa do Mundo do Maurício, desta vez para a Copa de 2018 na Rússia.</p>
-
-                <p>Abaixo alguns dados básicos:</p>
-
-                <ul class="dashed">
-                    <li>o preço de cada participação (Cartela) é de R$. 20,00 (Vinte reais). As Cartelas são individuais (não aceitaremos grupos para uma mesma Cartela);</li>
-                    <li>o prêmio será de 80% (Oitenta por cento) do total arrecadado. Sendo assim, quanto mais participantes, melhor o prêmio;</li>
-                    <li><strong>a Cartela deverá ser entregue juntamente com o comprovante de pagamento até o dia 12 de junho de 2018, para o e-mail <a href="mailto:bolaodomauricio@gmail.com">bolaodomauricio@gmail.com</a>;</strong></li>
-                    <li>demais informações, como dados bancários para pagamento da Cartela, encontram-se no Regulamento, disponível para download abaixo.</li>
-                </ul>
-
-                <hr style="margin: 30px 0;">
-
-                <div class="downloads">
-                    <div>
-                        <p>
-                            Baixar a cartela:
-                        </p>
-                        <a href="/assets/files/Cartela - Bolão do Maurício.xlsx" download="Cartela - Bolão do Maurício.xlsx">
-                            <button class="btn">Baixar Cartela</button>
-                        </a>
-                    </div>
-                    <div>
-                        <p>
-                            Veja o regulamento na seguinte página:
-                        </p>
-                            <a href="/regulamento.php" target="_blank">
-                                <button class="btn">Ver Regulamento</button>
-                            </a>
-                    </div>
-                    <div>
-                        <p>
-                            Ou, se preferir, baixe-o clicando abaixo:
-                        </p>
-                        <a href="/assets/files/REGBOL.docx" download="Regulamento - Bolão do Maurício.docx">
-                            <button class="btn">Baixar Regulamento</button>
-                        </a>
-                    </div>
-                </div>
+                <h2>Ganhador</h2>
 
                 <p>
-                    <br>
-                    A partir de 14/06, após todos os jogos do dia serem realizados, estaremos publicando diariamente neste site a posição (ranking) dos participantes.<!-- E, a partir de 18/06, estaremos disponibilizando a função de Notificações.-->
+                    Pessoal,
                 </p>
+
+                <p>
+                    Notificamos que a Cartela vencedora do 9º Bolão Copa do Mundo - Rússia foi a de número <strong>036</strong> de <strong>Vagner Trindade</strong>, com 3191 pontos.
+                </p>
+
+                <p>
+                    Conforme o <a href="/regulamento.php">Regulamento</a>, o prêmio de <em>R$ 1.488,00</em> será pago em 18/07/2018.
+                </p>
+
+                <br>
+
+                <p>
+                    Muito obrigado a todos pela participação!
+                </p>
+
+                <p style="font-size: 2rem;">
+                    Até 2022!!!
+                </p>
+                    
             </div>
         </div>
     </main>

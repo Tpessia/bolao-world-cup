@@ -11,7 +11,7 @@
 <head>
     <script>
         if (localStorage.getItem("user") === null) {
-            window.location.replace('/login.php');
+            window.location.replace('/ganhador.php');
         }
     </script>
 
@@ -96,6 +96,9 @@
                         <a href="/index.php">Ranking</a>
                     </li>
                     <li>
+                        <a href="/ganhador.php">Ganhador</a>
+                    </li>
+                    <li>
                         <a href="/contato.php">Contato</a>
                     </li>
                     <li>
@@ -123,7 +126,10 @@
             </li>
             <li class="active">
                 <a href="/index.php">Ranking</a>
-            </li>        
+            </li>
+            <li>
+                <a href="/ganhador.php">Ganhador</a>
+            </li>
             <li>
                 <a href="/contato.php">Contato</a>
             </li>
